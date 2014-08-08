@@ -38,6 +38,13 @@ module.exports = function() {
       }
     },
 
+    uglify: {
+      options: { },
+      release: {
+        files: helpers.srcFiles(config.js.dest, config.js.dest, '**/*.js', 'js')
+      }
+    },
+
     jade: {
       templates: {
         files: helpers.srcFiles(config.html.src, config.html.dest, '**/*.jade', 'html')
@@ -105,6 +112,6 @@ module.exports = function() {
   grunt.registerTask('css', ['sass']);
   grunt.registerTask('templates', ['jade:templates']);
   grunt.registerTask('default', ['jade:index', 'css', 'js', 'templates', 'keyfile']);
-  grunt.registerTask('release', ['default']);
+  grunt.registerTask('release', ['default', 'uglify']);
 
 };
