@@ -1,0 +1,12 @@
+.login-form
+  h1 Login
+  .input-container
+    input(type="text" ng-keyup="keywatch($event)" ng-model="credentials.email")
+    .label 
+      p.text
+        span email
+  .input-container
+    input(type="password" ng-keyup="keywatch($event)" ng-model="credentials.password")
+    .label 
+      p.text 
+        span password
