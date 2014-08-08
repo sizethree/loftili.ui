@@ -14,7 +14,7 @@ define [
         templateUrl: '/html/views/home.html'
         controller: 'HomeController'
         resolve:
-          AuthState: new AuthProvider.resolver('all').validator
+          AuthState: new AuthProvider.resolver('any').validator
 
     @$inject = ['$routeProvider', 'AuthProvider']
 

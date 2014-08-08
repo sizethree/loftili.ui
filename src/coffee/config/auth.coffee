@@ -6,7 +6,6 @@ define [
   class AuthConfig
 
     constructor: (AuthProvider) ->
-      console.log AuthProvider
 
     @$inject: ['AuthProvider']
 

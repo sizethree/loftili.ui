@@ -12,8 +12,6 @@ define [
         deferred = $q.defer()
 
         finish = (user) ->
-          console.log user
-          console.log access_level
           deferred.resolve user
 
         fail = () ->

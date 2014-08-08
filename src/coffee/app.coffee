@@ -22,6 +22,7 @@ define ['ng', 'ngRoute', 'ngResource'], (ng, ngRoute, ngResource) ->
   autoload = [
     'config/location'
     'routes/home'
+    'routes/dashboard'
   ]
 
   require autoload, bootstrap

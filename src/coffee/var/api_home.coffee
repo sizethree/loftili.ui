@@ -1,3 +1,3 @@
 define [
 ], () ->
-  'http://loftili.apiary-mock.com'
+  'http://localhost:1337'

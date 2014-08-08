@@ -5,7 +5,6 @@ define [
   class HomeController
 
     constructor: (AuthState) ->
-      console.log arguments
 
     @$inject = ['AuthState']
 

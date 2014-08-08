@@ -10,6 +10,7 @@ test-results.xml
 /bower_components
 /public/index.html
 /public/js
+/public/html
 /public/css
 /public/fonts
 /public/swf
