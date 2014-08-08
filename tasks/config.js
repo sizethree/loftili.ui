@@ -4,6 +4,8 @@ module.exports = (function() {
 
   var out_dir = 'public',
       src_dir = 'src',
+      sass_vendor_dirs = path.join('vendor/sass'),
+      neat_path = require('node-neat').includePaths,
       config = {
         html: {
           dest: path.join(out_dir, 'html'),
@@ -24,12 +26,15 @@ module.exports = (function() {
             'angular-resource/angular-resource.js'
           ]
         },
-        sass: {}
+        sass: {
+          files: {},
+          load_paths: neat_path.concat(sass_vendor_dirs)
+        }
       },
       sass_in = path.join(config.css.src, 'app.sass'),
       sass_out = path.join(config.css.dest, 'app.css');
 
-  config['sass'][sass_out] = sass_in;
+  config['sass']['files'][sass_out] = sass_in;
 
   return config;
 

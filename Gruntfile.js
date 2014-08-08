@@ -80,9 +80,9 @@ module.exports = function() {
     sass: {
       build: {
         options: {
-          loadPath: require('node-neat').includePaths
+          loadPath: config.sass.load_paths
         },
-        files: config.sass
+        files: config.sass.files
       }
     }
 

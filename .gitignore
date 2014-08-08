@@ -2,8 +2,11 @@
 .DS_Store
 *.swp
 composer.lock
+Gemfile.lock
 .ruby-version
 test-results.xml
+
+/.bundle
 /.sass-cache
 /obj
 /node_modules
