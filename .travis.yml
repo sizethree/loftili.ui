@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+- '0.10'
+install:
+- gem install sass
+- gem install bourbon
+- gem install neat
+- bundle install --path ./vendor/bundle
+- bundle exec bitters install --path ./vendor/sass
+- npm install bower -g
+- npm install grunt-cli -g
+- bower install
+- npm install
+script:
+- echo "building $TRAVIS_COMMIT"
+- grunt release
+after_success:
+- tar -cvzf "loftili-$TRAVIS_COMMIT.tar.gz" ./public/
+- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
+  "ftp://ftp.sizethreestudios.com/loftili/$TRAVIS_COMMIT.tar.gz"
+- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
+  "ftp://ftp.sizethreestudios.com/loftili/latest.tar.gz"
+env:
+  global:
+  - secure: JeWjpPMnNzLMOGy6OvVYA83Ktz1VYU6g6Sijl1hGikBOXgdiBWPDN0kWDhNbC34rKvm8oD0ODqnjRRp6zIy/g6TDFY+pK/Bkf6d6dpapidxtdQnXwoV7+xVPKz1HDsIxZ+Bbff02lMt2fcOSe1vl02IJAmYWJExTVoBbLDOaoDI=
+  - secure: RULmuXLFqDtRsPJpViqI6di2nCsyhsUP1AuF0VQXX2sbhb57K6wvXOlw9hg3gTE0CSkvtBDMHMEJ0ouIF2ZcLd9jTrND/dw0F7Hq+zQ7Z2NSZR7YtL87mVb27q+IlU/39iqEx4hlwyY6GtjNk3So43ch+3DfZiYMpop/ACq87Zw=
