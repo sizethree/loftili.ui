@@ -1,6 +1,7 @@
 .env
 .DS_Store
 *.swp
+*.tar.gz
 composer.lock
 Gemfile.lock
 .ruby-version

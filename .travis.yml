@@ -23,5 +23,5 @@ after_success:
   "ftp://ftp.sizethreestudios.com/lofti.li/io/latest.tar.gz"
 env:
   global:
-  - secure: OGFA7CXA8nK1hrIFVWlstYe5QK/idUDF+DDXhgdCWQuuFnkzgd6Tt6F1lxC94F7gpvFd07cqQ9ozqjacik3qsGKjjzmwynIrtAxXye0coUyEXHd2rgfrcp5qqfDcv20XHOjdLe8Q7wA8A0PF1PwxdkikvN4OWi+JlKEgabx7Y3o=
-  - secure: gJzUbu7hsrd5Z5xsXkgdeAaxfEj1sjpdpRdguJyvVq/47s9d6UbJMgZPshU+vNAHRyOtRAP52M4BHbEJEJ6dUP4SPeEuwj6VFifVP9PcJVEp7LrANkKcylPWTKVKLBQOgMzTIaAiOetPd7Bt75k8U3W2sBXMKSpesOtnXnhnHXI=
+  - secure: EP+hO+S5CMxtNT7flMjAG1c2K56g8PtMJ1XNiYSAmyESVKnz1HCtoHFi+5x0sVHQGXKYu18OjV7M6U4CG5PxeFTTBENV9R6MNPoYglgMDoX03VAQjkR5XbO6YqCKyrIAzeOJ4/xx+t+FgfQXAN9+M50QDVpX9OEX3bNzC8z2YyA=
+  - secure: bX+JA4H34ddDnQNFkn612X+s2RzNlKv+WJCOcwz7mQWCyEd9C7woRVqQkCfIX2wKjyOh2rA83H3DUCo6PhH32lAgVrbMpdPrDoQHJOVe6uZgeg2KjjzKrJIs1OGg7e/tQv9KdXXn2lMJfL1lcX7pa9uUUgm0NVp/shyxSgVnDso=
