@@ -2,10 +2,12 @@ define [
   'ng'
 ], (ng) ->
 
-  class HomeController
+  HomeController = ($scope) ->
 
-    constructor: (AuthState) ->
+    $scope.credentials =
+      email: ''
+      password: ''
 
-    @$inject = ['AuthState']
+  HomeController['$inject'] = ['$scope']
 
-  ng.module('lft').controller 'HomeController', [HomeController]
+  ng.module('lft').controller 'HomeController', HomeController

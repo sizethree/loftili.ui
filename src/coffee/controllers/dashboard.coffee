@@ -1,5 +1,6 @@
 define [
   'ng'
+  'directives/login_form'
 ], (ng) ->
 
   class DashboardController

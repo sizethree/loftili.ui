@@ -13,8 +13,6 @@ define [
       route =
         templateUrl: '/html/views/home.html'
         controller: 'HomeController'
-        resolve:
-          AuthState: new AuthProvider.resolver('any').validator
 
     @$inject = ['$routeProvider', 'AuthProvider']
 

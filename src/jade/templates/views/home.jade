@@ -1,2 +1,17 @@
 .home-view
-  h1 
+  .inner
+    .top
+      h1 Welcome to Lofti.li
+      h2 Sign up or sign in!
+    hr
+    .bottom
+      .login
+        .container(lf-login-form credentials="credentials")
+      .sign-up
+        h1 Sign up
+        .input-container
+          p email
+          input(type="text")
+        .input-container
+          p password
+          input(type="password")
