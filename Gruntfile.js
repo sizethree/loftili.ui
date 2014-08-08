@@ -9,12 +9,15 @@ module.exports = function() {
 
   dotenv.load();
 
+  var api_home = process.env['API_HOME'] || 'http://api.lofti.li';
+
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadTasks('tasks');
   
   grunt.initConfig({
 
@@ -23,6 +26,15 @@ module.exports = function() {
       css: [config.css.dest],
       templates: [config.html.dest],
       index: ['public/index.html']
+    },
+
+    keyfile: {
+      api: {
+        dest: path.join(config.js.dest, 'var/api_home.js'),
+        amd: true,
+        name: 'API_HOME',
+        key: api_home
+      }
     },
 
     jade: {
@@ -91,7 +103,7 @@ module.exports = function() {
   grunt.registerTask('js', ['coffee:debug', 'copy:']);
   grunt.registerTask('css', ['sass']);
   grunt.registerTask('templates', ['jade:templates']);
-  grunt.registerTask('default', ['jade:index', 'css', 'js', 'templates']);
+  grunt.registerTask('default', ['jade:index', 'css', 'js', 'templates', 'keyfile']);
   grunt.registerTask('release', ['default']);
 
 };

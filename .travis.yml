@@ -13,6 +13,7 @@ install:
 - npm install
 script:
 - echo "building $TRAVIS_COMMIT"
+- echo "BUILD_COMMIT=$TRAVIS_COMMIT" > .env
 - grunt release
 after_success:
 - tar -cvzf "loftili-$TRAVIS_COMMIT.tar.gz" ./public/
@@ -22,5 +23,5 @@ after_success:
   "ftp://ftp.sizethreestudios.com/lofti.li/io/latest.tar.gz"
 env:
   global:
-  - secure: JeWjpPMnNzLMOGy6OvVYA83Ktz1VYU6g6Sijl1hGikBOXgdiBWPDN0kWDhNbC34rKvm8oD0ODqnjRRp6zIy/g6TDFY+pK/Bkf6d6dpapidxtdQnXwoV7+xVPKz1HDsIxZ+Bbff02lMt2fcOSe1vl02IJAmYWJExTVoBbLDOaoDI=
-  - secure: RULmuXLFqDtRsPJpViqI6di2nCsyhsUP1AuF0VQXX2sbhb57K6wvXOlw9hg3gTE0CSkvtBDMHMEJ0ouIF2ZcLd9jTrND/dw0F7Hq+zQ7Z2NSZR7YtL87mVb27q+IlU/39iqEx4hlwyY6GtjNk3So43ch+3DfZiYMpop/ACq87Zw=
+  - secure: OGFA7CXA8nK1hrIFVWlstYe5QK/idUDF+DDXhgdCWQuuFnkzgd6Tt6F1lxC94F7gpvFd07cqQ9ozqjacik3qsGKjjzmwynIrtAxXye0coUyEXHd2rgfrcp5qqfDcv20XHOjdLe8Q7wA8A0PF1PwxdkikvN4OWi+JlKEgabx7Y3o=
+  - secure: gJzUbu7hsrd5Z5xsXkgdeAaxfEj1sjpdpRdguJyvVq/47s9d6UbJMgZPshU+vNAHRyOtRAP52M4BHbEJEJ6dUP4SPeEuwj6VFifVP9PcJVEp7LrANkKcylPWTKVKLBQOgMzTIaAiOetPd7Bt75k8U3W2sBXMKSpesOtnXnhnHXI=
