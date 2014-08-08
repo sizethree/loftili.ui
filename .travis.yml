@@ -6,7 +6,7 @@ install:
 - gem install bourbon
 - gem install neat
 - bundle install --path ./vendor/bundle
-- bundle exec bitters install --path ./vendor/sass
+- bundle exec bitters install --path ./vendor/sass/bitters
 - npm install bower -g
 - npm install grunt-cli -g
 - bower install
