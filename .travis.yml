@@ -17,9 +17,9 @@ script:
 after_success:
 - tar -cvzf "loftili-$TRAVIS_COMMIT.tar.gz" ./public/
 - curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
-  "ftp://ftp.sizethreestudios.com/loftili/$TRAVIS_COMMIT.tar.gz"
+  "ftp://ftp.sizethreestudios.com/lofti.li/ui/$TRAVIS_COMMIT.tar.gz"
 - curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
-  "ftp://ftp.sizethreestudios.com/loftili/latest.tar.gz"
+  "ftp://ftp.sizethreestudios.com/lofti.li/io/latest.tar.gz"
 env:
   global:
   - secure: JeWjpPMnNzLMOGy6OvVYA83Ktz1VYU6g6Sijl1hGikBOXgdiBWPDN0kWDhNbC34rKvm8oD0ODqnjRRp6zIy/g6TDFY+pK/Bkf6d6dpapidxtdQnXwoV7+xVPKz1HDsIxZ+Bbff02lMt2fcOSe1vl02IJAmYWJExTVoBbLDOaoDI=
