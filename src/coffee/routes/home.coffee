@@ -7,12 +7,13 @@ define [
   class HomeRoute
 
     constructor: ($routeProvider, AuthProvider) ->
-      $routeProvider.when '/', HomeRoute.register(AuthProvider)
-
-    @register: (AuthProvider) ->
       route =
         templateUrl: '/html/views/home.html'
         controller: 'HomeController'
+        resolve:
+          _Auth: AuthProvider.filter('guest').validator
+
+      $routeProvider.when '/', route
 
     @$inject = ['$routeProvider', 'AuthProvider']
 

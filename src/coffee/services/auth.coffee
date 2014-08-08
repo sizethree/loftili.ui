@@ -5,45 +5,58 @@ define [
 
   active_user = null
 
-  makeValidator = (level) ->
-
-    validator = ($q, $location, Api) ->
-      deferred = $q.defer()
-
-      finish = (user) ->
-        deferred.resolve user
-
-      fail = () ->
-        $location.path '/'
-
-      check = () ->
-        Api.Auth.check().$promise
-
-      if active_user != null
-        finish active_user
-      else
-        check().then finish, fail
-
-      deferred.promise
-
-    validator['$inject'] = ['$q', '$location', 'Api']
-    validator
-
-
   class AuthResolver
 
-    constructor: (access_level) ->
-      @validator = makeValidator(access_level)
+    constructor: (callback) ->
+      @validator = ($q, $location, Api) ->
+        defer = $q.defer()
+        
+        active = (user) ->
+          callback user, defer, $location
+
+        guest = () ->
+          active_user = false
+          callback false, defer, $location
+
+        if active_user == null
+          Api.Auth.check().$promise.then active, guest
+        else if active_user == false
+          guest()
+        else
+          active(active_user)
+
+
+        defer.promise
+
+      @validator['$inject'] = ['$q', '$location', 'Api']
 
   class Auth
 
     constructor: () ->
       # chance for configuration
 
-    resolver: AuthResolver
+    filter: (type) ->
+      switch type
+        when 'guest'
+          finish = (user, promise, $location) ->
+            if user
+              $location.path '/dashboard'
+            else
+              promise.resolve()
+        when 'active'
+          finish = (user, promise, $location) ->
+            if !user
+              $location.path '/'
+            else
+              promise.resolve(user)
 
-    $get: () ->
-      () ->
+      resolver = new AuthResolver(finish)
+      resolver
+
+    $get: ['Api', (Api) ->
+      logout: () ->
+        Api.Auth.logout()
+    ]
 
     @$inject: []
 

@@ -4,14 +4,20 @@ define [
 ], (ng) ->
 
 
-  LoginForm = () ->
+  LoginForm = (Api) ->
     replace: true
     templateUrl: '/html/directives/login_form.html'
     scope:
       credentials: '='
     link: ($scope, $element, $attrs) ->
+      success = () ->
+        console.log 'success!'
+
+      fail = () ->
+        console.log 'failed!'
+
       attempt = () ->
-        console.log $scope.credentials
+        Api.Auth.attempt($scope.credentials).$promise.then success, fail
 
       $scope.keywatch = (evt) ->
         if evt.keyCode == 13

@@ -21,6 +21,7 @@ define ['ng', 'ngRoute', 'ngResource'], (ng, ngRoute, ngResource) ->
 
   autoload = [
     'config/location'
+    'config/http'
     'routes/home'
     'routes/dashboard'
   ]

@@ -11,7 +11,7 @@ define [
         templateUrl: '/html/views/dashboard.html'
         controller: 'DashboardController'
         resolve:
-          AuthState: new AuthProvider.resolver('active').validator
+          ActiveUser: AuthProvider.filter('active').validator
 
       $routeProvider.when '/dashboard', route
 

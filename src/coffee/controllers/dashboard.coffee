@@ -3,10 +3,11 @@ define [
   'directives/login_form'
 ], (ng) ->
 
-  class DashboardController
+  DashboardController = (ActiveUser, $scope, Auth) ->
+    $scope.logout = () ->
+      Auth.logout()
 
-    constructor: (AuthState) ->
 
-    @$inject = ['AuthState']
+  DashboardController['$inject'] = ['ActiveUser', '$scope', 'Auth']
 
-  ng.module('lft').controller 'DashboardController', [DashboardController]
+  ng.module('lft').controller 'DashboardController', DashboardController
