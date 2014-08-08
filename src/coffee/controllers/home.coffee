@@ -1,5 +1,7 @@
 define [
   'ng'
+  'directives/login_form'
+  'directives/signup_form'
 ], (ng) ->
 
   HomeController = ($scope) ->

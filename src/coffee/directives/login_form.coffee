@@ -11,7 +11,7 @@ define [
       credentials: '='
     link: ($scope, $element, $attrs) ->
       success = () ->
-        console.log 'success!'
+        $location.path('/dashboard')
 
       fail = () ->
         console.log 'failed!'
@@ -23,6 +23,6 @@ define [
         if evt.keyCode == 13
           attempt()
 
-  LoginForm.$inject = ['Api']
+  LoginForm.$inject = ['Api', '$location']
 
   ng.module('lft').directive 'lfLoginForm', LoginForm

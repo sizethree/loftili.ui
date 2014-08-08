@@ -1,8 +1,12 @@
 .login-form
   h1 Login
   .input-container
-    p email
     input(type="text" ng-keyup="keywatch($event)" ng-model="credentials.email")
+    .label 
+      p.text
+        span email
   .input-container
-    p password
     input(type="password" ng-keyup="keywatch($event)" ng-model="credentials.password")
+    .label 
+      p.text 
+        span password
