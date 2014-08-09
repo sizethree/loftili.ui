@@ -6,12 +6,17 @@ module.exports = function(grunt) {
         amd = this.data['amd'],
         name = this.data['name'],
         generator = this.data['generator'],
+        encrypt = this.data['encrypt'] === true,
         key = this.data['key'] || generator(),
         content,
         content_gen;
 
     function angularGen() {
-      return ["angular.module(\"", module, "\").value(\"", name ,"\", (function(a){ return atob(a); })(\"", key, "\"));"].join('');
+      var return_str = encrypt ? 'atob(a)': 'a',
+          module_str = ['angular.module("', module, '")'].join(''),
+          value_str = ['value("', name ,'", (function(a){ return ',return_str,'; })("', key, '"));'].join('');
+
+      return [module_str, value_str].join('.');
     }
 
     function varGen() {

@@ -18,6 +18,7 @@ module.exports = function() {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadTasks('tasks');
   
   grunt.initConfig({
@@ -26,22 +27,29 @@ module.exports = function() {
       scripts: [config.js.dest],
       css: [config.css.dest],
       templates: [config.html.dest],
-      index: ['public/index.html']
+      index: ['public/index.html'],
+      obj: ['obj']
     },
 
     keyfile: {
       api: {
-        dest: path.join(config.js.dest, 'var/api_home.js'),
-        amd: true,
+        dest: 'obj/js/api_home.js',
+        module: 'lft',
         name: 'API_HOME',
-        key: api_home
+        key: api_home,
+        encrypt: false
       }
     },
 
     uglify: {
       options: { },
       release: {
-        files: helpers.srcFiles(config.js.dest, config.js.dest, '**/*.js', 'js')
+        files: [{
+          expand: true,
+          cwd: config.js.dest,
+          src: '**/*.js',
+          dest: config.js.dest
+        }]
       }
     },
 
@@ -57,31 +65,28 @@ module.exports = function() {
     },
 
     coffee: {
+      options: {
+        join: true
+      },
       debug: {
-        expand: true,
-        flatten: false,
-        cwd: config.js.src,
-        src: ['**/*.coffee'],
-        dest: config.js.dest,
-        ext: '.js'
+        files: config.coffee.files
       }
     },
 
-    copy: {
-      vendor: {
-        files: [{
-          cwd: 'bower_components',
-          expand: true,
-          src: config.js.vendor_libs,
-          dest: 'public/js/vendor'
-        }]
+    concat: {
+      options: {
+        separator: ';',
+      },
+      dist: {
+        src: config.js.vendor_libs.concat(['obj/js/app.js', 'obj/js/**/*.js']),
+        dest: path.join(config.js.dest, 'app.js')
       }
     },
 
     watch: {
       scripts: {
         files: [config.js.src + '/**/*.coffee'],
-        tasks: ['clean:scripts', 'coffee:debug', 'copy:vendor']
+        tasks: ['clean:scripts', 'coffee:debug', 'keyfile']
       },
       templates: {
         files: [config.html.src + '/**/*.jade'],
@@ -108,10 +113,10 @@ module.exports = function() {
 
   });
   
-  grunt.registerTask('js', ['coffee:debug', 'copy:']);
+  grunt.registerTask('js', ['coffee:debug', 'concat']);
   grunt.registerTask('css', ['sass']);
   grunt.registerTask('templates', ['jade:templates']);
-  grunt.registerTask('default', ['jade:index', 'css', 'js', 'templates', 'keyfile']);
+  grunt.registerTask('default', ['jade:index', 'css', 'keyfile', 'js', 'templates']);
   grunt.registerTask('release', ['default', 'uglify']);
 
 };

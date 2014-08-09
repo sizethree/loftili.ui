@@ -18,23 +18,29 @@ module.exports = (function() {
         js: {
           dest: path.join(out_dir, 'js'),
           src: path.join(src_dir, 'coffee'),
+          obj: path.join(out_dir, '..', 'obj', 'js'),
           vendor_libs: [
-            'requirejs/require.js',
-            'jquery/dist/jquery.js',
-            'angular/angular.js',
-            'angular-route/angular-route.js',
-            'angular-resource/angular-resource.js'
+            'bower_components/jquery/dist/jquery.js',
+            'bower_components/angular/angular.js',
+            'bower_components/angular-route/angular-route.js',
+            'bower_components/angular-resource/angular-resource.js'
           ]
         },
         sass: {
           files: {},
           load_paths: neat_path.concat(sass_vendor_dirs)
+        },
+        coffee: {
+          files: {}
         }
       },
       sass_in = path.join(config.css.src, 'app.sass'),
-      sass_out = path.join(config.css.dest, 'app.css');
+      sass_out = path.join(config.css.dest, 'app.css'),
+      coffee_out = path.join(config.js.obj, 'app.js'),
+      coffee_in = [path.join(config.js.src, '**/*.coffee')];
 
   config['sass']['files'][sass_out] = sass_in;
+  config['coffee']['files'][coffee_out] = coffee_in;
 
   return config;
 
