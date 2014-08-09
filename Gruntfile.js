@@ -43,7 +43,9 @@ module.exports = function() {
     },
 
     uglify: {
-      options: { },
+      options: { 
+        banner: 'Danny Hadley, 2014'
+      },
       release: {
         files: [{
           src: path.join(config.js.dest, 'app.js'),
