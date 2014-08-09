@@ -1,0 +1,4 @@
+.flash-message
+  ul.list(ng-if="messages && messages.length")
+    li(ng-repeat="message in messages")
+      p {{ message }}

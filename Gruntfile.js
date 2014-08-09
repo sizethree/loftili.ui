@@ -12,13 +12,14 @@ module.exports = function() {
   var api_home = process.env['API_HOME'] || 'http://api.lofti.li';
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-html2js');
   grunt.loadTasks('tasks');
   
   grunt.initConfig({
@@ -45,19 +46,43 @@ module.exports = function() {
       options: { },
       release: {
         files: [{
-          expand: true,
-          cwd: config.js.dest,
-          src: '**/*.js',
-          dest: config.js.dest
+          src: path.join(config.js.dest, 'app.js'),
+          dest: path.join(config.js.dest, 'app.min.js')
         }]
       }
     },
 
-    jade: {
+    html2js: {
       templates: {
-        files: helpers.srcFiles(config.html.src, config.html.dest, '**/*.jade', 'html')
-      },
+        options: {
+          module: 'lft.templates',
+          rename: function(filename) {
+            var rel = filename.replace(/jade\/templates\/(.*)\.jade/, '$1');
+            return rel.replace(/\//g, '.');
+          }
+        },
+        src: config.jade.files.in,
+        dest: config.jade.files.out
+      }
+    },
+
+    jade: {
       index: {
+        options: {
+          data: {
+            debug: true
+          }
+        },
+        files: {
+          'public/index.html': 'src/jade/index.jade'
+        }
+      },
+      indexmin: {
+        options: {
+          data: {
+            debug: true
+          }
+        },
         files: {
           'public/index.html': 'src/jade/index.jade'
         }
@@ -86,11 +111,11 @@ module.exports = function() {
     watch: {
       scripts: {
         files: [config.js.src + '/**/*.coffee'],
-        tasks: ['clean:scripts', 'coffee:debug', 'keyfile']
+        tasks: ['clean:scripts', 'js'],
       },
       templates: {
         files: [config.html.src + '/**/*.jade'],
-        tasks: ['jade:templates']
+        tasks: ['clean:scripts', 'js']
       },
       sass: {
         files: [config.css.src + '/**/*.sass'],
@@ -113,10 +138,10 @@ module.exports = function() {
 
   });
   
-  grunt.registerTask('js', ['coffee:debug', 'concat']);
+  grunt.registerTask('templates', ['html2js:templates']);
+  grunt.registerTask('js', ['keyfile', 'coffee:debug', 'templates', 'concat']);
   grunt.registerTask('css', ['sass']);
-  grunt.registerTask('templates', ['jade:templates']);
-  grunt.registerTask('default', ['jade:index', 'css', 'keyfile', 'js', 'templates']);
-  grunt.registerTask('release', ['default', 'uglify']);
+  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js']);
+  grunt.registerTask('release', ['default', 'uglify', 'jade:indexmin']);
 
 };

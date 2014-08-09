@@ -1,0 +1,2 @@
+lft.controller 'HomeController', [() ->
+]
