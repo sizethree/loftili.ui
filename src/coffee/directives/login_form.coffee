@@ -1,28 +1,29 @@
-define [
-  'ng'
-  'services/api'
-], (ng) ->
+lft.directive 'lfLoginForm', ['$location', 'Auth', ($location, Auth) ->
 
-
-  LoginForm = (Api) ->
+  LoginForm =
     replace: true
-    templateUrl: '/html/directives/login_form.html'
-    scope:
-      credentials: '='
+    templateUrl: 'directives.login_form'
+    scope: {}
     link: ($scope, $element, $attrs) ->
+      $scope.creds = {}
+      $scope.errors = []
+
       success = () ->
         $location.path('/dashboard')
 
       fail = () ->
-        console.log 'failed!'
+        $scope.errors = ['Hmm, try again']
 
-      attempt = () ->
-        Api.Auth.attempt($scope.credentials).$promise.then success, fail
+      $scope.attempt = (event) ->
+        Auth.attempt($scope.creds).then success, fail
+        if event
+          event.stopPropagation()
 
       $scope.keywatch = (evt) ->
+        $scope.errors = []
         if evt.keyCode == 13
-          attempt()
+          $scope.attempt()
 
-  LoginForm.$inject = ['Api', '$location']
+  LoginForm
 
-  ng.module('lft').directive 'lfLoginForm', LoginForm
+]

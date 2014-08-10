@@ -1,37 +1,21 @@
-.home-view
+.home.view
+  padding: 20px 0
 
   .inner
     +outer-container
-
+ 
   .bottom
     +outer-container
-    .login, .sign-up
+    margin: 0 0 20px 0
+    .intro, .sign-up
       +span-columns(6)
-      &.sign-up
-        +omega
-      .input-container
-        +outer-container
-        position: relative
-        overflow: hidden
+    .sign-up
+      +omega
+      h1, p, input
+        margin: 0px
+      .input-container, .top, .flash-message
         margin: 0 0 10px 0
-        .label, input
-          display: block
-        .label
-          +transition(all 500ms ease)
-          z-index: 2
-          position: absolute
-          left: 10px
-          top: 0px
-          height: 100%
-          p.text
-            display: table
-            vertical-align: center
-            height: 100%
-            position: relative
-            span
-              display: table-cell
-              vertical-align: middle
-        input
-          position: relative
-          z-index: 1
-          margin: 0px auto
+
+  @import "partials/home/intro"
+  @import "partials/home/about"
+

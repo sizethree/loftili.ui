@@ -1,12 +1,5 @@
-define [
-  'ng'
-], (ng) ->
+lft.config ['$locationProvider', ($locationProvider) ->
 
-  class LocationConfig
+  $locationProvider.html5Mode true
 
-    constructor: ($locationProvider) ->
-      $locationProvider.html5Mode true
-
-    @$inject = ['$locationProvider']
-
-  ng.module('lft').config LocationConfig
+]

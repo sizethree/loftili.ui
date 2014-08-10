@@ -1,0 +1,53 @@
+.home.intro
+  margin: 20px 0 40px
+  $device-padding-vertical: 5em
+  $device-padding-horizontal: 0.4em
+  $device-screen-width: 14em
+  $device-screen-height: 25em
+  $device-background: darken(gray, 40)
+  $device-backside-background: darken($device-background, 10)
+  $device-text-color: white
+  $device-image: 'https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png'
+  $device-background-top: #162c4c
+  $device-background-bottom: #0a120d
+  $gradient-angle: 10deg
+
+  .device-background
+    +outer-container
+    position: relative
+    background: rgba(0,0,0,0.75)
+    background-image: url($device-image)
+    background-repeat: no-repeat
+    background-size: cover
+    width: 100%
+    button
+      +button(simple, $base-background-color)
+      font-size: $base-font-size
+      outline: none
+
+  .device-text
+    color: $device-text-color
+    padding: 2em
+    +media($large-screen)
+      max-width: 50%
+      padding: 4em
+      float: left
+
+    h4
+      margin-bottom: .5em
+      padding-bottom: .5em
+      border-bottom: 1px solid transparentize($device-text-color, 0.7)
+    p
+      font-family: $serif
+      margin-bottom: 1.5em
+
+  .device
+    position: absolute
+    right: 0px
+    top: 0px
+    .screen
+      +outer-container
+      +transform(translateY(-100px))
+      position: relative
+      img
+        float: left

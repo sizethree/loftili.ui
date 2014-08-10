@@ -1,64 +1,54 @@
-define [
-  'ng'
-  'services/api'
-], (ng) ->
-
+lft.service 'Auth', ['$q', '$location', 'Api', ($q, $location, Api) ->
+  
   active_user = null
 
-  class AuthResolver
+  filter = (type) ->
+    defer = $q.defer()
 
-    constructor: (callback) ->
-      @validator = ($q, $location, Api) ->
-        defer = $q.defer()
-        
-        active = (user) ->
-          callback user, defer, $location
+    redirect = (path) ->
+      defer.reject()
+      $location.path(path)
 
-        guest = () ->
-          active_user = false
-          callback false, defer, $location
+    success = (user) ->
+      active_user = user
+      if type == 'guest'
+        redirect('/dashboard')
+      else
+        defer.resolve()
 
-        if active_user == null
-          Api.Auth.check().$promise.then active, guest
-        else if active_user == false
-          guest()
-        else
-          active(active_user)
+    fail = () ->
+      active_user = false
+      if type == 'active'
+        redirect('/')
+      else
+        defer.resolve()
 
+    if active_user == null
+      Api.Auth.check().$promise.then success, fail
+    else
+      if active_user != false then success(active_user) else fail()
 
-        defer.promise
+    defer.promise
 
-      @validator['$inject'] = ['$q', '$location', 'Api']
+  Auth =
+    filter: filter
+    user: () -> active_user
+    logout: () ->
+      active_user = null
+      Api.Auth.logout().$promise.then () -> $location.path('/')
+    attempt: (creds) ->
+      defer = $q.defer()
 
-  class Auth
+      success = (user) ->
+        active_user = user
+        defer.resolve user
 
-    constructor: () ->
-      # chance for configuration
+      fail = () ->
+        active_user = false
+        defer.reject()
 
-    filter: (type) ->
-      switch type
-        when 'guest'
-          finish = (user, promise, $location) ->
-            if user
-              $location.path '/dashboard'
-            else
-              promise.resolve()
-        when 'active'
-          finish = (user, promise, $location) ->
-            if !user
-              $location.path '/'
-            else
-              promise.resolve(user)
+      Api.Auth.attempt(creds).$promise.then success, fail
 
-      resolver = new AuthResolver(finish)
-      resolver
+      defer.promise
 
-    $get: ['Api', (Api) ->
-      logout: () ->
-        Api.Auth.logout()
-    ]
-
-    @$inject: []
-
-  ng.module('lft').provider 'Auth', Auth
-
+]

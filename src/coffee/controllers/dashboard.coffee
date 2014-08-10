@@ -1,11 +1,5 @@
-define [
-  'ng'
-], (ng) ->
+lft.controller 'DashboardController', ['$scope', 'tracks', ($scope, tracks) ->
 
-  DashboardController = (ActiveUser, $scope, Auth) ->
-    $scope.logout = () ->
-      Auth.logout()
+  $scope.tracks = tracks
 
-  DashboardController['$inject'] = ['ActiveUser', '$scope', 'Auth']
-
-  ng.module('lft').controller 'DashboardController', DashboardController
+]

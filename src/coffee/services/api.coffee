@@ -1,20 +1,28 @@
-define [
-  'ng'
-  'ngResource'
-  'var/api_home'
-], (ng, ngResource, API_HOME) ->
+lft.service 'Api', ['$resource', 'API_HOME', ($resource, API_HOME) ->
 
-  ApiFactory = ($resource) ->
+  Api = {}
 
-    Auth: $resource API_HOME + '/auth', {},
-      check:
-        method: 'GET'
-      attempt:
-        method: 'POST'
-      logout:
-        method: 'DELETE'
+  Api.User = $resource [API_HOME, 'users', ':user_id'].join('/')
 
-  ApiFactory['$inject'] = ['$resource']
+  Api.Auth = $resource [API_HOME, 'auth'].join('/'), {},
+    check:
+      method: 'GET'
+    attempt:
+      method: 'POST'
+    logout:
+      method: 'DELETE'
 
-  ng.module('lft').factory 'Api', ApiFactory
+  Api.Track = $resource [API_HOME, 'tracks', ':track_id'].join('/'), {},
+    upload:
+      method: 'POST'
+      params:
+        track_id: 'upload'
+      transformRequest: (data) ->
+        fdt = new FormData()
+        fdt.append 'file', data.track_file
+        fdt
 
+  # must be returned
+  Api
+
+]

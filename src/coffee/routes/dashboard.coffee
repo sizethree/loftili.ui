@@ -1,20 +1,16 @@
-define [
-  'ng'
-  'services/auth',
-  'controllers/dashboard'
-], (ng) ->
+lft.config ['$routeProvider', ($routeProvider) ->
 
-  class DashboardRoute
+  $routeProvider.when '/dashboard',
+    templateUrl: 'views.dashboard'
+    controller: 'DashboardController'
+    resolve:
+      activeUser: ['Auth', (Auth) ->
+        Auth.filter 'active'
+      ],
 
-    constructor: ($routeProvider, AuthProvider) ->
-      route =
-        templateUrl: '/html/views/dashboard.html'
-        controller: 'DashboardController'
-        resolve:
-          ActiveUser: AuthProvider.filter('active').validator
+      tracks: ['Api', (Api) ->
+        tracks = Api.Track.query()
+        tracks.$promise
+      ]
 
-      $routeProvider.when '/dashboard', route
-
-    @$inject = ['$routeProvider', 'AuthProvider']
-
-  ng.module('lft').config DashboardRoute
+]

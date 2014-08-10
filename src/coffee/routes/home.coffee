@@ -1,20 +1,11 @@
-define [
-  'ng'
-  'services/auth'
-  'controllers/home'
-], (ng) ->
+lft.config ['$routeProvider', ($routeProvider) ->
 
-  class HomeRoute
+  $routeProvider.when '/',
+    templateUrl: 'views.home'
+    controller: 'HomeController'
+    resolve:
+      activeUser: ['Auth', (Auth) ->
+        Auth.filter 'guest'
+      ]
 
-    constructor: ($routeProvider, AuthProvider) ->
-      route =
-        templateUrl: '/html/views/home.html'
-        controller: 'HomeController'
-        resolve:
-          _Auth: AuthProvider.filter('guest').validator
-
-      $routeProvider.when '/', route
-
-    @$inject = ['$routeProvider', 'AuthProvider']
-
-  ng.module('lft').config HomeRoute
+]
