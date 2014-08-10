@@ -23,9 +23,11 @@ lft.directive 'lfTrackUploadForm', ['$timeout', 'Api', '$http', ($timeout, Api, 
       $scope.file = (input) ->
         clearFailures()
         fd_file = input.files[0]
+
         if validate fd_file
           track = new Api.Track
             track_file: fd_file
+
           track.$upload()
 
         $scope.$digest()

@@ -1,0 +1,10 @@
+.track
+  .info
+    .bit.name
+      p {{ track.name }}
+    .bit.filetype
+      p {{ track.type }}
+    .bit.added
+      p {{ track.createdAt | date:'short' }}
+  .actions
+    .action

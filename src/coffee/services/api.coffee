@@ -12,6 +12,8 @@ lft.service 'Api', ['$resource', 'API_HOME', ($resource, API_HOME) ->
     logout:
       method: 'DELETE'
 
+  Api.Device = $resource [API_HOME, 'devices', ':device_id'].join('/'), {}
+
   Api.Track = $resource [API_HOME, 'tracks', ':track_id'].join('/'), {},
     upload:
       method: 'POST'
