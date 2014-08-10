@@ -6,3 +6,11 @@
       button.cover(ng-click="startUpload()")
         span.type upload a track
       input(type="file" name="file" multiple onchange="angular.element(this).scope().file(this)")
+  .progress
+    .upload-list
+      .uploading(ng-repeat="upload in uploading")
+        .text
+          p.msg 
+            span Uploading: 
+            span.upload-name {{ upload.name }}
+        .loader(lf-progress-bar)
