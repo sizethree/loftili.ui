@@ -9,9 +9,11 @@
         li.nav-link
           a(href='#') Contact
     .navigation-tools
-      button.sign-up(ng-if="!user()" ng-click="toggle()") Login
-      button.sign-out(ng-if="user()" ng-click="logout()") Logout
-    .login-wrapper
+      button.sign-up(ng-if="!user()" ng-click="toggle($event)")
+        span(ng-if="!form_active") Login
+        span(ng-if="form_active") Close
+      button.sign-out(ng-if="user()" ng-click="logout($event)") Logout
+    .login-wrapper(ng-if="!user()")
       .login-container(ng-class="{active: form_active}")
         .container(lf-login-form)
 

@@ -19,8 +19,17 @@ lft.directive 'lfSignupForm', ['Api', 'Auth', '$location', (Api, Auth, $location
         $scope.locked = false
 
       fail = (response) ->
-        console.log response
-        $scope.errors = ['unable to create an account']
+        errors = []
+
+        addError = (err) ->
+          clean = err.replace(/_/g, ' ')
+          errors.push clean
+
+        if response and response.data
+          addError err for err, val of response.data.invalidAttributes
+
+        message = ['You need to enter better values for', errors.join(', ')].join(' ')
+        $scope.errors = [message]
 
       create = () ->
         $scope.locked = true
@@ -31,6 +40,7 @@ lft.directive 'lfSignupForm', ['Api', 'Auth', '$location', (Api, Auth, $location
         create()
 
       $scope.keywatch = (evt) ->
+        $scope.errors = []
         if evt.keyCode == 13
           create()
 

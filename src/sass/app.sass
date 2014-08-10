@@ -10,11 +10,18 @@ body, html
   z-index: 50
 
 [ng-view]
+  min-height: 100%
+  +calc(min-height, "100% - 140px")
   position: relative
   z-index: 40
 
 @import "shared/typeography"
+
 @import "directives/footer"
 @import "directives/header"
+@import "directives/flash-message"
+@import "directives/track-upload-form"
+
 @import "views/home"
+@import "views/dashboard"
 

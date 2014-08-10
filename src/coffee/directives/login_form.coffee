@@ -1,21 +1,23 @@
-lft.directive 'lfLoginForm', ['Auth', '$location', (Auth, $location) ->
+lft.directive 'lfLoginForm', ['$location', 'Auth', ($location, Auth) ->
 
   LoginForm =
     replace: true
     templateUrl: 'directives.login_form'
     scope: {}
     link: ($scope, $element, $attrs) ->
-      $scope.credentials = {}
+      $scope.creds = {}
       $scope.errors = []
 
       success = () ->
         $location.path('/dashboard')
 
       fail = () ->
-        $scope.errors = ['unable to create an account - make sure you\'ve entered enough info']
+        $scope.errors = ['Hmm, try again']
 
-      $scope.attempt = () ->
-        Auth.attempt($scope.credentials).then success, fail
+      $scope.attempt = (event) ->
+        Auth.attempt($scope.creds).then success, fail
+        if event
+          event.stopPropagation()
 
       $scope.keywatch = (evt) ->
         $scope.errors = []

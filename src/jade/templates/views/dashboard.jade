@@ -1,4 +1,24 @@
-.dashboard-view(ng-controller="DashboardController")
-  .top
-    .actions
-      a(ng-click="logout()") logout
+.dashboard.view
+
+  .container
+    .profile-info
+      
+
+    .dashboard-inner
+      .track-list-wrapper.half-section
+        .top
+          h4.subtitle
+            span.closer
+            | Your tracks
+        .bottom
+          .track-list-container(ng-if="tracks.length > 0")
+            .track-list(lf-track-list tracks="tracks")
+          .upload-track-container(ng-class="{vis: tracks.length === 0 || uploading}")
+            .uploader(lf-track-upload-form)
+      .device-list-wrapper.half-section
+        .top
+          h4.subtitle 
+            span.closer
+            | Your devices
+        
+

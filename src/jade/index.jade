@@ -10,4 +10,7 @@ html(lang="en" ng-app="lft")
     .head(lf-header)
     .view(ng-view)
     .foot(lf-footer)
-    script(src="/js/app.min.js" type="text/javascript")
+    if debug
+      script(src="/js/app.js" type="text/javascript")
+    else
+      script(src="/js/app.min.js" type="text/javascript")

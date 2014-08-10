@@ -1,10 +1,10 @@
 .login-form
   .flash(lf-flash-message messages="errors")
   .input-container
-    input(type="text" ng-keyup="keywatch($event)" ng-model="credentials.email" placeholder="email" ng-if="!locked")
+    input(type="text" ng-keyup="keywatch($event)" ng-model="creds.email" placeholder="email" ng-if="!locked" data-mm-noclose="true")
     input(type="text" disabled="true" ng-model="credentials.email" ng-if="locked")
   .input-container
-    input(type="password" ng-keyup="keywatch($event)" ng-model="credentials.password" placeholder="password" ng-if="!locked")
+    input(type="password" ng-keyup="keywatch($event)" ng-model="creds.password" placeholder="password" ng-if="!locked" data-mm-noclose="true")
     input(type="password" disabled="true" ng-model="credentials.password" ng-if="locked")
   .input-container
-    button(ng-click="attempt()") login
+    button(ng-click="attempt($event)") login

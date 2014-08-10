@@ -1,6 +1,5 @@
-lft.controller 'DashboardController', ['$scope', 'Auth', ($scope, Auth) ->
+lft.controller 'DashboardController', ['$scope', 'tracks', ($scope, tracks) ->
 
-  $scope.logout = () ->
-    Auth.logout()
+  $scope.tracks = tracks
 
 ]

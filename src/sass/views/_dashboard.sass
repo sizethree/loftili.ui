@@ -1,0 +1,35 @@
+.dashboard.view
+  padding: 20px 0
+
+  .container
+    +outer-container
+
+  .subtitle
+    font-weight: bold
+
+  .dashboard-inner
+    +outer-container
+
+  .half-section
+    +span-columns(6)
+    &:last-child
+      +omega
+
+    .bottom
+      padding: 5px 0
+
+    .top
+      padding: 5px 10px
+      background: $dark-gray
+      color: lighten($light-gray, 10)
+      border-radius: 2px
+
+      .closer
+        display: inline-block
+        height: 16px
+        width: 16px
+        margin: 0 10px 0 0
+        background: lighten($light-gray, 10)
+        border-radius: 2px
+        cursor: pointer
+

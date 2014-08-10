@@ -1,7 +1,7 @@
 {
   "name": "loftili-ui",
   "version": "0.0.1",
-  "description": "",
+  "description": "UI Application for the lofti.li product series",
   "author": "Danny Hadley <danny@dadleyy.com>",
   "license": "MIT",
   "dependencies": {},

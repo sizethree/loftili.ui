@@ -24,6 +24,8 @@ module.exports = function() {
   
   grunt.initConfig({
 
+    pkg: grunt.file.readJSON('package.json'),
+
     clean: {
       scripts: [config.js.dest],
       css: [config.css.dest],
@@ -44,7 +46,7 @@ module.exports = function() {
 
     uglify: {
       options: { 
-        banner: 'Danny Hadley, 2014'
+        banner: '/* lofti.li ui <%= pkg.version %>, <%= grunt.template.today("yyyy-mm-dd") %> */'
       },
       release: {
         files: [{
@@ -71,8 +73,8 @@ module.exports = function() {
     jade: {
       index: {
         options: {
-          data: {
-            debug: true
+          data: function() {
+            return {debug: true};
           }
         },
         files: {
@@ -81,8 +83,8 @@ module.exports = function() {
       },
       indexmin: {
         options: {
-          data: {
-            debug: true
+          data: function() {
+            return {debug: true};
           }
         },
         files: {

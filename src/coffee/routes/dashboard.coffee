@@ -6,6 +6,11 @@ lft.config ['$routeProvider', ($routeProvider) ->
     resolve:
       activeUser: ['Auth', (Auth) ->
         Auth.filter 'active'
+      ],
+
+      tracks: ['Api', (Api) ->
+        tracks = Api.Track.query()
+        tracks.$promise
       ]
 
 ]
