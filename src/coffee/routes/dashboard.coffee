@@ -1,6 +1,7 @@
 lft.config ['$routeProvider', ($routeProvider) ->
 
   callbacks = []
+
   next = (user) ->
     callback user for callback in callbacks
 
@@ -9,6 +10,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
     controller: 'DashboardController'
     resolve:
       activeUser: ['Auth', (Auth) ->
+        callbacks = []
         active = Auth.filter 'active'
         active.then next
         active
