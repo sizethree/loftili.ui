@@ -1,4 +1,11 @@
 .track-list
+  .list-header
+    .bit.name
+      p track name
+    .bit.filetype
+      p file type
+    .bit added
+    
   .list-container
     .track-container(ng-repeat="track in tracks")
       .track(lf-track track="track")

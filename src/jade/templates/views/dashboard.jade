@@ -19,7 +19,7 @@
             | tracks below. 
             a.leveler(ng-click="nonewb()") Got it, thanks
           .upload-track-container(ng-class="{vis: tracks.length === 0 || uploading}")
-            .uploader(lf-track-upload-form)
+            .uploader(lf-track-upload-form tracks="tracks")
       .device-list-wrapper.half-section
         .top
           h4.subtitle 

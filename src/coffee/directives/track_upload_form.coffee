@@ -25,9 +25,11 @@ lft.directive 'lfTrackUploadForm', ['$timeout', 'Api', '$http', ($timeout, Api, 
         fd_file = input.files[0]
         indx = null
 
-        remove = () ->
-          console.log 'finished upload...'
+        success = (new_track) ->
           $scope.uploading.splice (indx - 1), 1
+          console.log new_track
+          if $scope.tracks and angular.isArray $scope.tracks
+            $scope.tracks.push new_track
 
         fail = () ->
           $scope.uploading.splice (indx - 1), 1
@@ -36,7 +38,7 @@ lft.directive 'lfTrackUploadForm', ['$timeout', 'Api', '$http', ($timeout, Api, 
           indx = $scope.uploading.push fd_file
           track = new Api.Track
             track_file: fd_file
-          track.$upload().then remove, fail
+          track.$upload().then success, fail
 
         $scope.$digest()
 

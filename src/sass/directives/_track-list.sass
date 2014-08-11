@@ -1,8 +1,34 @@
 .track-list
   margin: 0 10px
+
+  .list-header
+    margin: 0 0 10px 0
+    
+    .bit
+      border-bottom: 1px solid darken($light-gray, 5)
+      color: darken($light-gray, 10)
+
+  .list-container
+    .track-container
+      margin: 0 0 10px 0
+
+
   .track
     +outer-container
-    .bit
-      +span-columns(4)
-    .bit.added
+
+  .bit
+    p
+      margin-bottom: 0px
+
+    &.name
+      +span-columns(8)
+
+    &.added
+      +span-columns(2)
       text-align: right
+
+    &.filetype
+      +span-columns(2)
+
+
+

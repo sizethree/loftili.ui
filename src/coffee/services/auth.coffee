@@ -14,7 +14,7 @@ lft.service 'Auth', ['$q', '$location', 'Api', ($q, $location, Api) ->
       if type == 'guest'
         redirect('/dashboard')
       else
-        defer.resolve()
+        defer.resolve(active_user)
 
     fail = () ->
       active_user = false
