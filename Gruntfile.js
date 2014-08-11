@@ -84,7 +84,7 @@ module.exports = function() {
       indexmin: {
         options: {
           data: function() {
-            return {debug: true};
+            return {debug: false};
           }
         },
         files: {
