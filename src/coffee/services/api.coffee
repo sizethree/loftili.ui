@@ -21,28 +21,54 @@ lft.service 'Api', ['$resource', '$q', 'API_HOME', ($resource, $q, API_HOME) ->
 
           deferred = $q.defer()
           parsed = []
+          artists = {}
+          artist_count = 0
           tracks = response.data
 
-          check = () ->
-            if tracks.length == parsed.length
-              deferred.resolve parsed
+          delegateArtists = () ->
+            for raw_track in tracks
+              raw_track.artist = artists[raw_track.artist]
+              parsed.push new Api.Track raw_track
+            deferred.resolve parsed
 
-          fetch = (track, index) ->
-            addOne = (track) ->
-              parsed.splice index, 0, track
+          check = () ->
+            missing = false
+
+            for id, artist of artists
+              if artist.$resolved != true
+                missing = true
+
+            if !missing
+              delegateArtists()
+            else
+              false
+
+          fetch = (artist_id) ->
+            addOne = (artist) ->
               check()
 
             failedOne = () ->
               deferred.reject()
 
-            full = Api.Track.get
-              track_id: track.id
+            full = Api.Artist.get
+              artist_id: artist_id
 
             full.$promise.then addOne, failedOne
+            full
 
-          fetch track, index for track, index in tracks
+          getArtists = (tracks) ->
+            for track, index in tracks
+              if not artists[track.artist]
+                artists[track.artist] = fetch track.artist
+                artist_count++
+
+          if tracks.length > 0
+            getArtists(tracks)
+          else
+            deferred.resolve parsed
 
           deferred.promise
+
     devices:
       method: 'GET'
       params:
@@ -75,6 +101,8 @@ lft.service 'Api', ['$resource', '$q', 'API_HOME', ($resource, $q, API_HOME) ->
         fdt = new FormData()
         fdt.append 'file', data.track_file
         fdt
+
+  Api.Artist = $resource [API_HOME, 'artists', ':artist_id'].join('/'), {}
 
   # must be returned
   Api

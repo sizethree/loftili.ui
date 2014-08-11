@@ -2,6 +2,7 @@
   margin: 0 10px
 
   .list-header
+    +outer-container
     margin: 0 0 10px 0
     
     .bit
@@ -15,20 +16,29 @@
 
   .track
     +outer-container
+    .info
+      +outer-container
 
   .bit
+    overflow: hidden
     p
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
       margin-bottom: 0px
 
     &.name
-      +span-columns(8)
+      +span-columns(5)
+
+    &.artist
+      +span-columns(3.5)
+
+    &.filetype
+      +span-columns(1.5)
 
     &.added
       +span-columns(2)
+      +omega
       text-align: right
-
-    &.filetype
-      +span-columns(2)
-
 
 
