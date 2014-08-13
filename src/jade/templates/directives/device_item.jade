@@ -1,0 +1,14 @@
+.device-item
+  .bit.name
+    p.txt {{ device.name }}
+  .bit.ip_addr
+    p.txt &nbsp; {{ device.ip_addr }}
+  .bit.port
+    p.txt &nbsp {{ device.port }}
+  .bit.status
+    p.txt &nbsp; {{ device.status }}
+  .bit.updated
+    p.txt {{ device.updatedAt | date:'shortDate' }}
+  .bit.actions
+    .actions
+      button.delete(ng-click="delete(device)")

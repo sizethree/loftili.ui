@@ -28,7 +28,7 @@
         .bottom
           .device-list-container(ng-if="devices.length > 0")
             .device-list(lf-device-list devices="devices")
-          .newbie(nf-if="devices.length === 0 && newbie")
+          .newbie(ng-if="devices.length === 0 && newbie")
             p.text
             | Make sure you've got your raspberry pi up and running at home with the latest
             | firmware from the 

@@ -42,7 +42,9 @@ lft.config ['$routeProvider', ($routeProvider) ->
           deferred.reject()
 
         devices = (user) ->
-          Api.User.devices({user_id: user.id}).$promise.then finish, fail
+          devices = Api.User.devices
+            user: user.id
+          devices.$promise.then finish, fail
 
         callbacks.push devices
         deferred.promise

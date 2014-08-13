@@ -6,6 +6,8 @@ lft.directive 'lfDeviceList', [() ->
     scope:
       devices: '='
     link: ($scope, $element, $attrs) ->
-      console.log $element
+
+      $scope.remove = (index) ->
+        $scope.devices.splice index, 1
 
 ]

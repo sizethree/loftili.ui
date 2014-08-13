@@ -8,6 +8,9 @@ lft.service 'Api', ['$resource', '$q', 'API_HOME', ($resource, $q, API_HOME) ->
   track_defaults =
     track_id: '@id'
 
+  device_defaults =
+    device_id: '@id'
+
   Api.User = $resource [API_HOME, 'users', ':user_id', ':fn'].join('/'), user_defaults,
     tracks:
       method: 'GET'
@@ -68,12 +71,24 @@ lft.service 'Api', ['$resource', '$q', 'API_HOME', ($resource, $q, API_HOME) ->
             deferred.resolve parsed
 
           deferred.promise
-
     devices:
       method: 'GET'
-      params:
-        fn: 'devices'
+      url: [API_HOME, 'devicepermissions'].join('/')
       isArray: true
+      interceptor:
+        response: (response) ->
+          data = response.data
+          devices = []
+
+          parse = (mapping) ->
+            device = new Api.Device mapping.device
+            device.permission = mapping.level
+            device
+
+          if angular.isArray data
+            devices.push parse(mapping) for mapping in data
+
+          devices
 
   Api.Auth = $resource [API_HOME, 'auth'].join('/'), {},
     check:
@@ -90,7 +105,19 @@ lft.service 'Api', ['$resource', '$q', 'API_HOME', ($resource, $q, API_HOME) ->
       method: 'GET'
       url: [API_HOME, 'logout'].join('/')
 
-  Api.Device = $resource [API_HOME, 'devices', ':device_id'].join('/'), {}
+  Api.Device = $resource [API_HOME, 'devices', ':device_id', ':fn'].join('/'), device_defaults,
+    delete:
+      method: 'GET'
+      params:
+        fn: 'destroy'
+
+  Api.DevicePermission = $resource [API_HOME, 'devicepermissions', ':permission_id'].join('/'), {},
+    query:
+      method: 'GET'
+      isArray: true
+      interceptor:
+        response: (response) ->
+          return response
 
   Api.Track = $resource [API_HOME, 'tracks', ':track_id'].join('/'), {},
     upload:

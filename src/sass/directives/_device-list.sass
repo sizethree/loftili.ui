@@ -1,0 +1,52 @@
+.device-list
+  margin: 0 10px
+
+  .list-header
+    +outer-container
+    margin: 0 0 10px 0
+    
+    .bit
+      border-bottom: 1px solid darken($light-gray, 5)
+      color: darken($light-gray, 10)
+
+  .list-container
+    .device-container
+      margin: 0 0 10px 0
+
+  .device-item
+    +outer-container
+    .info
+      +outer-container
+    .actions
+      +outer-container
+      button
+        outline: none
+        &.delete
+
+  .bit
+    +span-columns(2)
+    overflow: hidden
+    p
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+      margin-bottom: 0px
+
+    &.name
+      +span-columns(5)
+
+    &.ip_addr
+      +span-columns(1.5)
+
+    &.port
+      +span-columns(1)
+
+    &.status
+      +span-columns(1)
+
+    &.updated
+      +span-columns(2.5)
+
+    &.actions
+      +span-columns(1)
+      +omega
