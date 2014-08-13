@@ -106,10 +106,12 @@ lft.service 'Api', ['$resource', '$q', 'API_HOME', ($resource, $q, API_HOME) ->
       url: [API_HOME, 'logout'].join('/')
 
   Api.Device = $resource [API_HOME, 'devices', ':device_id', ':fn'].join('/'), device_defaults,
-    delete:
-      method: 'GET'
+    register:
+      method: 'PUT'
       params:
-        fn: 'destroy'
+        fn: 'register'
+    delete:
+      method: 'DELETE'
 
   Api.DevicePermission = $resource [API_HOME, 'devicepermissions', ':permission_id'].join('/'), {},
     query:

@@ -14,6 +14,9 @@ lft.directive 'lfDeviceCreator', ['Api', 'Auth', (Api, Auth) ->
           level: 1
           device: device.id
 
+        Api.Device.register
+          id: device.id
+
         permission.$save success, fail
         $scope.devices.push device
 
@@ -23,13 +26,7 @@ lft.directive 'lfDeviceCreator', ['Api', 'Auth', (Api, Auth) ->
         console.log 'fail!'
 
       attempt = () ->
-        user_id = Auth.user().id
-
-        device_attrs = angular.extend $scope.device,
-          owner: user_id
-
-        device = new Api.Device device_attrs
-
+        device = new Api.Device $scope.device
         device.$save().then addPermission, fail
 
       $scope.keywatch = (evt) ->

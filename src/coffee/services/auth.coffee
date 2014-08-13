@@ -1,4 +1,4 @@
-lft.service 'Auth', ['$q', '$location', 'Api', ($q, $location, Api) ->
+lft.service 'Auth', ['$q', '$http', '$location', 'Api', ($q, $http, $location, Api) ->
   
   active_user = null
 
@@ -40,6 +40,7 @@ lft.service 'Auth', ['$q', '$location', 'Api', ($q, $location, Api) ->
       defer = $q.defer()
 
       success = (user) ->
+        $http.defaults.headers.common.Authorization = ['Basic', user.id].join(' ')
         active_user = user
         defer.resolve user
 

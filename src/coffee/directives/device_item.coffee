@@ -17,4 +17,8 @@ lft.directive 'lfDeviceItem', [() ->
 
         device.$delete().then success, fail
 
+      $scope.report = () ->
+        $scope.device.$report()
+
+
 ]
