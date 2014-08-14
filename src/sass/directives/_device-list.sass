@@ -20,8 +20,17 @@
     .actions
       +outer-container
       button
+        margin: 0
+        width: auto
+        height: auto
+        float: right
+        box-shadow: inset 0px 0px 1px rgba(255,255,255,0.2)
+        border-radius: 0px 3px 3px 0px
         outline: none
+        padding: 2px
         &.delete
+        &:last-child
+          border-radius: 3px 0px 0px 3px
 
   .bit
     +span-columns(2)
@@ -45,8 +54,11 @@
       +span-columns(1)
 
     &.updated
-      +span-columns(2.5)
+      +span-columns(1.5)
 
     &.actions
-      +span-columns(1)
+      +span-columns(2)
       +omega
+      text-align: right
+        
+
