@@ -6,11 +6,6 @@ lft.config ['$routeProvider', ($routeProvider) ->
     resolve:
       activeUser: ['Auth', (Auth) ->
         Auth.filter 'guest'
-      ],
-      device: ['Api', (Api) ->
-        device = new Api.Device
-          id: 1
-        device.$register()
       ]
 
 ]

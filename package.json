@@ -4,7 +4,9 @@
   "description": "UI Application for the lofti.li product series",
   "author": "Danny Hadley <danny@dadleyy.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "bower": "^1.3.9"
+  },
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-coffee": "^0.10.1",
