@@ -12,6 +12,7 @@ lft.directive 'lfEditFieldInput', ['$rootScope', ($rootScope) ->
         is_save = evt.keyCode == 13
         if is_save or evt.keyCode == 27
           editField.close is_save, model.$modelValue
+          original_value = null
           $rootScope.$digest()
 
       focus = () ->
@@ -19,7 +20,7 @@ lft.directive 'lfEditFieldInput', ['$rootScope', ($rootScope) ->
         original_value = model.$modelValue
 
       blurOut = () ->
-        no_action = original_value == model.$modelValue
+        no_action = (original_value == model.$modelValue) || (original_value == null)
         editField.close false, original_value, no_action
         $rootScope.$digest()
 
