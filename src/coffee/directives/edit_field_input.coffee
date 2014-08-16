@@ -19,7 +19,8 @@ lft.directive 'lfEditFieldInput', ['$rootScope', ($rootScope) ->
         original_value = model.$modelValue
 
       blurOut = () ->
-        editField.close false, original_value
+        no_action = original_value == model.$modelValue
+        editField.close false, original_value, no_action
         $rootScope.$digest()
 
       editField.add focus

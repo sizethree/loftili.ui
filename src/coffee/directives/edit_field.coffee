@@ -13,8 +13,12 @@ lft.directive 'lfEditField', [() ->
       if angular.isFunction @scope.revert
         @scope.revert @scope.property, value
 
-    close: (save, final_value) ->
+    close: (save, final_value, no_action) ->
       @scope.editing = false
+
+      if no_action
+        return
+
       if save
         @save(final_value)
       else

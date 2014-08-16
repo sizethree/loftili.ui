@@ -38,6 +38,12 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
 
       $scope.saveProperty = (property, value) ->
         $scope.device[property] = value
-        $scope.device.$save()
+
+        success = () ->
+          console.log 'updated successfully'
+        fail = () ->
+          console.log 'failed updating'
+
+        $scope.device.$save().then success, fail
 
 ]
