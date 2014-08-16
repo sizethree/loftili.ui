@@ -20,7 +20,6 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
 
       pingSuccess = (response) ->
         if(response.device)
-          console.log response.device.updatedAt
           $scope.device.updatedAt = response.device.updatedAt
 
         $scope.device.status = true
