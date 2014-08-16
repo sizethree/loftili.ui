@@ -11,7 +11,9 @@
         p.txt last updated:
         p.txt {{ device.updatedAt | date:'short' }}
     .status-icon.active(ng-if="device.status")
+      span ok
     .status-icon.inactive(ng-if="!device.status")
+      span bad
   .bit.actions
     .actions
       button.delete(ng-click="delete(device)")

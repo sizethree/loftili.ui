@@ -20,19 +20,15 @@ lft.directive 'lfDeviceCreator', ['Api', 'Auth', '$timeout', (Api, Auth, $timeou
           user: user_id
           device: device.id
 
-        setStatus = (response) ->
-          console.log arguments
-
-        ping = () ->
-          Api.Device.ping({device_id: device.id}).$promise.then setStatus
-
-        dns_entry.$save().then ping, dnsFail
+        dns_entry.$save().then dnsSuccess, dnsFail
         permission.$save()
         $scope.devices.push device
 
       dnsFail = () ->
         $scope.failures.push 'Unable to create a dns entry for your device!'
         $timeout clearErrors, 2500
+
+      dnsSuccess = () ->
 
       addError = (error) ->
         $scope.failures.push error

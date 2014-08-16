@@ -18,8 +18,21 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
         device.$delete().then success, fail
         Api.DnsRecord.delete({device: device.id, user: Auth.user().id})
 
-      $scope.report = () ->
-        $scope.device.$report()
+      pingSuccess = (response) ->
+        if(response.device)
+          console.log response.device.updatedAt
+          $scope.device.updatedAt = response.device.updatedAt
+
+        $scope.device.status = true
+
+      pingFail = (response) ->
+        if(response.device)
+          $scope.device.updatedAt = response.device.updatedAt
+
+        $scope.device.status = false
+
+      $scope.refresh = () ->
+        Api.Device.ping({device_id: $scope.device.id}).$promise.then pingSuccess, pingFail
 
 
 ]
