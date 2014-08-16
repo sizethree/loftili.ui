@@ -8,16 +8,7 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
       ondelete: '&'
       index: '='
     link: ($scope, $element, $attrs) ->
-      $scope.delete = (device) ->
-        success = () ->
-          $scope.ondelete()
-
-        fail = () ->
-          console.log 'the device was not removed!'
-
-        device.$delete().then success, fail
-        Api.DnsRecord.delete({device: device.id, user: Auth.user().id})
-
+      # private
       pingSuccess = (response) ->
         if(response.device)
           $scope.device.updatedAt = response.device.updatedAt
@@ -29,6 +20,20 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
           $scope.device.updatedAt = response.device.updatedAt
 
         $scope.device.status = false
+
+      # public
+      $scope.delete = (device) ->
+        success = () ->
+          $scope.ondelete()
+
+        fail = () ->
+          console.log 'the device was not removed!'
+
+        device.$delete().then success, fail
+        Api.DnsRecord.delete({device: device.id, user: Auth.user().id})
+
+      $scope.play = () ->
+        console.log 'sending play signal'
 
       $scope.refresh = () ->
         Api.Device.ping({device_id: $scope.device.id}).$promise.then pingSuccess, pingFail

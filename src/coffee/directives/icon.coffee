@@ -20,7 +20,7 @@ lft.directive 'lfIcon', ['ICONOGRAPHY', 'Svg', (ICONOGRAPHY, Svg) ->
 
       group = Svg.create 'g'
       group.translate width * 0.5, height * 0.5
-      group.scale 0.5
+      group.scale 0.80
 
       icon = Svg.create 'path'
 
