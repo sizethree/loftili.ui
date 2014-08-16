@@ -2,7 +2,11 @@
   .bit.name
     p.txt {{ device.name }}
   .bit.ip_addr
-    p.txt &nbsp; {{ device.ip_addr }}
+    .field(lf-edit-field save="saveProperty" revert="revertPropery" property="'ip_addr'")
+      .editor
+        input(type="text" lf-edit-field-input ng-model="device.ip_addr")
+      .viewer
+        p.txt &nbsp; {{ device.ip_addr }}
   .bit.port
     p.txt &nbsp {{ device.port }}
   .bit.status.has-tooltip

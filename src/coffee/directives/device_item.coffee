@@ -34,5 +34,11 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
       $scope.refresh = () ->
         Api.Device.ping({device_id: $scope.device.id}).$promise.then pingSuccess, pingFail
 
+      $scope.revertPropery = (property, value) ->
+        $scope.device[property] = value
+
+      $scope.saveProperty = (property, value) ->
+        $scope.device[property] = value
+        $scope.device.$save()
 
 ]
