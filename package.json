@@ -1,7 +1,7 @@
 {
   "name": "loftili-ui",
-  "version": "0.0.1",
-  "description": "UI Application for the lofti.li product series",
+  "version": "0.0.2",
+  "description": "Client side one-page-application for the lofti.li user dashboard portal",
   "author": "Danny Hadley <danny@dadleyy.com>",
   "license": "MIT",
   "dependencies": {
