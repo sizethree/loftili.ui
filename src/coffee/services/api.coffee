@@ -5,6 +5,7 @@ lft.service 'Api', [
   'Api/Track',
   'Api/Artist',
   'Api/DevicePermission',
+  'Api/DnsRecord',
   () ->
 
     Api =
@@ -14,5 +15,6 @@ lft.service 'Api', [
       Track: arguments[3]
       Artist: arguments[4]
       DevicePermission: arguments[5]
+      DnsRecord: arguments[6]
 
 ]

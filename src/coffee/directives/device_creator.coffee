@@ -1,4 +1,4 @@
-lft.directive 'lfDeviceCreator', ['Api', 'Auth', (Api, Auth) ->
+lft.directive 'lfDeviceCreator', ['Api', 'Auth', '$timeout', (Api, Auth, $timeout) ->
 
   lfDeviceCreator =
     replace: true
@@ -6,6 +6,8 @@ lft.directive 'lfDeviceCreator', ['Api', 'Auth', (Api, Auth) ->
     scope:
       devices: '='
     link: ($scope, $element, $attrs) ->
+      $scope.failures = []
+
       addPermission = (device) ->
         user_id = Auth.user().id
 
@@ -14,15 +16,29 @@ lft.directive 'lfDeviceCreator', ['Api', 'Auth', (Api, Auth) ->
           level: 1
           device: device.id
 
-        permission.$save success, fail
+        dns_entry = new Api.DnsRecord
+          user: user_id
+          device: device.id
+
+        dns_entry.$save()
+        permission.$save()
         $scope.devices.push device
 
-      success = (permission) ->
-    
-      fail = () ->
-        console.log 'fail!'
+      addError = (error) ->
+        $scope.failures.push error
+
+      clearErrors = () ->
+        $scope.failures = []
+
+      fail = (response) ->
+        if response and response.data
+          addError ['You need to enter a better value for', error].join(' ') for error, val of response.data.invalidAttributes
+        else
+          addError 'Unable to get a response from the server'
+        $timeout clearErrors, 2500
 
       attempt = () ->
+        console.log $scope.device
         device = new Api.Device $scope.device
         device.$save().then addPermission, fail
 

@@ -1,9 +1,10 @@
 .device-creator
+  .problems(lf-flash-message messages="failures")
   .title-container
     h4.type create a new device
   .form-container
     .input-container
       input(type="text" ng-keyup="keywatch($event)" ng-model="device.name" placeholder="pick a name (i.e living-boom)")
       input(type="text" ng-keyup="keywatch($event)" ng-model="device.port" placeholder="port (i.e 8080)")
-      input(type="text" ng-keyup="keywatch($event)" ng-model="device.ip" placeholder="ip address (i.e 72.0.0.1)")
+      input(type="text" ng-keyup="keywatch($event)" ng-model="device.ip_addr" placeholder="ip address (i.e 72.0.0.1)")
 
