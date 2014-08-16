@@ -14,9 +14,6 @@ lft.directive 'lfDeviceCreator', ['Api', 'Auth', (Api, Auth) ->
           level: 1
           device: device.id
 
-        Api.Device.register
-          id: device.id
-
         permission.$save success, fail
         $scope.devices.push device
 
