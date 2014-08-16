@@ -14,8 +14,7 @@ install:
 script:
 - echo "building $TRAVIS_COMMIT"
 - echo "BUILD_COMMIT=$TRAVIS_COMMIT" > .env
-- grunt
-- grunt uglify
+- grunt relase
 after_success:
 - tar -cvzf "loftili-$TRAVIS_COMMIT.tar.gz" ./public/
 - curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
