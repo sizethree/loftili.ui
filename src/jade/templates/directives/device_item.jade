@@ -5,13 +5,16 @@
     p.txt &nbsp; {{ device.ip_addr }}
   .bit.port
     p.txt &nbsp {{ device.port }}
-  .bit.status
-    p.txt &nbsp; {{ device.status }}
-  .bit.updated
-    p.txt {{ device.updatedAt | date:'shortDate' }}
+  .bit.status.has-tooltip
+    .tooltip(lf-tooltip)
+      .content
+        p.txt last updated:
+        p.txt {{ device.updatedAt | date:'short' }}
+    .status-icon.active(ng-if="device.status")
+    .status-icon.inactive(ng-if="!device.status")
   .bit.actions
     .actions
       button.delete(ng-click="delete(device)")
         .icon(lf-icon icon="trash" width="30" height="30") 
-      button.report(ng-click="report()")
+      button.report(ng-click="refresh()")
         .icon(lf-icon icon="refresh" width="30" height="30")

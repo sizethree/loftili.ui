@@ -17,6 +17,7 @@
     +outer-container
     .info
       +outer-container
+
     .actions
       +outer-container
       button
@@ -32,9 +33,29 @@
         &:last-child
           border-radius: 3px 0px 0px 3px
 
+    .bit.status
+      height: 20px
+      .status-icon
+        display: block
+        position: absolute
+        left: 2%
+        top: 2%
+        right: 2%
+        bottom: 2%
+        border-radius: 2px
+        border: 1px solid white
+        &.active
+          +linear-gradient($success-color, darken($success-color, 5))
+          border-color: darken($success-color, 10)
+        &.inactive
+          +linear-gradient($notice-color, darken($notice-color, 5))
+          border-color: darken($notice-color, 10)
+
   .bit
     +span-columns(2)
     overflow: hidden
+    &.status
+      overflow: visible
     p
       overflow: hidden
       text-overflow: ellipsis
@@ -42,20 +63,18 @@
       margin-bottom: 0px
 
     &.name
-      +span-columns(5)
+      +span-columns(4.5)
 
     &.ip_addr
-      +span-columns(1.5)
+      +span-columns(3)
 
     &.port
-      +span-columns(1)
+      +span-columns(1.5)
 
     &.status
       +span-columns(1)
-
-    &.updated
-      +span-columns(1.5)
-
+      position: relative
+    
     &.actions
       +span-columns(2)
       +omega
