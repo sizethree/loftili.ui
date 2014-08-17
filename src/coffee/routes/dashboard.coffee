@@ -5,10 +5,18 @@ lft.config ['$routeProvider', ($routeProvider) ->
   next = (user) ->
     callback user for callback in callbacks
 
-  $routeProvider.when '/dashboard',
+  $routeProvider.when '/dashboard/:child?',
     templateUrl: 'views.dashboard'
     controller: 'DashboardController'
     resolve:
+      childView: ['$route', ($route) ->
+        current_route = $route.current
+        if current_route.params and current_route.params['child']
+          current_route.params['child']
+        else
+          'overview'
+      ],
+
       activeUser: ['Auth', (Auth) ->
         callbacks = []
         active = Auth.filter 'active'

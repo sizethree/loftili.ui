@@ -1,39 +1,40 @@
 .dashboard.view
 
+  .nav(lf-dashboard-nav active="active_nav")
+
   .container
-
-    .profile-info
-
-    .dashboard-inner
-      .track-list-wrapper.half-section
-        .top
-          h4.subtitle
-            span.closer
-            | Your tracks
-        .bottom
-          .track-list-container(ng-if="tracks.length > 0")
-            .track-list(lf-track-list tracks="tracks")
-          .newbie(ng-if="tracks.length === 0 && newbie")
-            p.text 
-            | Hey, looks like youre just getting started with your library. Try uploading a few
-            | tracks below. 
-            a.leveler(ng-click="nonewb()") Got it, thanks
-          .upload-track-container(ng-class="{vis: tracks.length === 0 || uploading}")
-            .uploader(lf-track-upload-form tracks="tracks")
-      .device-list-wrapper.half-section
-        .top
-          h4.subtitle 
-            span.closer
-            | Your devices
-        .bottom
-          .device-list-container(ng-if="devices.length > 0")
-            .device-list(lf-device-list devices="devices")
-          .newbie(ng-if="devices.length === 0 && newbie")
-            p.text
-            | Make sure you've got your raspberry pi up and running at home with the latest
-            | firmware from the 
-            a(href="https://github.com/loftili/core" title="repo") repository 
-            | pulled down and running. Then come back and fill out this form below to get started!
-          .device-create-form-container(ng-class="{vis: devices.length === 0 || creating}")
-            .creator(lf-device-creator devices="devices")
+    .sub-view.overview
+      .profile-info
+      .dashboard-inner
+        .track-list-wrapper.half-section
+          .top
+            h4.subtitle
+              span.closer
+              | Your tracks
+          .bottom
+            .track-list-container(ng-if="tracks.length > 0")
+              .track-list(lf-track-list tracks="tracks")
+            .newbie(ng-if="tracks.length === 0 && newbie")
+              p.text 
+              | Hey, looks like youre just getting started with your library. Try uploading a few
+              | tracks below. 
+              a.leveler(ng-click="nonewb()") Got it, thanks
+            .upload-track-container(ng-class="{vis: tracks.length === 0 || uploading}")
+              .uploader(lf-track-upload-form tracks="tracks")
+        .device-list-wrapper.half-section
+          .top
+            h4.subtitle 
+              span.closer
+              | Your devices
+          .bottom
+            .device-list-container(ng-if="devices.length > 0")
+              .device-list(lf-device-list devices="devices")
+            .newbie(ng-if="devices.length === 0 && newbie")
+              p.text
+              | Make sure you've got your raspberry pi up and running at home with the latest
+              | firmware from the 
+              a(href="https://github.com/loftili/core" title="repo") repository 
+              | pulled down and running. Then come back and fill out this form below to get started!
+            .device-create-form-container(ng-class="{vis: devices.length === 0 || creating}")
+              .creator(lf-device-creator devices="devices")
 

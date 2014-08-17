@@ -30,10 +30,22 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
           console.log 'the device was not removed!'
 
         device.$delete().then success, fail
-        Api.DnsRecord.delete({device: device.id, user: Auth.user().id})
+
+        # To.Do - success and fail!
+        Api.DnsRecord.delete
+          device: device.id
+          user: Auth.user().id
 
       $scope.play = () ->
-        console.log 'sending play signal'
+        params =
+          track: 1
+          device: $scope.device.id
+
+        success = () -> console.log arguments
+        fail = () -> console.log arguments
+
+        Api.Playback.start(params).$promise.then success, fail
+       
 
       $scope.refresh = () ->
         Api.Device.ping({device_id: $scope.device.id}).$promise.then pingSuccess, pingFail
@@ -44,10 +56,11 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
       $scope.saveProperty = (property, value) ->
         $scope.device[property] = value
 
-        success = () ->
-          console.log 'updated successfully'
-        fail = () ->
-          console.log 'failed updating'
+        # To.do - notifications
+        success = () -> console.log 'passed update'
+
+        # To.do - notifications and loader
+        fail = () -> console.log 'failed update'
 
         $scope.device.$save().then success, fail
 

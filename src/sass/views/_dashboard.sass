@@ -1,8 +1,15 @@
 .dashboard.view
-  padding: 20px 0
+  +outer-container
+  min-height: 100%
+
+  .nav, .container
+    h2, p, a
+      margin: 0
 
   .container
     +outer-container
+    +span-columns(10)
+    padding: 20px 0 0 0
 
   .subtitle
     font-weight: bold

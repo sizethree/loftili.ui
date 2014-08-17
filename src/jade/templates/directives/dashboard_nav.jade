@@ -1,0 +1,12 @@
+.nav-container.dashboard-nav
+  .inner-fill
+    ul.nav(data-active="{{ active }}")
+      li.overview
+        .icon(lf-icon icon="dash" width="30" height="30" fill="#414141" scale="0.7")
+        a.link.overview(href="/dashboard") Overview
+      li.devices
+        .icon(lf-icon icon="pi" width="30" height="30" fill="#414141")
+        a.link.devices(href="/dashboard/devices") Devices
+      li.library
+        .icon(lf-icon icon="book" width="30" height="30" fill="#414141")
+        a.link.library(href="/dashboard/library") Library

@@ -13,6 +13,7 @@ lft.directive 'lfIcon', ['ICONOGRAPHY', 'Svg', (ICONOGRAPHY, Svg) ->
       width = $attrs['width'] || default_width
       height = $attrs['height'] || default_height
       fill = $attrs['fill'] || '#fff'
+      scale = parseFloat $attrs['scale'] || '0.8'
 
       svg = Svg.create 'svg',
         width: width
@@ -20,7 +21,7 @@ lft.directive 'lfIcon', ['ICONOGRAPHY', 'Svg', (ICONOGRAPHY, Svg) ->
 
       group = Svg.create 'g'
       group.translate width * 0.5, height * 0.5
-      group.scale 0.80
+      group.scale scale
 
       icon = Svg.create 'path'
 
