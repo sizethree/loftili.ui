@@ -36,6 +36,16 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
           device: device.id
           user: Auth.user().id
 
+      $scope.stop = () ->
+        params =
+          track: 1
+          device: $scope.device.id
+
+        success = () -> console.log arguments
+        fail = () -> console.log arguments
+
+        Api.Playback.stop(params).$promise.then success, fail
+
       $scope.play = () ->
         params =
           track: 1
