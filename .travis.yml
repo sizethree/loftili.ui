@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '0.10'
 install:
-  - gem install sass -v 3.3.14
+- gem install sass -v 3.3.14
 - gem install bourbon
 - gem install neat
 - bundle install --path ./vendor/bundle
