@@ -9,7 +9,7 @@ module.exports = function() {
 
   dotenv.load();
 
-  var api_home = process.env['API_HOME'] || 'http://api.lofti.li';
+  var api_home = process.env['API_HOME'] || 'http://api.loftili.com';
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
