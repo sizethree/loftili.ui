@@ -1,0 +1,33 @@
+.blog-post
+  +outer-container
+
+  .post-title
+    +outer-container
+    margin-bottom: 20px
+
+    h1.title-text
+      line-height: 54px
+
+    h1.title-text
+      +span-columns(10)
+      font-size: 54px
+      font-weight: 200
+
+    .title-date
+      +span-columns(2)
+      text-align: right
+      display: table
+      height: 54px
+
+      h2
+        display: table-cell
+        vertical-align: bottom 
+        font-size: 12px
+        text-transform: uppercase
+        font-family: $sans-serif
+
+        span
+          border-bottom: 2px solid darken($light-gray, 15)
+
+  .content
+    text-indent: 1em
