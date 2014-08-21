@@ -1,7 +1,7 @@
 @import "base"
 
 body, html
-  width: 100%
+  min-width: 100%
   height: 100%
   position: relative
 
@@ -11,7 +11,7 @@ body, html
 
 [ng-view]
   min-height: 100%
-  +calc(min-height, "100% - 110px")
+  +calc(min-height, "100% - 100px")
   position: relative
   z-index: 40
 

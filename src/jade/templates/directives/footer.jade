@@ -1,6 +1,8 @@
 .footer.main
+  .footer-wrapper
     .footer-logo
-      .icon(lf-icon icon="logo" width="30" height="30" scale="1.5")
+      a.home-link(href="/")
+        .icon(lf-icon icon="logo" width="30" height="30" scale="1.5")
     ul
       li
         a(href='/about') About
@@ -9,12 +11,12 @@
     .footer-secondary-links
       ul.footer-social
         li
-          a(href='http://google.com/+Loftiliapp')
+          a.social-link(href="http://google.com/+Loftiliapp" target="_blank")
             .icon(lf-icon icon="google" width="22" height="22" fill="#fdfdfd" scale="1.2")
         li
-          a(href='https://twitter.com/loftili')
+          a.social-link(href="https://twitter.com/loftili" target="_blank")
             .icon(lf-icon icon="twitter" width="22" height="22" fill="#fdfdfd" scale="1.1")
         li
-          a(href='javascript:void(0)')
+          a.social-link(href="https://www.youtube.com/channel/UC9UwH1yJl8s5Ldwp2i-Vf1g" target="_blank")
             .icon(lf-icon icon="youtube" width="22" height="22" fill="#fdfdfd" scale="1.1")
 

@@ -1,18 +1,28 @@
 .footer.main
-  +outer-container
   $footer-background: desaturate(darken($base-accent-color, 20), 30)
   $footer-color: white
   $footer-link-color: transparentize($footer-color, 0.6)
   $footer-disclaimer-color: transparentize($footer-color, 0.6)
   background: $footer-background
-  padding: 5px 10px
   width: 100%
+  height: auto
+
+  .footer-wrapper
+    +outer-container
+    padding: 5px 0
 
   .footer-logo
-    margin-right: 1em
+    margin: 0px 1em 0px 0.66em
     float: left
-    margin-bottom: 0
     height: 30px
+
+    .home-link
+      display: block
+      height: 30px
+
+  .icon
+    display: block
+    height: 22px
 
   ul
     float: left
@@ -38,21 +48,21 @@
       font-size: .8em
       font-weight: 400
 
-    ul.footer-social
-      float: right
-      margin-top: 0
+  ul.footer-social
+    float: right
+    margin-top: 0
+    height: 22px
+    margin-top: 4px
 
-      li
-        float: left
-        font-size: 1em
-        padding-right: .7em
-        &:last-child
-          padding-right: 0
+    li
+      float: left
+      font-size: 1em
+      padding-right: .7em
+      height: 22px
 
-      img
-        opacity: .7
-        height: 1.6em
-        padding: 1px
-        &:hover
-          opacity: 1
+      a.social-link
+        display: block
+        height: 22px
 
+      &:last-child
+        padding-right: 0
