@@ -1,7 +1,7 @@
 @import "base"
 
 body, html
-  width: 100%
+  min-width: 100%
   height: 100%
   position: relative
 
@@ -11,25 +11,29 @@ body, html
 
 [ng-view]
   min-height: 100%
-  +calc(min-height, "100% - 140px")
+  +calc(min-height, "100% - 100px")
   position: relative
   z-index: 40
 
 @import "shared/typeography"
+@import "shared/classes"
 
+@import "directives/icon"
 @import "directives/footer"
 @import "directives/header"
-@import "directives/flash-message"
-@import "directives/track-upload-form"
-@import "directives/device-creator"
-@import "directives/icon"
+@import "directives/tooltip"
+@import "directives/blog-post"
 @import "directives/track-list"
 @import "directives/device-list"
 @import "directives/device-item"
 @import "directives/progress-bar"
-@import "directives/tooltip"
+@import "directives/flash-message"
 @import "directives/dashboard-nav"
+@import "directives/device-creator"
+@import "directives/track-upload-form"
 
 @import "views/home"
+@import "views/blog"
+@import "views/about"
+@import "views/contact"
 @import "views/dashboard"
-
