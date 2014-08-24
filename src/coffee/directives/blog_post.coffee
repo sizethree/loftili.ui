@@ -6,8 +6,6 @@ lft.directive 'lfBlogPost', ['$sce', ($sce) ->
     scope:
       post: '='
     link: ($scope, $element, $attrs) ->
-      console.log $scope.post
-
       $scope.title = () ->
         $sce.trustAsHtml $scope.post.title
 
