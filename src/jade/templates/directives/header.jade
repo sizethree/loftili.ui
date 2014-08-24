@@ -12,7 +12,7 @@
           a(href='/contact') Contact
 
     .navigation-tools
-      button.sign-in(ng-if="!user()" ng-click="toggle($event)")
+      button.login(ng-if="!user()" ng-click="toggle($event)")
         span(ng-if="!form_active") Login
         span(ng-if="form_active") Close
       button.sign-out(ng-if="user()" ng-click="logout($event)") Logout
