@@ -1,4 +1,4 @@
-lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
+lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang', ($timeout, Api, Auth, Notifications, Lang) ->
 
   lfDeviceItem =
     replace: true
@@ -8,19 +8,6 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
       ondelete: '&'
       index: '='
     link: ($scope, $element, $attrs) ->
-      # private
-      pingSuccess = (response) ->
-        if(response.device)
-          $scope.device.updatedAt = response.device.updatedAt
-
-        $scope.device.status = true
-
-      pingFail = (response) ->
-        if(response.device)
-          $scope.device.updatedAt = response.device.updatedAt
-
-        $scope.device.status = false
-
       # public
       $scope.delete = (device) ->
         success = () ->
@@ -56,9 +43,26 @@ lft.directive 'lfDeviceItem', ['Api', 'Auth', (Api, Auth) ->
 
         Api.Playback.start(params).$promise.then success, fail
        
-
       $scope.refresh = () ->
-        Api.Device.ping({device_id: $scope.device.id}).$promise.then pingSuccess, pingFail
+        notification_id = Notifications.add Lang('device.ping.started')
+
+        success = (response) ->
+          if(response.updatedAt)
+            $scope.device.updatedAt = response.updatedAt
+
+          $scope.device.status = true
+          Notifications.remove notification_id
+          Notifications.flash Lang('device.ping.success'), 'success'
+
+        fail  = (response) ->
+          if(response.data && response.data.updatedAt)
+            $scope.device.updatedAt = response.data.updatedAt
+
+          $scope.device.status = false
+          Notifications.remove notification_id
+          Notifications.flash Lang('device.ping.failed'), 'error'
+
+        Api.Device.ping({device_id: $scope.device.id}).$promise.then success, fail
 
       $scope.revertPropery = (property, value) ->
         $scope.device[property] = value

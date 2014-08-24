@@ -9,6 +9,7 @@ html(lang="en" ng-app="lft")
     link(href='http://static.loftili.com/loftili.png' rel='shortcut icon')
   body
     .head(lf-header)
+    .notifications(lf-notification-manager)
     .view(ng-view)
     .foot(lf-footer)
     if debug

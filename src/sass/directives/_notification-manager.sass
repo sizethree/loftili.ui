@@ -1,0 +1,32 @@
+.notification-manager
+  position: relative
+  z-index: 1000
+  
+  .notification-container
+    position: fixed
+    width: 400px
+    left: 50%
+    margin: 0 -200px
+    top: 0px
+
+    .notification-inner
+      padding: 5px 15px
+      background: lighten($light-gray, 10)
+
+      border: 
+        left: 1px solid $light-gray
+        right: 1px solid $light-gray
+        bottom: 1px solid $light-gray
+
+      color: darken($light-gray, 25)
+      font-size: 12px
+
+      &.error
+        color: darken($light-gray, 50)
+        background: $error-color
+        border-color: darken($error-color, 10)
+
+      &.success
+        color: darken($light-gray, 50)
+        background: $success-color
+        border-color: darken($success-color, 10)
