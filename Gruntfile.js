@@ -9,7 +9,8 @@ module.exports = function() {
 
   dotenv.load();
 
-  var api_home = process.env['API_HOME'] || 'http://api.loftili.com';
+  var api_home = process.env['API_HOME'] || 'http://api.loftili.com',
+      analytics_id = process.env['GA_ID'] || 'UA-54198766-3';
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -41,6 +42,13 @@ module.exports = function() {
         name: 'API_HOME',
         key: api_home,
         encrypt: false
+      },
+      google: {
+        dest: 'obj/js/google.js',
+        module: 'lft',
+        name: 'GA_ID',
+        key: btoa(analytics_id),
+        encrypt: true
       }
     },
 

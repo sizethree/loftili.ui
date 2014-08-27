@@ -23,7 +23,8 @@ module.exports = (function() {
           vendor_libs: [
             path.join(vendor_js_dir, 'angular/angular.js'),
             path.join(vendor_js_dir, 'angular-route/angular-route.js'),
-            path.join(vendor_js_dir, 'angular-resource/angular-resource.js')
+            path.join(vendor_js_dir, 'angular-resource/angular-resource.js'),
+            path.join(vendor_js_dir, 'analytics/index.js')
           ]
         },
         sass: {
