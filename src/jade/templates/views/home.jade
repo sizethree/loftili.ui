@@ -1,9 +1,2 @@
 .home.view
-  .inner
-    .top(ng-include="'partials.home.intro'")
-    hr
-    .bottom
-      .intro(ng-include="'partials.home.features'")
-      .sign-up
-        .container(lf-signup-form)
-    .about(ng-include="'partials.home.about'")
+  .content(lf-dynamic-content content="content")

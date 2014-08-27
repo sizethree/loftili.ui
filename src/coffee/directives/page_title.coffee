@@ -13,11 +13,11 @@ lft.directive 'lfPageTitle', ['$rootScope', 'Analaytics', ($rootScope, Analaytic
 
       start = (evt, route_event) ->
         route = route_event.$$route
-        Analaytics.event 'routing', ['routeStart', route.originalPath].join(':')
+        Analaytics.event 'routing', 'route_start', route.originalPath
 
       error = (evt, route_event) ->
         route = route_event.$$route
-        Analaytics.event 'routing', ['routeError', route.originalPath].join(':')
+        Analaytics.event 'routing', 'route_error', route.originalPath
 
       $rootScope.$on '$routeChangeStart', start
       $rootScope.$on '#routeChangeError', error

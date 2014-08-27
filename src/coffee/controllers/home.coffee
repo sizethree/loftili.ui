@@ -1,2 +1,5 @@
-lft.controller 'HomeController', [() ->
+lft.controller 'HomeController', ['$scope', 'content', ($scope, content) ->
+
+  $scope.content = content
+
 ]
