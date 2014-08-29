@@ -44,15 +44,15 @@ lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang
         Api.Playback.start(params).$promise.then success, fail
        
       $scope.refresh = () ->
-        notification_id = Notifications.add Lang('device.ping.started')
+        notification_id = Notifications.add Lang('device.ping.start')
 
         success = (response) ->
           if(response.updatedAt)
             $scope.device.updatedAt = response.updatedAt
 
           $scope.device.status = true
-          Notifications.remove notification_id
-          Notifications.flash Lang('device.ping.success'), 'success'
+          #Notifications.remove notification_id
+          Notifications.add Lang('device.ping.success'), 'success'
 
         fail  = (response) ->
           if(response.data && response.data.updatedAt)
@@ -60,7 +60,7 @@ lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang
 
           $scope.device.status = false
           Notifications.remove notification_id
-          Notifications.flash Lang('device.ping.failed'), 'error'
+          Notifications.flash Lang('device.ping.fail'), 'error'
 
         Api.Device.ping({device_id: $scope.device.id}).$promise.then success, fail
 
