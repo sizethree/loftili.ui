@@ -6,10 +6,10 @@
     h2, p, a
       margin: 0
 
-  .container
+  > .container
     +outer-container
     +span-columns(10)
-    padding: 20px 0 0 0
+    padding: 20px 1em 0 0
 
   .subtitle
     font-weight: bold
@@ -28,9 +28,6 @@
 
   .half-section
     +outer-container
-
-    &:last-child
-      +omega
 
     .bottom
       padding: 5px 0

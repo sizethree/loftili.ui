@@ -1,22 +1,22 @@
 .header.main
-  .navigation-wrapper
-    a.logo(href='/')
-      .icon(lf-icon icon="logo" width="30" height="30" scale="1.5" fill="white")
-    .nav
-      ul#navigation-menu
-        li.nav-link
-          a(href='/about') About
-        li.nav-link
-          a(href='/blog') Blog
-        li.nav-link
-          a(href='/contact') Contact
-
-    .navigation-tools
-      button.login(ng-if="!user()" ng-click="toggle($event)")
-        span(ng-if="!form_active") Login
-        span(ng-if="form_active") Close
-      button.sign-out(ng-if="user()" ng-click="logout($event)") Logout
-    .login-wrapper(ng-if="!user()")
-      .login-container(ng-class="{active: form_active}")
-        .container(lf-login-form)
+  .header-inner
+    .navigation-wrapper
+      a.logo(href='/')
+        .icon(lf-icon icon="logo" width="30" height="30" scale="1.5" fill="white")
+      .nav
+        ul#navigation-menu
+          li.nav-link
+            a(href='/about') About
+          li.nav-link
+            a(href='/blog') Blog
+          li.nav-link
+            a(href='/contact') Contact
+      .navigation-tools
+        button.login(ng-if="!user()" ng-click="toggle($event)")
+          span(ng-if="!form_active") Login
+          span(ng-if="form_active") Close
+        button.sign-out(ng-if="user()" ng-click="logout($event)") Logout
+      .login-wrapper(ng-if="!user()")
+        .login-container(ng-class="{active: form_active}")
+          .container(lf-login-form)
 
