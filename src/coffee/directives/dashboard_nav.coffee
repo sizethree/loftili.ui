@@ -6,6 +6,5 @@ lft.directive 'lfDashboardNav', [() ->
     scope:
       active: '='
     link: ($scope, $element, $attrs) ->
-      console.log $scope.active
 
 ]
