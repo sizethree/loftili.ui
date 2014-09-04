@@ -7,12 +7,14 @@
   width: 100%
   height: auto
 
-  .footer-wrapper
+  > .footer-inner
     +outer-container
-    padding: 5px 0
+    +outer-wrapper
+    padding-top: 5px
+    padding-bottom: 5px
 
   .footer-logo
-    margin: 0px 1em 0px 0.66em
+    margin: 0px 1em 0px 0
     float: left
     height: 30px
 
@@ -37,6 +39,7 @@
 
   ul li a
     color: $footer-link-color
+    font-size: $base-font-size * 0.75
     &:hover
       color: transparentize($footer-color, 0)
 

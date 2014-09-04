@@ -18,6 +18,8 @@
   height: $navigation-height
   width: 100%
   z-index: 999
+  > .header-inner
+    +outer-wrapper
 
   .navigation-wrapper, .login-wrapper
     +clearfix
@@ -74,7 +76,7 @@
   .logo
     float: left
     max-height: $navigation-height
-    margin: 0px 1em 0px 0.66em
+    margin: 0px 1em 0px 0
 
     .icon
       height: 30px
@@ -149,7 +151,6 @@
   .navigation-tools
     +clearfix
     display: block
-    padding-right: $navigation-padding
     padding-left: $navigation-padding / 2
     clear: both
     background: #505050
