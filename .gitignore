@@ -13,11 +13,13 @@ test-results.xml
 /node_modules
 /bower_components
 /public/index.html
+/public/app.conf
 /public/js
 /public/html
 /public/css
 /public/fonts
 /public/swf
+/public/img
 /public/svg
 /target
 /storage

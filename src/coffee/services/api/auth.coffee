@@ -1,6 +1,6 @@
-AuthFactory = ($resource, User, API_HOME) ->
+AuthFactory = ['$resource', 'Api/User', 'URLS', ($resource, User, URLS) ->
 
-  Auth = $resource [API_HOME, 'auth'].join('/'), {},
+  Auth = $resource [URLS.api, 'auth'].join('/'), {},
     check:
       method: 'GET'
       interceptor:
@@ -15,11 +15,8 @@ AuthFactory = ($resource, User, API_HOME) ->
 
     logout:
       method: 'GET'
-      url: [API_HOME, 'logout'].join('/')
+      url: [URLS.api, 'logout'].join('/')
 
-lft.service 'Api/Auth', [
-  '$resource',
-  'Api/User',
-  'API_HOME',
-  AuthFactory
 ]
+
+lft.service 'Api/Auth', AuthFactory

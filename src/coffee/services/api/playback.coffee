@@ -1,6 +1,6 @@
-PlaybackFactory = ($resource, API_HOME) ->
+PlaybackFactory = ['$resource', 'URLS', ($resource, URLS) ->
 
-  Playback = $resource [API_HOME, 'playback', ':fn'].join('/'), {},
+  Playback = $resource [URLS.api, 'playback', ':fn'].join('/'), {},
     start:
       method: 'POST'
       params:
@@ -10,8 +10,6 @@ PlaybackFactory = ($resource, API_HOME) ->
       params:
         fn: 'stop'
 
-lft.service 'Api/Playback', [
-  '$resource',
-  'API_HOME',
-  PlaybackFactory
 ]
+
+lft.service 'Api/Playback', PlaybackFactory

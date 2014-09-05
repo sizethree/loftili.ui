@@ -1,6 +1,6 @@
-lft.service 'Api/DevicePermission', ['$resource', 'API_HOME', ($resource, API_HOME) ->
+DevicePermissionFactory = ['$resource', 'URLS', ($resource, URLS) ->
 
-  DevicePermission = $resource [API_HOME, 'devicepermissions', ':permission_id'].join('/'), {},
+  DevicePermission = $resource [URLS.api, 'devicepermissions', ':permission_id'].join('/'), {},
     query:
       method: 'GET'
       isArray: true
@@ -9,3 +9,5 @@ lft.service 'Api/DevicePermission', ['$resource', 'API_HOME', ($resource, API_HO
           return response
 
 ]
+
+lft.service 'Api/DevicePermission', DevicePermissionFactory

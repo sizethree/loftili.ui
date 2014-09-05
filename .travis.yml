@@ -17,10 +17,15 @@ script:
 - grunt release
 after_success:
 - tar -cvzf "loftili-$TRAVIS_COMMIT.tar.gz" ./public/
-- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
-  "ftp://ftp.sizethreestudios.com/artifacts/lofti.li/ui/$TRAVIS_COMMIT.tar.gz"
-- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
-  "ftp://ftp.sizethreestudios.com/artifacts/lofti.li/ui/latest.tar.gz"
+- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS "ftp://ftp.sizethreestudios.com/artifacts/loftili/ui/$TRAVIS_COMMIT.tar.gz"
+- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS "ftp://ftp.sizethreestudios.com/artifacts/loftili/ui/latest.tar.gz"
+- |
+  if [ -n "$TRAVIS_TAG" ]
+  then
+  curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS "ftp://ftp.sizethreestudios.com/artifacts/loftili/ui/$TRAVIS_TAG.tar.gz"
+  else
+  echo "not pushing as a tagged build a travis tagged build"
+  fi
 env:
   global:
   - secure: EP+hO+S5CMxtNT7flMjAG1c2K56g8PtMJ1XNiYSAmyESVKnz1HCtoHFi+5x0sVHQGXKYu18OjV7M6U4CG5PxeFTTBENV9R6MNPoYglgMDoX03VAQjkR5XbO6YqCKyrIAzeOJ4/xx+t+FgfQXAN9+M50QDVpX9OEX3bNzC8z2YyA=

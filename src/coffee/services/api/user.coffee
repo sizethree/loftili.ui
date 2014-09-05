@@ -1,9 +1,10 @@
-UserFactory = ($resource, $q, API_HOME, Device, Track, Artist) ->
+dependencies = ['$resource', '$q', 'URLS', 'Api/Device', 'Api/Track', 'Api/Artist']
+UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) ->
 
   user_defaults =
     user_id: '@id'
 
-  User = $resource [API_HOME, 'users', ':user_id', ':fn'].join('/'), user_defaults,
+  User = $resource [URLS.api, 'users', ':user_id', ':fn'].join('/'), user_defaults,
     tracks:
       method: 'GET'
       params:
@@ -66,7 +67,7 @@ UserFactory = ($resource, $q, API_HOME, Device, Track, Artist) ->
 
     devices:
       method: 'GET'
-      url: [API_HOME, 'devicepermissions'].join('/')
+      url: [URLS.api, 'devicepermissions'].join('/')
       isArray: true
       interceptor:
         response: (response) ->
@@ -83,13 +84,6 @@ UserFactory = ($resource, $q, API_HOME, Device, Track, Artist) ->
 
           devices
 
-lft.service 'Api/User', [
-  '$resource',
-  '$q',
-  'API_HOME',
-  'Api/Device',
-  'Api/Track',
-  'Api/Artist',
-  UserFactory
 ]
 
+lft.service 'Api/User', UserFactory

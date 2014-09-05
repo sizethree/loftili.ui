@@ -1,6 +1,6 @@
-lft.service 'Analaytics', ['GA_ID', (GA_ID) ->
+lft.service 'Analaytics', ['GOOGLE', (GOOGLE) ->
 
-  ga 'create', GA_ID, 'auto'
+  ga 'create', GOOGLE.tracking, 'auto'
   ga 'send', 'pageview'
 
   Analaytics =
