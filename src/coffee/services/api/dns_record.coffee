@@ -1,9 +1,7 @@
-DnsRecordFactory = ($resource, API_HOME) ->
+DnsRecordFactory = ['$resource', 'URLS', ($resource, URLS) ->
 
-  DnsRecord = $resource [API_HOME, 'dns'].join('/')
+  DnsRecord = $resource [URLS.api, 'dns'].join('/')
 
-lft.service 'Api/DnsRecord', [
-  '$resource',
-  'API_HOME',
-  DnsRecordFactory
 ]
+
+lft.service 'Api/DnsRecord', DnsRecordFactory

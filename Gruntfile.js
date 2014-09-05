@@ -9,9 +9,6 @@ module.exports = function() {
 
   dotenv.load();
 
-  var api_home = process.env['API_HOME'] || 'http://api.loftili.com',
-      analytics_id = process.env['GA_ID'] || 'UA-54198766-3';
-
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-coffee');
@@ -31,25 +28,9 @@ module.exports = function() {
       scripts: [config.js.dest],
       css: [config.css.dest],
       templates: [config.html.dest],
+      img: ['public/img'],
       index: ['public/index.html'],
       obj: ['obj']
-    },
-
-    keyfile: {
-      api: {
-        dest: 'obj/js/api_home.js',
-        module: 'lft',
-        name: 'API_HOME',
-        key: api_home,
-        encrypt: false
-      },
-      google: {
-        dest: 'obj/js/google.js',
-        module: 'lft',
-        name: 'GA_ID',
-        key: btoa(analytics_id),
-        encrypt: true
-      }
     },
 
     uglify: {
@@ -139,6 +120,15 @@ module.exports = function() {
       }
     },
 
+    copy: {
+      img: {
+        expand: true,
+        cwd: 'src/img',
+        src: '**/*',
+        dest: 'public/img'
+      }
+    },
+
     sass: {
       build: {
         options: {
@@ -151,9 +141,10 @@ module.exports = function() {
   });
   
   grunt.registerTask('templates', ['html2js:templates']);
-  grunt.registerTask('js', ['keyfile', 'coffee:debug', 'templates', 'concat']);
+  grunt.registerTask('js', ['coffee:debug', 'templates', 'concat']);
   grunt.registerTask('css', ['sass']);
-  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js']);
+  grunt.registerTask('img', ['copy:img']);
+  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js', 'img']);
   grunt.registerTask('release', ['default', 'uglify', 'jade:indexmin']);
 
 };

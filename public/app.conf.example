@@ -1,0 +1,9 @@
+{
+  "urls": {
+    "api": "http://localhost:1337",
+    "blog": "http://localhost:8888"
+  },
+  "google": {
+    "tracking": ""
+  }
+}

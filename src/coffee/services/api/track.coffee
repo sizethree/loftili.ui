@@ -1,6 +1,6 @@
-TrackFactory = ($resource, $q, API_HOME) ->
+TrackFactory = ['$resource', '$q', 'URLS', ($resource, $q, URLS) ->
 
-  Track = $resource [API_HOME, 'tracks', ':track_id'].join('/'), {},
+  Track = $resource [URLS.api, 'tracks', ':track_id'].join('/'), {},
     upload:
       method: 'POST'
       params:
@@ -10,12 +10,6 @@ TrackFactory = ($resource, $q, API_HOME) ->
         fdt.append 'file', data.track_file
         fdt
 
-  Track
-
-lft.service 'Api/Track', [
-  '$resource',
-  '$q',
-  'API_HOME',
-  TrackFactory
 ]
 
+lft.service 'Api/Track', TrackFactory

@@ -1,9 +1,7 @@
-ArtistFactory = ($resource, API_HOME) ->
+ArtistFactory = ['$resource', 'URLS', ($resource, URLS) ->
 
-  Artist = $resource [API_HOME, 'artists', ':artist_id'].join('/'), {}
+  Artist = $resource [URLS.api, 'artists', ':artist_id'].join('/'), {}
 
-lft.service 'Api/Artist', [
-  '$resource',
-  'API_HOME',
-  ArtistFactory
 ]
+
+lft.service 'Api/Artist', ArtistFactory

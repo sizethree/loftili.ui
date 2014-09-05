@@ -1,9 +1,9 @@
-DeviceFactory = ($resource, $q, API_HOME) ->
+DeviceFactory = ['$resource', '$q', 'URLS', ($resource, $q, URLS) ->
 
   device_defaults =
     device_id: '@id'
 
-  Device = $resource [API_HOME, 'devices', ':device_id', ':fn'].join('/'), device_defaults,
+  Device = $resource [URLS.api, 'devices', ':device_id', ':fn'].join('/'), device_defaults,
     delete:
       method: 'DELETE'
     ping:
@@ -11,11 +11,6 @@ DeviceFactory = ($resource, $q, API_HOME) ->
       params:
         fn: 'ping'
 
-lft.service 'Api/Device', [
-  '$resource',
-  '$q',
-  'API_HOME',
-  DeviceFactory
 ]
 
-
+lft.service 'Api/Device', DeviceFactory
