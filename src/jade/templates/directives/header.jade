@@ -12,11 +12,11 @@
           li.nav-link
             a(href='/contact') Contact
       .navigation-tools
-//-         button.login(ng-if="!user()" ng-click="toggle($event)")
-//-           span(ng-if="!form_active") Login
-//-           span(ng-if="form_active") Close
-//-         button.sign-out(ng-if="user()" ng-click="logout($event)") Logout
-//-       .login-wrapper(ng-if="!user()")
-//-         .login-container(ng-class="{active: form_active}")
-//-           .container(lf-login-form)
-//- 
+        button.login(ng-if="!user()" ng-click="toggle($event)")
+            span(ng-if="!form_active") Login
+            span(ng-if="form_active") Close
+          button.sign-out(ng-if="user()" ng-click="logout($event)") Logout
+        .login-wrapper(ng-if="!user()")
+          .login-container(ng-class="{active: form_active}")
+            .container(lf-login-form)
+         
