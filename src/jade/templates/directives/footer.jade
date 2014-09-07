@@ -11,6 +11,9 @@
     .footer-secondary-links
       ul.footer-social
         li
+          a.social-link(href="https://github.com/loftili" target="_blank" ng-click="track('github', $event)")
+            .icon(lf-icon icon="github" width="22" height="22" fill="#fdfdfd" scale="1.5")
+        li
           a.social-link(href="http://jira.sizethreestudios.com/secure/RapidBoard.jspa?rapidView=4" target="_blank" ng-click="track('jira', $event)")
             .icon(lf-icon icon="jira" width="22" height="22" fill="#fdfdfd" scale="1.2")
         li
