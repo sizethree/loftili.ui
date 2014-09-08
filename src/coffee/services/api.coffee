@@ -1,4 +1,4 @@
-lft.service 'Api', [
+dependencies =[
   'Api/User',
   'Api/Auth',
   'Api/Device',
@@ -7,16 +7,17 @@ lft.service 'Api', [
   'Api/DevicePermission',
   'Api/DnsRecord',
   'Api/Playback'
-  () ->
-
-    Api =
-      User: arguments[0]
-      Auth: arguments[1]
-      Device: arguments[2]
-      Track: arguments[3]
-      Artist: arguments[4]
-      DevicePermission: arguments[5]
-      DnsRecord: arguments[6]
-      Playback: arguments[7]
-
 ]
+lft.service 'Api', dependencies.concat([() ->
+
+  Api =
+    User: arguments[0]
+    Auth: arguments[1]
+    Device: arguments[2]
+    Track: arguments[3]
+    Artist: arguments[4]
+    DevicePermission: arguments[5]
+    DnsRecord: arguments[6]
+    Playback: arguments[7]
+
+])

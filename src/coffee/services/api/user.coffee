@@ -46,7 +46,7 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
             failedOne = () ->
               deferred.reject()
 
-            full = Api.Artist.get
+            full = Artist.get
               artist_id: artist_id
 
             full.$promise.then addOne, failedOne
