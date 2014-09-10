@@ -11,6 +11,9 @@
     .footer-secondary-links
       ul.footer-social
         li
+          a.social-link(href="http://mail.loftili.com/mailman/listinfo/info_loftili.com" target="_blank" ng-click="track('mail', $event)")
+            .icon(lf-icon icon="mail" width="22" height="22" fill="#fdfdfd" scale="1.5")
+        li
           a.social-link(href="https://github.com/loftili" target="_blank" ng-click="track('github', $event)")
             .icon(lf-icon icon="github" width="22" height="22" fill="#fdfdfd" scale="1.5")
         li
