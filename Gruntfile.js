@@ -17,6 +17,7 @@ module.exports = function() {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadTasks('tasks');
   
@@ -42,6 +43,16 @@ module.exports = function() {
           src: path.join(config.js.dest, 'app.js'),
           dest: path.join(config.js.dest, 'app.min.js')
         }]
+      }
+    },
+
+    cssmin: {
+      release: {
+        expand: true,
+        cwd: 'public/css/',
+        src: ['*.css'],
+        dest: 'public/css/',
+        ext: '.min.css'
       }
     },
 
@@ -121,6 +132,12 @@ module.exports = function() {
     },
 
     copy: {
+      icons: {
+        expand: true,
+        cwd: 'bower_components',
+        src: ['ionicons/css/**/*', 'ionicons/fonts/**/*'],
+        dest: 'public/vendor'
+      },
       img: {
         expand: true,
         cwd: 'src/img',
@@ -144,7 +161,8 @@ module.exports = function() {
   grunt.registerTask('js', ['coffee:debug', 'templates', 'concat']);
   grunt.registerTask('css', ['sass']);
   grunt.registerTask('img', ['copy:img']);
-  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js', 'img']);
-  grunt.registerTask('release', ['default', 'uglify', 'jade:indexmin']);
+  grunt.registerTask('icons', ['copy:icons']);
+  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js', 'img', 'icons']);
+  grunt.registerTask('release', ['default', 'uglify', 'cssmin', 'jade:indexmin']);
 
 };
