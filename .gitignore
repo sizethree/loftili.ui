@@ -21,6 +21,7 @@ test-results.xml
 /public/swf
 /public/img
 /public/svg
+/public/vendor
 /target
 /storage
 

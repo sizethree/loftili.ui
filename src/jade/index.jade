@@ -3,9 +3,10 @@ html(lang="en")
   head
     meta(charset="utf-8")
     title(lf-page-title)
-    link(href='//fonts.googleapis.com/css?family=Radley:400,400italic' rel='stylesheet' type='text/css')
-    link(href='//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css')
-    link(href='/css/app.css' rel='stylesheet')
+    if debug
+      link(href='/css/app.css' rel='stylesheet')
+    else
+      link(href='/css/app.min.css' rel='stylesheet')
     link(href='/img/loftili.png' rel='shortcut icon')
   body
     .head(lf-header)
