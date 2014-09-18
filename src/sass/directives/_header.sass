@@ -158,19 +158,7 @@
     float: right
     clear: none
 
-  button.login, button.sign-out
-    margin-top: 1.2em
-    float: right
-    +transition(all 0.2s ease-in-out)
-    display: inline
-    background: $navigation-nav-button-background
-    border-radius: $base-border-radius
-    color: white
-    font-size: .8em
-    font-weight: 800
-    text-transform: uppercase
-    padding: .5em 1em
-    outline: none
+    .btn-grp.logged-in,
+    .logged-out
+      margin-top: 0.8em
 
-    &:hover
-      background: lighten($navigation-nav-button-background, 10)

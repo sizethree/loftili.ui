@@ -8,6 +8,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
   $routeProvider.when '/dashboard/:child?',
     templateUrl: 'views.dashboard'
     controller: 'DashboardController'
+    name: 'dashboard'
     resolve:
       childView: ['$route', ($route) ->
         current_route = $route.current
