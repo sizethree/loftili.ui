@@ -1,0 +1,13 @@
+.account.view
+  .inner
+    .account-info
+      p.name Name: {{user.first_name}} {{user.last_name}}
+      p.email Email: {{user.email}}
+      .privacy-info
+        .level(ng-switch="user.privacy_level")
+          .invisible(ng-switch-when="5")
+            p Hidden
+          .visible(ng-switch-when="1")
+            p Visible 
+    .account-feed
+

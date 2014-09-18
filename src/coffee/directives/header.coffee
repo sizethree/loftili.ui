@@ -1,4 +1,4 @@
-lft.directive 'lfHeader', ['Auth', 'MenuManager', (Auth, MenuManager) ->
+lft.directive 'lfHeader', ['$rootScope', 'Auth', 'MenuManager', ($rootScope, Auth, MenuManager) ->
 
   lfHeader =
     replace: true
@@ -14,6 +14,13 @@ lft.directive 'lfHeader', ['Auth', 'MenuManager', (Auth, MenuManager) ->
 
       close = () ->
         $scope.form_active = false
+
+      update = (evt, route_info) ->
+        route_obj = route_info.$$route
+        if route_obj and route_obj.name
+          $scope.active_route = route_obj.name
+
+      $rootScope.$on '$routeChangeSuccess', update
 
       $scope.toggle = (event) ->
         $scope.form_active = !$scope.form_active

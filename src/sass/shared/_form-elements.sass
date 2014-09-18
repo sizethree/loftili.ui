@@ -2,3 +2,42 @@ input[type="file"]
   display: block
   width: 100px
   height: 100px
+
+.btn-grp
+  +clearfix
+  position: relative
+
+  a.button, button
+    position: relative
+    float: left
+    border-radius: 0 0
+    margin: 0
+    z-index: 1
+
+    &:hover, &.active
+      z-index: 2
+
+    &:first-child
+      border-radius: 3px 0 0 3px
+
+    &:last-child
+      border-radius: 0 3px 3px 0
+
+a.button, button
+  +transition(all 500ms ease)
+  padding: 5px
+  box-sizing: content-box
+  display: block
+  background: $base-accent-color
+  border-radius: 0.1875em
+  color: white
+  font-size: 0.8em
+  font-weight: 800
+  text-transform: uppercase
+  padding: 5px
+  outline: none
+
+  &:hover, &.active
+    background: lighten($base-accent-color, 2)
+    box-shadow: 0px 0px 1px 0.1px rgba(0,0,0,0.55), inset 0px 0px 1px 0.1px lighten($base-accent-color, 10)
+    text-shadow: 1px 1px rgba(0,0,0,0.25)

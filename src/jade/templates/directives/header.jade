@@ -3,7 +3,7 @@
     .navigation-wrapper
       a.logo(href='/')
         .icon(lf-icon icon="logo" width="30" height="30" scale="1.5" fill="white")
-      .nav
+      .nav(ng-if="!user()")
         ul#navigation-menu
           li.nav-link
             a(href='/about') About
@@ -12,11 +12,14 @@
           li.nav-link
             a(href='/contact') Contact
       .navigation-tools
-        button.login(ng-if="!user()" ng-click="toggle($event)")
-            span(ng-if="!form_active") Login
-            span(ng-if="form_active") Close
-          button.sign-out(ng-if="user()" ng-click="logout($event)") Logout
-        .login-wrapper(ng-if="!user()")
-          .login-container(ng-class="{active: form_active}")
-            .container(lf-login-form)
+        .logged-out(ng-if="!user()")
+          button.login.ionicon(ng-click="toggle($event)" ng-class="{close: form_active, login: !form_active}")
+        .btn-grp.logged-in(ng-if="user()" ng-attr-active="{{active_route}}")
+          a.button.ionicon.dashboard(href="/dashboard", ng-class="{active: active_route === 'dashboard'}")
+          a.button.ionicon.account(href="/account" ng-class="{active: active_route === 'account'}")
+          button.sign-out(href="#" ng-click="logout($event)")
+            i.ionicon.logout
+      .login-wrapper(ng-if="!user()")
+        .login-container(ng-class="{active: form_active}")
+          .container(lf-login-form)
          
