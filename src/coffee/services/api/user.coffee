@@ -5,6 +5,8 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
     user_id: '@id'
 
   User = $resource [URLS.api, 'users', ':user_id', ':fn'].join('/'), user_defaults,
+    update:
+      method: 'PUT'
     tracks:
       method: 'GET'
       params:

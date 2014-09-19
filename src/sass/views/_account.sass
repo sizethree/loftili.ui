@@ -1,7 +1,70 @@
 .account.view
+  padding: 20px 0
   
   > .inner
     +outer-wrapper
 
     .account-feed, .account-info
       +span-columns(6)
+
+  .account-info, .account-feed .section
+    border: 1px solid darken(white, 15)
+    border-radius: 3px
+    .info
+      +clearfix
+      margin: 0 0 10px 0
+
+      .label
+        float: left
+        width: 110px
+        color: lighten($base-font-color, 50)
+
+      .value
+        width: auto
+        overflow: hidden
+  
+    .password
+
+      .errors.vis
+        margin: 0 0 10px 0
+
+      .fields
+        +clearfix
+
+      .value
+        +outer-container
+        margin-left: 110px
+        display: block
+        float: none
+
+        a.button
+          display: inline-block
+          cursor: pointer
+
+      input[type="password"]
+        +span-columns(6)
+
+  .account-feed .section
+    margin: 0 0 10px
+
+    &:last-child
+      margin-bottom: 0
+
+  .name-container
+    +clearfix
+    p 
+      display: inline-block
+
+  .section-title,
+  .section-content
+    padding: 10px
+ 
+  .section-title
+    background: adjust_hue(saturate(#f2f2f2, 10), 150)
+    border: 
+      bottom: 1px solid darken(white, 15)
+
+    h2
+      font-family: $sans-serif
+      font-weight: 800
+      
