@@ -10,7 +10,7 @@ lft.directive 'lfLoginForm', ['$location', 'Auth', 'Api', 'Notifications', 'Lang
     link: ($scope, $element, $attrs) ->
       $scope.creds = {}
       $scope.errors = []
-      $scope.resetting = false
+      $scope.state = 0
 
       $scope.attempt = (event) ->
         success = () ->
@@ -30,31 +30,42 @@ lft.directive 'lfLoginForm', ['$location', 'Auth', 'Api', 'Notifications', 'Lang
 
       $scope.reset = () ->
         success_lang = Lang('reset_password.success')
+
         success = () ->
           Notifications.flash success_lang, 'info'
-          if $scope.close and isFn($scope.close)
-            $scope.close()
+          $scope.state = 2
 
         fail = () ->
           $scope.errors = ['Hmm, try again']
 
-        if !$scope.resetting
-          $scope.resetting = true
-        else
+        finish = (user) ->
+          $scope.creds.email = user.email
+          $scope.creds.password = $scope.creds.new_password
+          $scope.attempt()
+
+        if $scope.state == 0
+          $scope.state = 1
+        else if $scope.state == 1
           reset = Api.PasswordReset.save
             user: $scope.creds.reset_email
           reset.$promise.then success, fail
+        else if $scope.state = 2
+          reset = Api.User.update
+            id: 'reset'
+            password: $scope.creds.new_password
+            reset_token: $scope.creds.reset_token
+          reset.$promise.then finish, fail
 
       $scope.cancel = () ->
-        if $scope.resetting
-          $scope.resetting = false
+        if $scope.state > 0
+          $scope.state = 0
         else
           if $scope.close and isFn($scope.close)
             $scope.close()
 
       $scope.keywatch = (evt) ->
         $scope.errors = []
-        if evt.keyCode == 13 and !$scope.resetting
+        if evt.keyCode == 13 and $scope.state == 0
           $scope.attempt()
 
   LoginForm

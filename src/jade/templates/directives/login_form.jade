@@ -1,16 +1,20 @@
 .login-form
   .flash(lf-flash-message messages="errors")
-  .input-container(ng-if="resetting")
+  .input-container(ng-if="state === 2")
+    input(type="text" ng-keyup="keywatch($event)" ng-model="creds.reset_token" placeholder="paste your token here" data-mm-noclose="true")
+  .input-container(ng-if="state === 2")
+    input(type="password" ng-keyup="keywatch($event)" ng-model="creds.new_password" placeholder="new password" data-mm-noclose="true")
+  .input-container(ng-if="state === 1")
     input(type="text" ng-keyup="keywatch($event)" ng-model="creds.reset_email" placeholder="email for reset" data-mm-noclose="true")
-  .input-container(ng-if="!resetting")
+  .input-container(ng-if="state === 0")
     input(type="text" ng-keyup="keywatch($event)" ng-model="creds.email" placeholder="email" ng-if="!locked" data-mm-noclose="true")
     input(type="text" disabled="true" ng-model="credentials.email" ng-if="locked")
-  .input-container(ng-if="!resetting")
+  .input-container(ng-if="state === 0")
     input(type="password" ng-keyup="keywatch($event)" ng-model="creds.password" placeholder="password" ng-if="!locked" data-mm-noclose="true")
     input(type="password" disabled="true" ng-model="credentials.password" ng-if="locked")
   .input-container.actions
     .cancel
-      button.ionicon.gray(ng-click="cancel()" data-mm-noclose="true" ng-class="{cancel: !resetting, back: resetting}")
+      button.ionicon.gray(ng-click="cancel()" data-mm-noclose="true" ng-class="{cancel: state === 0, back: state > 0}")
     .btn-grp.others
-      button.ionicon(ng-click="reset()" data-mm-noclose="true" ng-class="{help: !resetting, send: resetting}")
-      button.ionicon.send(ng-click="attempt($event)" ng-if="!resetting")
+      button.ionicon(ng-click="reset()" data-mm-noclose="true" ng-class="{help: state === 0, send: state > 0}")
+      button.ionicon.send(ng-click="attempt($event)" ng-if="state === 0")
