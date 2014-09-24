@@ -1,5 +1,7 @@
 lft.value 'LANG',
   en:
+    reset_password:
+      success: 'Check your email, you should have a link waiting'
     account:
       password:
         change:
