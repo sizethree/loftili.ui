@@ -1,10 +1,16 @@
 .login-form
   .flash(lf-flash-message messages="errors")
-  .input-container
+  .input-container(ng-if="resetting")
+    input(type="text" ng-keyup="keywatch($event)" ng-model="creds.reset_email" placeholder="email for reset" data-mm-noclose="true")
+  .input-container(ng-if="!resetting")
     input(type="text" ng-keyup="keywatch($event)" ng-model="creds.email" placeholder="email" ng-if="!locked" data-mm-noclose="true")
     input(type="text" disabled="true" ng-model="credentials.email" ng-if="locked")
-  .input-container
+  .input-container(ng-if="!resetting")
     input(type="password" ng-keyup="keywatch($event)" ng-model="creds.password" placeholder="password" ng-if="!locked" data-mm-noclose="true")
     input(type="password" disabled="true" ng-model="credentials.password" ng-if="locked")
-  .input-container
-    button(ng-click="attempt($event)") login
+  .input-container.actions
+    .cancel
+      button.ionicon.gray(ng-click="cancel()" data-mm-noclose="true" ng-class="{cancel: !resetting, back: resetting}")
+    .btn-grp.others
+      button.ionicon(ng-click="reset()" data-mm-noclose="true" ng-class="{help: !resetting, send: resetting}")
+      button.ionicon.send(ng-click="attempt($event)" ng-if="!resetting")

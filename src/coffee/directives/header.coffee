@@ -22,6 +22,10 @@ lft.directive 'lfHeader', ['$rootScope', 'Auth', 'MenuManager', ($rootScope, Aut
 
       $rootScope.$on '$routeChangeSuccess', update
 
+      $scope.closeLogin = () ->
+        $scope.form_active = false
+        MenuManager.remove manager_index
+
       $scope.toggle = (event) ->
         $scope.form_active = !$scope.form_active
 

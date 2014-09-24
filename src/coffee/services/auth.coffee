@@ -32,10 +32,13 @@ lft.service 'Auth', ['$q', '$http', '$location', 'Api', ($q, $http, $location, A
 
   Auth =
     filter: filter
+
     user: () -> active_user
+
     logout: () ->
       active_user = null
       Api.Auth.logout().$promise.then () -> $location.path('/')
+
     attempt: (creds) ->
       defer = $q.defer()
 
