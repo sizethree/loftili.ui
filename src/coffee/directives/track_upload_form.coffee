@@ -8,6 +8,7 @@ lft.directive 'lfTrackUploadForm', ['$timeout', 'Api', '$http', ($timeout, Api, 
     link: ($scope, $element, $attrs) ->
       $scope.uploading = []
       $scope.failures = []
+      $scope.searching = false
       file_type_rgx = /audio\/.*/
       form = null
 
@@ -20,6 +21,9 @@ lft.directive 'lfTrackUploadForm', ['$timeout', 'Api', '$http', ($timeout, Api, 
       clearFailures = () ->
         $scope.failures = []
 
+      $scope.toggleSearch = () ->
+        $scope.searching = !($scope.searching)
+
       $scope.file = (input) ->
         clearFailures()
         fd_file = input.files[0]
@@ -27,7 +31,6 @@ lft.directive 'lfTrackUploadForm', ['$timeout', 'Api', '$http', ($timeout, Api, 
 
         success = (new_track) ->
           $scope.uploading.splice (indx - 1), 1
-          console.log new_track
           if $scope.tracks and angular.isArray $scope.tracks
             $scope.tracks.push new_track
 

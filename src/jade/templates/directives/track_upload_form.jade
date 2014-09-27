@@ -2,10 +2,13 @@
   .title-container
   .problems(lf-flash-message messages="failures")
   form.form-container
-    .input-container.file
-      button.cover(ng-click="startUpload()")
-        span.type upload a track
-      input(type="file" name="file" multiple onchange="angular.element(this).scope().file(this)")
+    .input-container
+      .btn-grp
+        .file
+          button.cover.ionicon.folder
+          input(type="file" name="file" multiple onchange="angular.element(this).scope().file(this)")
+        .track-search(lf-track-search ng-class="{open: searching}")
+        button.url.ionicon(ng-click="toggleSearch()" ng-class="{search: !searching, close: searching}")
   .progress
     .upload-list
       .uploading(ng-repeat="upload in uploading")

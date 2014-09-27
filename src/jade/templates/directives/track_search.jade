@@ -1,0 +1,9 @@
+.track-search
+  input(type="text" placeholder="search our library or enter a url" ng-keyup="search($event)")
+  .result-list
+    .result(ng-repeat="result in results")
+      .result-inner
+        .artist
+          p {{result.artist.name}}
+        .name
+          p {{result.title}}

@@ -1,9 +1,9 @@
 .track
   .info
     .bit.name
-      p {{ track.name }}
+      p {{ track.title }}
     .bit.artist
-      p {{ track.artist.name }}
+      p {{ track.artist.name || 'not found' }}
     .bit.filetype
       p {{ track.type }}
     .bit.added

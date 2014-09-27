@@ -1,0 +1,47 @@
+.track-search
+  display: block
+  position: relative
+
+  .result-list
+    position: absolute
+    top: 100%
+    left: 0
+    width: 100%
+    height: auto
+
+  .result
+    min-width: 200px
+    background: darken(white, 5)
+    cursor: pointer
+    border:
+      left: 1px solid darken(white, 10)
+      right: 1px solid darken(white, 10)
+      bottom: 1px solid darken(white, 10)
+
+    &:hover
+      background: darken(white, 1)
+
+    &:first-child
+      border:
+        top: 1px solid darken(white, 10)
+
+  .result-inner
+    +clearfix
+    padding: 3px 10px
+
+    .artist, .name
+      font-size: 12px
+      p
+        text-overflow: ellipsis
+        overflow: hidden
+        white-space: nowrap
+
+    .artist
+      float: right
+      color: lighten($dark-gray, 50)
+
+    .name
+      overflow: hidden
+      width: auto
+      color: $dark-gray
+
