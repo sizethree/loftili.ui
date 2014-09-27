@@ -56,7 +56,7 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
 
           getArtists = (tracks) ->
             for track, index in tracks
-              if not artists[track.artist]
+              if track.artist and (not artists[track.artist])
                 artists[track.artist] = fetch track.artist
                 artist_count++
 

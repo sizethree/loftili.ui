@@ -6,6 +6,5 @@ lft.directive 'lfTrackList', [() ->
     scope:
       tracks: '='
     link: ($scope, $element, $attrs) ->
-      console.log $scope.tracks
 
 ]

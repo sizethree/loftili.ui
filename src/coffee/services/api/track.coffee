@@ -10,6 +10,17 @@ TrackFactory = ['$resource', '$q', 'URLS', ($resource, $q, URLS) ->
         fdt.append 'file', data.track_file
         fdt
 
+    search:
+      method: 'GET'
+      isArray: true
+      params:
+        track_id: 'search'
+
+    scout:
+      method: 'GET'
+      params:
+        track_id: 'scout'
+
 ]
 
 lft.service 'Api/Track', TrackFactory
