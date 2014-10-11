@@ -1,7 +1,7 @@
 .track
   .info
-    .bit.name
-      p {{ track.title }}
+    .bit.name(ng-class="{missing: !track.title}")
+      p {{ track.title || 'not found' }}
     .bit.artist
       p {{ track.artist.name || 'not found' }}
     .bit.filetype

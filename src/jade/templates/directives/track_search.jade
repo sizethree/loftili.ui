@@ -1,9 +1,12 @@
 .track-search
-  input(type="text" placeholder="search our library or enter a url" ng-keyup="search($event)")
-  .result-list
-    .result(ng-repeat="result in results")
-      .result-inner
+  .searching-flag(ng-if="searching")
+  input.search-input(type="text" ng-model="query.val" placeholder="search our library or enter a url" ng-keyup="search($event)")
+  .result-list(ng-if="!searching")
+    .result(ng-repeat="result in results" ng-class="{addable: result.arist.name && result.title}" ng-click="add(result)")
+      .result-inner(ng-if="result.artist.name && result.title")
         .artist
-          p {{result.artist.name}}
+          p(ng-if="result.artist.name") {{result.artist.name}}
         .name
           p {{result.title}}
+      .result-inner(ng-if="!result.artist.name || !result.title")
+        p.missing-info we have the track but we're missing info!
