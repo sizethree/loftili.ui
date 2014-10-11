@@ -7,6 +7,7 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
   User = $resource [URLS.api, 'users', ':user_id', ':fn'].join('/'), user_defaults,
     update:
       method: 'PUT'
+
     tracks:
       method: 'GET'
       params:
@@ -59,6 +60,9 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
               if track.artist and (not artists[track.artist])
                 artists[track.artist] = fetch track.artist
                 artist_count++
+
+            if artist_count == 0
+              delegateArtists()
 
           if tracks.length > 0
             getArtists(tracks)
