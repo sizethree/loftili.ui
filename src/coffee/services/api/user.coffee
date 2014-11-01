@@ -8,6 +8,11 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
     update:
       method: 'PUT'
 
+    addTrack:
+      method: 'PUT'
+      params:
+        fn: 'tracks'
+
     tracks:
       method: 'GET'
       params:

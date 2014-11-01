@@ -10,3 +10,4 @@
           p {{result.title}}
       .result-inner(ng-if="!result.artist.name || !result.title")
         p.missing-info we have the track but we're missing info!
+        .edit-form(lf-track-edit-form track="result")

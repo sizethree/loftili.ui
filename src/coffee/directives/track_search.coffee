@@ -1,4 +1,4 @@
-lft.directive 'lfTrackSearch', ['$timeout', 'Api', ($timeout, Api) ->
+lft.directive 'lfTrackSearch', ['$timeout', 'Auth', 'Api', ($timeout, Auth, Api) ->
 
   BOUNCE_TIME = 400
   Track = Api.Track
@@ -54,6 +54,20 @@ lft.directive 'lfTrackSearch', ['$timeout', 'Api', ($timeout, Api) ->
           bounce_timeout = $timeout search, BOUNCE_TIME
         else
           $scope.results = []
+
+      $scope.add = (track) ->
+        current_user = Auth.user()
+        promise = Api.User.addTrack
+          id: current_user.id
+          track: track.id
+
+        success = () ->
+          $scope.results = []
+          $scope.$emit 'track:added', track
+
+        fail = () ->
+
+        promise.$promise.then success, fail
 
       closed = () ->
         $scope.searching = false
