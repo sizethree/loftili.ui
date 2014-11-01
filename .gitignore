@@ -12,6 +12,7 @@ test-results.xml
 /obj
 /node_modules
 /bower_components
+/public/.htaccess
 /public/index.html
 /public/app.conf
 /public/js

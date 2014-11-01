@@ -21,6 +21,9 @@ lft.directive 'lfTrackUploadForm', ['Api', 'Notifications', (Api, Notifications)
       clearFailures = () ->
         $scope.failures = []
 
+      added = (evt, track) ->
+        $scope.tracks.push track
+
       $scope.toggleSearch = () ->
         $scope.searching = !($scope.searching)
 
@@ -48,5 +51,7 @@ lft.directive 'lfTrackUploadForm', ['Api', 'Notifications', (Api, Notifications)
           track.$upload().then success, fail
 
         $scope.$digest()
+
+      $scope.$on 'track:added', added
 
 ]

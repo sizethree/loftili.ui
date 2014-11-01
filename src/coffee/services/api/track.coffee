@@ -10,6 +10,11 @@ TrackFactory = ['$resource', '$q', 'URLS', ($resource, $q, URLS) ->
         fdt.append 'file', data.track_file
         fdt
 
+    update:
+      method: 'PUT'
+      params:
+        track_id: '@id'
+
     search:
       method: 'GET'
       isArray: true
