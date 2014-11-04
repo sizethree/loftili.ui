@@ -6,28 +6,58 @@
 
   .actions
     +outer-container
-    button
+    position: relative
+
+    button, .button
       margin: 0
-      width: auto
-      height: auto
+      width: 36px
+      height: 36px
       float: right
       box-shadow: inset 0px 0px 1px rgba(255,255,255,0.2)
       outline: none
       padding: 2px
       border-radius: 0px
+      box-sizing: border-box
+      &:after
+        line-height: 33px
       &:first-child
         border-radius: 0px 3px 3px 0px
       &:last-child
         border-radius: 3px 0px 0px 3px
+
+  .share-central
+    position: absolute
+    top: 100%
+    margin-top: 5px
+    left: 0
+    width: 100%
+    height: auto
+    background: darken(white, 3)
+    border: 1px solid darken(white, 8)
+    border-radius: 2px
+
+    button.close
+      position: absolute
+      top: 0px
+      right: 0px
+      background: transparent
+
+      &:after
+        color: lighten(black, 60)
+
 
   .bit
     height: 36px
     position: relative
     p
       line-height: 36px
+
     .tooltip
       p
         line-height: 1.55em
+
+    &.actions
+      overflow: visible
 
   .edit-field
 

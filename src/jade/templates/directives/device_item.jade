@@ -12,11 +12,10 @@
       span bad
   .bit.actions
     .actions
-      button.delete(ng-click="delete(device)")
-        .icon(lf-icon icon="trash" width="30" height="30") 
-      button.report(ng-click="refresh()")
-        .icon(lf-icon icon="refresh" width="30" height="30")
-      button.play(ng-click="play(device)")
-        .icon(lf-icon icon="play" width="30" height="30")
-      button.play(ng-click="stop(device)")
-        .icon(lf-icon icon="stop" width="30" height="30")
+      button.ionicon.trash.delete(ng-click="delete(device)")
+      button.ionicon.loop.report(ng-click="refresh()")
+      button.ionicon.share(ng-click="sharing = !sharing")
+      a.button.ionicon.mixer.control(href="/devices/{{device.id}}")
+    .share-central(ng-if="sharing")
+      button.ionicon.close(ng-click="stopShare()")
+      .device-share-control(lf-device-share device="device")

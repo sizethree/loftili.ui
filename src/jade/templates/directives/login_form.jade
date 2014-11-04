@@ -1,4 +1,4 @@
-.login-form
+.login-form(data-mm-noclose="true")
   .flash(lf-flash-message messages="errors")
   .input-container(ng-if="state === 2")
     input(type="text" ng-keyup="keywatch($event)" ng-model="creds.reset_token" placeholder="paste your token here" data-mm-noclose="true")

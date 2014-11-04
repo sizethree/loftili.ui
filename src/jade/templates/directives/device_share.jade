@@ -1,0 +1,10 @@
+.device-share
+  .share-top
+    h2.device-name.sans share <i class="dark">[{{ device.name }}]</i>
+  .share-bottom
+    .search
+      input(type="text" placeholder="search people" ng-change="search($event)" ng-model="search.query")
+    ul.results
+      li.result(ng-repeat="result in results")
+        button.ionicon.add(ng-click="share(result)")
+        h2.sans.username {{result.username}}

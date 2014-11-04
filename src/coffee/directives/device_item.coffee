@@ -8,6 +8,11 @@ lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang
       ondelete: '&'
       index: '='
     link: ($scope, $element, $attrs) ->
+      $scope.sharing = false
+
+      $scope.stopShare = () ->
+        $scope.sharing = false
+
       # public
       $scope.delete = (device) ->
         success = () ->
@@ -17,31 +22,6 @@ lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang
           console.log 'the device was not removed!'
 
         device.$delete().then success, fail
-
-        # To.Do - success and fail!
-        Api.DnsRecord.delete
-          device: device.id
-          user: Auth.user().id
-
-      $scope.stop = () ->
-        params =
-          track: 1
-          device: $scope.device.id
-
-        success = () -> console.log arguments
-        fail = () -> console.log arguments
-
-        Api.Playback.stop(params).$promise.then success, fail
-
-      $scope.play = () ->
-        params =
-          track: 1
-          device: $scope.device.id
-
-        success = () -> console.log arguments
-        fail = () -> console.log arguments
-
-        Api.Playback.start(params).$promise.then success, fail
        
       $scope.refresh = () ->
         notification_id = Notifications.add Lang('device.ping.start')
@@ -51,8 +31,8 @@ lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang
             $scope.device.updatedAt = response.updatedAt
 
           $scope.device.status = true
-          #Notifications.remove notification_id
-          Notifications.add Lang('device.ping.success'), 'success'
+          Notifications.remove notification_id
+          Notifications.flash Lang('device.ping.success'), 'success'
 
         fail  = (response) ->
           if(response.data && response.data.updatedAt)

@@ -20,6 +20,6 @@
           button.sign-out(href="#" ng-click="logout($event)")
             i.ionicon.logout
       .login-wrapper(ng-if="!user()")
-        .login-container(ng-class="{active: form_active}")
+        .login-container(ng-class="{active: form_active}" data-mm-noclose="true")
           .container(lf-login-form close="closeLogin")
          
