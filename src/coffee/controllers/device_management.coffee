@@ -1,0 +1,4 @@
+lft.controller 'DeviceManagementController', [() ->
+
+
+]
