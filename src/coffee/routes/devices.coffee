@@ -33,6 +33,29 @@ lft.config ['$routeProvider', ($routeProvider) ->
         callbacks.push getDevice
         deferred.promise
       ]
+      permissions: ['$q', '$route', 'Api', 'Auth', ($q, $route, Api, Auth) ->
+        deferred = $q.defer()
+        current_route = $route.current
+        device_id = current_route.params.id
+
+        notCurrent = (device_permission) ->
+          current_user = Auth.user()
+          current_user.id != device_permission.user.id
+
+        finish = (permissions) ->
+          finalized = []
+          for permission in permissions
+            finalized.push permission if notCurrent permission
+          deferred.resolve finalized
+
+        getPermissions = () ->
+          request = Api.DevicePermission.search
+            device: device_id
+          request.$promise.then finish
+
+        callbacks.push getPermissions
+        deferred.promise
+      ]
 
 ]
 

@@ -5,6 +5,7 @@ lft.directive 'lfDeviceShare', ['$timeout', 'Api', 'DEVICE_PERMISSION_LEVELS', (
     templateUrl: 'directives.device_share'
     scope:
       device: '='
+      permissions: '='
     link: ($scope, $element, $attrs) ->
       timeout_promise = null
       $scope.last_results = null
@@ -13,6 +14,11 @@ lft.directive 'lfDeviceShare', ['$timeout', 'Api', 'DEVICE_PERMISSION_LEVELS', (
 
       filter = () ->
         $scope.results = []
+
+        if angular.isArray $scope.permissions
+          $scope.shared_ids = []
+          $scope.shared_ids.push permission.user.id for permission in $scope.permissions
+
         for user in $scope.last_results
           if $scope.shared_ids.indexOf(user.id) < 0
             $scope.results.push user
@@ -25,7 +31,7 @@ lft.directive 'lfDeviceShare', ['$timeout', 'Api', 'DEVICE_PERMISSION_LEVELS', (
           $scope.shared_ids.push permission.user.id for permission in permissions
           filter()
 
-        if $scope.shared_ids == null
+        if $scope.shared_ids == null and !$scope.permissions
           shared_with_req = Api.DevicePermission.search
             device: $scope.device.id
           shared_with_req.$promise.then addAndFilter
@@ -54,8 +60,12 @@ lft.directive 'lfDeviceShare', ['$timeout', 'Api', 'DEVICE_PERMISSION_LEVELS', (
         timeout_promise = $timeout search, 400
 
       $scope.share = (user) ->
-        add = () ->
+        add = (permission) ->
           $scope.shared_ids.push user.id
+
+          if angular.isArray $scope.permissions
+            $scope.permissions.push permission
+
           filter()
 
         new_permission = new Api.DevicePermission
