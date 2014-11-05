@@ -1,1 +1,30 @@
-.view.device_management
+.view.device-management
+  .inner
+    .device-info
+      .name-date
+        dl.created
+          dt created:
+          dd {{device.createdAt | date:'MMM, yy'}}
+        dl.device-name
+          dt name:
+          dd {{device.name}}
+      .technical
+        dl.ip_addr
+          dt IP:
+          dd {{device.ip_addr}}
+        dl.port 
+          dt port:
+          dd {{device.port}}
+      .social
+        dl.shared-with
+          dt shared with
+          dd.shared-definition
+            ul.shared-list(ng-if="permissions.length > 0")
+              li.device-permission(ng-repeat="permission in permissions" data-level="{{permission.level}}")
+                button.ionicon.close.remove.transparent(ng-click="removePermission(permission)")
+                p.permission-level.sans {{permission.level | permissionLevel}}
+                p.user-name.sans {{permission.user.username}}
+            p.info-box.no-permissions(ng-if="!permissions.length") you havent shared this device
+            .share-control(lf-device-share device="device" permissions="permissions")
+            
+            
