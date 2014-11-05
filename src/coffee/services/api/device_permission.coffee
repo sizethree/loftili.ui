@@ -7,6 +7,9 @@ DevicePermissionFactory = ['$resource', 'URLS', ($resource, URLS) ->
       interceptor:
         response: (response) ->
           return response
+    search:
+      method: 'GET'
+      isArray: true
 
 ]
 
