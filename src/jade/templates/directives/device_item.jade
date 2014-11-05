@@ -1,6 +1,10 @@
 .device-item
   .bit.name
-    p.txt {{ device.name }}
+    p.txt.sans {{ device.name }}
+  .bit.ip_addr
+    p.txt.sans {{ device.ip_addr }}
+  .bit.port
+    p.txt.sans {{ device.port }}
   .bit.status.has-tooltip
     .tooltip(lf-tooltip)
       .content
