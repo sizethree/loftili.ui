@@ -1,0 +1,8 @@
+.device-controls
+  .status-info
+    p.device-status {{device_state}}
+  ul.control-list
+    li.stop.control
+      button.ionicon.stop(ng-click="stop()")
+    li.play.control
+      button.ionicon.play(ng-click="play()")

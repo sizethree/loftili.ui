@@ -1,0 +1,92 @@
+.device-info
+  +clearfix
+
+  dl
+    +clearfix
+    display: block
+    margin: 0
+
+    dl, dt
+      margin: 0
+
+    dt
+      float: left
+      margin: 0 10px 0 0
+
+    dd
+      overflow: hidden
+      height: auto
+
+  .name-date
+    +clearfix
+
+  .device-name
+    overflow: hidden
+    height: auto
+    dt
+      display: none
+
+    dd
+      font-size: 40px
+      line-height: 48px
+
+  .created
+    +clearfix
+
+    dt, dd
+      line-height: 48px
+
+  .social
+    margin: 5px 0 0 0
+    padding: 5px 0 0 0
+    border-top: 1px solid darken(white, 10)
+
+    dd, dt
+      float: none
+      display: block
+
+    .no-permissions
+      display: block
+      font-size: 12px
+
+    .shared-list
+      list-style: none
+
+      li.device-permission
+        +clearfix
+        padding: 5px 0
+
+        p.user-name, p.permission-level, .remove, .remove:after
+          display: block
+          font-size: 16px
+          height: 16px
+          line-height: 20px
+          padding: 0
+
+        p.user-name
+          overflow: hidden
+          height: auto
+
+        p.permission-level
+          text-transform: lowercase
+          float: right
+
+        .remove
+          float: right
+
+  .device-share
+
+    .share-top
+      display: none
+
+    .share-bottom .search
+      padding: 0px
+
+  .technical
+    +clearfix
+
+    .ip_addr
+      margin: 0 10px 0 0
+
+    .ip_addr, .port
+      float: left
