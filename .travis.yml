@@ -17,8 +17,10 @@ script:
 - grunt release
 after_success:
 - tar -cvzf "loftili-$TRAVIS_COMMIT.tar.gz" ./public/
-- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS "ftp://ftp.sizethreestudios.com/artifacts/loftili/ui/$TRAVIS_COMMIT.tar.gz"
-- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS "ftp://ftp.sizethreestudios.com/artifacts/loftili/ui/latest.tar.gz"
+- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
+  "ftp://ftp.sizethreestudios.com/artifacts/loftili/ui/$TRAVIS_COMMIT.tar.gz"
+- curl --ftp-create-dirs -T "loftili-$TRAVIS_COMMIT.tar.gz" -u $FTP_USER:$FTP_PASS
+  "ftp://ftp.sizethreestudios.com/artifacts/loftili/ui/latest.tar.gz"
 - |
   if [ -n "$TRAVIS_TAG" ]
   then
@@ -28,6 +30,5 @@ after_success:
   fi
 env:
   global:
-  - secure: EP+hO+S5CMxtNT7flMjAG1c2K56g8PtMJ1XNiYSAmyESVKnz1HCtoHFi+5x0sVHQGXKYu18OjV7M6U4CG5PxeFTTBENV9R6MNPoYglgMDoX03VAQjkR5XbO6YqCKyrIAzeOJ4/xx+t+FgfQXAN9+M50QDVpX9OEX3bNzC8z2YyA=
-  - secure: bX+JA4H34ddDnQNFkn612X+s2RzNlKv+WJCOcwz7mQWCyEd9C7woRVqQkCfIX2wKjyOh2rA83H3DUCo6PhH32lAgVrbMpdPrDoQHJOVe6uZgeg2KjjzKrJIs1OGg7e/tQv9KdXXn2lMJfL1lcX7pa9uUUgm0NVp/shyxSgVnDso=
-  - secure: ClW5L6usMzNheGd/JXn3ENldJcWsskEzSOcxyHAoveRCrZ4BMR0JLgjd4hfKOps9BBIBzJeySZYrCDx8uMbUNfmEVudmXFCqb7ZrWkGJgRLuPuYkpdl4QwMtPZVl2xWUPf4aFXWemsq8SWkM/K5zvrERjuBR66T7me+CYxz1Ylo=
+  - secure: LLd3R8C2+ihQnJSnn+bhVp7hRq3kErAdTGkEzbbZ0hAM8kWxm7H4ejJctcNpg8ngCIIRYVZ8uOoLhat81aUSwBuo7+XeihGoqXoTndXhJSat32FH4LWkp846iRthnTogvnkoHdc7oVWvQoMsUikM83GH6WWvUo4/DERC+NdNgJc=
+  - secure: yMmXr0jZpeSSVHjUm0/fdNJthvkiw5OKP8oFn1ynzNsa2Q0s37bEPxPlm7WUWbO2NzqnBrDzUyA3GH2xDDNZMi7IgvwAaZjTR8rr7d+1AWSkDQNAzqYEhvM6+PoaEnO+2SpMgCPKP3z9TwYiDdK9s5KOLfn9Z46y+4rextcViI4=
