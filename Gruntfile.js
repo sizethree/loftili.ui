@@ -20,10 +20,27 @@ module.exports = function() {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadTasks('tasks');
+
+  var pkg_info = grunt.file.readJSON('package.json'),
+      banner = [
+        '/*!', 
+        '<%= pkg.name %>',
+        [
+          'v<%= pkg.version %>',
+          '<% if(pkg.commit) { %>',
+          '-<%= pkg.commit %>', 
+          '<% } %>',
+        ].join(''),
+        '[<%= pkg.repository.url %>]',
+        '*/'
+      ].join(' ');
+
+  if(process.env['TRAVIS_COMMIT'])
+    pkg_info.commit = process.env['TRAVIS_COMMIT'].substr(0, 8);
   
   grunt.initConfig({
 
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: pkg_info,
 
     clean: {
       scripts: [config.js.dest],
@@ -36,7 +53,7 @@ module.exports = function() {
 
     uglify: {
       options: { 
-        banner: '/* lofti.li ui <%= pkg.version %>, <%= grunt.template.today("yyyy-mm-dd") %> */'
+        banner: banner
       },
       release: {
         files: [{
