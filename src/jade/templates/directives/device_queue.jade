@@ -1,3 +1,10 @@
 .device-queue
   .no-tracks(ng-if="!queue.length")
     p.no-tracks-text there are to queued tracks for this device
+  ul.queue-track-list
+    li.track-container(ng-repeat="track in queue")
+      .inner-container
+        p.queue-index {{$index+1}}
+        p.track-title {{track.title || 'untitled'}}
+  .controls
+    button.add.ionicon(ng-click="expandSearch()")

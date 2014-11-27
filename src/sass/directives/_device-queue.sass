@@ -1,2 +1,44 @@
 .device-queue
   display: block
+
+  .queue-track-list
+    list-style: none
+
+  .track-container
+    +clearfix
+    display: block
+    padding: 5px 10px
+
+    &:nth-child(odd)
+      background: darken(white, 10)
+
+  .controls
+    position: relative
+    padding: 10px 0 0 0
+    margin: 10px 0 0 0
+    border:
+      top: 1px solid darken(white, 10)
+    
+    button.add
+      position: absolute
+      height: 8px
+      width: 8px
+      left: -9px
+      top: -9px
+      padding: 5px
+
+      &:after
+        line-height: 8px
+        font-size: 8px
+
+  .inner-container
+    +clearfix
+    
+    .queue-index,
+    .track-title
+      float: left
+      display: block
+      margin: 0 10px 0 0
+
+    .queue-index
+      font-size: 16px
