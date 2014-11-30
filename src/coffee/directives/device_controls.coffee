@@ -8,6 +8,16 @@ lft.directive 'lfDeviceControls', ['Api', 'DEVICE_STATES', (Api, DEVICE_STATES) 
     link: ($scope, $element, $attrs) ->
       $scope.device_state = null
       
+      $scope.play = () ->
+        request = Api.Playback.start
+          device: $scope.device.id
+        request.$promise.then getState, getState
+
+      $scope.stop = () ->
+        request = Api.Playback.stop
+          device: $scope.device.id
+        request.$promise.then getState, getState
+      
       update = (response) ->
         ping = response.ping
         status = if ping.status then ping.status else false
