@@ -7,7 +7,5 @@ lft.directive 'lfDeviceQueue', [() ->
       device: '='
       queue: '='
     link: ($scope, $element, $attrs) ->
-      console.log $scope.device
-
 
 ]
