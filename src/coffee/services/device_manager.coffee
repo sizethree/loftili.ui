@@ -1,4 +1,4 @@
-lft.service 'DeviceManager', ['$q', 'Api', ($q, Api) ->
+lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', ($q, Analytics, Api) ->
 
   class DeviceManager
 
@@ -62,6 +62,8 @@ lft.service 'DeviceManager', ['$q', 'Api', ($q, Api) ->
       request = Api.Playback.stop
         device: @device.id
 
+      Analytics.event 'playback', 'stop', ['device', @device.name].join(':')
+
       request.$promise.then finish, fail
 
       deferred.promise
@@ -78,6 +80,8 @@ lft.service 'DeviceManager', ['$q', 'Api', ($q, Api) ->
 
       request = Api.Playback.start
         device: @device.id
+
+      Analytics.event 'playback', 'start', ['device', @device.name].join(':')
 
       request.$promise.then finish, fail
 

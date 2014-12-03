@@ -1,4 +1,4 @@
-lft.directive 'lfFooter', ['Analaytics', (Analaytics) ->
+lft.directive 'lfFooter', ['Analytics', (Analytics) ->
 
   lfFooter =
     replace: true
@@ -6,6 +6,6 @@ lft.directive 'lfFooter', ['Analaytics', (Analaytics) ->
     scope: {}
     link: ($scope, $element, $attrs) ->
       $scope.track = (type, event) ->
-        Analaytics.event 'social', 'footer_click', type
+        Analytics.event 'social', 'footer_click', type
 
 ]

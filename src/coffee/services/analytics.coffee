@@ -1,20 +1,18 @@
-lft.service 'Analaytics', ['GOOGLE', (GOOGLE) ->
+lft.service 'Analytics', ['GOOGLE', (GOOGLE) ->
 
   ga 'create', GOOGLE.tracking, 'auto'
   ga 'send', 'pageview'
 
-  Analaytics =
+  Analytics =
 
     track: (path, title) ->
       ga 'send', 'pageview',
         page: path,
         title: title
     
-    log: () ->
-
     event: (category, action, data) ->
       ga 'send', 'event', category, action, data
 
-  Analaytics
+  Analytics
 
 ]
