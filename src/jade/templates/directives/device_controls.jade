@@ -1,6 +1,4 @@
 .device-controls
-  .status-info
-    p.device-status {{device_state}}
   .control-list.btn-grp
-    button.ionicon.stop(ng-click="stop()")
-    button.ionicon.play(ng-click="play()")
+    button.ionicon.stop(ng-if="playing()" ng-click="stop()")
+    button.ionicon.play(ng-if="!playing()" ng-click="play()")

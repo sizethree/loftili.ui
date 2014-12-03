@@ -12,3 +12,6 @@ lft.value 'LANG',
         start: 'Sending a ping request to your device'
         success: 'We\'ve successfully communicated with your device'
         fail: 'We were unable to communicate with your device'
+      playback:
+        starting: 'Starting playback, please wait'
+        stopping: 'Stopping playback, please wait'
