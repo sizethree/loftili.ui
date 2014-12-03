@@ -1,22 +1,35 @@
-lft.directive 'lfDeviceControls', ['Api', 'DEVICE_STATES', (Api, DEVICE_STATES) ->
+lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATES', (Api, Notifications, Lang, DEVICE_STATES) ->
 
   lfDeviceControls =
     replace: true
     templateUrl: 'directives.device_controls'
     scope:
-      device: '='
+      manager: '='
     link: ($scope, $element, $attrs) ->
+      notification_id = null
+      playing_lang = Lang 'device.playback.starting'
+      stopping_lang = Lang 'device.playback.stopping'
+
       $scope.device_state = null
+
+      $scope.playing = () ->
+        $scope.device_state == DEVICE_STATES.PLAYING
       
       $scope.play = () ->
-        request = Api.Playback.start
-          device: $scope.device.id
-        request.$promise.then getState, getState
+        $scope.manager.startPlayback().then getState, getState
+
+        if notification_id
+          Notifications.remove notification_id
+
+        notification_id = Notifications.add playing_lang
 
       $scope.stop = () ->
-        request = Api.Playback.stop
-          device: $scope.device.id
-        request.$promise.then getState, getState
+        $scope.manager.stopPlayback().then getState, getState
+
+        if notification_id
+          Notifications.remove notification_id
+
+        notification_id = Notifications.add stopping_lang
       
       update = (response) ->
         ping = response.ping
@@ -27,12 +40,12 @@ lft.directive 'lfDeviceControls', ['Api', 'DEVICE_STATES', (Api, DEVICE_STATES) 
           $scope.device_state = DEVICE_STATES.PLAYING
 
       getState = () ->
+        if notification_id
+          Notifications.remove notification_id
+
         $scope.device_state = null
 
-        request = Api.Device.ping
-          device_id: $scope.device.id
-
-        request.$promise.then update
+        $scope.manager.getState().then update
 
       getState()
 

@@ -23,11 +23,13 @@ input[type="file"]
     &:hover, &.active
       z-index: 2
 
-    &:first-child
-      border-radius: 3px 0 0 3px
-
     &:last-child
-      border-radius: 0 3px 3px 0
+      border-top-right-radius: 3px
+      border-bottom-right-radius: 3px
+
+    &:first-child
+      border-top-left-radius: 3px
+      border-bottom-left-radius: 3px
 
 a.button, button
   +transition(all 500ms ease)
