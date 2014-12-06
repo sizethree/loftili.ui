@@ -1,5 +1,7 @@
 lft.value 'LANG',
   en:
+    queuing:
+      failed: 'Unable to add the track to your device queue'
     reset_password:
       success: 'Check your email, you should have a link waiting'
     account:

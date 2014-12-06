@@ -7,4 +7,6 @@
         p.queue-index {{$index+1}}
         p.track-title {{track.title || 'untitled'}}
   .controls
-    button.add.ionicon(ng-click="expandSearch()")
+    button.search-toggle-button.ionicon(ng-click="searchToggle()" ng-class="{add: !adding, close: adding}")
+  .search-area(ng-if="adding")
+    .searcher(lf-device-queue-search manager="manager" queue="queue")

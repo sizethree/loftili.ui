@@ -17,6 +17,23 @@ lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', 'DEVICE_STATES', ($q, An
     trigger: (event) ->
       fn() for fn in @listeners[event]
 
+    queueTrack: (track) ->
+      deferred = $q.defer()
+
+      success = (new_queue) ->
+        deferred.resolve new_queue
+
+      fail = () ->
+        deferred.reject()
+
+      request = Api.TrackQueue.add
+        id: @device.id
+        track: track.id
+
+      request.$promise.then success, fail
+
+      deferred.promise
+
     getQueue: () ->
       deferred = $q.defer()
 

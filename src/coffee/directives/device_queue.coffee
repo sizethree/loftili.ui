@@ -8,6 +8,10 @@ lft.directive 'lfDeviceQueue', ['$timeout', 'Api', 'DEVICE_STATES', ($timeout, A
       queue: '='
     link: ($scope, $element, $attrs) ->
       looping = false
+      $scope.adding = false
+
+      $scope.searchToggle = () ->
+        $scope.adding = !$scope.adding
 
       finish = (new_queue) ->
         $scope.queue = new_queue

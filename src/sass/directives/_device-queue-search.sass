@@ -1,0 +1,62 @@
+.device-queue-search
+  display: block
+  position: relative
+
+  .search-input
+    margin: 0
+
+  .search-input-container
+    +clearfix
+    display: block
+    position: relative
+
+  .result-info
+    position: absolute
+    top: 100%
+    left: 0
+    margin: 10px 0 0 0
+    width: 100%
+    background: darken(white, 5)
+    border: 1px solid darken(white, 10)
+    border-radius: 2px
+    padding: 5px  0
+
+  .no-result-text
+    display: block
+    padding: 0 5px
+    text-transform: uppercase
+    color: darken(white, 25)
+    font-size: 10px
+
+  .result-list
+    list-style: none
+
+  li.result-item
+    padding: 0 5px
+    height: 20px
+
+    > .inner
+      +clearfix
+
+    .title
+      float: left
+
+      p
+        line-height: 20px
+        font-size: 14px
+
+    .item-controls
+      float: right
+      overflow: hidden
+
+      button
+        overflow: hidden
+        height: auto
+        display: block
+        width: 10px
+        height: 10px
+        margin: 2px 0 0 0
+
+        &:after
+          font-size: 10px
+      
