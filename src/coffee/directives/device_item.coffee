@@ -1,4 +1,4 @@
-lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang', ($timeout, Api, Auth, Notifications, Lang) ->
+lft.directive 'lfDeviceItem', ['$timeout', 'DeviceManager', 'Notifications', 'Lang', ($timeout, DeviceManager, Notifications, Lang) ->
 
   lfDeviceItem =
     replace: true
@@ -8,7 +8,9 @@ lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang
       ondelete: '&'
       index: '='
     link: ($scope, $element, $attrs) ->
+      manager = new DeviceManager $scope.device
       $scope.sharing = false
+      $scope.connected = false
 
       $scope.stopShare = () ->
         $scope.sharing = false
@@ -26,23 +28,17 @@ lft.directive 'lfDeviceItem', ['$timeout', 'Api', 'Auth', 'Notifications', 'Lang
       $scope.refresh = () ->
         notification_id = Notifications.add Lang('device.ping.start')
 
-        success = (response) ->
-          if(response.updatedAt)
-            $scope.device.updatedAt = response.updatedAt
-
-          $scope.device.status = true
+        success = (state) ->
+          $scope.connected = state != null
           Notifications.remove notification_id
           Notifications.flash Lang('device.ping.success'), 'success'
 
         fail  = (response) ->
-          if(response.data && response.data.updatedAt)
-            $scope.device.updatedAt = response.data.updatedAt
-
-          $scope.device.status = false
+          $scope.connected = false
           Notifications.remove notification_id
           Notifications.flash Lang('device.ping.fail'), 'error'
 
-        Api.Device.ping({device_id: $scope.device.id}).$promise.then success, fail
+        manager.getState().then success, fail
 
       $scope.revertPropery = (property, value) ->
         $scope.device[property] = value

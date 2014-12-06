@@ -9,7 +9,7 @@
   .technical
     dl.ip_addr
       dt IP:
-      dd {{device.ip_addr}}
+      dd.editable(lf-easy-input value="device.ip_addr" finish="saveIp")
     dl.port 
       dt port:
       dd {{device.port}}

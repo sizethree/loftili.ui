@@ -10,9 +10,9 @@
       .content
         p.txt last updated:
         p.txt {{ device.updatedAt | date:'short' }}
-    .status-icon.active(ng-if="device.status")
+    .status-icon.active(ng-if="connected")
       span ok
-    .status-icon.inactive(ng-if="!device.status")
+    .status-icon.inactive(ng-if="!connected")
       span bad
   .bit.actions
     .actions
