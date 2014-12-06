@@ -31,13 +31,8 @@ lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATE
 
         notification_id = Notifications.add stopping_lang
       
-      update = (response) ->
-        ping = response.ping
-        status = if ping.status then ping.status else false
-        if /stopped/i.test status
-          $scope.device_state = DEVICE_STATES.STOPPED
-        else if /playing/i.test status
-          $scope.device_state = DEVICE_STATES.PLAYING
+      update = (state) ->
+        $scope.device_state = state
 
       getState = () ->
         if notification_id

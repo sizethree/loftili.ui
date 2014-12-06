@@ -1,4 +1,4 @@
-lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', ($q, Analytics, Api) ->
+lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', 'DEVICE_STATES', ($q, Analytics, Api, DEVICE_STATES) ->
 
   class DeviceManager
 
@@ -37,7 +37,18 @@ lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', ($q, Analytics, Api) ->
       deferred = $q.defer()
 
       success = (result) =>
-        deferred.resolve result
+        state = null
+
+        if result and result.ping
+          status = result.ping.status
+          if /stopped/i.test status
+            state = DEVICE_STATES.STOPPED
+          else if /playing/i.test status
+            state = DEVICE_STATES.PLAYING
+          else if /errored/i.test status
+            state = DEVICE_STATES.ERRORED
+
+        deferred.resolve state
 
       fail = (result) =>
         deferred.reject result

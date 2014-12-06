@@ -1,4 +1,4 @@
-lft.directive 'lfDeviceQueue', ['$timeout', 'Api', ($timeout, Api) ->
+lft.directive 'lfDeviceQueue', ['$timeout', 'Api', 'DEVICE_STATES', ($timeout, Api, DEVICE_STATES) ->
 
   lfDeviceQueue =
     replace: true
@@ -21,6 +21,10 @@ lft.directive 'lfDeviceQueue', ['$timeout', 'Api', ($timeout, Api) ->
       cleanup = () ->
         looping = false
 
+      receiveState = (response, state) ->
+        if state == DEVICE_STATES.PLAYING
+          startLoop()
+
       startLoop = () ->
         if looping == false
           looping = true
@@ -31,6 +35,6 @@ lft.directive 'lfDeviceQueue', ['$timeout', 'Api', ($timeout, Api) ->
 
       $element.on '$destroy', cleanup
 
-      startLoop()
+      $scope.manager.getState().then receiveState
 
 ]
