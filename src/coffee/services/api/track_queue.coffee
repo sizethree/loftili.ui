@@ -1,6 +1,12 @@
 TrackQueueService = ['$resource', 'URLS', ($resource, URLS) ->
 
-  TrackQueue = $resource [URLS.api, 'queues', ':id'].join('/')
+  queue_defaults =
+    id: '@id'
+
+  TrackQueue = $resource [URLS.api, 'queues', ':id'].join('/'), queue_defaults,
+    add:
+      method: 'PUT'
+      isArray: true
 
 ]
 

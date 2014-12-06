@@ -1,0 +1,13 @@
+.device-queue-search
+  .search-input-container
+    input.search-input(type="text" ng-keyup="keyUp($event)" placeholder="search for tracks to add to your queue")
+  .result-info(ng-if="results !== null")
+    .no-results(ng-if="results.length === 0")
+      p.no-result-text.bold no results found
+    ul.result-list(ng-if="results.length > 0")
+      li.result-item(ng-repeat="result in results")
+        .inner
+          .title 
+            p {{result.title}}
+          .item-controls
+            button.adder.ionicon.add(ng-click="add(result)")
