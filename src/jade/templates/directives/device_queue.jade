@@ -6,6 +6,8 @@
       .inner-container
         p.queue-index {{$index+1}}
         p.track-title {{track.title || 'untitled'}}
+        .item-controls
+          button.remover.ionicon.close(ng-click="removeItem($index)")
   .controls
     button.search-toggle-button.ionicon(ng-click="searchToggle()" ng-class="{add: !adding, close: adding}")
   .search-area(ng-if="adding")

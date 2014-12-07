@@ -1,44 +1,70 @@
-lft.directive 'lfDeviceQueue', ['$timeout', 'Api', 'DEVICE_STATES', ($timeout, Api, DEVICE_STATES) ->
+do ->
 
-  lfDeviceQueue =
-    replace: true
-    templateUrl: 'directives.device_queue'
-    scope:
-      manager: '='
-      queue: '='
-    link: ($scope, $element, $attrs) ->
-      looping = false
-      $scope.adding = false
+  factory = () ->
+    a = 0
+    $timeout = arguments[a++]
+    Api = arguments[a++]
+    DEVICE_STATES = arguments[a++]
+    Notifications = arguments[a++]
+    Lang = arguments[a++]
 
-      $scope.searchToggle = () ->
-        $scope.adding = !$scope.adding
-
-      finish = (new_queue) ->
-        $scope.queue = new_queue
-
-        if looping
-          $timeout update, 1000
-
-      update = () ->
-        $scope.manager.getQueue().then finish
-
-      cleanup = () ->
+    lfDeviceQueue =
+      replace: true
+      templateUrl: 'directives.device_queue'
+      scope:
+        manager: '='
+        queue: '='
+      link: ($scope, $element, $attrs) ->
         looping = false
+        $scope.adding = false
 
-      receiveState = (response, state) ->
-        if state == DEVICE_STATES.PLAYING
-          startLoop()
+        $scope.searchToggle = () ->
+          $scope.adding = !$scope.adding
 
-      startLoop = () ->
-        if looping == false
-          looping = true
-          update()
+        $scope.removeItem = (item_index) ->
+          success = (new_queue) ->
+            $scope.queue = new_queue
 
-      $scope.manager.on 'stop', cleanup
-      $scope.manager.on 'start', startLoop
+          fail = () ->
+            failed_lang = Lang 'queuing.failed_remove'
+            Notifications.flash failed_lang, 'error'
 
-      $element.on '$destroy', cleanup
+          $scope.manager.removeQueueItem(item_index).then success, fail
 
-      $scope.manager.getState().then receiveState
+        finish = (new_queue) ->
+          $scope.queue = new_queue
 
-]
+          if looping
+            $timeout update, 1000
+
+        update = () ->
+          $scope.manager.getQueue().then finish
+
+        cleanup = () ->
+          looping = false
+
+        receiveState = (response, state) ->
+          if state == DEVICE_STATES.PLAYING
+            startLoop()
+
+        startLoop = () ->
+          if looping == false
+            looping = true
+            update()
+
+        $scope.manager.on 'stop', cleanup
+        $scope.manager.on 'start', startLoop
+
+        $element.on '$destroy', cleanup
+
+        $scope.manager.getState().then receiveState
+
+  factory.$inject = [
+    '$timeout',
+    'Api',
+    'DEVICE_STATES',
+    'Notifications',
+    'Lang'
+  ]
+  
+  lft.directive 'lfDeviceQueue', factory

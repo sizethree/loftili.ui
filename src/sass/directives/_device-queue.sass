@@ -8,9 +8,16 @@
     +clearfix
     display: block
     padding: 5px 10px
+    border-radius: 2px
+    background: white
+    border-bottom: 1px solid darken(white, 5)
+    border-top: 1px solid darken(white, 1)
+
+    &:first-child
+      border-top: none
 
     &:nth-child(odd)
-      background: darken(white, 10)
+      background: darken(white, 3)
 
   .search-area
     margin: 10px 0 0 0
@@ -34,8 +41,21 @@
         line-height: 8px
         font-size: 8px
 
-  .inner-container
+  .track-container .inner-container
     +clearfix
+
+    .item-controls
+      float: right
+      margin-top: 2px
+
+      button
+        height: 10px
+        width: 10px
+        display: block
+
+        &:after 
+          font-size: 10px
+          line-height: 10px
     
     .queue-index,
     .track-title

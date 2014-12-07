@@ -45,7 +45,7 @@ lft.directive 'lfDeviceQueueSearch', ['$timeout', 'Api', 'Notifications', 'Lang'
           failed_lang = Lang 'queuing.failed'
           Notifications.flash failed_lang, 'error'
 
-        $scope.manager.queueTrack({id: 100}).then success, fail
+        $scope.manager.queueTrack({id: track.id}).then success, fail
 
       $scope.keyUp = (event) ->
         last_val = event.target.value
