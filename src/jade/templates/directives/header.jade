@@ -4,7 +4,7 @@
       a.logo(href='/')
         .icon(lf-icon icon="logo" width="30" height="30" scale="1.5" fill="white")
       .nav(ng-if="!user()")
-        ul#navigation-menu
+        ul.navigation-menu-list
           li.nav-link
             a(href='/about') About
           li.nav-link
@@ -12,7 +12,7 @@
           li.nav-link
             a(href='/contact') Contact
       .nav(ng-if="user()")
-        ul#navigation-menu
+        ul.navigation-menu-list
           li.nav-link
             a(href='/dashboard') Dashboard
       .navigation-tools
