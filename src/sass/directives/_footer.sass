@@ -50,12 +50,41 @@
     li
       font-size: .8em
       font-weight: 400
+      
+  .expander
+    display: none
+
+    +media(max-width 820px)
+      display: block
 
   ul.footer-social
     float: right
     margin-top: 0
     height: 22px
     margin-top: 4px
+
+    +media(max-width 820px)
+      display: none
+      position: absolute
+      top: -200px
+      right: 1em
+      margin: 0
+      padding: 5px
+      background: $dark-gray
+      height: auto
+      border-radius: 2px
+
+      &.open
+        display: block
+
+        li 
+          padding: 0
+          float: none
+          display: block
+          margin: 0 0 10px 0
+
+          &:last-child
+            margin-bottom: 0
 
     li
       float: left
