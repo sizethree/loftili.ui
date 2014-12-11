@@ -1,10 +1,8 @@
 .nav-container.dashboard-nav
-  +span-columns(2)
   min-height: 1px
   position: static
 
   .inner-fill
-    +span-columns(1.85)
     border: 
       right: 1px solid lighten($light-gray, 5)
       left: 1px solid lighten($light-gray, 5)
@@ -66,7 +64,7 @@
       line-height: 30px
       height: 30px
       position: relative
-      padding: 5px 20px
+      padding: 5px 1em
       box-sizing: content-box
       border: 
         top: 1px solid lighten($light-gray, 5)
@@ -77,11 +75,19 @@
         float: left
         height: 30px
   
-      a.link, 
-        +calc(width, "100% - 30px")
       span.icon
         width: 30px
         margin-left: -8px
+
+      span.text
+        text-transform: uppercase
+        font-size: 12px
+
+        +media(max-width 1200px)
+          font-size: 10px
+
+        +media(max-width 820px)
+          display: none
 
       svg path, a.link
         fill: darken($light-gray, 30)

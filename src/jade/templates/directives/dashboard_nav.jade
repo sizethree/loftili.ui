@@ -2,11 +2,14 @@
   .inner-fill
     ul.nav(data-active="{{ active }}")
       li.overview
-        .icon(lf-icon icon="dash" width="30" height="30" fill="#414141" scale="0.7")
-        a.link.overview(href="/dashboard") Overview
+        a.link.overview(href="/dashboard")
+          .icon(lf-icon icon="dash" width="30" height="30" fill="#414141" scale="0.7")
+          span.text overview
       li.devices
-        .icon(lf-icon icon="pi" width="30" height="30" fill="#414141")
-        a.link.devices(href="/dashboard/devices") Devices
+        a.link.devices(href="/dashboard/devices")
+          .icon(lf-icon icon="pi" width="30" height="30" fill="#414141")
+          span.text devices
       li.library
-        .icon(lf-icon icon="book" width="30" height="30" fill="#414141")
-        a.link.library(href="/dashboard/library") Library
+        a.link.library(href="/dashboard/library")
+          .icon(lf-icon icon="book" width="30" height="30" fill="#414141")
+          span.text library

@@ -1,26 +1,104 @@
 .home.view
-  +outer-wrapper
-  padding-top: 20px
 
-  .inner
-    +outer-container
- 
+  .big-splash
+    background-image: url(http://i.imgur.com/oYz2wXS.jpg)
+    background-size: cover
+    background-position: center center
+    min-height: 400px
+    width: 100%
+    text-align: center
+    display: table
+    position: relative
+
+    &:after
+      content: ''
+      position: absolute
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      background: rgba(0,0,0,0.7)
+      z-index: 2
+
+    .text
+      display: table-cell
+      position: relative
+      z-index: 3
+      vertical-align: middle
+
+      h1
+        color: lighten(black, 100)
+        font-size: 80px
+        padding: 10px 0
+
+      h2
+        color: lighten(black, 90)
+        font-size: 24px
+
+  .intro
+    padding: 40px 1em
+
+    .top
+      margin: 0 100px
+      text-align: center
+
+    .top h2
+      font-size: 30px
+      color: darken(white, 65)
+      margin: 0 140px 20px
+
+    .top p
+      font-size: 18px
+      line-height: 27px
+      color: darken(white, 40)
+      margin: 0 0 20px 0
+
   .bottom
+    margin: 20px 0 0 0
+
+  .bottom > h2
+    font-size: 60px
+    text-align: center
+    color: darken(white, 65)
+
+  .goods
     +outer-container
-    margin: 0 0 20px 0
+    list-style: none
+    margin: 40px 40px 0
 
-    .intro, .sign-up
-      +span-columns(6)
+    li
+      +span-columns(4)
+      +clearfix
+      float: left
 
-    .sign-up
-      +omega
+    .text
+      overflow: hidden
+      height: auto
+      color: darken(white, 50)
 
-      h1, p, input
-        margin: 0px
+    .text p
+      font-size: 18px
+      line-height: 24px
 
-      .input-container, .top, .flash-message
-        margin: 0 0 10px 0
+    .blurb
+      position: relative
+      width: 60px
+      height: 60px
+      border-radius: 30px
+      background: darken(white, 40)
+      float: left
+      margin: 0 20px 0
 
-  @import "partials/home/intro"
-  @import "partials/home/about"
+      &:after
+        color: white
+        font-size: 35px
+        line-height: 60px
 
+    .core .blurb
+      background: lighten(#57aed9, 9)
+
+    .api .blurb
+      background: adjust_hue(lighten(#57aed9, 9), 251)
+
+    .ui .blurb
+      background: adjust_hue(lighten(#57aed9, 9), 211)
