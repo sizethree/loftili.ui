@@ -19,7 +19,6 @@
     "angular-resource": "~1.2.16",
     "angular-route": "~1.2.16",
     "analytics": "http://www.google-analytics.com/analytics.js",
-    "ionicons": "~1.5.2",
-    "663f1b40-4e52-4ed2-9a85-0557dafd8bd0": "http://fast.fonts.net/jsapi/663f1b40-4e52-4ed2-9a85-0557dafd8bd0.js"
+    "ionicons": "~1.5.2"
   }
 }

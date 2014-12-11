@@ -9,25 +9,19 @@
         .track-section-container(ng-if="active_nav === 'library' || active_nav === 'overview'")
           .track-list-wrapper.half-section
             .top
-              h4.subtitle
-                span.closer
-                | Your tracks
+              h4.subtitle Your tracks
             .bottom
               .track-list-container(ng-if="tracks.length > 0")
                 .track-list(lf-track-list tracks="tracks")
               .newbie(ng-if="tracks.length === 0 && newbie")
-                p.text 
-                | Hey, looks like youre just getting started with your library. Try uploading a few
-                | tracks below. 
-                a.leveler(ng-click="nonewb()") Got it, thanks
+                p.text Hey, looks like youre just getting started with your library. Try uploading a few tracks below. 
+                  a.leveler(ng-click="nonewb()") Got it, thanks
               .upload-track-container(ng-class="{vis: tracks.length === 0 || uploading}")
                 .uploader(lf-track-upload-form tracks="tracks")
         .device-section-container(ng-if="active_nav === 'devices' || active_nav === 'overview'")
           .device-list-wrapper.half-section
             .top
-              h4.subtitle 
-                span.closer
-                | Your devices
+              h4.subtitle Your devices
             .bottom
               .device-list-container(ng-if="devices.length > 0")
                 .device-list(lf-device-list devices="devices")
