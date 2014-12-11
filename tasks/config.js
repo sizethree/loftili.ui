@@ -22,6 +22,7 @@ module.exports = (function() {
           obj: path.join(out_dir, '..', 'obj', 'js'),
           vendor_libs: [
             path.join(vendor_js_dir, 'angular/angular.js'),
+            path.join(vendor_js_dir, '663f1b40-4e52-4ed2-9a85-0557dafd8bd0/index.js'),
             path.join(vendor_js_dir, 'angular-route/angular-route.js'),
             path.join(vendor_js_dir, 'angular-resource/angular-resource.js'),
             path.join(vendor_js_dir, 'analytics/index.js')
