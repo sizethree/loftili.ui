@@ -17,7 +17,7 @@
       right: 0
       top: 0
       bottom: 0
-      background: rgba(0,0,0,0.7)
+      background: rgba(0,0,0,0.5)
       z-index: 2
 
     .text
@@ -42,10 +42,45 @@
       margin: 0 100px
       text-align: center
 
+      +media(max-width 920px)
+        margin:
+          left: 80px
+          right: 80px
+
+      +media(max-width 840px)
+        margin:
+          left: 60px
+          right: 60px
+
+      +media(max-width 800px)
+        margin:
+          left: 40px
+          right: 40px
+
+      +media(max-width 720px)
+        margin:
+          left: 10px
+          right: 10px
+
     .top h2
       font-size: 30px
       color: darken(white, 65)
       margin: 0 140px 20px
+      +media(max-width 920px)
+        margin:
+          right: 100px
+          left: 100px
+
+      +media(max-width 800px)
+        margin:
+          right: 50px
+          left: 50px
+
+      +media(max-width 720px)
+        font-size: 24px
+        margin:
+          right: 10px
+          left: 10px
 
     .top p
       font-size: 18px
@@ -69,7 +104,11 @@
     li
       +span-columns(4)
       +clearfix
-      float: left
+
+      +media(max-width 800px)
+        float: none
+        width: 100%
+        margin: 0 0 20px 0
 
     .text
       overflow: hidden
