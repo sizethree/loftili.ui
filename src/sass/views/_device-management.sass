@@ -10,8 +10,50 @@
   .device-info
     +span-columns(2)
 
+    +media(max-width 800px)
+      +span-columns(12)
+      margin: 0 0 10px 0
+
+      dl.created
+        display: none
+
+      .technical, .social
+        display: none
+
   .device-queue
     margin: 20px 0 0 0
 
   .where-the-magic-happens
     +span-columns(10)
+
+    +media(max-width 800px)
+      +span-columns(12)
+      margin: 0
+      padding: 10px
+
+      .device-queue
+        margin: 20px 0 0 0
+        padding: 20px 0 0 0
+        border-top: 1px solid darken(white, 10)
+
+      .device-controls
+        display: block
+        position: relative
+
+      .control-list
+        display: block
+        position: relative
+        text-align: center
+        padding: 5px 0
+
+        button
+          display: inline-block
+          border-radius: 50px
+          float: none
+          margin: 0 auto
+          width: 100px
+          height: 100px
+          padding: 0
+
+          &:after
+            font-size: 40px
