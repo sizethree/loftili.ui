@@ -1,17 +1,12 @@
 .nav-container.dashboard-nav
-  min-height: 1px
-  position: static
+  position: relative
 
   .inner-fill
-    border: 
-      right: 1px solid lighten($light-gray, 5)
-      left: 1px solid lighten($light-gray, 5)
-    position: absolute
-    background: lighten($light-gray, 10)
     height: 100%
 
   .top
     padding: 10px 20px
+
     h2
       margin: 0
       color: $light-gray
@@ -22,37 +17,11 @@
 
   ul.nav
     position: relative
-    &:after
-      +transform(rotate(45deg))
-      content: ''
-      background: lighten($light-gray, 2)
-      display: block
-      position: absolute
-      right: -8px
-      top: 0px
-      width: 16px
-      height: 16px
-      border:
-        top: 1px solid lighten($light-gray, 5)
-        right: 1px solid lighten($light-gray, 5)
     
-    &[data-active="overview"]
-      &:after
-        top: 12px
-      li.overview
-        background: lighten($light-gray, 2)
-
-    &[data-active="devices"]
-      &:after
-        top: 54px
-      li.devices
-        background: lighten($light-gray, 2)
-
-    &[data-active="library"]
-      &:after
-        top: 96px
-      li.library
-        background: lighten($light-gray, 2)
+    &[data-active="overview"] li.overview,
+    &[data-active="devices"] li.devices,
+    &[data-active="library"] li.library
+      background: lighten($light-gray, 12)
 
     p, h2, a
       font-size: 16px

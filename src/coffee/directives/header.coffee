@@ -1,4 +1,4 @@
-lft.directive 'lfHeader', ['$rootScope', 'Auth', 'MenuManager', ($rootScope, Auth, MenuManager) ->
+lft.directive 'lfHeader', ['$rootScope', '$route', 'Auth', 'MenuManager', ($rootScope, $route, Auth, MenuManager) ->
 
   lfHeader =
     replace: true

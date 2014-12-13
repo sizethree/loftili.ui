@@ -35,6 +35,9 @@
         color: lighten(black, 90)
         font-size: 24px
 
+        +media(max-width 800px)
+          font-size: 18px
+
   .intro
     padding: 40px 1em
 
@@ -101,6 +104,9 @@
     list-style: none
     margin: 40px 40px 0
 
+    +media(max-width 800px)
+      margin: 40px 0 0 
+
     li
       +span-columns(4)
       +clearfix
@@ -108,7 +114,7 @@
       +media(max-width 800px)
         float: none
         width: 100%
-        margin: 0 0 20px 0
+        margin: 0 0 40px 0
 
     .text
       overflow: hidden
@@ -118,6 +124,9 @@
     .text p
       font-size: 18px
       line-height: 24px
+
+      +media(max-width 800px)
+        text-align: center
 
     .blurb
       position: relative
@@ -132,6 +141,11 @@
         color: white
         font-size: 35px
         line-height: 60px
+
+      +media(max-width 800px)
+        display: block
+        float: none
+        margin: 0 auto 10px
 
     .core .blurb
       background: lighten(#57aed9, 9)

@@ -1,18 +1,18 @@
 .device-info
   .name-date
-    dl.device-name
-      dt name:
-      dd {{device.name}}
-    dl.created
-      dt created:
-      dd {{device.createdAt | date:'MMM, yyyy'}}
+    dl.device-name.gill.medium
+      dt.gill.light name:
+      dd.gill.medium {{device.name.split('.')[0]}}
+    dl.created.setting
+      dt.upper.gill.light created:
+      dd.gill.medium {{device.createdAt | date:'MMM, yyyy'}}
   .technical
-    dl.ip_addr
-      dt IP:
+    dl.ip_addr.setting
+      dt.upper.gill.light IP:
       dd.editable(lf-easy-input value="device.ip_addr" finish="saveIp")
-    dl.port 
-      dt port:
-      dd {{device.port}}
+    dl.port.setting
+      dt.upper.gill.light port:
+      dd.gill.medium {{device.port}}
   .social
     dl.shared-with
       dt shared with

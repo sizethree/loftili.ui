@@ -14,6 +14,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
     templateUrl: 'views.home'
     controller: 'HomeController'
     title: 'home'
+    name: 'home'
     resolve:
       activeUser: ['Auth', (Auth) ->
         Auth.filter 'guest'
@@ -41,6 +42,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
     templateUrl: 'views.about'
     controller: 'AboutController'
     title: 'about'
+    name: 'about'
     resolve:
       content: ['$http', '$q', 'URLS', ($http, $q, URLS) ->
         deferred = $q.defer()
@@ -65,6 +67,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
     templateUrl: 'views.contact'
     controller: 'ContactController'
     title: 'contact'
+    name: 'contact'
     resolve:
       content: ['$http', '$q', 'URLS', ($http, $q, URLS) ->
         deferred = $q.defer()
@@ -89,6 +92,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
     templateUrl: 'views.blog'
     controller: 'BlogController'
     title: 'blog'
+    name: 'blog'
     resolve:
       posts: ['$http', '$q', 'URLS', ($http, $q, URLS) ->
         deferred = $q.defer()

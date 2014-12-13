@@ -1,21 +1,28 @@
 .device-info
   +clearfix
 
-  dl
+  dl.setting
     +clearfix
     display: block
     margin: 0
+    height: 22px
+    line-height: 22px
 
-    dl, dt
-      margin: 0
+    input[type="text"]
+      height: 22px
+
+    dt, dd
+      font-size: 14px
 
     dt
       float: left
-      margin: 0 10px 0 0
+      margin: 0 10px 0
+      color: lighten($dark-gray, 20)
 
     dd
       overflow: hidden
       height: auto
+      color: lighten($dark-gray, 10)
 
   .name-date
     +clearfix
@@ -23,17 +30,12 @@
   .device-name
     overflow: hidden
     height: auto
+
     dt
       display: none
 
     dd
       font-size: 40px
-      line-height: 48px
-
-  .created
-    +clearfix
-
-    dt, dd
       line-height: 48px
 
   .social
@@ -81,12 +83,3 @@
 
     .share-bottom .search
       padding: 0px
-
-  .technical
-    +clearfix
-
-    .ip_addr
-      margin: 0 10px 0 0
-
-    .ip_addr, .port
-      float: left

@@ -6,20 +6,19 @@
       .nav(ng-if="!user()")
         ul.navigation-menu-list
           li.nav-link
-            a(href='/about') About
+            a(href='/about' ng-class="{active: active_route === 'about'}") about
           li.nav-link
-            a(href='/blog') Blog
+            a(href='/blog' ng-class="{active: active_route === 'blog'}") blog
           li.nav-link
-            a(href='/contact') Contact
+            a(href='/contact' ng-class="{active: active_route === 'contact'}") contact
       .nav(ng-if="user()")
         ul.navigation-menu-list
           li.nav-link
-            a(href='/dashboard') Dashboard
+            a(href='/dashboard' ng-class="{active: active_route === 'dashboard'}") dashboard
       .navigation-tools
         .logged-out(ng-if="!user()")
           button.login.ionicon(ng-click="toggle($event)" ng-class="{close: form_active, login: !form_active}")
         .btn-grp.logged-in(ng-if="user()" ng-attr-active="{{active_route}}")
-          a.button.ionicon.dashboard(href="/dashboard", ng-class="{active: active_route === 'dashboard'}")
           a.button.ionicon.account(href="/account" ng-class="{active: active_route === 'account'}")
           button.sign-out(href="#" ng-click="logout($event)")
             i.ionicon.logout
