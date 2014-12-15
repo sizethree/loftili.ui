@@ -1,8 +1,9 @@
 .blog-post
   .post-title 
-    h1.title-text(ng-bind-html="title()")
+    h1.title-text
+      a(ng-href="/blog/{{post.slug}}" title="post.title") {{post.title}}
     .title-date 
-      h2 
-        span {{ post.date | date }}
+      h2.date-text
+        span {{post.date | date}}
   .content.article
     .dynamic(lf-dynamic-content content="post.content")
