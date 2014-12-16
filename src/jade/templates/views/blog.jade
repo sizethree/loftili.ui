@@ -1,8 +1,8 @@
-.blog-view
+.blog-view(ng-class="{single: has_slug}")
   .blog-title
     .inner
       h1.huge the dev blog
-  .blog-posts
+  .blog-posts.gill.medium
     .post-wrapper(ng-repeat="post in posts")
       .post(lf-blog-post post="post")
       

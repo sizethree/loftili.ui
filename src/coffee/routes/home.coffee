@@ -88,30 +88,6 @@ lft.config ['$routeProvider', ($routeProvider) ->
         deferred.promise
       ]
 
-  $routeProvider.when '/blog',
-    templateUrl: 'views.blog'
-    controller: 'BlogController'
-    title: 'blog'
-    name: 'blog'
-    resolve:
-      posts: ['$http', '$q', 'URLS', ($http, $q, URLS) ->
-        deferred = $q.defer()
-
-        success = (response) ->
-          posts = response.data
-          deferred.resolve posts
-
-        fail = () ->
-
-        promise = $http
-          url: url(URLS.blog, 'posts')
-          withCredentials: false
-
-        promise.then success, fail
-
-        deferred.promise
-      ]
-
   $routeProvider.otherwise
     redirectTo: '/'
 
