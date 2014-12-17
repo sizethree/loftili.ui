@@ -42,13 +42,19 @@ module.exports = (function() {
       sass_out = path.join(config.css.dest, 'app.css'),
       jade_out = path.join(config.js.obj, 'templates.js'),
       jade_in = path.join(config.html.src, '**/*.jade'),
-      coffee_out = path.join(config.js.obj, 'app.js'),
-      coffee_in = [path.join(config.js.src, '**/*.coffee')];
+      coffee_out = config.js.obj,
+      coffee_in = '**/*.coffee';
 
   config['jade']['files']['in'] = jade_in;
   config['jade']['files']['out'] = jade_out;
   config['sass']['files'][sass_out] = sass_in;
-  config['coffee']['files'][coffee_out] = coffee_in;
+  config['coffee']['files'] = [{
+    expand: true,
+    cwd: config.js.src,
+    src: [coffee_in],
+    dest: coffee_out,
+    ext: '.js'
+  }];
 
   return config;
 

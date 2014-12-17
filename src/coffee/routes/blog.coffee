@@ -30,17 +30,19 @@ lft.config ['$routeProvider', ($routeProvider) ->
   $routeProvider.when '/blog/:slug',
     templateUrl: 'views.blog'
     controller: 'BlogController'
-    title: 'blog'
     name: 'blog'
+    title: 'none'
     resolve:
       posts: ['$http', '$route', '$q', 'URLS', '$location', ($http, $route, $q, URLS, $location) ->
         deferred = $q.defer()
-        route_params = $route.current.params
+        current_route = $route.current
+        route_params = current_route.params
         slug_name = if route_params then route_params.slug else false
 
         success = (response) ->
           found_data = response.data
           has_data = angular.isArray(found_data) and found_data.length == 1
+          current_route.$$route.title = found_data[0].title
 
           if has_data
             deferred.resolve found_data

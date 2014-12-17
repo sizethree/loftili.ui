@@ -1,4 +1,4 @@
-lft.directive 'lfHeader', ['$rootScope', '$route', 'Auth', 'MenuManager', ($rootScope, $route, Auth, MenuManager) ->
+_factory = ($rootScope, $route, Auth, MenuManager, Analytics) ->
 
   lfHeader =
     replace: true
@@ -10,6 +10,7 @@ lft.directive 'lfHeader', ['$rootScope', '$route', 'Auth', 'MenuManager', ($root
       manager_index = null
 
       $scope.logout = () ->
+        Analytics.event 'authentication', 'logout', 'header'
         Auth.logout()
 
       close = () ->
@@ -30,10 +31,13 @@ lft.directive 'lfHeader', ['$rootScope', '$route', 'Auth', 'MenuManager', ($root
         $scope.form_active = !$scope.form_active
 
         if $scope.form_active
+          Analytics.event 'authentication', 'start', 'login_form'
           manager_index = MenuManager.register close
         else
           MenuManager.remove manager_index
 
         event.stopPropagation()
 
-]
+_factory.$inject = ['$rootScope', '$route', 'Auth', 'MenuManager', 'Analytics']
+
+lft.directive 'lfHeader', _factory
