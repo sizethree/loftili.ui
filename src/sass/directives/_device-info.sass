@@ -1,85 +1,90 @@
 .device-info
   +clearfix
 
-  dl.setting
-    +clearfix
-    display: block
-    margin: 0
-    height: 22px
-    line-height: 22px
+  dl
+    +outer-container
+    height: auto
+    margin: 0 0 10px 0
 
-    input[type="text"]
-      height: 22px
+  dt, dd
+    height: 30px
+    font-size: 16px
+    line-height: 30px
+
+  dt
+    +span-columns(2.5)
+    text-align: right
+
+  dd
+    +span-columns(9.5)
+
+  .created,
+  .device-name
+    display: block
 
     dt, dd
-      font-size: 14px
-
-    dt
-      float: left
-      margin: 0 10px 0
-      color: lighten($dark-gray, 20)
-
-    dd
-      overflow: hidden
       height: auto
-      color: lighten($dark-gray, 10)
-
-  .name-date
-    +clearfix
-
-  .device-name
-    overflow: hidden
-    height: auto
+      font-size: 24px
+      line-height: 24px
 
     dt
-      display: none
+      opacity: 0.0
+      
+  .created dd,
+  .created dt
+    font-size: 12px
+    line-height: 12px
 
-    dd
-      font-size: 40px
-      line-height: 48px
+  .port
+    margin: 0 0 10px 0
+    padding: 0 0 10px 0
+    border-bottom: 1px solid darken(white, 10)
 
-  .social
-    margin: 5px 0 0 0
-    padding: 5px 0 0 0
+  .ip_addr
+    margin: 10px 0 10px 0 
+    padding: 10px 0 0 0
     border-top: 1px solid darken(white, 10)
 
-    dd, dt
+  .shared-with
+    height: auto
+
+    dt, dd
+      +span-columns(12)
+      text-align: left
+      margin: 0
       float: none
-      display: block
+      height: auto
 
     .no-permissions
-      display: block
-      font-size: 12px
-
-    .shared-list
-      list-style: none
-
-      li.device-permission
-        +clearfix
-        padding: 5px 0
-
-        p.user-name, p.permission-level, .remove, .remove:after
-          display: block
-          font-size: 16px
-          height: 16px
-          line-height: 20px
-          padding: 0
-
-        p.user-name
-          overflow: hidden
-          height: auto
-
-        p.permission-level
-          text-transform: lowercase
-          float: right
-
-        .remove
-          float: right
-
-  .device-share
+      font-size: 10px
+      line-height: 12px
+      padding: 5px
+      background: darken(white, 12)
 
     .share-top
       display: none
 
     .share-bottom .search
-      padding: 0px
+      padding: 0
+
+    .shared-list li
+      +clearfix
+      padding: 0 5px
+      border-top: 1px solid darken(white, 20)
+
+      &:last-child
+        border-bottom: 1px solid darken(white, 20)
+
+      button.remove,
+      .permission-level
+        float: right
+        font-size: 12px
+
+        &:after
+          font-size: 12px
+
+      button.remove
+        padding-right: 0
+
+      .user-name 
+        float: left

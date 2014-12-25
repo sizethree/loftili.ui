@@ -14,6 +14,10 @@ lft.directive 'lfEasyInput', [() ->
       $scope.focus = () ->
         temp_val = $scope.val
 
+      $scope.blurOut = () ->
+        input_el = $element.find 'input'
+        input_el[0].blur()
+
       $scope.keyUp = (event) ->
         is_save = event.keyCode == 13
         can_save = angular.isFunction $scope.finish

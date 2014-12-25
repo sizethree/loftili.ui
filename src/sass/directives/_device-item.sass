@@ -4,6 +4,10 @@
   .info
     +outer-container
 
+  .action-group
+    +clearfix
+    float: right
+
   .actions
     +outer-container
     position: relative
@@ -12,17 +16,13 @@
       margin: 0
       width: 36px
       height: 36px
-      float: right
       outline: none
       padding: 2px
-      border-radius: 0px
       box-sizing: border-box
+
       &:after
         line-height: 33px
-      &:first-child
-        border-radius: 0px 3px 3px 0px
-      &:last-child
-        border-radius: 3px 0px 0px 3px
+
 
   .share-central
     position: absolute
