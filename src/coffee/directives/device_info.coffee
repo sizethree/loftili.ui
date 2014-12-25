@@ -1,4 +1,4 @@
-lft.directive 'lfDeviceInfo', ['Api', (Api) ->
+lft.directive 'lfDeviceInfo', ['Api', 'Notifications', 'Lang', (Api, Notifications, Lang) ->
 
   lfDeviceInfo =
     replace: true
@@ -7,18 +7,39 @@ lft.directive 'lfDeviceInfo', ['Api', (Api) ->
       device: '='
       permissions: '='
     link: ($scope, $element, $attrs) ->
-      $scope.saveIp = (ip_addr, scope) ->
+      $scope.savePort = (port, scope, element) ->
+        params =
+          id: $scope.device.id
+          port: port
+
         success = () ->
+          lang = Lang 'device.updating.port.success'
+          $scope.device.port = port
+          Notifications.flash lang, 'success'
+          scope.blurOut()
+
+        fail = () ->
+          scope.val = $scope.device.port
+
+        new_device = new Api.Device params
+        new_device.$update().then success, fail
+
+      $scope.saveIp = (ip_addr, scope) ->
+        params =
+          id: $scope.device.id
+          ip_addr: ip_addr
+
+        success = () ->
+          lang = Lang 'device.updating.ip_addr.success'
           $scope.device.ip_addr = ip_addr
+          Notifications.flash lang, 'success'
+          scope.blurOut()
 
         fail = () ->
           scope.val = $scope.device.ip_addr
 
-        request = Api.Device.update
-          id: $scope.device.id
-          ip_addr: ip_addr
-
-        request.$promise.then success, fail
+        new_device = new Api.Device params
+        new_device.$update().then success, fail
 
       $scope.removePermission = (permission) ->
         finish = () ->

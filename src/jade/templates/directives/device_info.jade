@@ -1,21 +1,19 @@
 .device-info
-  .name-date
+  .info-inner
     dl.device-name.gill.medium
       dt.gill.light name:
-      dd.gill.medium {{device.name.split('.')[0]}}
+      dd.canberra.bold {{device.name.split('.')[0]}}
     dl.created.setting
-      dt.upper.gill.light created:
+      dt.gill.light created:
       dd.gill.medium {{device.createdAt | date:'MMM, yyyy'}}
-  .technical
     dl.ip_addr.setting
-      dt.upper.gill.light IP:
+      dt.gill.light IP:
       dd.editable(lf-easy-input value="device.ip_addr" finish="saveIp")
     dl.port.setting
-      dt.upper.gill.light port:
-      dd.gill.medium {{device.port}}
-  .social
+      dt.gill.light port:
+      dd.editable(lf-easy-input value="device.port" finish="savePort")
     dl.shared-with
-      dt shared with
+      dt.gill.light.upper device shares
       dd.shared-definition
         ul.shared-list(ng-if="permissions.length > 0")
           li.device-permission(ng-repeat="permission in permissions" data-level="{{permission.level}}")
@@ -24,5 +22,3 @@
             p.user-name.sans {{permission.user.username}}
         p.info-box.no-permissions(ng-if="!permissions.length") you havent shared this device
         .share-control(lf-device-share device="device" permissions="permissions")
-        
-        

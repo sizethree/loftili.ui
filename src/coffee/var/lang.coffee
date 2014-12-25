@@ -11,6 +11,11 @@ lft.value 'LANG',
           success: 'Your password has been updated!'
           fail: 'We\'ve messed something up, shoot us an email!'
     device:
+      updating:
+        port:
+          success: 'Successfully updated your device\'s port'
+        ip_addr:
+          success: 'Successfully updated your device\'s ip address'
       ping:
         start: 'Sending a ping request to your device'
         success: 'We\'ve successfully communicated with your device'
