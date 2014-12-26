@@ -1,0 +1,9 @@
+.device-status-icon
+  .tooltip(lf-tooltip)
+    .content.last-checked
+      p.label.gill.upper.light last commuinicated
+      p.value.gill.medium {{last_checked | date:'shortTime'}}
+  .status-icon.active(ng-if="status")
+    span ok
+  .status-icon.inactive(ng-if="!status")
+    span bad

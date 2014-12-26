@@ -8,6 +8,7 @@ _factory = ($timeout, Api, DEVICE_STATES, Notifications, Lang) ->
       queue: '='
     link: ($scope, $element, $attrs) ->
       looping = false
+      feed_loop_id = null
       $scope.adding = false
 
       $scope.searchToggle = () ->
@@ -23,33 +24,12 @@ _factory = ($timeout, Api, DEVICE_STATES, Notifications, Lang) ->
 
         $scope.manager.removeQueueItem(item_index).then success, fail
 
-      finish = (new_queue) ->
-        $scope.queue = new_queue
+      update = (err, response) ->
 
-        if looping
-          $timeout update, 1000
+      $scope.$on '$destroy', () ->
+        $scope.manager.feed.remove feed_loop_id
 
-      update = () ->
-        $scope.manager.getQueue().then finish
-
-      cleanup = () ->
-        looping = false
-
-      receiveState = (response, state) ->
-        if state == DEVICE_STATES.PLAYING
-          startLoop()
-
-      startLoop = () ->
-        if looping == false
-          looping = true
-          update()
-
-      $scope.manager.on 'stop', cleanup
-      $scope.manager.on 'start', startLoop
-
-      $element.on '$destroy', cleanup
-
-      $scope.manager.getState().then receiveState
+      feed_loop_id = $scope.manager.feed.add update
 
 _factory.$inject = ['$timeout', 'Api', 'DEVICE_STATES', 'Notifications', 'Lang']
 

@@ -1,19 +1,25 @@
 .device-info
   .info-inner
-    dl.device-name.gill.medium
-      dt.gill.light name:
-      dd.canberra.bold {{device.name.split('.')[0]}}
-    dl.created.setting
-      dt.gill.light created:
-      dd.gill.medium {{device.createdAt | date:'MMM, yyyy'}}
-    dl.ip_addr.setting
-      dt.gill.light IP:
-      dd.editable(lf-easy-input value="device.ip_addr" finish="saveIp")
-    dl.port.setting
-      dt.gill.light port:
-      dd.editable(lf-easy-input value="device.port" finish="savePort")
+    .device-brief
+      .device-state
+        .status-icon(lf-device-status-icon manager="manager")
+      .device-name-date
+        p.name.txt.canberra.bold {{device.name.split('.')[0]}}
+        p.date.upper.txt.gill.medium {{device.createdAt | date:'MMM, yyyy'}}
+    .device-configuration
+      .area-title.gill.light.upper
+        i.ionicon.gear-b
+        p device configuration
+      dl.ip_addr.setting
+        dt.gill.light ip address:
+        dd.editable(lf-easy-input value="device.ip_addr" finish="saveIp")
+      dl.port.setting
+        dt.gill.light port:
+        dd.editable(lf-easy-input value="device.port" finish="savePort")
     dl.shared-with
-      dt.gill.light.upper device shares
+      dt.gill.light.upper.area-title
+        i.ionicon.stalker
+        p device shares
       dd.shared-definition
         ul.shared-list(ng-if="permissions.length > 0")
           li.device-permission(ng-repeat="permission in permissions" data-level="{{permission.level}}")

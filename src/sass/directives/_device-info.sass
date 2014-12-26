@@ -1,6 +1,27 @@
 .device-info
   +clearfix
 
+  .device-brief
+    +clearfix
+
+    .device-state
+      +span-columns(3.5)
+
+      p.label
+        font-size: 10px
+
+    .device-name-date
+      float: none
+      overflow: hidden
+      height: auto
+
+      p.name
+        font-size: 24px
+
+      p.date
+        font-size: 12px
+        color: lighten(black, 40)
+
   dl
     +outer-container
     height: auto
@@ -35,19 +56,31 @@
     font-size: 12px
     line-height: 12px
 
-  .port
-    margin: 0 0 10px 0
-    padding: 0 0 10px 0
+  .device-configuration
+    margin: 10px 0
+    padding: 10px 0
     border-bottom: 1px solid darken(white, 10)
+    border-top: 1px solid darken(white, 10)
+
+  .area-title
+    +clearfix
+
+    i, p
+      display: block
+      float: left
+      line-height: 24px
+      font-size: 12px
+
+    i.ionicon:after
+      font-size: 12px
+      line-height: 24px
 
   .ip_addr
-    margin: 10px 0 10px 0 
-    padding: 10px 0 0 0
-    border-top: 1px solid darken(white, 10)
+    margin-top: 10px
 
   .shared-with
     height: auto
-
+      
     dt, dd
       +span-columns(12)
       text-align: left

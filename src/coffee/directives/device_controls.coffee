@@ -9,40 +9,34 @@ lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATE
       notification_id = null
       playing_lang = Lang 'device.playback.starting'
       stopping_lang = Lang 'device.playback.stopping'
-
-      $scope.device_state = null
+      feed_loop_id = null
 
       $scope.playing = () ->
-        $scope.device_state == DEVICE_STATES.PLAYING
-      
-      $scope.play = () ->
-        $scope.manager.startPlayback().then getState, getState
+        false
 
+      clear = () ->
         if notification_id
           Notifications.remove notification_id
-
+     
+      $scope.play = () ->
+        $scope.manager.startPlayback().then clear, clear
+        clear()
         notification_id = Notifications.add playing_lang
 
       $scope.stop = () ->
-        $scope.manager.stopPlayback().then getState, getState
-
-        if notification_id
-          Notifications.remove notification_id
-
+        $scope.manager.stopPlayback().then clear, clear
+        clear()
         notification_id = Notifications.add stopping_lang
       
-      update = (state) ->
-        $scope.device_state = state
+      update = (err, feed_response) ->
+        if err
+          $scope.ping = false
+        else
+          $scope.ping = feed_response.ping
 
-      getState = () ->
-        if notification_id
-          Notifications.remove notification_id
+      $scope.$on '$destroy', () ->
+        $scope.manager.feed.remove feed_loop_id
 
-        $scope.device_state = null
-
-        $scope.manager.getState().then update
-
-      getState()
-
+      feed_loop_id = $scope.manager.feed.add update
 
 ]
