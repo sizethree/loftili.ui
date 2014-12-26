@@ -2,8 +2,39 @@
   display: block
   +clearfix
 
-  .status-info
-    float: right
+  .current-state-info
+    float: left
+    +span-columns(2.5)
+
+    p.label
+      font-size: 12px
+
+    p.value
+      font-size: 22px
+
+  .info-bottom
+    +clearfix
+    overflow: hidden
+    padding: 5px
+    background: darken(white, 5)
+    border: 1px solid darken(white, 8)
+    border-radius: 2px
+
+    .device-state, .stream-state
+      display: block
+      float: left
+
+      p.label
+        font-size: 10px
+
+      p.device-value,
+      p.stream-value
+        font-size: 14px
+
+    .stream-state
+      padding: 0 0 0 5px
+      margin: 0 0 0 5px
+      border-left: 1px solid darken(white, 5)
 
   .control-list
     height: auto

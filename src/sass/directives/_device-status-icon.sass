@@ -1,0 +1,46 @@
+.device-status-icon
+  position: relative
+  display: block
+
+  .tooltip 
+
+    .tooltip-inner.vis .content
+      width: auto
+
+  .last-checked
+    display: block
+
+    p.label
+      font-size: 10px
+      text-overflow: hidden
+      white-space: nowrap
+      display: block
+      margin: 0 0 5px 0 
+
+    p.value
+      font-size: 22px
+
+  .status-icon
+    display: block
+    position: relative
+    width: auto
+    height: auto
+    border-radius: 2px
+    border: 1px solid white
+
+    span
+      display: block
+      line-height: 32px
+      text-align: center
+
+    &.active
+      +linear-gradient($success-color, darken($success-color, 5))
+      border-color: darken($success-color, 10)
+      span
+        color: darken($success-color, 50)
+
+    &.inactive
+      +linear-gradient($notice-color, darken($notice-color, 5))
+      border-color: darken($notice-color, 10)
+      span
+        color: darken($notice-color, 50)

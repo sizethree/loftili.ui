@@ -1,8 +1,9 @@
-lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', 'DEVICE_STATES', ($q, Analytics, Api, DEVICE_STATES) ->
+_factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
 
   class DeviceManager
 
     constructor: (@device) ->
+      @feed = new DeviceFeed @device
       @listeners =
         stop: []
         start: []
@@ -67,22 +68,11 @@ lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', 'DEVICE_STATES', ($q, An
 
       deferred.promise
 
-    getState: () ->
+    ping: () ->
       deferred = $q.defer()
 
       success = (result) =>
-        state = null
-
-        if result and result.ping
-          status = result.ping.status
-          if /stopped/i.test status
-            state = DEVICE_STATES.STOPPED
-          else if /playing/i.test status
-            state = DEVICE_STATES.PLAYING
-          else if /errored/i.test status
-            state = DEVICE_STATES.ERRORED
-
-        deferred.resolve state
+        deferred.resolve result
 
       fail = (result) =>
         deferred.reject result
@@ -134,4 +124,6 @@ lft.service 'DeviceManager', ['$q', 'Analytics', 'Api', 'DEVICE_STATES', ($q, An
 
   DeviceManager
 
-]
+_factory.$inject = ['$q', 'Analytics', 'Api', 'DEVICE_STATES', 'DeviceFeed']
+
+lft.service 'DeviceManager', _factory

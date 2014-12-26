@@ -38,7 +38,7 @@ lft.directive 'lfDeviceItem', ['$timeout', 'DeviceManager', 'Notifications', 'La
           Notifications.remove notification_id
           Notifications.flash Lang('device.ping.fail'), 'error'
 
-        manager.getState().then success, fail
+        manager.ping().then success, fail
 
       $scope.revertPropery = (property, value) ->
         $scope.device[property] = value
