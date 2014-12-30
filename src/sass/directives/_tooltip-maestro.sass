@@ -1,0 +1,29 @@
+.tooltip-maestro
+  display: block
+
+  .tooltip-instance
+    +transition(opacity 300ms ease)
+    +clearfix
+    display: none
+    opacity: 0.0
+    position: fixed
+    width: auto
+    height: auto
+    background: darken(white, 10)
+    border: 1px solid darken(white, 15)
+    padding: 5px
+
+    &:after
+      +transform(rotate(45deg))
+      content: ''
+      display: block
+      position: absolute
+      top: -5px
+      margin: 0 0 0 -5px
+      left: 50%
+      width: 10px
+      height: 10px
+      background: darken(white, 10)
+      border: 
+        left: 1px solid darken(white, 15)
+        top: 1px solid darken(white, 15)

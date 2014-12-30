@@ -1,28 +1,20 @@
-lft.directive 'lfTooltip', [() ->
+lft.directive 'lfTooltip', ['TooltipManager', (TooltipManager) ->
 
   lfTooltip =
     replace: true
     transclude: true
     templateUrl: 'directives.tooltip'
-    link: ($scope, $element, $attrs) ->
-      content_path = ['.tooltip-inner', '.content']
-      $content = $element
+    compile: (element, attrs, transclude) ->
+      link = ($scope, $element, $attrs) ->
+        placement_scope = $scope.$new()
 
-      while(content_path.length)
-        next_level = content_path.splice(0,1)[0]
-        $content = $content.children next_level
+        $scope.hover = () -> $scope.$broadcast 'hover'
+        $scope.off = () -> $scope.$broadcast 'off'
 
-      $scope.vis = false
+        transclusionFn = TooltipManager.transclusion $element, placement_scope
+        child_scope = $scope.$parent.$new()
+        transclude child_scope, transclusionFn
 
-      $scope.hover = () ->
-        height = $content[0].offsetHeight
-        $content.css
-          top: (-(height + 8) + 'px')
-        $scope.vis = true
-
-      $scope.off = () ->
-        $content.css
-          top: '0px'
-        $scope.vis = false
+        $scope.$on '$destroy', () -> placement_scope.$destroy()
 
 ]
