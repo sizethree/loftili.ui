@@ -7,7 +7,11 @@ body, html
 
 .header.main, .footer.main
   position: relative
-  z-index: 50
+  z-index: 61
+
+.tooltip-maestro
+  position: relative
+  z-index: 70
 
 [ng-view]
   min-height: 100%
@@ -38,6 +42,7 @@ body, html
 @import "directives/flash-message"
 @import "directives/dashboard-nav"
 @import "directives/device-creator"
+@import "directives/tooltip-maestro"
 @import "directives/device-controls"
 @import "directives/track-edit-form"
 @import "directives/track-upload-form"
