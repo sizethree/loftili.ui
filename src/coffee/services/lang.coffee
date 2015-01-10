@@ -1,8 +1,8 @@
-LangFactory = (LANG) ->
+LangFactory = () ->
 
   Lang = (context) ->
     splits = context.split '.'
-    dict = LANG['en']
+    dict = Lang.current_dict
 
     while splits.length
       lvl = splits.shift()
@@ -13,6 +13,10 @@ LangFactory = (LANG) ->
 
     return dict
 
-LangFactory.$inject = ['LANG']
+  Lang.current_dict = {}
+
+  Lang
+
+LangFactory.$inject = []
 
 lft.service 'Lang', LangFactory

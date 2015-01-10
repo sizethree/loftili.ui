@@ -16,6 +16,9 @@ _factory = () ->
           $scope.status = true
           $scope.last_checked = ping_response.last_checked
 
+      $scope.$on '$destroy', () ->
+        $scope.manager.feed.remove feed_loop_id
+
       feed_loop_id = $scope.manager.feed.add update
 
 _factory.$inject = []

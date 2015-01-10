@@ -6,18 +6,10 @@
   .bit.port
     p.txt.sans {{ device.port }}
   .bit.status.has-tooltip
-    .tooltip(lf-tooltip)
-      .content
-        p.txt last updated:
-        p.txt {{ device.updatedAt | date:'short' }}
-    .status-icon.active(ng-if="connected")
-      span ok
-    .status-icon.inactive(ng-if="!connected")
-      span bad
+    .status-icon(lf-device-status-icon manager="manager" ng-if="manager")
   .bit.actions
     .action-group.btn-grp
       button.ionicon.trash.delete(ng-click="delete(device)")
-      button.ionicon.loop.report(ng-click="refresh()")
       button.ionicon.share(ng-click="sharing = !sharing")
       a.button.ionicon.mixer.control(href="/devices/{{device.id}}")
     .share-central(ng-if="sharing")
