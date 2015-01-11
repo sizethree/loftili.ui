@@ -1,4 +1,4 @@
-lft.directive 'lfDeviceItem', ['$timeout', 'DeviceManager', 'Notifications', 'Lang', ($timeout, DeviceManager, Notifications, Lang) ->
+_factory = ($timeout, DeviceManager, Notifications, Lang) ->
 
   lfDeviceItem =
     replace: true
@@ -8,7 +8,7 @@ lft.directive 'lfDeviceItem', ['$timeout', 'DeviceManager', 'Notifications', 'La
       ondelete: '&'
       index: '='
     link: ($scope, $element, $attrs) ->
-      manager = new DeviceManager $scope.device
+      $scope.manager = new DeviceManager $scope.device
       $scope.sharing = false
       $scope.connected = false
 
@@ -38,7 +38,7 @@ lft.directive 'lfDeviceItem', ['$timeout', 'DeviceManager', 'Notifications', 'La
           Notifications.remove notification_id
           Notifications.flash Lang('device.ping.fail'), 'error'
 
-        manager.ping().then success, fail
+        $scope.manager.ping().then success, fail
 
       $scope.revertPropery = (property, value) ->
         $scope.device[property] = value
@@ -54,4 +54,6 @@ lft.directive 'lfDeviceItem', ['$timeout', 'DeviceManager', 'Notifications', 'La
 
         $scope.device.$save().then success, fail
 
-]
+_factory.$inject = ['$timeout', 'DeviceManager', 'Notifications', 'Lang']
+
+lft.directive 'lfDeviceItem', _factory

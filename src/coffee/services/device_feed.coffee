@@ -1,5 +1,7 @@
 _factory = (Api, $timeout) ->
 
+  FEED_TIMEOUT = 3000
+
   uuid = do ->
     indx = 0
     () ->
@@ -13,16 +15,15 @@ _factory = (Api, $timeout) ->
     fn_uid
 
   start = () ->
-    @looping = true
     device_id = @device.id
 
     success = (response) =>
       fn(null, response) for fn in @listeners
-      $timeout update, 1000
+      $timeout update, FEED_TIMEOUT
 
     fail = () =>
       fn(true, null) for fn in @listeners
-      $timeout update, 1000
+      $timeout update, FEED_TIMEOUT
 
     request = () ->
       ping_request = Api.Device.ping
@@ -42,16 +43,19 @@ _factory = (Api, $timeout) ->
       @listeners = []
       @looping = false
 
-    add: (update_fn) ->
+    add: (update_fn, silent) ->
       if angular.isFunction update_fn
         added_id = addListener.call @, update_fn
-        if @listeners.length == 1
-          start.call @
+
+        if !@looping and silent != true
+          @looping = true
+          start.call(@)
+
         added_id
       else
         false
 
-    remove: (fn_id) ->
+    remove: (fn_id, silent) ->
       for fn, indx in @listeners
         if fn.$$fn_id == fn_id
           @listeners.splice indx, 1

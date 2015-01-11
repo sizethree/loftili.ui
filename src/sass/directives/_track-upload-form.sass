@@ -67,11 +67,19 @@
       overflow: hidden
 
       input[type="text"]
-        height: 30px
+        height: 32px
+        width: 100%
+        line-height: 1em
+        text-indent: 1em
+        padding-left: 0
+        padding-right: 0
         border-radius: 0px
+        border: 
+          top: 1px solid darken(white, 20)
+          bottom: 1px solid darken(white, 20)
 
       &.open
-        +calc(width, "100% - 60px")
+        +calc(width, "100% - 64px")
         overflow: visible
 
     .btn-grp

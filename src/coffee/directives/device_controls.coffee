@@ -9,7 +9,15 @@ lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATE
       notification_id = null
       playing_lang = Lang 'device.playback.starting'
       stopping_lang = Lang 'device.playback.stopping'
+      restarting_lang = Lang 'device.playback.restarting'
       feed_loop_id = null
+
+      $scope.currentTrack = () ->
+        ping = $scope.ping
+        if ping and ping.track_id >= 0
+          $scope.manager.currentTrack()
+        else
+          false
 
       $scope.playing = () ->
         false
@@ -27,7 +35,12 @@ lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATE
         $scope.manager.stopPlayback().then clear, clear
         clear()
         notification_id = Notifications.add stopping_lang
-      
+
+      $scope.restart = () ->
+        $scope.manager.restartPlayback().then clear, clear
+        clear()
+        notification_id = Notifications.add restarting_lang
+
       update = (err, feed_response) ->
         if err
           $scope.ping = false

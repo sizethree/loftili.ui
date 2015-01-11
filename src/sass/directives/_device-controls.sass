@@ -2,9 +2,26 @@
   display: block
   +clearfix
 
+  .errored-text-container
+    overflow: hidden
+    height: auto
+    background: darken(white, 10)
+    border: darken(white, 15)
+    color: darken(white, 50)
+    height: 32px
+    border-radius: 2px
+
+    .error-text
+      line-height: 22px
+      display: block
+      padding: 5px 10px
+      text-transform: uppercase
+      font-size: 10px
+
   .current-state-info
-    float: left
-    +span-columns(2.5)
+    width: auto
+    height: auto
+    overflow: hidden
 
     p.label
       font-size: 12px
@@ -20,28 +37,41 @@
     border: 1px solid darken(white, 8)
     border-radius: 2px
 
-    .device-state, .stream-state
+    .stream-state
       display: block
       float: left
 
       p.label
         font-size: 10px
-
-      p.device-value,
-      p.stream-value
-        font-size: 14px
-
-    .stream-state
-      padding: 0 0 0 5px
-      margin: 0 0 0 5px
-      border-left: 1px solid darken(white, 5)
+      
+      i.icon
+        display: block
+        width: 10px
+        height: 10px
+        border-radius: 5px
+        background: red
+        margin: 5px auto 0
 
   .control-list
     height: auto
     list-style: none
+    float: left
     padding: 0
-    margin: 0
-    overflow: hidden
+    margin: 0 10px 0 0
+
+  .current-playback
+    +clearfix
+    display: block
+
+    h1.current-track
+      display: block
+      float: left
+      color: darken(white, 80)
+
+    .ionicon
+      display: block
+      float: left
+      margin: 0 10px 0 0
 
   button
     float: left

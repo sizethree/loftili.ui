@@ -1,12 +1,40 @@
 _factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
 
+  playbackFn = (type) ->
+    deferred = $q.defer()
+
+    finish = (result) =>
+      @trigger type
+      deferred.resolve result
+
+    fail = (result) =>
+      deferred.reject result
+
+    request = Api.Playback[type]
+      device: @device.id
+
+    Analytics.event 'playback', type, ['device', @device.name].join(':')
+
+    request.$promise.then finish, fail
+
+    deferred.promise
+
   class DeviceManager
 
     constructor: (@device) ->
+      @current_queue = null
+      @last_ping = null
       @feed = new DeviceFeed @device
       @listeners =
         stop: []
         start: []
+        restart: []
+
+      update = (err, device) =>
+        if device and device.ping
+          @last_ping = device.ping
+
+      @feed.add update, true
 
     on: (event, fn) ->
       is_function = angular.isFunction fn
@@ -17,6 +45,18 @@ _factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
 
     trigger: (event) ->
       fn() for fn in @listeners[event]
+
+    currentTrack: () ->
+      has_queue = @current_queue and @current_queue.length > 0
+      has_ping = @last_ping and @last_ping.track_id >= 0
+      if has_ping and has_queue
+        found_title = false
+        track_id = @last_ping.track_id
+        for track in @current_queue
+          found_title = track.title if track_id == track.id
+        found_title
+      else
+        return false
 
     removeQueueItem: (index) ->
       deferred = $q.defer()
@@ -56,6 +96,7 @@ _factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
       deferred = $q.defer()
 
       success = (result) =>
+        @current_queue = result
         deferred.resolve result
 
       fail = (result) =>
@@ -72,6 +113,7 @@ _factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
       deferred = $q.defer()
 
       success = (result) =>
+        @last_ping = result
         deferred.resolve result
 
       fail = (result) =>
@@ -84,43 +126,14 @@ _factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
 
       deferred.promise
 
+    restartPlayback: () ->
+      playbackFn.call @, 'restart'
+
     stopPlayback: () ->
-      deferred = $q.defer()
-
-      finish = (result) =>
-        @trigger 'stop'
-        deferred.resolve result
-
-      fail = (result) =>
-        deferred.reject result
-
-      request = Api.Playback.stop
-        device: @device.id
-
-      Analytics.event 'playback', 'stop', ['device', @device.name].join(':')
-
-      request.$promise.then finish, fail
-
-      deferred.promise
+      playbackFn.call @, 'stop'
 
     startPlayback: () ->
-      deferred = $q.defer()
-
-      finish = (result) =>
-        @trigger 'start'
-        deferred.resolve result
-
-      fail = (result) =>
-        deferred.reject result
-
-      request = Api.Playback.start
-        device: @device.id
-
-      Analytics.event 'playback', 'start', ['device', @device.name].join(':')
-
-      request.$promise.then finish, fail
-
-      deferred.promise
+      playbackFn.call @, 'start'
 
   DeviceManager
 
