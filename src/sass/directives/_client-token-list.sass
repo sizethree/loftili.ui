@@ -1,0 +1,58 @@
+.client-token-list.directive
+  display: block
+
+  .token-list
+    display: block
+    list-style: none
+
+  p.client-name
+    font-size: 16px
+    line-height: 24px
+
+  .token-list .token
+    +clearfix
+    height: auto
+    padding: 5px 10px
+
+    &:nth-child(odd)
+      background: darken(white, 5)
+
+    .name-container
+      overflow: hidden
+      height: auto
+
+  .token-container
+    +clearfix
+    float: right
+
+    code.client-token
+      top: -2px
+      padding: 2px 8px
+      margin-bottom: -4px
+      font-size: 14px
+
+    code.client-token, 
+    a.token-display-toggle
+      display: block
+      float: left
+      line-height: 24px
+
+    a.token-display-toggle
+      font-size: 16px
+
+    button.remover
+      float: left
+      display: block
+      margin: 0 0 0 10px
+
+      .ionicon, .ionicon:after
+        display: block
+        font-size: 12px
+        line-height: 12px
+        width: 12px
+        height: 12px
+
+    .token-display-toggle
+      cursor: pointer
+      color: $blue-color
+      margin: 0 0 0 10px

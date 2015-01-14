@@ -1,0 +1,11 @@
+.client-browser.directive
+  .client-search
+    input.searcher(type="text" placeholder="search for loftili clients" ng-keyup="keyManager($event)" ng-model="query.text")
+  .client-results
+    ul.client-list
+      li.client(ng-repeat="client in results")
+        .action-container
+          button.adder(ng-click="add(client)")
+            i.ionicon.add
+        .name-container
+          p.client-name {{client.name}}

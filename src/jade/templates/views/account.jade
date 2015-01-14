@@ -1,36 +1,46 @@
 .account.view
   .inner
-    .account-info
-      .section-title
-        h2.title Account info
-      .section-content
-        .info.name-container
-          .label
-            p Name:
-          .value
-            p.first {{user.first_name}} 
-            p.last {{user.last_name}}
-        .info
-          .label
-            p Email
-          .value
-            p.email {{user.email}}
-        .info.password
-          .value
-            .opener(ng-if="!changing_password")
-              a.button(ng-click="startPasswordChange()" href="#") Change password
-            .input(ng-if="changing_password")
-              .errors(lf-flash-message messages="errors")
-              .fields
-                input(type="password" placeholder="password" ng-keyup="update('password', $event)")
-                input(type="password" placeholder="confirm" ng-keyup="update('password_confirm', $event)")
-              .actions
-                a.button(ng-click="savePassword()" href="#") Save
-        .info.privacy-info
-          .label
-            p Privacy level:
-          .value.level(ng-switch="user.privacy_level")
-            .invisible(ng-switch-when="5")
-              p Hidden
-            .visible(ng-switch-when="1")
-              p Visible 
+    .account-info.account-section
+      .section-inner
+        .section-title
+          h2.title Account Info
+        .section-content
+          .info.name-container
+            .label
+              p Name:
+            .value
+              p.first {{user.first_name}} 
+              p.last {{user.last_name}}
+          .info
+            .label
+              p Email
+            .value
+              p.email {{user.email}}
+          .info.password
+            .value
+              .opener(ng-if="!changing_password")
+                a.button.password-change(ng-click="passwordToggle(true)" href="#") Change password
+              .input(ng-if="changing_password")
+                .errors(lf-flash-message messages="errors")
+                .fields
+                  input(type="password" placeholder="password" ng-keyup="update('password', $event)")
+                  input(type="password" placeholder="confirm" ng-keyup="update('password_confirm', $event)")
+                .actions.btn-grp
+                  a.button(ng-click="savePassword()" href="#") Save
+                  a.button(ng-click="passwordToggle(false)" href="#")
+                    i.ionicon.close
+          .info.privacy-info
+            .label
+              p Privacy level:
+            .value.level(ng-switch="user.privacy_level")
+              .invisible(ng-switch-when="5")
+                p Hidden
+              .visible(ng-switch-when="1")
+                p Visible 
+    .client-info.account-section
+      .section-inner
+        .section-title
+          h2.title Authorized Applications
+        .section-content
+          .client-list(lf-client-token-list tokens="client_tokens" clients="clients" manager="client_manager")
+          .client-browser(lf-client-browser manager="client_manager")

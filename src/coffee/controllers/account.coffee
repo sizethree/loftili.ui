@@ -1,6 +1,9 @@
-AccountControllerFactory = ['$scope', 'activeUser', 'Api', 'Notifications', 'Lang', ($scope, activeUser, Api, Notifications, Lang) ->
+_factory = ($scope, activeUser, Api, Notifications, Lang, ClientManager, clientTokens, clients) ->
 
   $scope.user = activeUser
+  $scope.clients = clients
+  $scope.client_tokens = clientTokens
+  $scope.client_manager = new ClientManager clientTokens, clients
 
   $scope.fields =
     password: ''
@@ -36,8 +39,8 @@ AccountControllerFactory = ['$scope', 'activeUser', 'Api', 'Notifications', 'Lan
     else
       $scope.errors = ['Passwords must match']
 
-  $scope.startPasswordChange = () ->
-    $scope.changing_password = true
+  $scope.passwordToggle = (state) ->
+    $scope.changing_password = state
 
   $scope.savePassword = () ->
     attempt()
@@ -50,6 +53,15 @@ AccountControllerFactory = ['$scope', 'activeUser', 'Api', 'Notifications', 'Lan
       val = evt.srcElement.value
       $scope.fields[type] = val
 
+_factory.$inject = [
+  '$scope',
+  'activeUser',
+  'Api',
+  'Notifications',
+  'Lang',
+  'ClientManager',
+  'clientTokens',
+  'clients'
 ]
 
-lft.controller 'AccountController', AccountControllerFactory
+lft.controller 'AccountController', _factory
