@@ -1,0 +1,11 @@
+.client-token-list.directive
+  ul.token-list
+    li.token(ng-repeat="token in tokens")
+      .token-container
+        code.inline.client-token(ng-if="showing($index)") {{token.token}}
+        a.token-display-toggle(ng-if="!showing($index)" ng-click="show($index)") show
+        a.token-display-toggle(ng-if="showing($index)" ng-click="hide($index)") hide
+        button.remover(ng-click="remove(token)")
+          i.ionicon.close
+      .name-container
+        p.gill.light.client-name {{clientById(token.client).name}}

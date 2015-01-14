@@ -5,12 +5,16 @@
     +outer-wrapper
     +clearfix
 
-    .account-feed, .account-info
-      +span-columns(6)
+  .account-section
+    +span-columns(6)
 
-  .account-info, .account-feed .section
-    border: 1px solid darken(white, 15)
+  .section-inner
     border-radius: 3px
+    border: 1px solid darken(white, 20)
+
+  .account-info
+    display: block
+
     .info
       +clearfix
       margin: 0 0 10px 0
@@ -31,6 +35,10 @@
 
       .fields
         +clearfix
+        margin: 0 0 5px 0
+
+        input
+          border: 1px solid darken(white, 15)
 
       .value
         +outer-container
@@ -39,22 +47,23 @@
         float: none
 
         a.button
+          text-transform: lowercase
+          font-size: 12px
+          line-height: 12px
           display: inline-block
           cursor: pointer
 
+          &:hover
+            box-shadow: none
+
+          .ionicon, .ionicon:after
+            font-size: 12px
+            line-height: 12px
+            height: 12px
+            width: 12px
+
       input[type="password"]
         +span-columns(6)
-
-  .account-feed .section
-    margin: 0 0 10px
-
-    &:last-child
-      margin-bottom: 0
-
-  .name-container
-    +clearfix
-    p 
-      display: inline-block
 
   .section-title,
   .section-content
@@ -68,4 +77,9 @@
     h2
       font-family: $sans-serif
       font-weight: 800
+
+  .client-info .client-browser
+    margin: 10px 0 0 0
+    padding: 10px 0 0 0
+    border-top: 1px solid darken(white, 10)
       

@@ -4,3 +4,30 @@
 
 @mixin outer-wrapper
   padding: 0 1em
+
+@mixin bordered-input
+  border-radius: 2px
+  border: 1px solid darken(white, 10)
+
+@mixin result-list
+  +clearfix
+  display: block
+  list-style: none
+  background: darken(white, 15)
+  border-radius: 2px
+
+  li
+    +clearfix
+    border:
+      left: 1px solid darken(white, 20)
+      right: 1px solid darken(white, 20)
+    position: relative
+    display: block
+    padding: 5px 10px
+
+    &:first-child
+      border-top: 1px solid darken(white, 20)
+
+    &:last-child
+      border-bottom: 1px solid darken(white, 20)
+

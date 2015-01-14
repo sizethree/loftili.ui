@@ -1,0 +1,39 @@
+.client-browser.directive
+  display: block
+  position: relative
+
+  .client-search
+    display: block
+    width: 100%
+
+  input.searcher
+    +bordered-input
+    position: relative
+    width: 100%
+
+  .client-results
+    position: absolute
+    width: 100%
+    top: 100%
+    margin: 5px 0 0 0
+
+    ul.client-list
+      +result-list
+    
+    li.client .action-container
+      +clearfix
+      float: right
+
+      button, .ionicon, .ionicon:after
+        font-size: 12px
+        line-height: 12px
+        width: 12px
+        height: 12px
+
+    li.client .name-container
+      overflow: hidden
+      height: auto
+
+      .client-name
+        font-size: 16px
+        line-height: 24px
