@@ -1,0 +1,62 @@
+.faq.view
+  display: block
+
+  .faq-intro
+    +clearfix
+    margin: 0 auto
+    padding: 40px 1em
+    text-align: center
+
+    .app-name
+      font-size: 12px
+      color: darken(white, 50)
+
+    .main-title
+      font-size: 34px
+      color: darken(white, 80)
+
+  .faq-bottom
+    margin: 0 auto
+    max-width: 600px
+
+    .faq-section
+      margin: 20px 0
+      padding: 20px 0
+      border-top: 2px solid darken(white, 10)
+
+      &:first-child
+        margin: 0
+        border: none
+        padding: 0
+
+    .section-title
+      font-size: 22px
+      text-transform: uppercase
+      color: darken(white, 20)
+
+    ul.questions
+      list-style: none
+      display: block
+
+    ul.questions li
+      display: block
+      border-top: 1px solid darken(white, 5)
+      margin: 0 0 20px 0
+      padding: 20px 0 0 0
+
+      &:first-child
+        border: none
+ 
+    dl
+      +clearfix
+      display: block
+
+    dl dt
+      font-size: 24px
+      margin: 0 0 10px
+      color: darken(white, 60)
+
+    dl dd
+      font-size: 14px
+      color: darken(white, 80)
+      line-height: 21px
