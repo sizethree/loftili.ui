@@ -3,7 +3,7 @@
     .navigation-wrapper
       a.logo(href='/')
         .icon(lf-icon icon="logo" width="30" height="30" scale="1.5" fill="white")
-      .nav(ng-if="!user()")
+      .nav.guest-nav(ng-if="!user()")
         ul.navigation-menu-list
           li.nav-link
             a(href='/about' ng-class="{active: active_route === 'about'}") about
