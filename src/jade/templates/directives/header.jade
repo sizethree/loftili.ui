@@ -13,7 +13,7 @@
             a(href='/blog' ng-class="{active: active_route === 'blog'}") blog
           li.nav-link
             a(href='/contact' ng-class="{active: active_route === 'contact'}") contact
-      .nav(ng-if="user()")
+      .nav.user-nav(ng-if="user()")
         ul.navigation-menu-list
           li.nav-link
             a(href='/dashboard' ng-class="{active: active_route === 'dashboard'}") dashboard
