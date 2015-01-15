@@ -7,6 +7,9 @@
   > .header-inner
     +outer-wrapper
 
+  .guest-nav
+    float: left
+
   .navigation-wrapper, .login-wrapper
     +clearfix
     +outer-container
@@ -61,22 +64,28 @@
       height: 30px
       margin: 15px 0 0 0
 
+  .navigation-menu-list
+    +clearfix
+
   ul li.nav-link
     text-transform: uppercase
     display: block
     line-height: 60px
     overflow: hidden
     float: left
-    padding: 0 1em 0 0
+    padding: 0 10px 0 0
 
-    a
-      font-size: 14px
-      color: darken(white, 35)
-      display: inline-block
+  .nav-link a
+    font-size: 14px
+    color: darken(white, 35)
+    display: inline-block
 
-      &.active,
-      &:hover
-        color: white
+    +media(max-width 400px)
+      font-size: 12px
+
+    &.active,
+    &:hover
+      color: white
 
   .active-nav-item a
     border-bottom: 1px solid white
