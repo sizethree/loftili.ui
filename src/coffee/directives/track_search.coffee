@@ -1,4 +1,4 @@
-lft.directive 'lfTrackSearch', ['$timeout', 'Auth', 'Api', ($timeout, Auth, Api) ->
+_factory = ($timeout, Auth, Api) ->
 
   BOUNCE_TIME = 400
   Track = Api.Track
@@ -61,9 +61,9 @@ lft.directive 'lfTrackSearch', ['$timeout', 'Auth', 'Api', ($timeout, Auth, Api)
           id: current_user.id
           track: track.id
 
-        success = () ->
+        success = (new_track) ->
           $scope.results = []
-          $scope.$emit 'track:added', track
+          $scope.$emit 'track:added', new_track
 
         fail = () ->
 
@@ -74,4 +74,7 @@ lft.directive 'lfTrackSearch', ['$timeout', 'Auth', 'Api', ($timeout, Auth, Api)
         $scope.query.val = ''
 
       $scope.$on 'closed', closed
-]
+
+_factory.$inject = ['$timeout', 'Auth', 'Api']
+
+lft.directive 'lfTrackSearch', _factory

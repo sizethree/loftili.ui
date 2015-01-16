@@ -13,6 +13,10 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
       params:
         fn: 'tracks'
 
+    dropTrack:
+      method: 'DELETE'
+      url: [URLS.api, 'users', ':user', 'tracks', ':track'].join '/'
+
     search:
       method: 'GET'
       url: [URLS.api, 'users', 'search'].join '/'

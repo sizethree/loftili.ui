@@ -1,4 +1,7 @@
 lft.value 'i18n-en',
+  library:
+    tracks:
+      dropping: 'Removing the track from your library, please wait'
   queuing:
     failed: 'Unable to add the track to your device queue'
     failed_remove: 'Unable to remove the track from your device queue'

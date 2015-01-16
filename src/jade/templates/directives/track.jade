@@ -4,9 +4,8 @@
       p {{ track.title || 'not found' }}
     .bit.artist
       p {{ track.artist.name || 'not found' }}
-    .bit.filetype
-      p {{ track.type }}
     .bit.added
       p {{ track.createdAt | date:'shortDate' }}
-  .actions
-    .action
+    .bit.actions.btn-grp(ng-if="manager")
+      button.remover(ng-click="drop()")
+        i.ionicon.close

@@ -39,50 +39,54 @@
       display: none
 
   .result-list
+    +result-list
     position: absolute
+    border: none
     z-index: 1
     top: 100%
     left: 0
+    margin: 5px 0 0 0
     width: 100%
     height: auto
 
   .result
     min-width: 200px
-    background: darken(white, 5)
     cursor: pointer
-    border:
-      left: 1px solid darken(white, 10)
-      right: 1px solid darken(white, 10)
-      bottom: 1px solid darken(white, 10)
+    padding: 5px 10px
+    border: 1px solid darken(white, 12)
+    border-radius: 2px
+    border-bottom: none
+
+    &:last-child
+      border-bottom: 1px solid darken(white, 12)
 
     &.addable:hover
-      background: darken(white, 1)
-
-    &:first-child
-      border:
-        top: 1px solid darken(white, 10)
+      background: darken(white, 15)
 
   .result-inner
     +clearfix
-    padding: 3px 10px
 
-    .artist, .name
-      font-size: 12px
-      p
-        text-overflow: ellipsis
-        overflow: hidden
-        white-space: nowrap
-
-    .missing-info
-      font-size: 12px
-      color: darken(white, 40)
+    .name,
+    .artist, 
+    .edit-form input[type="text"]
+      display: block
+      height: 22px
+      font-size: 16px
+      line-height: 22px
+      color: lighten($dark-gray, 2)
 
     .artist
       float: right
-      color: lighten($dark-gray, 50)
 
     .name
       overflow: hidden
       width: auto
-      color: $dark-gray
 
+    .edit-form input[type="text"]
+      line-height: 1em
+      font: $aptifer-light
+      display: block
+      border: none
+      background: transparent
+      padding: 0
+      margin: 0

@@ -3,26 +3,34 @@
 
   .list-header
     +outer-container
-    margin: 0 0 10px 0
-    
+    margin: 0
+    padding: 5px 10px
+    border-radius: 2px
+   
     .bit
-      border-bottom: 1px solid darken($light-gray, 5)
       color: darken($light-gray, 10)
 
   .list-container
+    position: relative
+    padding: 0
+
     .device-container
-      margin: 0 0 10px 0
+      border-radius: 2px
+      background: darken(white, 5)
+      padding: 5px 10px
+
+  .bit p
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    margin-bottom: 0px
 
   .bit
     +span-columns(2)
     overflow: hidden
+
     &.status
       overflow: visible
-    p
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
-      margin-bottom: 0px
 
     &.ip_addr
       +span-columns(2)
