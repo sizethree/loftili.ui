@@ -1,44 +1,66 @@
 .track-list
-  margin: 0 10px
+  display: block
+  position: relative
 
   .list-header
     +outer-container
-    margin: 0 0 10px 0
+    margin: 0
+    padding: 5px 0
+    border-radius: 2px
     
     .bit
-      border-bottom: 1px solid darken($light-gray, 5)
       color: darken($light-gray, 10)
 
   .list-container
-    .track-container
-      margin: 0 0 10px 0
+    position: relative
+    padding: 0
 
+    .track-container
+      border-radius: 2px
+      background: darken(white, 5)
+      padding: 5px 0
 
   .track
     +outer-container
+
     .info
       +outer-container
 
+  .bit p
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    margin-bottom: 0px
+
   .bit
     overflow: hidden
-    p
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
-      margin-bottom: 0px
+    height: 24px
+    line-height: 24px
 
     &.name
       +span-columns(5)
+      padding-left: 5px
 
     &.artist
       +span-columns(3.5)
 
-    &.filetype
-      +span-columns(1.5)
-
     &.added
       +span-columns(2)
-      +omega
       text-align: right
 
+  .bit.actions
+    +clearfix
+    +span-columns(1.5)
+    +omega
+    padding-right: 5px
+    display: block
 
+    button
+      float: right
+
+    button, .ionicon, .ionicon:after
+      display: block
+      font-size: 12px
+      line-height: 12px
+      width: 12px
+      height: 12px

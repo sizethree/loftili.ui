@@ -7,10 +7,11 @@ _factory = (Api, $timeout) ->
     () ->
       ['feed_fn', indx++].join '-'
 
-  addListener = (fn) ->
+  addListener = (fn, was_silent) ->
     fn_uid = uuid()
     wrapper = (err, response) -> fn(err, response)
     wrapper.$$fn_id = fn_uid
+    wrapper.$$silent = was_silent
     @listeners.push wrapper
     fn_uid
 
@@ -45,7 +46,7 @@ _factory = (Api, $timeout) ->
 
     add: (update_fn, silent) ->
       if angular.isFunction update_fn
-        added_id = addListener.call @, update_fn
+        added_id = addListener.call @, update_fn, silent
 
         if !@looping and silent != true
           @looping = true
@@ -62,6 +63,10 @@ _factory = (Api, $timeout) ->
           break
       
       if @listeners.length == 0
+        @looping = false
+
+      if @listeners.length == 1 and @listeners[0].$$silent == true
+        @listeners.splice 0, 1
         @looping = false
 
 

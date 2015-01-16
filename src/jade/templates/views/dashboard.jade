@@ -9,7 +9,7 @@
               a.gill.light.upper.subtitle(href="/dashboard/library") library
             .bottom
               .track-list-container(ng-if="tracks.length > 0")
-                .track-list(lf-track-list tracks="tracks")
+                .track-list(lf-track-list tracks="tracks" manager="track_manager")
               .upload-track-container(ng-class="{vis: tracks.length === 0 || uploading}")
                 .uploader(lf-track-upload-form tracks="tracks")
         .device-section-container(ng-if="active_nav === 'devices' || active_nav === 'overview'")

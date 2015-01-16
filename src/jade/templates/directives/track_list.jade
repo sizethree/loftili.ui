@@ -4,10 +4,9 @@
       p track name
     .bit.artist
       p artist
-    .bit.filetype
-      p type
-    .bit.added added
-    
+    .bit.added 
+      p added
+    .bit.actions(ng-if="manager")
   .list-container
     .track-container(ng-repeat="track in tracks")
-      .track(lf-track track="track")
+      .track(lf-track track="track" manager="manager")
