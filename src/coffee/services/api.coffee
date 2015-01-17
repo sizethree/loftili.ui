@@ -9,6 +9,7 @@ dependencies =[
   'Api/TrackQueue',
   'Api/PasswordReset',
   'Api/DevicePermission',
+  'Api/DeviceState',
   'Api/Client',
   'Api/ClientToken'
 ]
@@ -27,6 +28,7 @@ lft.service 'Api', dependencies.concat([() ->
     TrackQueue: arguments[aindx++]
     PasswordReset: arguments[aindx++]
     DevicePermission: arguments[aindx++]
+    DeviceState: arguments[aindx++]
     Client: arguments[aindx++]
     ClientToken: arguments[aindx++]
 

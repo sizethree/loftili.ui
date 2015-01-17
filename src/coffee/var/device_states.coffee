@@ -1,4 +1,5 @@
 lft.value 'DEVICE_STATES',
-  STOPPED: 1
+  STOPPED: 0
+  BUFFERING: 1
   PLAYING: 2
   ERRORED: 3

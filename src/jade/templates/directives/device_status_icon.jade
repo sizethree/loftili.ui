@@ -1,9 +1,11 @@
-.device-status-icon
+.device-status-icon(ng-click="force()")
   .tooltip(lf-tooltip)
     .content.last-checked
-      p.label.gill.upper.light last commuinicated
-      p.value.gill.medium {{last_checked | date:'shortTime'}}
-  .status-icon.active(ng-if="status")
+      .with-diff(ng-if="time_diff >= 0")
+        p.label.gill.medium we last heard from your device {{ time_diff }} second(s) ago
+      .without-diff(ng-if="!(time_diff >= 0)")
+        p.label.gill.medium we havent heard from your device
+  .status-icon.active(ng-if="time_diff >= 0")
     span ok
-  .status-icon.inactive(ng-if="!status")
+  .status-icon.inactive(ng-if="!(time_diff >= 0)")
     span bad

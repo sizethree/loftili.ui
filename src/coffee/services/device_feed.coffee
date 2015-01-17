@@ -1,6 +1,6 @@
 _factory = (Api, $timeout) ->
 
-  FEED_TIMEOUT = 3000
+  FEED_TIMEOUT = 1000
 
   uuid = do ->
     indx = 0
@@ -27,7 +27,7 @@ _factory = (Api, $timeout) ->
       $timeout update, FEED_TIMEOUT
 
     request = () ->
-      ping_request = Api.Device.ping
+      ping_request = Api.DeviceState.get
         device_id: device_id
       ping_request.$promise.then success, fail
 
@@ -55,6 +55,19 @@ _factory = (Api, $timeout) ->
         added_id
       else
         false
+
+    refresh: () ->
+      device_id = @device.id
+
+      success = (response) =>
+        fn(null, response) for fn in @listeners
+
+      fail = () =>
+        fn(true, null) for fn in @listeners
+
+      ping_request = Api.DeviceState.get
+        device_id: device_id
+      ping_request.$promise.then success, fail
 
     remove: (fn_id, silent) ->
       for fn, indx in @listeners

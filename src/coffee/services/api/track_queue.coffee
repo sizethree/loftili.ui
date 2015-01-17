@@ -10,6 +10,10 @@ TrackQueueService = ['$resource', 'URLS', ($resource, URLS) ->
     remove:
       method: 'DELETE'
       isArray: true
+    current:
+      method: 'GET'
+      params:
+        position: 'current'
 
 ]
 

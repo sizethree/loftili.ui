@@ -31,8 +31,11 @@ _factory = ($timeout) ->
           hide_timeout = null
 
         bounding = placement_el[0].getBoundingClientRect()
-        left = bounding.left
+        left = bounding.left - (bounding.width * 0.5)
         top = bounding.bottom + 10
+
+        if left < 5
+          left = 5
 
         containing_el.css
           top: [top, 'px'].join ''
