@@ -1,14 +1,17 @@
 .device-controls
   .control-list.btn-grp
     button.ionicon.loop(ng-click="restart()")
-    button.ionicon.stop(ng-click="stop()" ng-if="ping.status === 'playing'")
-    button.ionicon.play(ng-click="play()" ng-if="ping.status === 'stopped'")
-  .errored-text-container(ng-if="!ping || ping.status === 'errored'")
-    p.error-text(ng-if="!ping") {{ "device.errors.unable_to_communicate" | i18n }}
-    p.error-text(ng-if="ping.status === 'errored'") {{ ping.error| deviceErrors }}
-  .current-state-info(ng-if="ping.status === 'playing'")
+    button.ionicon.stop(ng-click="stop()" ng-if="player_state === 1 || player_state === 2")
+    button.ionicon.play(ng-click="play()" ng-if="player_state !== 1 && player_state !== 2")
+  .errored-text-container(ng-if="player_state > 2")
+    p.error-text {{ "device.errors.unable_to_communicate" | i18n }}
+  .current-state-info(ng-if="player_state === 2 || player_state === 1")
     .info-bottom
       .current-playback
-        .playback-info(ng-if="ping.track_id >= 0")
+        .playback-info(ng-if="current_track.title")
+          i.ionicon.loading(ng-if="player_state === 1")
           i.ionicon.radio-waves
-          h1.current-track.gill.medium {{currentTrack()}}
+          h1.current-track.gill.medium {{current_track.title}}
+        .playback-info(ng-if="!current_track.title")
+          i.ionicon.radio-waves
+          h1.current-track.gill.medium

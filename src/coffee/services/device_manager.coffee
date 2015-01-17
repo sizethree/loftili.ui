@@ -46,17 +46,22 @@ _factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
     trigger: (event) ->
       fn() for fn in @listeners[event]
 
-    currentTrack: () ->
-      has_queue = @current_queue and @current_queue.length > 0
-      has_ping = @last_ping and @last_ping.track_id >= 0
-      if has_ping and has_queue
-        found_title = false
-        track_id = @last_ping.track_id
-        for track in @current_queue
-          found_title = track.title if track_id == track.id
-        found_title
-      else
-        return false
+    getCurrentTrack: () ->
+      deferred = $q.defer()
+
+      success = (track) ->
+        deferred.resolve track
+
+      fail = () ->
+        deferred.reject()
+
+      request = Api.TrackQueue.current
+        id: @device.id
+
+      request.$promise.then success, fail
+
+
+      deferred.promise
 
     removeQueueItem: (index) ->
       deferred = $q.defer()

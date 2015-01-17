@@ -1,4 +1,6 @@
-lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATES', (Api, Notifications, Lang, DEVICE_STATES) ->
+_factory = (Api, Notifications, Lang, DEVICE_STATES) ->
+  
+  to_i = (num) -> parseInt num, 10
 
   lfDeviceControls =
     replace: true
@@ -12,17 +14,13 @@ lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATE
       restarting_lang = Lang 'device.playback.restarting'
       feed_loop_id = null
 
-      $scope.currentTrack = () ->
-        ping = $scope.ping
-        if ping and ping.track_id >= 0
-          $scope.manager.currentTrack()
-        else
-          false
+      $scope.current_track = null
 
-      $scope.playing = () ->
-        false
+      updateTrack = (current_track) ->
+        $scope.current_track = current_track
 
       clear = () ->
+        $scope.manager.feed.refresh()
         if notification_id
           Notifications.remove notification_id
      
@@ -43,13 +41,16 @@ lft.directive 'lfDeviceControls', ['Api', 'Notifications', 'Lang', 'DEVICE_STATE
 
       update = (err, feed_response) ->
         if err
-          $scope.ping = false
+          $scope.player_state = DEVICE_STATES.ERRORED
         else
-          $scope.ping = feed_response.ping
+          $scope.player_state = to_i feed_response['player:state']
+          $scope.manager.getCurrentTrack().then updateTrack, updateTrack
 
       $scope.$on '$destroy', () ->
         $scope.manager.feed.remove feed_loop_id
 
       feed_loop_id = $scope.manager.feed.add update
 
-]
+_factory.$inject = ['Api', 'Notifications', 'Lang', 'DEVICE_STATES']
+
+lft.directive 'lfDeviceControls', _factory
