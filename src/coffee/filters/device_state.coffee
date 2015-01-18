@@ -1,11 +1,15 @@
 lft.filter 'deviceState', ['DEVICE_STATES', (DEVICE_STATES) ->
   
   deviceState = (play_state) ->
-    if /playing/i.test play_state
-      "playing"
-    else if /stopped/i.test play_state
-      "stopped"
-    else if /errored/i.test play_state
-      "errored"
+    is_ok = play_state == DEVICE_STATES.PLAYING || play_state == DEVICE_STATES.STOPPED || play_state == DEVICE_STATES.BUFFERING
+
+    if is_ok
+      "ok"
+    else if play_state == DEVICE_STATES.ERRORED
+      "!"
+    else if play_state == DEVICE_STATES.QUEUE_ERROR
+      "!"
+    else
+      "?"
 
 ]

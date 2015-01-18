@@ -1,5 +1,7 @@
 _factory = () ->
 
+  to_i = (num) -> parseInt num, 10
+
   lfDeviceStatusIcon =
     restrict: 'AE'
     replace: true
@@ -14,12 +16,13 @@ _factory = () ->
         current_time = new Date().getTime()
 
         if err
-          $scope.status = false
+          $scope.status = -1
+          $scope.time_diff = -1
         else
           timestamp = ping_response.timestamp
           diff = current_time - timestamp
           $scope.time_diff = Math.round diff * 0.001
-          $scope.status = true
+          $scope.status = to_i ping_response['player:state']
 
       $scope.$on '$destroy', () ->
         $scope.manager.feed.remove feed_loop_id
