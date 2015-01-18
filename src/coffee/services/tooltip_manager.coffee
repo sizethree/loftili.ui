@@ -23,6 +23,7 @@ _factory = ($timeout) ->
 
     transclusion: (placement_el, placement_scope) ->
       containing_el = tooltipElement()
+      tooltip_el = null
       hide_timeout = null
 
       placementHover = () ->
@@ -31,7 +32,7 @@ _factory = ($timeout) ->
           hide_timeout = null
 
         bounding = placement_el[0].getBoundingClientRect()
-        left = bounding.left - (bounding.width * 0.5)
+        left = bounding.left
         top = bounding.bottom + 10
 
         if left < 5
@@ -39,9 +40,18 @@ _factory = ($timeout) ->
 
         containing_el.css
           top: [top, 'px'].join ''
-          left: [left, 'px'].join ''
-          opacity: 1.0
           display: "inline-block"
+
+        container_width = containing_el[0].getBoundingClientRect().width
+        bounding_width = bounding.width
+        real_left = left - (container_width * 0.5) + (bounding_width * 0.5)
+
+        if real_left < 5
+          real_left = 5
+
+        containing_el.css
+          left: [real_left, 'px'].join ''
+          opacity: 1.0
 
       hidePlacement = () ->
         containing_el.css
@@ -64,6 +74,7 @@ _factory = ($timeout) ->
       placement_scope.$on '$destroy', destroyPlacement
 
       transclusionFn = (element, scope) ->
+        tooltip_el = element
         containing_el.append element
         trigger "transclude", [containing_el]
 
