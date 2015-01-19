@@ -4,6 +4,11 @@
       p {{ track.title || 'not found' }}
     .bit.artist
       p {{ track.artist.name || 'not found' }}
-    .bit.actions.btn-grp(ng-if="manager")
-      button.remover(ng-click="drop()")
-        i.ionicon.close
+    .bit.actions(ng-if="manager")
+      .container.btn-grp
+        button.playback-trigger.play(ng-if="!playing" ng-click="play()")
+          i.ionicon.play-computer
+        button.playback-trigger.stop(ng-if="playing" ng-click="stop()")
+          i.ionicon.stop
+        button.remover(ng-click="drop()")
+          i.ionicon.close

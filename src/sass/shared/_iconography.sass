@@ -5,7 +5,7 @@
   height: 20px
   margin: 0 auto
 
-  &:after
+  &:after, &:before
     content: ''
     display: block
     speak: none
@@ -99,3 +99,23 @@
 
   &.exclamation:after
     content: '\f101'
+
+  &.play-computer:after
+    z-index: 2
+    content: '\f215'
+    font-size: 10px
+    line-height: 10px
+    display: block
+    color: darken(white, 20)
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 10px
+    margin: -5px 0 0 -5px
+    height: 10px
+
+  &.play-computer:before
+    content: '\f20a'
+    position: relative
+    z-index: 3
+
