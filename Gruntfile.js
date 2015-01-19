@@ -149,6 +149,12 @@ module.exports = function() {
     },
 
     copy: {
+      soundmanager: {
+        expand: true,
+        cwd: 'bower_components/soundmanager/swf',
+        src: ['**/*.swf'],
+        dest: 'public/swf'
+      },
       icons: {
         expand: true,
         cwd: 'bower_components',
@@ -179,7 +185,7 @@ module.exports = function() {
   grunt.registerTask('css', ['sass']);
   grunt.registerTask('img', ['copy:img']);
   grunt.registerTask('icons', ['copy:icons']);
-  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js', 'img', 'icons']);
+  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js', 'img', 'icons', 'copy:soundmanager']);
   grunt.registerTask('release', ['default', 'uglify', 'cssmin', 'jade:indexmin']);
 
 };

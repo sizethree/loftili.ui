@@ -34,8 +34,8 @@
 
   .bit
     overflow: hidden
-    height: 24px
-    line-height: 24px
+    height: 28px
+    line-height: 28px
 
     &.name
       +span-columns(5)
@@ -50,13 +50,29 @@
     +omega
     padding-right: 5px
     display: block
+    text-align: right
 
-    button
-      float: right
+    .container
+      display: inline-block
 
     button, .ionicon, .ionicon:after
       display: block
-      font-size: 12px
-      line-height: 12px
-      width: 12px
-      height: 12px
+      font-size: 16px
+      line-height: 16px
+      width: 16px
+      height: 16px
+
+    button.playback-trigger.play
+      
+      .ionicon:after
+        font-size: 6px
+        margin-top: -9px
+        margin-left: -8px
+        color: white
+    
+      .ionicon:before
+        font-size: 16px
+        line-height: 16px
+        width: 16px
+        height: 16px
+
