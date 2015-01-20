@@ -1,5 +1,7 @@
 lft.config ['$routeProvider', ($routeProvider) ->
 
+  to_i = (num) -> parseInt num, 10
+
   url = (paths...) ->
     paths.join '/'
  
@@ -23,6 +25,43 @@ lft.config ['$routeProvider', ($routeProvider) ->
           withCredentials: false
 
         promise.then success, fail
+
+        deferred.promise
+      ]
+
+  $routeProvider.when '/blog/pages/:id',
+    templateUrl: 'views.blog',
+    controller: 'BlogController'
+    name: 'blog'
+    resolve:
+      posts: ['$http', '$route', '$q', 'URLS', '$location', ($http, $route, $q, URLS, $location) ->
+        deferred = $q.defer()
+        current_route = $route.current
+        route_params = current_route.params
+        page_id = if route_params then to_i route_params.id else false
+
+        fail = () ->
+          $location.url '/blog'
+
+        success = (response) ->
+          has_posts = angular.isArray(response.data) and response.data.length > 0
+          if has_posts
+            deferred.resolve response.data
+          else
+            fail()
+
+        getPosts = () ->
+          promise = $http
+            url: url URLS.blog, 'posts'
+            params:
+              page: page_id
+            withCredentials: false
+          promise.then success, fail
+
+        if page_id
+          getPosts()
+        else
+          fail()
 
         deferred.promise
       ]

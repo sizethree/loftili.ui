@@ -1,9 +1,3 @@
-do ->
-  soundManager.setup
-    url: '/swf/'
-    preferFlash: true
-    useHTML5Audio: false
-
 _factory = (URLS) ->
 
   listeners:
