@@ -21,6 +21,10 @@ html(lang="en")
     .view(ng-view)
     .foot(lf-footer)
     if debug
+      script.
+        (function(global) { global.LF_DEBUG = true; })(this);
       script(src="/js/app.js" type="text/javascript")
     else
+      script.
+        (function(global) { global.LF_DEBUG = false; })(this);
       script(src="/js/app.min.js" type="text/javascript")
