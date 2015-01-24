@@ -1,0 +1,35 @@
+.invitation-list
+  
+  ul.invitations
+    +clearfix
+    list-style: none
+    display: block
+
+  .invitations .invite-item
+    +clearfix
+    padding: 5px 10px
+    display: block
+    border-radius: 2px
+
+    &:nth-child(odd)
+      background: darken(white, 5)
+
+  .invitations .invite-item .sent-at,
+  .invitations .invite-item .sent-to
+    +span-columns(4)
+    line-height: 25px
+    font-size: 14px
+
+  .invitations .invite-item .actions
+    +span-columns(4)
+    text-align: right
+
+    .btn-group
+      display: inline-block
+      +clearfix
+
+    .ionicon, .ionicon:after
+      font-size: 12px
+      line-height: 12px
+      height: 12px
+      width: 12px

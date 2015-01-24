@@ -44,3 +44,12 @@
         .section-content
           .client-list(lf-client-token-list tokens="client_tokens" clients="clients" manager="client_manager")
           .client-browser(lf-client-browser manager="client_manager")
+    .client-info.account-section
+      .section-inner
+        .section-title
+          h2.title Invitation 
+        .section-content
+          .list-container
+            .invitation-list(lf-invitation-list invitations="invitations")
+          .inviter-container
+            .inviter(lf-invitation-sender)

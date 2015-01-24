@@ -7,10 +7,14 @@
 
   .account-section
     +span-columns(6)
+    margin-bottom: 2.35765%
 
     +media(max-width 800px)
       +span-columns(12)
       margin-bottom: 20px
+
+    &:nth-child(2n + 2)
+      +omega
 
   .section-inner
     border-radius: 3px
@@ -86,4 +90,17 @@
     margin: 10px 0 0 0
     padding: 10px 0 0 0
     border-top: 1px solid darken(white, 10)
-      
+
+
+  .inviter-container
+    display: block
+    padding: 10px 0
+    margin: 10px 0
+    border-top: 1px solid darken(white, 10)
+    
+    .title h1
+      color: darken(white, 50)
+      font-size: 18px
+
+    .inviter input
+      width: 100%

@@ -16,6 +16,22 @@ lft.config ['$routeProvider', ($routeProvider) ->
         active.then next
         active
       ]
+      invitations: ['Api', '$q', (Api, $q) ->
+        deferred = $q.defer()
+
+        success = (tokens) ->
+          deferred.resolve tokens
+
+        fail = () ->
+          deferred.reject tokens
+
+        getClientTokens = () ->
+          request = Api.Invitation.query()
+          request.$promise.then success, fail
+
+        callbacks.push getClientTokens
+        deferred.promise
+      ]
       clientTokens: ['Api', '$q', (Api, $q) ->
         deferred = $q.defer()
 

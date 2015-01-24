@@ -1,4 +1,7 @@
 lft.value 'i18n-en',
+  invitation:
+    sending: 'Sending invitation, please wait'
+    failed_remove: 'Failed deleting the invitation, please contact support'
   library:
     tracks:
       dropping: 'Removing the track from your library, please wait'
