@@ -22,7 +22,7 @@ _factory = () ->
         else
           diff = current_time - timestamp
           $scope.last_heard = new Date timestamp
-          $scope.time_diff = Math.round diff * 0.001
+          $scope.time_diff = diff
           $scope.status = to_i ping_response['player:state']
 
       $scope.$on '$destroy', () ->
