@@ -1,9 +1,15 @@
-_factory = ($scope, activeUser, Api, Notifications, Lang, ClientManager, clientTokens, clients) ->
+_factory = ($scope, activeUser, Api, Notifications, Lang, ClientManager, clientTokens, clients, invitations) ->
 
   $scope.user = activeUser
   $scope.clients = clients
   $scope.client_tokens = clientTokens
   $scope.client_manager = new ClientManager clientTokens, clients
+  $scope.invitations = invitations
+
+  inviteSent = (event, invite) ->
+    $scope.invitations.push invite
+
+  $scope.$on 'invitation:sent', inviteSent
 
   $scope.fields =
     password: ''
@@ -61,7 +67,8 @@ _factory.$inject = [
   'Lang',
   'ClientManager',
   'clientTokens',
-  'clients'
+  'clients',
+  'invitations'
 ]
 
 lft.controller 'AccountController', _factory

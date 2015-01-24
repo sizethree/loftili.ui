@@ -1,0 +1,12 @@
+.invitation-list
+  ul.invitations
+    li.invite-item(ng-repeat="invite in invitations")
+      .sent-to
+        p.email.canberra.light {{invite.to}}
+      .sent-at
+        p.date-created.canberra.light <em>sent:</em> {{invite.createdAt | timeAgo}}
+      .actions
+        .btn-group
+          button.remover(ng-click="destroy(invite)")
+            i.ionicon.close
+      
