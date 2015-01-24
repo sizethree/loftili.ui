@@ -91,7 +91,10 @@ module.exports = function() {
       index: {
         options: {
           data: function() {
-            return {debug: true};
+            return {
+              debug: true,
+              commit: pkg_info.commit || new Date().getTime()
+            };
           }
         },
         files: {
@@ -101,7 +104,10 @@ module.exports = function() {
       indexmin: {
         options: {
           data: function() {
-            return {debug: false};
+            return {
+              debug: false,
+              commit: pkg_info.commit || new Date().getTime()
+            };
           }
         },
         files: {
