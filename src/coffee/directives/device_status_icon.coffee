@@ -14,13 +14,14 @@ _factory = () ->
 
       update = (err, ping_response) ->
         current_time = new Date().getTime()
+        timestamp = if ping_response then to_i ping_response.timestamp else false
 
-        if err
+        if err or !(timestamp >= 0)
           $scope.status = -1
           $scope.time_diff = -1
         else
-          timestamp = ping_response.timestamp
           diff = current_time - timestamp
+          $scope.last_heard = new Date timestamp
           $scope.time_diff = Math.round diff * 0.001
           $scope.status = to_i ping_response['player:state']
 
