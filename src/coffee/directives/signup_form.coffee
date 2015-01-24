@@ -1,9 +1,10 @@
-lft.directive 'lfSignupForm', ['Api', 'Auth', '$location', (Api, Auth, $location) ->
+_factory = (Api, Auth, $location) ->
 
   SignupForm =
     replace: true
     templateUrl: 'directives.signup_form'
-    scope: {}
+    scope:
+      token: '='
     link: ($scope, $element, $attrs) ->
       $scope.locked = false
       $scope.errors = []
@@ -33,7 +34,12 @@ lft.directive 'lfSignupForm', ['Api', 'Auth', '$location', (Api, Auth, $location
 
       create = () ->
         $scope.locked = true
-        user = new Api.User($scope.credentials)
+
+        params = angular.extend $scope.credentials,
+          token: if $scope.token then $scope.token.token else false
+
+        user = new Api.User params
+
         user.$save().then sucess, fail
 
       $scope.attempt = () ->
@@ -44,4 +50,8 @@ lft.directive 'lfSignupForm', ['Api', 'Auth', '$location', (Api, Auth, $location
         if evt.keyCode == 13
           create()
 
-]
+
+_factory.$inject = ['Api', 'Auth', '$location']
+
+
+lft.directive 'lfSignupForm', _factory

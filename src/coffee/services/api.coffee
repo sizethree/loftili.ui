@@ -6,6 +6,7 @@ dependencies =[
   'Api/Artist',
   'Api/Playback',
   'Api/DnsRecord',
+  'Api/Invitation',
   'Api/TrackQueue',
   'Api/PasswordReset',
   'Api/DevicePermission',
@@ -25,6 +26,7 @@ lft.service 'Api', dependencies.concat([() ->
     Artist: arguments[aindx++]
     Playback: arguments[aindx++]
     DnsRecord: arguments[aindx++]
+    Invitation: arguments[aindx++]
     TrackQueue: arguments[aindx++]
     PasswordReset: arguments[aindx++]
     DevicePermission: arguments[aindx++]
