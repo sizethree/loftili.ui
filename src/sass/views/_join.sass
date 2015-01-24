@@ -1,0 +1,40 @@
+.join.view
+  display: block
+
+  .signup-container
+    +clearfix
+    padding: 20px 0
+    max-width: 800px
+    margin: 0 auto
+
+  .welcome-message
+    text-align: center
+    padding: 20px 0
+
+  .welcome-message h2
+    color: darken(white, 50)
+    font-size: 18px
+
+  .welcome-message h1
+    color: darken(white, 80)
+    font-size: 50px
+
+  .form-wrapper
+    +span-columns(6)
+
+  .joining-details
+    +span-columns(6)
+
+  .signup-form
+    display: block
+
+    .input-container
+      margin: 0 0 10px 0
+
+    input
+      +bordered-input
+      width: 100%
+      box-sizing: border-box
+
+  .signup-form .top
+    display: none
