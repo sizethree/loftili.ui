@@ -1,4 +1,5 @@
 lft = angular.module 'lft', ['ngRoute', 'ngResource', 'lft.templates']
+io.sails.autoConnect = false
 
 loaded_config = (response) ->
   data = response.data
@@ -10,6 +11,6 @@ failed_config = () ->
 
 injector = angular.injector ['ng']
 http = injector.get '$http'
-http.get('/app.conf').then loaded_config, failed_config
+http.get('/app.conf.json').then loaded_config, failed_config
 
 this.lft = lft
