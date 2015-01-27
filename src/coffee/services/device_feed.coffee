@@ -83,6 +83,6 @@ _factory = (Api, $timeout) ->
         @looping = false
 
 
-_factory.$inject = ['Api', '$timeout']
+_factory.$inject = ['Api', '$timeout', 'SocketManager']
 
 lft.service 'DeviceFeed', _factory
