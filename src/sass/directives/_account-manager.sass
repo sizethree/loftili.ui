@@ -1,0 +1,62 @@
+.directive.account-manager
+  +outer-container
+  display: block
+
+  .username-container dt
+    display: none
+
+  .username-container dd
+    font-size: 22px
+    color: darken(white, 50)
+
+  .input-container
+    +outer-container
+    +span-columns(6)
+    padding-top: 5px
+    padding-bottom: 5px
+    margin-top: 5px
+    margin-bottom: 5px
+    height: 54px
+
+    &:nth-child(even)
+      +omega
+
+  dl.input-container dt
+    display: block
+    color: darken(white, 60)
+    margin: 0 0 5px 0
+
+  dl.input-container dd
+    display: block
+
+  dl.password-input .field-container
+    +clearfix
+    +span-columns(8)
+
+  dl.password-input .toggle-container.open
+    +span-columns(4)
+    +omega
+
+  dl.password-input .toggle-container.open
+    display: block
+
+    button, .ionicon, .ionicon:after
+      font-size: 14px
+      line-height: 26px
+      width: 26px
+      height: 26px
+      padding: 0
+      margin: 0
+
+  dl.password-input .field-container input[type="password"]
+    +span-columns(6)
+
+    &:last-child
+      +omega
+
+  dl.input-container dd input[type="text"],
+  dl.input-container dd input[type="password"]
+    +bordered-input
+    width: 100%
+
+

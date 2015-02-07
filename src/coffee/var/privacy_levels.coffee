@@ -1,0 +1,4 @@
+lft.value 'PRIVACY_LEVELS',
+  PRIVATE: 3,
+  PUBLIC: 1,
+  CONNECTED: 2
