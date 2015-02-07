@@ -1,16 +1,21 @@
-lft = angular.module 'lft', ['ngRoute', 'ngResource', 'lft.templates']
-io.sails.autoConnect = false
+run = (global) ->
 
-loaded_config = (response) ->
-  data = response.data
-  lft.value 'URLS', data.urls
-  lft.value 'GOOGLE', data.google
-  angular.bootstrap document, ['lft']
+  lft = angular.module 'lft', ['ngRoute', 'ngResource', 'lft.templates']
 
-failed_config = () ->
+  loaded_config = (response) ->
+    data = response.data
+    lft.value 'CONFIG', data
+    lft.value 'URLS', data.urls
+    lft.value 'GOOGLE', data.google
 
-injector = angular.injector ['ng']
-http = injector.get '$http'
-http.get('/app.conf.json').then loaded_config, failed_config
+    angular.bootstrap document, ['lft']
 
-this.lft = lft
+  failed_config = () ->
+
+  injector = angular.injector ['ng']
+  http = injector.get '$http'
+  http.get('/app.conf.json').then loaded_config, failed_config
+
+  global.lft = lft
+
+run @
