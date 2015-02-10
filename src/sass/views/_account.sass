@@ -23,56 +23,6 @@
   .account-info
     display: block
 
-    .info
-      +clearfix
-      margin: 0 0 10px 0
-
-      .label
-        float: left
-        width: 110px
-        color: lighten($base-font-color, 50)
-
-      .value
-        width: auto
-        overflow: hidden
-  
-    .password
-
-      .errors.vis
-        margin: 0 0 10px 0
-
-      .fields
-        +clearfix
-        margin: 0 0 5px 0
-
-        input
-          border: 1px solid darken(white, 15)
-
-      .value
-        +outer-container
-        margin-left: 110px
-        display: block
-        float: none
-
-        a.button
-          text-transform: lowercase
-          font-size: 12px
-          line-height: 12px
-          display: inline-block
-          cursor: pointer
-
-          &:hover
-            box-shadow: none
-
-          .ionicon, .ionicon:after
-            font-size: 12px
-            line-height: 12px
-            height: 12px
-            width: 12px
-
-      input[type="password"]
-        +span-columns(6)
-
   .section-title,
   .section-content
     padding: 10px

@@ -1,4 +1,8 @@
 lft.value 'i18n-en',
+  privacy:
+    PRIVATE: 'private'
+    CONNECTED: 'connections'
+    PUBLIC: 'public'
   invitation:
     sending: 'Sending invitation, please wait'
     failed_remove: 'Failed deleting the invitation, please contact support'
@@ -11,6 +15,8 @@ lft.value 'i18n-en',
   reset_password:
     success: 'Check your email, you should have a link waiting'
   account:
+    doing_update: 'Please wait, updating account'
+    update_success: 'Successfully updated your account'
     password:
       change:
         success: 'Your password has been updated!'

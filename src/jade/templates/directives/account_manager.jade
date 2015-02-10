@@ -1,0 +1,31 @@
+.directive.account-manager(ng-init="changing_password = false;")
+  .top-area
+    dl.username-container
+      dt.username username
+      dd.gill.medium {{manager.user.username}}
+  .bottom-area
+    dl.input-container.name-input.first
+      dt.gill.medium first name
+      dd.editable(lf-easy-input value="manager.user.first_name" finish="save.first_name")
+    dl.input-container.name-input.last
+      dt.gill.medium last name
+      dd.editable(lf-easy-input value="manager.user.last_name" finish="save.last_name")
+    dl.input-container.email-input
+      dt.gill.medium email
+      dd.editable(lf-easy-input value="manager.user.email" finish="save.email")
+    dl.input-container.password-input
+      dt.gill.medium password
+      dd.editable
+        .field-container(ng-if="changing_password")
+          input(type="password" value="" ng-model="fields.password.a" placeholder="new password")
+          input(type="password" value="" ng-model="fields.password.b" placeholder="confirm password")
+        .toggle-container.button-group(ng-class="{open: changing_password}")
+          button(ng-if="!changing_password" ng-click="changing(true)") change password
+          button(ng-if="changing_password" ng-click="changing(false)")
+            i.ionicon.close
+          button(ng-if="changing_password" ng-click="save.password()")
+            i.ionicon.check
+    dl.input-container.privacy-setting
+      dt.gill.light privacy level
+      dd.editable
+        select(ng-model="fields.privacy" ng-change="save.privacy()" ng-options="value as ('privacy.'+name | i18n) for (name, value) in privacy_levels")

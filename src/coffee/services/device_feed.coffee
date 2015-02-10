@@ -1,6 +1,6 @@
-_factory = (Api, $timeout) ->
+_factory = (Api, Socket, $timeout) ->
 
-  FEED_TIMEOUT = 1000
+  FEED_TIMEOUT = 100000
 
   uuid = do ->
     indx = 0
@@ -36,6 +36,8 @@ _factory = (Api, $timeout) ->
         request()
       else false
 
+    # Socket.connect true
+
     update()
 
   class DeviceFeed
@@ -50,7 +52,7 @@ _factory = (Api, $timeout) ->
 
         if !@looping and silent != true
           @looping = true
-          start.call(@)
+          start.call @
 
         added_id
       else
@@ -83,6 +85,6 @@ _factory = (Api, $timeout) ->
         @looping = false
 
 
-_factory.$inject = ['Api', '$timeout']
+_factory.$inject = ['Api', 'Socket', '$timeout']
 
 lft.service 'DeviceFeed', _factory
