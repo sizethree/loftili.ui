@@ -15,7 +15,7 @@ test-results.xml
 /bower_components
 /public/.htaccess
 /public/index.html
-/public/app.conf
+/public/app.conf.json
 /public/js
 /public/html
 /public/css
