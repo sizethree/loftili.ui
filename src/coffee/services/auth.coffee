@@ -37,7 +37,11 @@ lft.service 'Auth', ['$q', '$http', '$location', 'Api', ($q, $http, $location, A
 
     logout: () ->
       active_user = null
-      Api.Auth.logout().$promise.then () -> $location.path('/')
+
+      bounce = () ->
+        $location.path '/'
+
+      Api.Auth.logout().$promise.then bounce bounce
 
     attempt: (creds) ->
       defer = $q.defer()
