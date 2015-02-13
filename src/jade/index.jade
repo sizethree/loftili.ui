@@ -18,7 +18,8 @@ html(lang="en")
     .head(lf-header)
     .notifications(lf-notification-manager)
     .tooltips(lf-tooltip-maestro)
-    .view(ng-view)
+    .view-wrapper
+      .view(ng-view)
     .foot(lf-footer)
     if debug
       script.
