@@ -1,4 +1,6 @@
 .env
+.ftppass
+.grunt
 .DS_Store
 *.swp
 *.rdb
@@ -24,6 +26,7 @@ test-results.xml
 /public/img
 /public/svg
 /public/vendor
+/publish
 /target
 /storage
 
