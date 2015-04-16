@@ -159,8 +159,12 @@ module.exports = function() {
       options: {
         separator: ';',
       },
-      dist: {
-        src: config.js.vendor_libs.concat(['obj/js/**/*.js']),
+      vendors: {
+        src: config.js.vendor_libs,
+        dest: path.join(config.js.dest, 'vendor.bundle.js')
+      },
+      sources: {
+        src: ['obj/js/**/*.js'],
         dest: path.join(config.js.dest, 'app.js')
       }
     },

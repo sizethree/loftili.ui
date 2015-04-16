@@ -24,6 +24,7 @@ html(lang="en")
     if debug
       script.
         (function(global) { global.LF_DEBUG = true; })(this);
+      script(src="/js/vendor.bundle.js?v=#{commit}" type="text/javascript")
       script(src="/js/app.js?v=#{commit}" type="text/javascript")
     else
       script.
