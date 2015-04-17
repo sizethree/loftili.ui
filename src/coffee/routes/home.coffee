@@ -1,7 +1,7 @@
 lft.config ['$routeProvider', ($routeProvider) ->
 
   about_id = 44
-  contact_id = 58
+  contact_id = 431
   home_id = 121
 
   url = (paths...) ->

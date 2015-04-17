@@ -18,6 +18,8 @@ module.exports = function() {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-contrib-ftpush');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadTasks('tasks');
 
@@ -33,7 +35,10 @@ module.exports = function() {
         ].join(''),
         '[<%= pkg.repository.url %>]',
         '*/'
-      ].join(' ');
+      ].join(' '),
+      artifact_name = [process.env['ARTIFACT_VERSION'] || 'latest', 'tar.gz'].join('.'),
+      artifact_dest = process.env['ARTIFACT_DESTINATION'] || 'artifacts/loftili/ui',
+      artifact_host = process.env['ARTIFACT_HOST'] || 'artifacts.sizethreestudios.com';
 
   if(process.env['TRAVIS_COMMIT'])
     pkg_info.commit = process.env['TRAVIS_COMMIT'].substr(0, 8);
@@ -41,6 +46,31 @@ module.exports = function() {
   grunt.initConfig({
 
     pkg: pkg_info,
+
+    ftpush: {
+      build: {
+        auth: {
+          host: artifact_host,
+          authKey: 'key1'
+        },
+        src: './publish',
+        dest: artifact_dest,
+        simple: true
+      }
+    },
+
+    compress: {
+      pkg: {
+        options: {
+          mode: 'tar',
+          archive: path.join('publish', artifact_name)
+        },
+        files: [{
+          expand: true, 
+          src: ['public/*']
+        }]
+      }
+    },
 
     clean: {
       scripts: [config.js.dest],
@@ -129,8 +159,12 @@ module.exports = function() {
       options: {
         separator: ';',
       },
-      dist: {
-        src: config.js.vendor_libs.concat(['obj/js/**/*.js']),
+      vendors: {
+        src: config.js.vendor_libs,
+        dest: path.join(config.js.dest, 'vendor.bundle.js')
+      },
+      sources: {
+        src: ['obj/js/**/*.js'],
         dest: path.join(config.js.dest, 'app.js')
       }
     },
@@ -186,6 +220,7 @@ module.exports = function() {
 
   });
   
+  grunt.registerTask('publish', ['compress', 'ftpush']);
   grunt.registerTask('templates', ['html2js:templates']);
   grunt.registerTask('js', ['coffee:debug', 'templates', 'concat']);
   grunt.registerTask('css', ['sass']);

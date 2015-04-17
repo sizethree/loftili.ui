@@ -18,11 +18,13 @@ html(lang="en")
     .head(lf-header)
     .notifications(lf-notification-manager)
     .tooltips(lf-tooltip-maestro)
-    .view(ng-view)
+    .view-wrapper
+      .view(ng-view)
     .foot(lf-footer)
     if debug
       script.
         (function(global) { global.LF_DEBUG = true; })(this);
+      script(src="/js/vendor.bundle.js?v=#{commit}" type="text/javascript")
       script(src="/js/app.js?v=#{commit}" type="text/javascript")
     else
       script.

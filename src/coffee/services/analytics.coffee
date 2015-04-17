@@ -3,7 +3,6 @@ lft.service 'Analytics', ['GOOGLE', '$rootScope', '$location', (GOOGLE, $rootSco
   current_route_listener = null
 
   ga 'create', GOOGLE.tracking, 'auto'
-  ga 'send', 'pageview'
 
   Analytics =
 
