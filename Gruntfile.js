@@ -2,24 +2,29 @@ var grunt = require('grunt'),
     dotenv = require('dotenv'),
     btoa = require('btoa'),
     path = require('path'),
-    config = require('./tasks/config'),
+    neat = require('node-neat'),
+    sass = require('node-sass'),
     helpers = require('./tasks/helpers');
 
 module.exports = function() {
 
   dotenv.load();
 
+  var paths = {
+    src: path.join(__dirname, 'src'),
+    dist: path.join(__dirname, 'public'),
+    temp: path.join(__dirname, 'obj'),
+    vendor: path.join(__dirname, 'bower_components')
+  };
+
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-contrib-ftpush');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadTasks('tasks');
 
@@ -47,38 +52,22 @@ module.exports = function() {
 
     pkg: pkg_info,
 
-    ftpush: {
-      build: {
-        auth: {
-          host: artifact_host,
-          authKey: 'key1'
-        },
-        src: './publish',
-        dest: artifact_dest,
-        simple: true
-      }
-    },
-
-    compress: {
-      pkg: {
-        options: {
-          mode: 'tar',
-          archive: path.join('publish', artifact_name)
-        },
-        files: [{
-          expand: true, 
-          src: ['public/*']
-        }]
-      }
-    },
-
     clean: {
-      scripts: [config.js.dest],
-      css: [config.css.dest],
-      templates: [config.html.dest],
-      img: ['public/img'],
-      index: ['public/index.html'],
-      obj: ['obj']
+      scripts: [
+        path.join(paths.dist, 'js')
+      ],
+      css: [
+        path.join(paths.dist, 'css')
+      ],
+      img: [
+        path.join(paths.dist, 'img')
+      ],
+      index: [
+        path.join(paths.dist, 'index.html')
+      ],
+      obj: [
+        paths.temp
+      ]
     },
 
     uglify: {
@@ -87,8 +76,11 @@ module.exports = function() {
       },
       release: {
         files: [{
-          src: path.join(config.js.dest, 'app.js'),
-          dest: path.join(config.js.dest, 'app.min.js')
+          src: [
+            path.join(paths.dist, 'js', 'vendor.bundle.js'),
+            path.join(paths.dist, 'js', 'app.js')
+          ],
+          dest: path.join(paths.dist, 'js', 'app.min.js')
         }]
       }
     },
@@ -96,15 +88,15 @@ module.exports = function() {
     cssmin: {
       release: {
         expand: true,
-        cwd: 'public/css/',
+        cwd: path.join(paths.dist, 'css'),
         src: ['*.css'],
-        dest: 'public/css/',
+        dest: path.join(paths.dist, 'css'),
         ext: '.min.css'
       }
     },
 
     html2js: {
-      templates: {
+      debug: {
         options: {
           module: 'lft.templates',
           rename: function(filename) {
@@ -112,8 +104,10 @@ module.exports = function() {
             return rel.replace(/\//g, '.');
           }
         },
-        src: config.jade.files.in,
-        dest: config.jade.files.out
+        files: [{
+          src: path.join(paths.src, 'jade', 'templates', '**/*.jade'),
+          dest: path.join(paths.temp, 'js/templates.js')
+        }]
       }
     },
 
@@ -127,9 +121,10 @@ module.exports = function() {
             };
           }
         },
-        files: {
-          'public/index.html': 'src/jade/index.jade'
-        }
+        files: [{
+          src: path.join(paths.src, 'jade', 'index.jade'),
+          dest: path.join(paths.dist, 'index.html')
+        }]
       },
       indexmin: {
         options: {
@@ -140,9 +135,10 @@ module.exports = function() {
             };
           }
         },
-        files: {
-          'public/index.html': 'src/jade/index.jade'
-        }
+        files: [{
+          src: path.join(paths.src, 'jade', 'index.jade'),
+          dest: path.join(paths.dist, 'index.html')
+        }]
       }
     },
 
@@ -151,7 +147,13 @@ module.exports = function() {
         join: true
       },
       debug: {
-        files: config.coffee.files
+        files: [{
+          expand: true,
+          cwd: path.join(paths.src, 'coffee'),
+          src: ['**/*.coffee'],
+          dest: path.join(paths.temp, 'js'),
+          ext: '.js'
+        }]
       }
     },
 
@@ -160,26 +162,43 @@ module.exports = function() {
         separator: ';',
       },
       vendors: {
-        src: config.js.vendor_libs,
-        dest: path.join(config.js.dest, 'vendor.bundle.js')
+        src: [
+          path.join(paths.vendor, 'angular/angular.js'),
+          path.join(paths.vendor, 'angular-route/angular-route.js'),
+          path.join(paths.vendor, 'angular-resource/angular-resource.js'),
+          path.join(paths.vendor, 'soundmanager/script/soundmanager2.js'),
+          path.join(paths.vendor, 'socket.io/index.js'),
+          path.join(paths.vendor, 'analytics/index.js')
+        ],
+        dest: path.join(paths.dist, 'js', 'vendor.bundle.js')
       },
-      sources: {
-        src: ['obj/js/**/*.js'],
-        dest: path.join(config.js.dest, 'app.js')
+      scripts: {
+        src: [
+          path.join(paths.temp, 'js', '**/*.js'),
+          path.join(paths.temp, 'templates', '**/*.js')
+        ],
+        dest: path.join(paths.dist, 'js', 'app.js')
       }
     },
 
     watch: {
       scripts: {
-        files: [config.js.src + '/**/*.coffee'],
-        tasks: ['clean:scripts', 'js'],
-      },
-      templates: {
-        files: [config.html.src + '/**/*.jade'],
-        tasks: ['clean:scripts', 'js']
+        files: [
+          path.join(paths.src, 'jade', '**/*.jade'),
+          path.join(paths.src, 'coffee', '/**/*.coffee')
+        ],
+        tasks: [
+          'clean:scripts', 
+          'coffee:debug',
+          'html2js:debug',
+          'concat:scripts',
+          'concat:vendors'
+        ],
       },
       sass: {
-        files: [config.css.src + '/**/*.sass'],
+        files: [
+          path.join(paths.src, 'sass', '**/*.sass')
+        ],
         tasks: ['sass']
       },
       index: {
@@ -210,23 +229,103 @@ module.exports = function() {
     },
 
     sass: {
-      build: {
+      debug: {
         options: {
-          loadPath: config.sass.load_paths
+          include: neat.includePaths
         },
-        files: config.sass.files
+        files: [{
+          cwd: path.join(paths.src, 'sass'),
+          expand: true,
+          src: ['app.sass'],
+          dest: path.join(paths.dist, 'css'),
+          ext: '.css'
+        }]
       }
     }
 
   });
+
+  grunt.registerMultiTask('sass', 'compiles sass via node native bindings', function() {
+    var done = this.async(),
+        files = this.files,
+        is_failed = false,
+        data = this.data;
+
+    function failed(reason) {
+      grunt.log.error(reason);
+
+      if(!is_failed) {
+        is_failed = true;
+        done(false);
+      }
+    }
+
+    function render(file) {
+      var source = file.src,
+          dest = file.dest,
+          main_file, exists,
+          sass_config = { includePaths: data.options.include };
+
+      if(source.length > 1 || is_failed)
+        return failed('must specify only one source file when compiling sass');
+
+      main_file = source[0];
+      exists = grunt.file.exists(main_file);
+
+      if(!exists)
+        return failed('unable to locate the main source file['+main_file+']');
+
+      grunt.log.ok('rendering['+main_file+'] to ['+dest+']');
+
+      function finished(err, result) {
+        var buffer = null;
+
+        if(err)
+          return failed(err);
+
+        buffer = result.css;
+
+        grunt.file.write(dest, buffer);
+        grunt.log.ok('finished');
+
+        done(true);
+      }
+
+      sass_config.file = main_file;
+      sass.render(sass_config, finished);
+    }
+
+    if(files.length === 1)
+      files.forEach(render);
+    else
+      failed('no sass file configuration detected');
+  });
   
-  grunt.registerTask('publish', ['compress', 'ftpush']);
-  grunt.registerTask('templates', ['html2js:templates']);
-  grunt.registerTask('js', ['coffee:debug', 'templates', 'concat']);
-  grunt.registerTask('css', ['sass']);
+  grunt.registerTask('publish', [
+    'compress', 
+    'ftpush'
+  ]);
+
+  grunt.registerTask('css', [
+    'sass'
+  ]);
+
   grunt.registerTask('img', ['copy:img']);
   grunt.registerTask('icons', ['copy:icons']);
-  grunt.registerTask('default', ['clean', 'jade:index', 'css', 'js', 'img', 'icons', 'copy:soundmanager']);
+
+  grunt.registerTask('default', [
+    'clean', 
+    'jade:index', 
+    'sass:debug', 
+    'coffee:debug',
+    'html2js:debug',
+    'concat:scripts',
+    'concat:vendors',
+    'img', 
+    'icons', 
+    'copy:soundmanager'
+  ]);
+
   grunt.registerTask('release', ['default', 'uglify', 'cssmin', 'jade:indexmin']);
 
 };
