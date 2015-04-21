@@ -1,0 +1,22 @@
+@mixin result-list
+  +clearfix
+  display: block
+  list-style: none
+  background: darken(white, 5)
+  border-radius: 2px
+
+  li
+    +clearfix
+    border:
+      left: 1px solid darken(white, 10)
+      right: 1px solid darken(white, 10)
+    position: relative
+    display: block
+    padding: 5px 10px
+
+    &:first-child
+      border-top: 1px solid darken(white, 20)
+
+    &:last-child
+      border-bottom: 1px solid darken(white, 20)
+
