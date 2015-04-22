@@ -1,15 +1,4 @@
-.device-list
-  .list-header
-    .bit.name
-      p device name
-    .bit.ip_addr
-      p ip address
-    .bit.port
-      p port
-    .bit.status
-      p ping
-    .bit.actions
-      p actions
+.device-list.directive
   .list-container
     .device-container(ng-repeat="device in devices")
       .device(lf-device-item device="device" ondelete="remove($index)")

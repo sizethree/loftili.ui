@@ -1,4 +1,4 @@
-.track-search
+.track-search.directive
   .searching-flag(ng-if="searching")
   input.search-input(type="text" ng-model="query.val" placeholder="search our library or enter a url" ng-keyup="search($event)")
   .result-list(ng-if="!searching")

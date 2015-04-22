@@ -1,17 +1,15 @@
-.device-item
+.device-item.directive
   .bit.name
     p.txt.sans {{ device.name }}
-  .bit.ip_addr
-    p.txt.sans {{ device.ip_addr }}
-  .bit.port
-    p.txt.sans {{ device.port }}
   .bit.status.has-tooltip
     .status-icon(lf-device-status-icon manager="manager" ng-if="manager")
   .bit.actions
     .action-group.btn-grp
-      button.ionicon.trash.delete(ng-click="delete(device)")
-      button.ionicon.share(ng-click="sharing = !sharing")
-      a.button.ionicon.mixer.control(href="/devices/{{device.id}}")
-    .share-central(ng-if="sharing")
-      button.ionicon.close(ng-click="stopShare()")
+      a.button(ng-click="delete(device)")
+        i.ionicon.trash.delete
+      a.button(ng-click="toggleShare()")
+        i.ionicon(ng-class="{close: sharing, share: !sharing}")
+      a.button(href="/devices/{{device.id}}")
+        i.ionicon.mixer.control
+    .popup(lf-popup delegate="sharing")
       .device-share-control(lf-device-share device="device")

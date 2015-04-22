@@ -1,14 +1,16 @@
-.track-upload-form
+.track-upload-form.directive
   .title-container
   .problems(lf-flash-message messages="failures")
   form.form-container
     .input-container
       .btn-grp
         .file
-          button.cover.ionicon.folder
+          a.cover.button
+            i.ionicon.folder
           input(type="file" name="file" multiple onchange="angular.element(this).scope().file(this)")
         .track-search(lf-track-search ng-class="{open: searching}")
-        button.url.ionicon(ng-click="toggleSearch()" ng-class="{search: !searching, close: searching}")
+        a.button(ng-click="toggleSearch()" ng-class="{search: !searching, close: searching}")
+          i.search.ionicon
   .progress
     .upload-list
       .uploading(ng-repeat="upload in uploading")

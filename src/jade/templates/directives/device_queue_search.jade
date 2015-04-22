@@ -10,4 +10,5 @@
           .title 
             p {{result.title}}
           .item-controls
-            button.adder.ionicon.add(ng-click="add(result)")
+            button.adder(ng-click="add(result)")
+              i.ionicon.add

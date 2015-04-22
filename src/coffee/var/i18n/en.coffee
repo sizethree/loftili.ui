@@ -23,7 +23,9 @@ lft.value 'i18n-en',
         fail: 'We\'ve messed something up, shoot us an email!'
   device:
     now_playing_text: "Now playing:"
+    register: "Register device:"
     errors:
+      registration: "Unable to register your device, please check your serial number"
       unable_to_communicate: "We're unable to get information from your device, please check it's configuration"
       empty_track_queue: "Your device was unable to load it\'s track queue, try restarting"
     updating:

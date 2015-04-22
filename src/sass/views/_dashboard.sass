@@ -37,24 +37,46 @@
       padding: 5px 0
 
     .section-top
-      padding: 10px 10px
-      background: $dark-gray
       border-radius: 2px
+      padding: 0 0.75em
+
+    .section-top .subtitle
+      display: inline-block
+      font-size: 0.75em
+      line-height: 2.5em
+      border-bottom: 2px solid $dark-gray
+
+  .device-section-container .registration-container
+    border: 1px solid darken(white, 8)
+    background: darken(white, 3)
+    display: block
+    margin: 20px 10px 0
+    padding: 10px
+    border-radius: 2px
+
+    .device-creator.directive .fields
+      +calc("width", "100% - 50px")
+      margin-right: 10px
+      float: left
+
+      margin: 
+        bottom: 0
+        top: 0
+
+    .device-creator.directive .fields .input-container
+      +span-columns(6)
+      margin: 
+        bottom: 0
+        top: 0
+
+    .device-creator.directive .actions
+      overflow: hidden
+      margin: 0
 
   &[active="overview"]
-    .track-section-container, .device-section-container
+    .track-section-container, 
+    .device-section-container
       +span-columns(6)
 
       +media(max-width 800px)
         +span-columns(12)
-        
-
-    .device-list
-
-      .bit.port, .bit.ip_addr
-        display: none
-
-      .bit.actions
-        +span-columns(6.5)
-
-

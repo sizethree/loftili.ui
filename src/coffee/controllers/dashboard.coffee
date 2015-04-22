@@ -11,8 +11,6 @@ _factory = ($scope, LibraryManager, activeUser, tracks, devices, childView, Sock
   $scope.nonewb = () ->
     $scope.newbie = false
 
-  Socket.connect true
-
 _factory.$inject = [
   '$scope',
   'LibraryManager',

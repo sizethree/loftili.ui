@@ -19,7 +19,5 @@
             .bottom
               .device-list-container(ng-if="devices.length > 0")
                 .device-list(lf-device-list devices="devices")
-              .newbie(ng-if="devices.length === 0 && newbie")
-                p.text Make sure you've got your raspberry pi up and running at home with the latest firmware from the 
-                  a(href="https://github.com/loftili/core" title="repo") repository 
-                  | pulled down and running. Then come back and fill out this form below to get started!
+              .registration-container
+                .creator(lf-device-creator devices="devices")

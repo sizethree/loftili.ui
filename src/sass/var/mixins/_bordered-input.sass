@@ -1,7 +1,10 @@
 @mixin bordered-input
+  +input-properties
   +transition(all 300ms ease)
+  +calc("width", "100% - 20px")
   border-radius: 2px
   border: 1px solid darken(white, 10)
+  font-family: $gill-light
 
   &:hover
     border: 1px solid darken(white, 15)

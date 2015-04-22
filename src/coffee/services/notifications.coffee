@@ -15,40 +15,45 @@ NotificationsFactory = ($timeout) ->
   trigger = (type) ->
     cb() for cb in listeners[type]
 
-  Notifications =
+  Notifications = {}
 
-    flash: (notification, type) ->
-      notification_id = Notifications.add notification, type
+  Notifications.flash = (notification, type) ->
+    notification_id = Notifications.add notification, type
 
-      remove = () ->
-        Notifications.remove notification_id
+    remove = () ->
+      Notifications.remove notification_id
 
-      $timeout remove, flash_timeout
+    $timeout remove, flash_timeout
 
-    add: (notification, type) ->
-      new_id = idgen()
+  Notifications.add = (notification, type) ->
+    new_id = idgen()
 
-      notifications.push
-        id: new_id
-        message: notification
-        type: type || 'info'
+    notifications.push
+      id: new_id
+      message: notification
+      type: type || 'info'
 
-      trigger 'added'
+    trigger 'added'
 
-      new_id
+    new_id
 
-    on: (evt, callback) ->
+  Notifications.on = (evt, callback) ->
       if angular.isFunction(callback) and angular.isArray(listeners[evt])
         listeners[evt].push callback
 
-    get: () ->
-      notifications
+  Notifications.get = () ->
+    notifications
 
-    remove: (target_id) ->
-      for notification, index in notifications
-        if notification && target_id == notification.id
-          notifications.splice index, 1
-          trigger 'removed'
+  Notifications.remove = (target_id) ->
+    for notification, index in notifications
+      if notification && target_id == notification.id
+        notifications.splice index, 1
+        trigger 'removed'
+  
+  Notifications.flash.error = (message) ->
+    Notifications.flash message, 'error'
+
+  Notifications
 
 NotificationsFactory.$inject = ['$timeout']
 

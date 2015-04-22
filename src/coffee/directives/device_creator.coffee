@@ -1,55 +1,46 @@
-lft.directive 'lfDeviceCreator', ['Api', 'Auth', '$timeout', (Api, Auth, $timeout) ->
+_factory = (Api, Auth, Notifications, Lang, $timeout) ->
+
+  link = ($scope, $element, $attrs) ->
+    $scope.failures = []
+
+    success = (created) ->
+      if $scope.devices
+        $scope.devices.push created
+      $scope.device = {}
+
+    fail = (response) ->
+      lang = Lang 'device.errors.registration'
+      Notifications.flash.error lang
+
+    attempt = () ->
+      device = $scope.device
+
+      if device and device.name and device.serial_number
+        (Api.Device.save
+          name: device.name
+          serial_number: device.serial_number
+        ).$promise.then success, fail
+
+    $scope.attempt = attempt
+
+    $scope.keywatch = (evt) ->
+      attempt true if evt.keyCode == 13
+
 
   lfDeviceCreator =
     replace: true
     templateUrl: 'directives.device_creator'
     scope:
       devices: '='
-    link: ($scope, $element, $attrs) ->
-      $scope.failures = []
+    link: link
 
-      addPermission = (device) ->
-        user_id = Auth.user().id
-
-        permission = new Api.DevicePermission
-          user: user_id
-          level: 1
-          device: device.id
-
-        dns_entry = new Api.DnsRecord
-          user: user_id
-          device: device.id
-
-        dns_entry.$save().then dnsSuccess, dnsFail
-        permission.$save()
-        $scope.devices.push device
-        $scope.device = {}
-
-      dnsFail = () ->
-        $scope.failures.push 'Unable to create a dns entry for your device!'
-        $timeout clearErrors, 2500
-
-      dnsSuccess = () ->
-
-      addError = (error) ->
-        $scope.failures.push error
-
-      clearErrors = () ->
-        $scope.failures = []
-
-      fail = (response) ->
-        if response and response.data
-          addError ['You need to enter a better value for', error].join(' ') for error, val of response.data.invalidAttributes
-        else
-          addError 'Unable to get a response from the server'
-        $timeout clearErrors, 2500
-
-      attempt = () ->
-        device = new Api.Device $scope.device
-        device.$save().then addPermission, fail
-
-      $scope.keywatch = (evt) ->
-        if evt.keyCode == 13
-          attempt()
-
+_factory.$inject = [
+  'Api'
+  'Auth'
+  'Notifications'
+  'Lang'
+  '$timeout'
 ]
+
+
+lft.directive 'lfDeviceCreator', _factory

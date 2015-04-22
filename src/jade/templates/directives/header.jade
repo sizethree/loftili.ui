@@ -19,10 +19,12 @@
             a(href='/dashboard' ng-class="{active: active_route === 'dashboard'}") dashboard
       .navigation-tools
         .logged-out(ng-if="!user()")
-          button.login.ionicon(ng-click="toggle($event)" ng-class="{close: form_active, login: !form_active}")
+          button(ng-click="toggle($event)" ng-class="{close: form_active, login: !form_active}")
+            i.login.ionicon
         .btn-grp.logged-in(ng-if="user()" ng-attr-active="{{active_route}}")
-          a.button.ionicon.account(href="/account" ng-class="{active: active_route === 'account'}")
-          button.sign-out(href="#" ng-click="logout($event)")
+          a.button(href="/account" ng-class="{active: active_route === 'account'}")
+            i.ionicon.account
+          a.button.sign-out(ng-click="logout($event)")
             i.ionicon.logout
       .login-wrapper(ng-if="!user()")
         .login-container(ng-class="{active: form_active}" data-mm-noclose="true")

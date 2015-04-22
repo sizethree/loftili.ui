@@ -1,53 +1,40 @@
-.device-list
+.device-list.directive
   margin: 0 10px
 
-  .list-header
-    +outer-container
-    margin: 0
-    padding: 5px 10px
-    border-radius: 2px
-   
-    .bit
-      color: darken($light-gray, 10)
-
   .list-container
+    margin: 20px 0 0 0
+
+  .device-container
+    +clearfix
     position: relative
-    padding: 0
+    padding: 4px 10px
+    display: block
+    border-top: 1px solid darken(white, 10)
 
-    .device-container
-      border-radius: 2px
-      background: darken(white, 5)
-      padding: 5px 10px
-
-  .bit p
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-    margin-bottom: 0px
+    &:last-child
+      border-bottom: 1px solid darken(white, 10)
 
   .bit
-    +span-columns(2)
+    +ellipsis-text
     overflow: hidden
+    font-size: 1em
+    line-height: 1em
 
+    &.name,
     &.status
-      overflow: visible
-
-    &.ip_addr
-      +span-columns(2)
-
-    &.port
-      +span-columns(1)
+      line-height: 1.8em
 
     &.name
-      +span-columns(4)
+      +span-columns(6)
 
     &.status
-      +span-columns(1.5)
-      position: relative
-    
-    &.actions
-      +span-columns(3.5)
-      +omega
-      text-align: right
-        
+      +span-columns(2)
+      overflow: visible
 
+    &.actions
+      +span-columns(4)
+      text-align: right
+
+      .button
+        display: inline-block
+        float: none
