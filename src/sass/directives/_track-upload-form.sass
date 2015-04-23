@@ -5,6 +5,9 @@
   .form-container
     padding: 0px 10px
 
+  button, a.button
+    +small-button
+
   .upload-list
     margin: 0 10px
 
@@ -86,12 +89,16 @@
       z-index: 1
       cursor: pointer
 
-      button
-        float: none
-
       &:hover 
         z-index: 2
         overflow: visible
+
+    .button 
+      border-radius: 2px 0 0 2px
+
+    .button.close,
+    .button.search
+      border-radius: 0 2px 2px 0
 
     .cover
       position: relative

@@ -3,6 +3,26 @@
   +transition(all 200px ease)
   +linear-gradient($base-accent-color, darken($base-accent-color, 10))
   border: 1px solid lighten($base-accent-color, 1)
-  text-transform: uppercase
+  padding: 0.5em
   cursor: pointer
   color: white
+
+  .ionicon  
+    width: 1.5em
+    height: 1.5em
+
+  .ionicon:after
+    font-size: 1.5em
+    line-height: 1em
+
+@mixin small-button
+  +basic-button
+  padding: 0.4em
+
+  .ionicon
+    height: 1em
+    width: 1em
+
+    &:after
+      font-size: 1.1em
+      line-height: 1em

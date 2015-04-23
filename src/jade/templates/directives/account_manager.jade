@@ -20,7 +20,7 @@
           input(type="password" value="" ng-model="fields.password.a" placeholder="new password")
           input(type="password" value="" ng-model="fields.password.b" placeholder="confirm password")
         .toggle-container.button-group(ng-class="{open: changing_password}")
-          button(ng-if="!changing_password" ng-click="changing(true)") change password
+          button.transparent.password-change-trigger(ng-if="!changing_password" ng-click="changing(true)") change password
           button(ng-if="changing_password" ng-click="changing(false)")
             i.ionicon.close
           button(ng-if="changing_password" ng-click="save.password()")
