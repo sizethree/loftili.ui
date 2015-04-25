@@ -1,23 +1,7 @@
-_factory = (DeviceManager, Notifications, Lang) ->
+_factory = ($q, DM, Auth, Api, Notifications, Lang) ->
 
   link = ($scope, $element, $attrs) ->
-    $scope.manager = new DeviceManager $scope.device
-    $scope.sharing = false
-
-    $scope.toggleShare = () ->
-      $scope.sharing = !$scope.sharing
-
-    $scope.stopShare = () ->
-      $scope.sharing = false
-
-    $scope.delete = (device) ->
-      success = () ->
-        $scope.ondelete()
-
-      fail = () ->
-        console.log 'the device was not removed!'
-
-      (device.$delete true).then success, fail
+    $scope.manager = new DM $scope.device
 
   lfDeviceItem =
     replace: true
@@ -29,7 +13,10 @@ _factory = (DeviceManager, Notifications, Lang) ->
     link: link
 
 _factory.$inject = [
+  '$q'
   'DeviceManager'
+  'Auth'
+  'Api'
   'Notifications'
   'Lang'
 ]

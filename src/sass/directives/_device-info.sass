@@ -1,126 +1,74 @@
-.device-info
+.device-info.directive
   +clearfix
+
+  > .info-inner
+    +clearfix
 
   .device-brief
     +clearfix
+    padding: 0 0 10px 0
 
-    .device-state
-      +span-columns(3.5)
+  .device-brief .device-delete
+    float: right
 
-      p.label
-        font-size: 10px
+  .device-brief .device-delete .remover
+    +small-button
+    +red-button
 
-    .device-name-date
-      float: none
-      overflow: hidden
-      height: auto
+  .device-brief .device-state
+    float: left
+    width: 2em
+    margin: 0 10px 0 0
 
-      p.name
-        font-size: 24px
+  .device-brief .device-name-date .date
+    font-size: 0.8em
 
-      p.date
-        font-size: 12px
-        color: lighten(black, 40)
+  .device-brief .device-name-date .name
+    font-size: 1.2em
 
-  dl
-    +outer-container
+  .device-brief .device-state .status-icon
+    height: 2em
+    font-size: 1em
+
+  .device-brief .device-state .status-icon .ionicon:after
+    line-height: 2em
+
+  .device-brief .device-name-date
+    overflow: hidden
     height: auto
-    margin: 0 0 10px 0
 
-  dt, dd
-    height: 30px
-    font-size: 16px
-    line-height: 30px
+  .share-zone .share-title
+    +clearfix
+    border-bottom: 1px solid darken(white, 8)
+    padding: 0 0 5px 0 
+    margin: 0 0 5px 0
 
-  dt
-    +span-columns(2.5)
-    text-align: right
+  .share-zone .share-top
+    display: none
 
-  dd
-    +span-columns(9.5)
+  .share-zone .share-title p,
+  .share-zone .share-title .ionicon
+    display: inline-block
 
-  .device-status-icon .status-icon
-    padding: 10px 0
-
-  .created,
-  .device-name
+  .share-zone .shared-list
     display: block
 
-    dt, dd
-      height: auto
-      font-size: 24px
-      line-height: 24px
-
-    dt
-      opacity: 0.0
-      
-  .created dd,
-  .created dt
-    font-size: 12px
-    line-height: 12px
-
-  .device-configuration
-    margin: 10px 0
-    padding: 10px 0
-    border-bottom: 1px solid darken(white, 10)
-    border-top: 1px solid darken(white, 10)
-
-  .area-title
+  .share-zone .shared-list .permission
     +clearfix
+    line-height: 1.7em
+    font-size: 0.8em
+    padding: 0.25em 0
 
-    i, p
-      display: block
-      float: left
-      line-height: 24px
-      font-size: 12px
+  .share-zone .shared-list .permission .actions
+    float: right
 
-    i.ionicon:after
-      font-size: 12px
-      line-height: 24px
+  .share-zone .shared-list .permission .actions button
+    +small-button
 
-  .ip_addr
-    margin-top: 10px
-
-  .shared-with
+  .share-zone .shared-list .info
+    +clearfix
     height: auto
-      
-    dt, dd
-      +span-columns(12)
-      text-align: left
-      margin: 0
-      float: none
-      height: auto
+    overflow: hidden
 
-    .no-permissions
-      font-size: 10px
-      line-height: 12px
-      padding: 5px
-      background: darken(white, 12)
-
-    .share-top
-      display: none
-
-    .share-bottom .search
-      padding: 0
-
-    .shared-list li
-      +clearfix
-      padding: 0 5px
-      border-top: 1px solid darken(white, 20)
-
-      &:last-child
-        border-bottom: 1px solid darken(white, 20)
-
-      button.remove,
-      .permission-level
-        float: right
-        font-size: 12px
-
-        &:after
-          font-size: 12px
-
-      button.remove
-        padding-right: 0
-
-      .user-name 
-        float: left
+  .share-zone .shared-list .info p
+    display: inline-block

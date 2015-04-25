@@ -1,8 +1,11 @@
-.device-controls
+.device-controls.directive
   .control-list.btn-grp
-    button.ionicon.loop(ng-click="restart()")
-    button.ionicon.stop(ng-click="stop()" ng-if="player_state === 1 || player_state === 2")
-    button.ionicon.play(ng-click="play()" ng-if="player_state !== 1 && player_state !== 2")
+    a.button(ng-click="restart()")
+      i.ionicon.loop
+    a.button(ng-click="stop()" ng-if="player_state === 1 || player_state === 2")
+      i.ionicon.stop
+    a.button(ng-click="play()" ng-if="player_state !== 1 && player_state !== 2")
+      i.ionicon.play
   .errored-text-container(ng-if="player_state > 2")
     p.error-text {{ "device.errors.unable_to_communicate" | i18n }}
   .current-state-info(ng-if="player_state === 2 || player_state === 1")

@@ -2,10 +2,10 @@ lft.filter 'permissionLevel', ['DEVICE_PERMISSION_LEVELS', 'Lang', (DEVICE_PERMI
   
   permissionLevel = (device_permission) ->
     level_name = null
+
     for name, val of DEVICE_PERMISSION_LEVELS
-      if val == device_permission
-        level_name = name
-        break
+      level_name = name if val == device_permission
+
     level_name
 
 ]

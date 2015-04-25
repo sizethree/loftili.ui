@@ -5,11 +5,5 @@
     .status-icon(lf-device-status-icon manager="manager" ng-if="manager")
   .bit.actions
     .action-group.btn-grp
-      a.button(ng-click="delete(device)")
-        i.ionicon.trash.delete
-      a.button(ng-click="toggleShare()")
-        i.ionicon(ng-class="{close: sharing, share: !sharing}")
       a.button(href="/devices/{{device.id}}")
         i.ionicon.mixer.control
-    .popup(lf-popup delegate="sharing")
-      .device-share-control(lf-device-share device="device")

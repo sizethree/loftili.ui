@@ -1,9 +1,9 @@
 DevicePermissionFactory = ['$resource', 'URLS', ($resource, URLS) ->
 
   default_params =
-    permission_id: '@id'
+    id: '@id'
 
-  DevicePermission = $resource [URLS.api, 'devicepermissions', ':permission_id'].join('/'), default_params,
+  DevicePermission = $resource [URLS.api, 'devicepermissions', ':id'].join('/'), default_params,
     query:
       method: 'GET'
       isArray: true

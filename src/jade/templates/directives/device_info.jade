@@ -1,30 +1,25 @@
-.device-info
+.device-info.directive
   .info-inner
     .device-brief
       .device-state
         .status-icon(lf-device-status-icon manager="manager")
+      .device-delete
+        button.remover(ng-click="destroy()")
+          i.ionicon.trash
       .device-name-date
-        p.name.txt.canberra.bold {{device.name.split('.')[0]}}
-        p.date.upper.txt.gill.medium {{device.createdAt | date:'MMM, yyyy'}}
-    .device-configuration
-      .area-title.gill.light.upper
-        i.ionicon.gear-b
-        p device configuration
-      dl.ip_addr.setting
-        dt.gill.light ip address:
-        dd.editable(lf-easy-input value="device.ip_addr" finish="saveIp")
-      dl.port.setting
-        dt.gill.light port:
-        dd.editable(lf-easy-input value="device.port" finish="savePort")
-    dl.shared-with
-      dt.gill.light.upper.area-title
+        p.name.txt.gill.bold {{device.name.split('.')[0]}}
+        p.date.txt.gill.light {{device.createdAt | date:'MMM, yyyy'}}
+    .share-zone
+      .share-title
         i.ionicon.stalker
-        p device shares
-      dd.shared-definition
-        ul.shared-list(ng-if="permissions.length > 0")
-          li.device-permission(ng-repeat="permission in permissions" data-level="{{permission.level}}")
-            button.ionicon.close.remove.transparent(ng-click="removePermission(permission)")
-            p.permission-level.sans {{permission.level | permissionLevel}}
+        p.gill.light device shares
+      ul.shared-list(ng-if="permissions.length > 0")
+        li.permission(ng-repeat="permission in permissions" data-level="{{permission.level}}")
+          .actions
+            button.remover(ng-click="removePermission(permission)")
+              i.ionicon.trash
+          .info
             p.user-name.sans {{permission.user.username}}
-        p.info-box.no-permissions(ng-if="!permissions.length") you havent shared this device
-        .share-control(lf-device-share device="device" permissions="permissions")
+            p.permission-level.sans {{permission.level | permissionLevel}}
+      p.info-box.no-permissions(ng-if="!permissions.length") you havent shared this device
+      .share-control(lf-device-share device="device" permissions="permissions")

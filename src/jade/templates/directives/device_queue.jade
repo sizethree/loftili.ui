@@ -1,4 +1,4 @@
-.device-queue
+.device-queue.directive
   .no-tracks(ng-if="!queue.length")
     p.no-tracks-text there are to queued tracks for this device
   ul.queue-track-list
@@ -7,8 +7,10 @@
         p.canberra.queue-index {{$index+1}}.
         p.aptifer.track-title {{track.title || 'untitled'}}
         .item-controls
-          button.remover.ionicon.close(ng-click="removeItem($index)")
+          button.remover(ng-click="removeItem($index)")
+            i.ionicon.close
   .controls
-    button.search-toggle-button.ionicon(ng-click="searchToggle()" ng-class="{add: !adding, close: adding}")
+    button.search-toggle-button(ng-click="searchToggle()")
+      i.ionicon(ng-class="{add: !adding, close: adding}")
   .search-area(ng-if="adding")
     .searcher(lf-device-queue-search manager="manager" queue="queue")

@@ -1,14 +1,59 @@
-dDeviceShare = ($timeout, Api, DEVICE_PERMISSION_LEVELS) ->
+dDeviceShare = ($timeout, Api, Auth, DEVICE_PERMISSION_LEVELS) ->
 
   link = ($scope, $element, $attrs) ->
     query = ''
+    busy = false
     $scope.results = []
 
     clear = () ->
       $scope.results = []
 
+    remove = (permission) ->
+      busy = true
+
+      success = () ->
+        busy = false
+
+      fail = () ->
+        busy = false
+
+      (Api.DevicePermission.delete
+        id: permission.id
+      ).$promise.then success, fail
+
+    share = (user) ->
+      busy = true
+
+      success = (permission) ->
+        busy = false
+        $scope.permissions.push permission
+        $scope.results = []
+
+      fail = () ->
+        bounce = false
+
+      (Api.DevicePermission.save
+        device: $scope.device.id
+        user: user.id
+        level: DEVICE_PERMISSION_LEVELS.FRIEND
+      ).$promise.then success, fail
+
+    $scope.share = (user) ->
+      share user if !busy
+
+    $scope.remove = (permission) ->
+      remove permission if !busy
+
     success = (results) ->
-      $scope.results = results
+      existing_ids = []
+      unique_results = []
+      existing_ids.push p.user.id for p in $scope.permissions
+
+      for r in results
+        existing = (existing_ids.indexOf r.id) >= 0
+        unique_results.push r if !existing
+
+      $scope.results = unique_results
 
     fail = () ->
       $scope.results = []
@@ -35,6 +80,7 @@ dDeviceShare = ($timeout, Api, DEVICE_PERMISSION_LEVELS) ->
 dDeviceShare.$inject = [
   '$timeout'
   'Api'
+  'Auth'
   'DEVICE_PERMISSION_LEVELS'
 ]
 

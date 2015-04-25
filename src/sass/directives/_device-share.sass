@@ -15,19 +15,36 @@
     padding: 10px 0 0 0
     border-top: 1px solid darken(white, 25)
 
-  .results .result
+  .existing-permissions
+    padding: 10px 0 0 0
+
+  .results .result,
+  .existing-permissions .permission
     +clearfix
     display: block
+    font-size: 0.8em
+    line-height: 1.8em
+    padding: 0.5em 0
+    border-top: 1px solid darken(white, 10)
 
-  .results .result .trigger
+    &:last-child
+      border-bottom: 1px solid darken(white, 10)
+
+  .results .result .trigger,
+  .existing-permissions .permission .remover
+    +small-button
     float: right
 
-  .results .result .username
+  .existing-permissions .permission .remover
+    +red-button
+
+  .existing-permissions .permission .remover
+
+  .results .result .username,
+  .existing-permissions .permission .name
     display: block
     overflow: hidden
     height: auto
-    line-height: 1.8em
-    font-size: 1em
 
   +popup-style
     +basic-popup

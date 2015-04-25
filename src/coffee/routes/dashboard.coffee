@@ -51,7 +51,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
           deferred.reject()
 
         devices = (user) ->
-          devices = Api.User.devices
+          devices = Api.Device.query
             user: user.id
           devices.$promise.then finish, fail
 

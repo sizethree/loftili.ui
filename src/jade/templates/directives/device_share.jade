@@ -4,7 +4,7 @@
   .share-bottom
     .search
       input(type="text" placeholder="search people" ng-change="search($event)" ng-model="search.query")
-    ul.results
+    ul.results(ng-if="results.length > 0")
       li.result(ng-repeat="result in results")
         button.trigger(ng-click="share(result)")
           i.ionicon.add
