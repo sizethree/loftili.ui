@@ -3,9 +3,18 @@ sDeviceManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
   DeviceManager = (device) ->
     is_connected = false
 
-    playback = (evt, device) ->
+    playback = (evt) ->
       handler = () ->
         defer = $q.defer()
+
+        success = () ->
+
+        fail = () ->
+
+        (Api.Playback[evt]
+          device: device.id
+        ).$promise.then success, fail
+
         defer.promise
 
     update = (data) ->
@@ -16,15 +25,16 @@ sDeviceManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
     Manager.connect = (callback) ->
       connected = (err) ->
         is_connected = !err
-        Socket.get '/devicestream'
-        Socket.on 'stuff', update
+        stream_url = ['/devicestream', device.id].join '/'
+        Socket.get stream_url
+        Socket.on 'update', update
         callback err
 
       Socket.connect connected
 
-    Manager.play = playback 'start', device
+    Manager.play = playback 'start'
 
-    Manager.stop = playback 'stop', device
+    Manager.stop = playback 'stop'
 
     Manager
     

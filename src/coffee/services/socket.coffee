@@ -54,9 +54,8 @@ sSocket = (CONFIG) ->
     connect.call @, callback unless is_connected
 
   Socket.get = (path) ->
-    console.log current_socket
     if current_socket
-      (current_socket.emit 'get', {method: 'get', url: '/devicestream'})
+      (current_socket.emit 'get', {method: 'get', url: path})
 
   Socket
 
