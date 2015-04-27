@@ -1,147 +1,42 @@
-_factory = ($q, Analytics, Api, DEVICE_STATES, DeviceFeed) ->
+sDeviceManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
 
-  playbackFn = (type) ->
-    deferred = $q.defer()
+  DeviceManager = (device) ->
+    is_connected = false
 
-    finish = (result) =>
-      @trigger type
-      deferred.resolve result
+    playback = (evt, device) ->
+      handler = () ->
+        defer = $q.defer()
+        defer.promise
 
-    fail = (result) =>
-      deferred.reject result
+    update = (data) ->
+      console.log data
 
-    request = Api.Playback[type]
-      device: @device.id
+    Manager = {}
 
-    Analytics.event 'playback', type, ['device', @device.name].join(':')
+    Manager.connect = (callback) ->
+      connected = (err) ->
+        is_connected = !err
+        Socket.get '/devicestream'
+        Socket.on 'stuff', update
+        callback err
 
-    request.$promise.then finish, fail
+      Socket.connect connected
 
-    deferred.promise
+    Manager.play = playback 'start', device
 
-  class DeviceManager
+    Manager.stop = playback 'stop', device
 
-    constructor: (@device) ->
-      @current_queue = null
-      @last_ping = null
-      @feed = new DeviceFeed @device
-      @listeners =
-        stop: []
-        start: []
-        restart: []
-
-      update = (err, device) =>
-        if device and device.ping
-          @last_ping = device.ping
-
-      @feed.add update, true
-
-    on: (event, fn) ->
-      is_function = angular.isFunction fn
-      is_evtlist = angular.isArray @listeners[event]
-
-      if is_function and is_evtlist
-        @listeners[event].push fn
-
-    trigger: (event) ->
-      fn() for fn in @listeners[event]
-
-    getCurrentTrack: () ->
-      deferred = $q.defer()
-
-      success = (track) ->
-        deferred.resolve track
-
-      fail = () ->
-        deferred.reject()
-
-      request = Api.TrackQueue.current
-        id: @device.id
-
-      request.$promise.then success, fail
-
-
-      deferred.promise
-
-    removeQueueItem: (index) ->
-      deferred = $q.defer()
-
-      success = (new_queue) ->
-        deferred.resolve new_queue
-
-      fail = () ->
-        deferred.reject()
-
-      request = Api.TrackQueue.remove
-        id: @device.id
-        position: index
-
-      request.$promise.then success, fail
-
-      deferred.promise
-
-    queueTrack: (track) ->
-      deferred = $q.defer()
-
-      success = (new_queue) ->
-        deferred.resolve new_queue
-
-      fail = () ->
-        deferred.reject()
-
-      request = Api.TrackQueue.add
-        id: @device.id
-        track: track.id
-
-      request.$promise.then success, fail
-
-      deferred.promise
-
-    getQueue: () ->
-      deferred = $q.defer()
-
-      success = (result) =>
-        @current_queue = result
-        deferred.resolve result
-
-      fail = (result) =>
-        deferred.reject result
-
-      request = Api.TrackQueue.query
-        id: @device.id
-
-      request.$promise.then success, fail
-
-      deferred.promise
-
-    ping: () ->
-      deferred = $q.defer()
-
-      success = (result) =>
-        @last_ping = result
-        deferred.resolve result
-
-      fail = (result) =>
-        deferred.reject result
-
-      request = Api.Device.ping
-        device_id: @device.id
-
-      request.$promise.then success, fail
-
-      deferred.promise
-
-    restartPlayback: () ->
-      playbackFn.call @, 'restart'
-
-    stopPlayback: () ->
-      playbackFn.call @, 'stop'
-
-    startPlayback: () ->
-      playbackFn.call @, 'start'
+    Manager
+    
 
   DeviceManager
 
-_factory.$inject = ['$q', 'Analytics', 'Api', 'DEVICE_STATES', 'DeviceFeed']
+sDeviceManager.$inject = [
+  '$q'
+  'Analytics'
+  'Api'
+  'Socket'
+  'DEVICE_STATES'
+]
 
-lft.service 'DeviceManager', _factory
+lft.service 'DeviceManager', sDeviceManager

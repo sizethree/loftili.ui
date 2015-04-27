@@ -1,7 +1,7 @@
 _factory = ($q, DM, Auth, Api, Notifications, Lang) ->
 
   link = ($scope, $element, $attrs) ->
-    $scope.manager = new DM $scope.device
+    $scope.manager = DM $scope.device
 
   lfDeviceItem =
     replace: true

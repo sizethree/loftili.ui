@@ -29,10 +29,9 @@ lft.value 'i18n-en',
       unable_to_communicate: "We're unable to get information from your device, please check it's configuration"
       empty_track_queue: "Your device was unable to load it\'s track queue, try restarting"
     updating:
-      port:
-        success: 'Successfully updated your device\'s port'
-      ip_addr:
-        success: 'Successfully updated your device\'s ip address'
+      name:
+        success: 'Successfully updated your device\'s name'
+        error: 'Unable to update the devie\'s name'
     ping:
       start: 'Sending a ping request to your device'
       success: 'We\'ve successfully communicated with your device'

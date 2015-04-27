@@ -1,9 +1,40 @@
-dDeviceInfo = ($location, Api, Notifications, Lang) ->
+dDeviceInfo = ($location, Api, Auth, Notifications, DPL, Lang) ->
 
-  link = ($scope, $element, $attrs) ->
+  update_lang =
+    name:
+      success: Lang 'device.updating.name.success'
+      error: Lang 'device.updating.name.error'
+
+  dDeviceInfoLink = ($scope, $element, $attrs) ->
     feed_loop_id = null
-    $scope.last_checked = $scope.device.last_checked
-    $scope.connection_status = null
+
+    $scope.updates = {}
+    $scope.current_user = Auth.user()
+
+    $scope.is_owner = () ->
+      permissions = $scope.permissions or []
+      current_user = Auth.user()
+      if current_user
+        result = false
+        for p in permissions
+          result = true if p.user.id == current_user.id and p.level == DPL.OWNER
+        result
+
+    $scope.updates.name = (new_name, input_scope, input_el) ->
+      success = () ->
+        $scope.device.name = new_name
+        input_scope.blurOut true
+        Notifications.flash.success update_lang.name.success
+
+      fail = () ->
+        input_el.val = input_scope.value = $scope.device.name
+        input_scope.blurOut true
+        Notifications.flash.error update_lang.name.error
+
+      (Api.Device.update
+        id: $scope.device.id
+        name: new_name
+      ).$promise.then success, fail
 
     $scope.destroy = () ->
       success = () ->
@@ -22,17 +53,6 @@ dDeviceInfo = ($location, Api, Notifications, Lang) ->
       (Api.DevicePermission.delete
         id: permission.id).$promise.then finish
 
-    update = (err, ping_response) ->
-      if err
-        $scope.last_checked = false
-      else
-        $scope.last_checked = ping_response.last_checked
-
-    $scope.$on '$destroy', () ->
-      $scope.manager.feed.remove feed_loop_id
-
-    feed_loop_id = $scope.manager.feed.add update
-
   lfDeviceInfo =
     replace: true
     templateUrl: 'directives.device_info'
@@ -40,12 +60,14 @@ dDeviceInfo = ($location, Api, Notifications, Lang) ->
       device: '='
       manager: '='
       permissions: '='
-    link: link
+    link: dDeviceInfoLink
 
 dDeviceInfo.$inject = [
   '$location'
   'Api'
+  'Auth'
   'Notifications'
+  'DEVICE_PERMISSION_LEVELS'
   'Lang'
 ]
 

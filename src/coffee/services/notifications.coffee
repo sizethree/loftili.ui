@@ -50,8 +50,8 @@ NotificationsFactory = ($timeout) ->
         notifications.splice index, 1
         trigger 'removed'
   
-  Notifications.flash.error = (message) ->
-    Notifications.flash message, 'error'
+  Notifications.flash.error = (message) -> Notifications.flash message, 'error'
+  Notifications.flash.success = (message) -> Notifications.flash message, 'success'
 
   Notifications
 

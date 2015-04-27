@@ -1,17 +1,21 @@
-_factory = ($scope, Api, device, permissions, device_queue, DeviceManager) ->
+DeviceManagementController = ($scope, Api, DeviceManager, resolutions...) ->
 
-  $scope.device = device
-  $scope.permissions = permissions
-  $scope.queue = device_queue
-  $scope.manager = new DeviceManager $scope.device
+  $scope.device = resolutions[0]
+  $scope.permissions = resolutions[1]
+  $scope.queue = resolutions[2]
+  $scope.manager = DeviceManager $scope.device
 
-_factory.$inject = [
-  '$scope',
-  'Api',
-  'device',
-  'permissions',
-  'device_queue',
+  stream = (err) ->
+
+  $scope.manager.connect stream
+
+DeviceManagementController.$inject = [
+  '$scope'
+  'Api'
   'DeviceManager'
+  'device'
+  'permissions'
+  'device_queue'
 ]
 
-lft.controller 'DeviceManagementController', _factory
+lft.controller 'DeviceManagementController', DeviceManagementController

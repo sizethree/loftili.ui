@@ -16,7 +16,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
     title: 'home'
     name: 'home'
     resolve:
-      activeUser: ['Auth', (Auth) ->
+      activeUser: ['Auth', 'Socket', (Auth, Socket) ->
         Auth.filter 'guest'
       ]
       content: ['$http', '$q', 'URLS', ($http, $q, URLS) ->

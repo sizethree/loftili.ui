@@ -59,10 +59,7 @@ lft.config ['$routeProvider', ($routeProvider) ->
           current_user.id != device_permission.user.id
 
         finish = (permissions) ->
-          finalized = []
-          for permission in permissions
-            finalized.push permission if notCurrent permission
-          deferred.resolve finalized
+          deferred.resolve permissions
 
         getPermissions = () ->
           request = Api.DevicePermission.search

@@ -3,18 +3,20 @@
     .device-brief
       .device-state
         .status-icon(lf-device-status-icon manager="manager")
-      .device-delete
+      .device-delete(ng-if="is_owner()")
         button.remover(ng-click="destroy()")
           i.ionicon.trash
       .device-name-date
-        p.name.txt.gill.bold {{device.name.split('.')[0]}}
-        p.date.txt.gill.light {{device.createdAt | date:'MMM, yyyy'}}
-    .share-zone
+        .input-container(ng-if="is_owner()")
+          .name-input(lf-easy-input value="device.name" finish="updates.name")
+        .name-container.not-owner(ng-if="!is_owner()")
+          p.name {{device.name}}
+    .share-zone(ng-if="is_owner()")
       .share-title
         i.ionicon.stalker
         p.gill.light device shares
       ul.shared-list(ng-if="permissions.length > 0")
-        li.permission(ng-repeat="permission in permissions" data-level="{{permission.level}}")
+        li.permission(ng-repeat="permission in permissions track by permission.id" data-level="{{permission.level}}" ng-if="permission.user.id !== current_user.id")
           .actions
             button.remover(ng-click="removePermission(permission)")
               i.ionicon.trash
