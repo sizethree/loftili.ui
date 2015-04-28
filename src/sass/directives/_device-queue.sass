@@ -37,19 +37,14 @@
 
   .track-container .inner-container
     +clearfix
+    line-height: 1.8em
 
     .item-controls
       float: right
       margin-top: 2px
 
       button
-        height: 10px
-        width: 10px
-        display: block
-
-        &:after 
-          font-size: 10px
-          line-height: 10px
+        +small-button
     
     .queue-index,
     .track-title

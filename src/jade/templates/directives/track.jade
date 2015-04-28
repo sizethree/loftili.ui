@@ -1,13 +1,13 @@
-.track
+.track.directive
   .info
     .bit.name(ng-class="{missing: !track.title}")
       p {{ track.title || 'not found' }}
     .bit.artist
       p {{ track.artist.name || 'not found' }}
     .bit.actions(ng-if="manager")
-      .container.btn-grp
+      .container.button-group
         button.playback-trigger.play(ng-if="!playing" ng-click="play()")
-          i.ionicon.play-computer
+          i.ionicon.play
         button.playback-trigger.stop(ng-if="playing" ng-click="stop()")
           i.ionicon.stop
         button.remover(ng-click="drop()")

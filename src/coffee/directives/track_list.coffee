@@ -1,4 +1,6 @@
-_factory = () ->
+dTrackList = () ->
+
+  dTrackListLink = ($scope, $element, $attrs) ->
 
   lfTrackList =
     replace: true
@@ -6,8 +8,9 @@ _factory = () ->
     scope:
       tracks: '='
       manager: '='
-    link: ($scope, $element, $attrs) ->
+    link: dTrackListLink
 
-_factory.$inject = []
+dTrackList.$inject = [
+]
 
-lft.directive 'lfTrackList', _factory
+lft.directive 'lfTrackList', dTrackList

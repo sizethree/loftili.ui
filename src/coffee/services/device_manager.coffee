@@ -1,5 +1,28 @@
 sDeviceManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
 
+  QueueManager = (device) ->
+
+    Manager = {}
+
+    Manager.add = (track) ->
+      defer = $q.defer()
+
+      success = (new_queue) ->
+        defer.resolve new_queue
+
+      fail = () ->
+        defer.reject()
+
+      (Api.TrackQueue.add
+        id: device.id
+        track: track.id
+      ).$promise.then success, fail
+
+      defer.promise
+
+    Manager
+
+
   DeviceManager = (device) ->
     is_connected = false
 
@@ -35,6 +58,8 @@ sDeviceManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
     Manager.play = playback 'start'
 
     Manager.stop = playback 'stop'
+
+    Manager.queue = QueueManager device
 
     Manager
     

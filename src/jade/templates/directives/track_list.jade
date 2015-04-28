@@ -1,10 +1,4 @@
-.track-list
-  .list-header
-    .bit.name
-      p track name
-    .bit.artist
-      p artist
-    .bit.actions(ng-if="manager")
+.track-list.directive
   .list-container
     .track-container(ng-repeat="track in tracks")
       .track(lf-track track="track" manager="manager")

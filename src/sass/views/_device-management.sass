@@ -33,20 +33,32 @@
   .queue-track-list
     display: block
 
-    .inner-container
-      height: 20px
-
-    .track-container p
-      text-size: 16px
-      line-height: 20px
-      text-transform: capitalize
-
     .inner-container .item-controls button
+      +small-button
+
+  .device-queue-search
+    display: block
+
+    input.search-input
+      border: 1px solid darken(white, 10)
+      width: 100%
+
+    .result-info
+      display: block
       padding: 0
-      width: 20px
-      height: 20px
-      box-sizing: border-box
-      margin: 0
+
+      .result-item
+        margin: 0
+        border-bottom: 1px solid darken(white, 8)
+        height: auto
+        padding: 5px 10px
+
+        button.adder
+          +small-button
+
+        &:last-child
+          border-bottom: none
+          margin-bottom: 0
 
   .where-the-magic-happens
     +span-columns(8)
@@ -85,35 +97,3 @@
           &:after
             font-size: 40px
 
-  .device-queue-search
-    display: block
-
-    input.search-input
-      border: 1px solid darken(white, 10)
-      width: 100%
-
-    .result-info
-      display: block
-      padding: 0
-
-      .result-item
-        margin: 0
-        border-bottom: 1px solid darken(white, 8)
-        height: auto
-        padding: 5px 10px
-
-        button.adder
-          margin: 0
-          width: 18px
-          height: 18px
-          box-sizing: border-box
-          padding: 0
-
-          .ionicon, .ionicon:after
-            width: 18px
-            height: 18px
-            line-height: 18px
-
-        &:last-child
-          border-bottom: none
-          margin-bottom: 0
