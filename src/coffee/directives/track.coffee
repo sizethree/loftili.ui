@@ -35,7 +35,8 @@ dTrack = (Lang, Notifications, Audio) ->
 
     $scope.stop = () ->
       $scope.playing = false
-      sound.stop()
+      if sound
+        sound.stop()
 
     $scope.drop = () ->
       if is_dropping
