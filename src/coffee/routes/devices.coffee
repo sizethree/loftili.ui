@@ -39,10 +39,10 @@ lft.config ['$routeProvider', ($routeProvider) ->
         device_id = current_route.params.id
 
         finish = (device_queue) ->
-          deferred.resolve device_queue
+          deferred.resolve device_queue.queue
 
         getQueue = () ->
-          request = Api.TrackQueue.query
+          request = Api.TrackQueue.get
             id: device_id
           request.$promise.then finish
 

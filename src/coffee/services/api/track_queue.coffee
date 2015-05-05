@@ -6,10 +6,8 @@ TrackQueueService = ['$resource', 'URLS', ($resource, URLS) ->
   TrackQueue = $resource [URLS.api, 'queues', ':id', ':position'].join('/'), queue_defaults,
     add:
       method: 'PUT'
-      isArray: true
     remove:
       method: 'DELETE'
-      isArray: true
     current:
       method: 'GET'
       params:

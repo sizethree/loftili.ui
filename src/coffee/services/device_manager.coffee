@@ -8,7 +8,7 @@ sDeviceManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
       defer = $q.defer()
 
       success = (new_queue) ->
-        defer.resolve new_queue
+        defer.resolve new_queue.queue
 
       fail = () ->
         defer.reject()

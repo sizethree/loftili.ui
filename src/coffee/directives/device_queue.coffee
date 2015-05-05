@@ -2,7 +2,6 @@ dDeviceQueue = ($timeout, DEVICE_STATES, Notifications, Lang) ->
 
   dDeviceQueueLink = ($scope, $element, $attrs) ->
     $scope.adding = false
-
     $scope.searchToggle = () -> $scope.adding = !$scope.adding
 
   lfDeviceQueue =
