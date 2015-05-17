@@ -31,8 +31,10 @@ sDeviceManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
         defer = $q.defer()
 
         success = () ->
+          defer.resolve true
 
         fail = () ->
+          defer.reject false
 
         (Api.Playback[evt]
           device: device.id

@@ -1,6 +1,6 @@
 NotificationsFactory = ($timeout) ->
   
-  flash_timeout = 1500
+  flash_timeout = 3000
 
   idgen = do () ->
     notification_count = 0

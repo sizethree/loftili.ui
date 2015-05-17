@@ -40,3 +40,4 @@ lft.value 'i18n-en',
       starting: 'Starting playback, please wait'
       stopping: 'Stopping playback, please wait'
       restarting: 'Attempting to restart playback, please wait'
+      failed: 'Unable to {{action}} device, please check it\'s connection'

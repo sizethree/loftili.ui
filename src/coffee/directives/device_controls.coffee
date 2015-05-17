@@ -7,14 +7,27 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
     playing_lang = Lang 'device.playback.starting'
     stopping_lang = Lang 'device.playback.stopping'
     restarting_lang = Lang 'device.playback.restarting'
+    failed_lang = Lang 'device.playback.failed'
 
     clear = () ->
 
     $scope.play = () ->
-      $scope.manager.play true
+      success = () ->
+
+      fail = () ->
+        failed_play = failed_lang.replace /{{action}}/, 'start'
+        Notifications.flash.error failed_play
+
+      ($scope.manager.play true).then success, fail
 
     $scope.stop = () ->
-      $scope.manager.stop true
+      success = () ->
+
+      fail = () ->
+        failed_play = failed_lang.replace /{{action}}/, 'stop'
+        Notifications.flash.error failed_play
+
+      ($scope.manager.stop true).then success, fail
 
     $scope.restart = () ->
 
