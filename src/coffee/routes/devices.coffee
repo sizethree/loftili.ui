@@ -33,18 +33,20 @@ lft.config ['$routeProvider', ($routeProvider) ->
         callbacks.push getDevice
         deferred.promise
       ]
-      device_queue: ['$q', '$route', 'Api', 'Auth', ($q, $route, Api, Auth) ->
+      device_queue: ['$q', '$route', 'DeviceManager', 'Auth', ($q, $route, DeviceManager, Auth) ->
         deferred = $q.defer()
         current_route = $route.current
         device_id = current_route.params.id
+        manager = DeviceManager
+          id: device_id
 
-        finish = (device_queue) ->
-          deferred.resolve device_queue.queue
+        finish = (queue) ->
+          deferred.resolve queue
+
+        fail = () ->
 
         getQueue = () ->
-          request = Api.TrackQueue.get
-            id: device_id
-          request.$promise.then finish
+          (manager.queue.load true).then finish, fail
 
         callbacks.push getQueue
         deferred.promise
