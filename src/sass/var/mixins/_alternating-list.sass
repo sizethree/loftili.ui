@@ -1,0 +1,17 @@
+@mixin alternating-list
+  display: block
+  border: 1px solid darken(white, 10)
+  border-radius: 3px
+
+  .list-item
+    display: block
+    border-top: 1px solid darken(white, 10)
+    padding: 0.4em 0.5em
+
+    &:first-child
+      border-top: 0
+
+    &:nth-child(odd)
+      background: darken(white, 3)
+
+

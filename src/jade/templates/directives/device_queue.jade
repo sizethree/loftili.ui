@@ -2,7 +2,7 @@
   .no-tracks(ng-if="!queue.length")
     p.no-tracks-text there are to queued tracks for this device
   ul.queue-track-list
-    li.track-container(ng-repeat="track in queue")
+    li.list-item.track-container(ng-repeat="track in queue")
       .inner-container
         p.foundry.queue-index {{$index+1}}.
         p.foundry.track-title {{track.title || 'untitled'}}

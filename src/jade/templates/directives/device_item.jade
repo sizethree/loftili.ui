@@ -1,8 +1,6 @@
 .device-item.directive
   .bit.name
     p.txt.sans {{ device.name }}
-  .bit.status.has-tooltip
-    .status-icon(lf-device-status-icon manager="manager" ng-if="manager")
   .bit.actions
     .action-group.btn-grp
       a.button(href="/devices/{{device.id}}")
