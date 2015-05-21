@@ -1,6 +1,7 @@
-@mixin basic-button
-  +input-properties
-  +no-highlight
+@import "input-properties"
+
+%basic-button
+  @extend input-properties
   +transition(all 300ms ease)
   +linear-gradient($base-accent-color, darken($base-accent-color, 10))
   border: 1px solid darken($base-accent-color, 8)
@@ -25,8 +26,8 @@
     font-size: 1.5em
     line-height: 1em
 
-@mixin small-button
-  +basic-button
+%small-button
+  @extend basic-button
   padding: 0.4em
 
   .ionicon

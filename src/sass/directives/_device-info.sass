@@ -12,8 +12,8 @@
     float: right
 
   .device-brief .device-delete .remover
-    +small-button
-    +transparent-button
+    @extend %small-button
+    @extend %transparent-button
 
   .device-brief .device-state
     float: left
@@ -63,7 +63,7 @@
     float: right
 
   .share-zone .shared-list .permission .actions button
-    +small-button
+    @extend %small-button
 
   .share-zone .shared-list .info
     +clearfix

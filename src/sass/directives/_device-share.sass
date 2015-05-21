@@ -32,11 +32,11 @@
 
   .results .result .trigger,
   .existing-permissions .permission .remover
-    +small-button
+    @extend %small-button
     float: right
 
   .existing-permissions .permission .remover
-    +red-button
+    @extend %red-button
 
   .existing-permissions .permission .remover
 
@@ -47,6 +47,6 @@
     height: auto
 
   +popup-style
-    +basic-popup
+    @extend %basic-popup
     width: 200px
     height: auto

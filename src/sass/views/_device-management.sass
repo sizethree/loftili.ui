@@ -31,16 +31,16 @@
     margin: 0.5em 0 0 0
 
   .queue-track-list
-    +alternating-list
+    @extend %alternating-list
 
   .queue-track-list .item-controls button
-    +small-button
+    @extend %small-button
 
   .device-queue-search
     display: block
 
   .device-queue-search input.search-input
-    +bordered-input
+    @extend %bordered-input
     width: 100%
 
   .device-queue-search .result-info

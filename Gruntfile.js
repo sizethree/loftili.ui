@@ -199,7 +199,7 @@ module.exports = function() {
         files: [
           path.join(paths.src, 'sass', '**/*.sass')
         ],
-        tasks: ['sass']
+        tasks: ['sass:debug']
       },
       index: {
         files: ['src/jade/index.jade'],

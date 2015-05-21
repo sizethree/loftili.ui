@@ -19,7 +19,7 @@
       top: 1px solid darken(white, 10)
     
   .controls .search-toggle-button
-    +small-button
+    @extend %small-button
     position: absolute
     top: -1em
     left: 0em
@@ -33,7 +33,7 @@
       margin-top: 2px
 
       button
-        +small-button
+        @extend %small-button
     
     .queue-index,
     .track-title

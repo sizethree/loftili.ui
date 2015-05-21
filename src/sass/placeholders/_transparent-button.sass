@@ -1,5 +1,7 @@
-@mixin transparent-button
-  +basic-button
+@import "basic-button"
+
+%transparent-button
+  @extend basic-button
   background: transparent
   border: none
 
@@ -9,6 +11,12 @@
 
   &:hover
     box-shadow: none
+  
+  &:active
+    background-image: none
+    background: transparent
+    box-shadow: none
 
-  &:hover .ionicon:after
+  &:hover,
+  .ionicon:after
     color: darken(white, 20)

@@ -1,0 +1,12 @@
+@import "transparent-button"
+
+%underlined-button
+  @extend transparent-button
+  +transition(none)
+  color: $color-blue
+  padding: 0.5em 0
+  text-decoration: underline
+  margin: 0
+
+  &:hover
+    color: darken($color-blue, 15)

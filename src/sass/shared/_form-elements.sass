@@ -1,7 +1,7 @@
 input[type="text"],
 input[type="email"],
 input[type="password"]
-  +bordered-input
+  @extend %bordered-input
 
 input[type="file"]
   display: block
@@ -10,7 +10,7 @@ input[type="file"]
 
 .btn-grp, 
 .button-group
-  +button-group
+  @extend %button-group
 
 .file
   cursor: pointer
@@ -24,7 +24,7 @@ input[type="file"]
 
 button,
 a.button
-  +basic-button
+  @extend %basic-button
 
   &.transparent, 
   &.transparent:hover, 

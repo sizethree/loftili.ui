@@ -7,7 +7,7 @@
     width: 100%
 
   input.searcher
-    +bordered-input
+    @extend %bordered-input
     position: relative
     width: 100%
 
@@ -18,7 +18,7 @@
     margin: 5px 0 0 0
 
     ul.client-list
-      +result-list
+      @extend %result-list
     
     li.client .action-container
       +clearfix

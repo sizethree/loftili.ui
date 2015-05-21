@@ -1,6 +1,6 @@
 .device-list.directive
   display: block
-  +alternating-list
+  @extend %alternating-list
 
   .device-container
     +clearfix
@@ -8,7 +8,7 @@
     display: block
 
   .bit
-    +ellipsis-text
+    @extend %ellipsis-text
     overflow: hidden
     font-size: 1em
     line-height: 1em

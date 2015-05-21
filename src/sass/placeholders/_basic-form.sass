@@ -1,4 +1,7 @@
-@mixin basic-form
+@import "bordered-input"
+@import "button-group"
+
+%basic-form
   +clearfix
   display: block
   position: relative
@@ -18,9 +21,9 @@
     input[type="email"],
     input[type="phone"],
     input[type="password"]
-      +bordered-input
+      @extend bordered-input
 
   .actions
     +clearfix
-    +button-group
+    @extend %button-group
     text-align: center
