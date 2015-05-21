@@ -2,20 +2,17 @@
   display: block
 
   .token-list
+    @extend %alternating-list
     display: block
     list-style: none
 
   p.client-name
-    font-size: 16px
-    line-height: 24px
+    line-height: 1.8em
+    font-size: 1em
 
   .token-list .token
     +clearfix
     height: auto
-    padding: 5px 10px
-
-    &:nth-child(odd)
-      background: darken(white, 5)
 
     .name-container
       overflow: hidden
@@ -26,31 +23,25 @@
     float: right
 
     code.client-token
-      top: -2px
+      margin-top: -0.25em
       padding: 2px 8px
-      margin-bottom: -4px
-      font-size: 14px
+      font-size: 1em
 
     code.client-token, 
     a.token-display-toggle
       display: block
       float: left
-      line-height: 24px
 
     a.token-display-toggle
-      font-size: 16px
+      @extend %transparent-button
+      line-height: 1.8em
+      margin: 0 10px
 
     button.remover
-      float: left
-      display: block
-      margin: 0 0 0 10px
-
-      .ionicon, .ionicon:after
-        display: block
-        font-size: 12px
-        line-height: 12px
-        width: 12px
-        height: 12px
+      @extend %small-button
+      font-size: 0.8em
+      line-height: 1.8em
+      padding: 0 0.4em
 
     .token-display-toggle
       cursor: pointer

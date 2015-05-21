@@ -10,10 +10,13 @@
 
   .device-brief .device-delete
     float: right
+    margin-left: 10px
 
   .device-brief .device-delete .remover
     @extend %small-button
     @extend %transparent-button
+    line-height: 1.8em
+    outline: none
 
   .device-brief .device-state
     float: left
@@ -22,9 +25,6 @@
 
   .device-brief .device-name-date .name-container.not-owner
     line-height: 1.8em
-
-  .device-brief .device-name-date .name-input input[type="text"]
-    padding: 0.6em 0.4em
 
   .device-brief .device-state .status-icon
     height: 2em
