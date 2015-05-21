@@ -231,6 +231,19 @@ module.exports = function() {
     sass: {
       debug: {
         options: {
+          include: neat.includePaths,
+          comments: true
+        },
+        files: [{
+          cwd: path.join(paths.src, 'sass'),
+          expand: true,
+          src: ['app.sass'],
+          dest: path.join(paths.dist, 'css'),
+          ext: '.css'
+        }]
+      },
+      release: {
+        options: {
           include: neat.includePaths
         },
         files: [{
@@ -264,7 +277,7 @@ module.exports = function() {
       var source = file.src,
           dest = file.dest,
           main_file, exists,
-          sass_config = { includePaths: data.options.include };
+          sass_config = { includePaths: data.options.include, sourceComments: data.options.comments == true };
 
       if(source.length > 1 || is_failed)
         return failed('must specify only one source file when compiling sass');
@@ -326,6 +339,12 @@ module.exports = function() {
     'copy:soundmanager'
   ]);
 
-  grunt.registerTask('release', ['default', 'uglify', 'cssmin', 'jade:indexmin']);
+  grunt.registerTask('release', [
+    'default', 
+    'uglify', 
+    'sass:release', 
+    'cssmin', 
+    'jade:indexmin'
+  ]);
 
 };
