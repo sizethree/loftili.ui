@@ -1,121 +1,52 @@
 .track-upload-form.directive
   display: block
-
-  .title-container, 
+  
   .form-container
-    padding: 0px 10px
+    +clearfix
 
-  button, a.button
+  .form-container .action-group
+    +button-group
+
+  .form-container .action-group a
     +small-button
 
-  .upload-list
-    margin: 0 10px
+  .form-container .action-group .file
+    +file-button
+    float: left
 
-    .uploading
-      +outer-container
-      padding: 3px 5px
-      border-radius: 2px
-      background: darken($base-background-color, 10)
+  .form-container .action-group .track-search
+    +transition(all 500ms ease)
+    float: left
+    width: 0
+    overflow: hidden
+    height: auto
 
-      .text
-        +span-columns(8)
-        overflow: hidden
-
-        p.msg
-          font-size: 0.8em
-          margin-bottom: 0px
-          line-height: 20px
-          span
-            float: left
-            display: inline-block
-            font: $serif
-            font-style: normal
-
-          span.upload-name
-            margin-left: 0.5em
-            white-space: nowrap
-            overflow: hidden
-            width: 60%
-            text-overflow: ellipsis
-
-      .loader
-        +span-columns(4)
-        +omega
-        float: right
-        height: 20px
-
-  .problems
-    margin: 0 10px
-
-  .type
-    margin: 0
-
-  .form-container
-  
-  .input-container
-    margin: 5px 0
-    box-sizing: content-box
+  .progress
+    +clearfix
     position: relative
 
-  .input-container
+  .progress .upload-list
+    +clearfix
 
-    .track-search.directive
-      +transition(all 300ms ease)
-      float: left
-      margin: 0
-      padding: 0
-      width: 0px
-      border-radius: 0
-      height: 30px
-      position: relative
-      overflow: hidden
+  .progress .upload-list .uploading
+    +clearfix
+    margin: 0.5em 0 0 0
 
-      input.search-input
-        +bordered-input
-        width: 100%
+  .progress .upload-list .uploading .text
+    +span-columns(9)
+    line-height: 1.8em
 
-      &.open
-        +calc(width, "100% - 64px")
-        overflow: visible
+  .progress .upload-list .uploading .text .blurb
+    display: inline-block
+    padding: 0px 5px
+    margin: -1px 0 0 0
+    background: darken(white, 10)
+    border: 1px soli darken(white, 15)
+    border-radius: 3px
 
-    .btn-grp
-      +clearfix
+  .progress .upload-list .uploading .loader
+    +span-columns(3)
+    height: 1.8em
 
-    .file
-      +clearfix
-      overflow: hidden
-      position: relative
-      float: left
-      z-index: 1
-      cursor: pointer
-
-      &:hover 
-        z-index: 2
-        overflow: visible
-
-    .button 
-      border-radius: 2px 0 0 2px
-
-    .button.close,
-    .button.search
-      border-radius: 0 2px 2px 0
-
-    .cover
-      position: relative
-      z-index: 2
-
-    .cover .type
-      border: none
-
-    input[type="file"]
-      height: 100%
-      width: 100%
-      margin: 0
-      opacity: 0.0
-      padding: 0
-      position: absolute
-      left: 0
-      top: 0
-      z-index: 3
-      text-indent: 9999px
-      overflow: hidden
+  .form-container .action-group .track-search.open
+    +calc("width", "100% - 50px")

@@ -1,0 +1,21 @@
+@mixin file-button
+  +clearfix
+  display: block
+  position: relative
+
+  .cover
+    position: relative
+    z-index: 1
+
+  input[type="file"]
+    height: 100%
+    width: 100%
+    margin: 0
+    opacity: 0.0
+    padding: 0
+    position: absolute
+    left: 0
+    top: 0
+    z-index: 3
+    text-indent: 9999px
+    overflow: hidden

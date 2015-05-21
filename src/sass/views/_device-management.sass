@@ -28,37 +28,59 @@
         background: white
 
   .device-queue
-    margin: 20px 0 0 0
+    margin: 0.5em 0 0 0
 
   .queue-track-list
     display: block
+    border: 1px solid darken(white, 10)
+    border-radius: 3px
 
-    .inner-container .item-controls button
+  .queue-track-list .track-container
+    display: block
+    border-top: 1px solid darken(white, 10)
+    padding: 0.4em 0.5em
+
+    &:first-child
+      border-top: 0
+
+    &:nth-child(odd)
+      background: darken(white, 3)
+
+  .queue-track-list .item-controls button
       +small-button
 
   .device-queue-search
     display: block
 
-    input.search-input
-      border: 1px solid darken(white, 10)
-      width: 100%
+  .device-queue-search input.search-input
+    +bordered-input
+    width: 100%
 
-    .result-info
-      display: block
-      padding: 0
+  .device-queue-search .result-info
+    background: transparent
+    border: none
+    padding: 0
+    margin: 10px 0 0 0
 
-      .result-item
-        margin: 0
-        border-bottom: 1px solid darken(white, 8)
-        height: auto
-        padding: 5px 10px
+  .device-queue-search .result-info .result-list
+    border: 1px solid darken(white, 10)
+    border-radius: 3px
 
-        button.adder
-          +small-button
+  .device-queue-search .result-info .result-list .result-item
+    +clearfix
+    border-top: 1px solid darken(white, 10)
+    padding: 0.4em 0.5em
+    height: auto
+    line-height: 1.8em
 
-        &:last-child
-          border-bottom: none
-          margin-bottom: 0
+    &:first-child
+      border-top: 0
+
+    &:nth-child(odd)
+      background: darken(white, 3)
+
+  .device-queue-search .result-info .result-list .result-item > .inner
+    +clearfix
 
   .where-the-magic-happens
     +span-columns(8)

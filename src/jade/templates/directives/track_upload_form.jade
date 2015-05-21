@@ -3,7 +3,7 @@
   .problems(lf-flash-message messages="failures")
   form.form-container
     .input-container
-      .btn-grp
+      .action-group
         .file
           a.cover.button
             i.ionicon.folder
@@ -15,7 +15,6 @@
     .upload-list
       .uploading(ng-repeat="upload in uploading")
         .text
-          p.msg 
-            span Uploading: 
-            span.upload-name {{ upload.name }}
+          p.msg.foundry uploading: 
+            span.blurb {{upload.name}}
         .loader(lf-progress-bar)

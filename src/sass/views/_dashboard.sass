@@ -2,85 +2,41 @@
   +outer-container
   min-height: 100%
   position: relative
-
-  .nav, .container
-    h2, p, a
-      margin: 0
-
-  > .container
-    +outer-container
-    padding: 1em 1em
-    position: relative
-    z-index: 1
-
-  .subtitle
-    font-weight: bold
-
-  .dashboard-inner
-    +outer-container
-
-  .newbie
-    padding: 0px 10px
-    color: darken($base-background-color, 25)
-
-    p.text
-      margin: 0px
-
-    a.leveler 
-      cursor: pointer
-      display: inline-block
+  margin: 0 1em
 
   .half-section
     +outer-container
-
-    .bottom
-      padding: 10px 0
-
-    .section-top
-      border-radius: 2px
-      padding: 0 0.75em
-
-    .section-top .subtitle
-      display: inline-block
-      font-size: 0.75em
-      line-height: 2.5em
-      border-bottom: 2px solid $dark-gray
-
-  .device-list.directive .list-container
-    margin: 0
-
-  .device-section-container .registration-container
-    border: 1px solid darken(white, 8)
-    background: darken(white, 3)
-    display: block
-    margin: 10px 10px 0
-    padding: 10px
+    border: 1px solid darken(white, 5)
+    margin: 2em 0
+    padding: 0.5em
     border-radius: 2px
 
-    .device-creator.directive .fields
-      +calc("width", "100% - 50px")
-      margin-right: 10px
-      float: left
+  .half-section .section-top
+    margin: 0 0 10px 0
 
-      margin: 
-        bottom: 0
-        top: 0
+  .half-section > .bottom
 
-    .device-creator.directive .fields .input-container
-      +span-columns(6)
-      margin: 
-        bottom: 0
-        top: 0
+  .device-section-container .device-creator .form-container
+    +clearfix
+    margin: 10px 0 0
 
-    .device-creator.directive .actions
-      overflow: hidden
-      margin: 0
+  .device-section-container .device-creator .form-container .fields
+    +clearfix
+    +span-columns(10)
+    margin-top: 0
+    margin-bottom: 0
 
-      button
-        +small-button
+  .device-section-container .device-creator .form-container .fields .input-container
+    +span-columns(6)
+    margin-top: 0
+    margin-bottom: 0
 
-  .track-upload-form.directive .input-container
-    margin: 0
+  .device-section-container .device-creator .form-container .actions
+    +span-columns(2)
+
+  .device-section-container .device-creator .form-container .actions button
+    +small-button
+
 
   &[active="overview"]
     .track-section-container, 

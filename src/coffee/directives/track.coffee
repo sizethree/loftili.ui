@@ -5,6 +5,7 @@ dTrack = (Lang, Notifications, Audio) ->
     notification_id = null
     dropping_lang = Lang 'library.tracks.dropping'
     sound = null
+    is_starting = false
 
     dropSuccess = () ->
       Notifications.remove notification_id
@@ -21,7 +22,7 @@ dTrack = (Lang, Notifications, Audio) ->
       promise.then dropSuccess, dropFail
 
     stopped = () ->
-      $scope.playing = false
+      $scope.playing = false if !is_starting
 
     makeSound = () ->
       sound = new Audio.Sound $scope.track
@@ -29,14 +30,14 @@ dTrack = (Lang, Notifications, Audio) ->
 
     $scope.play = () ->
       $scope.playing = true
-      if !sound
-        makeSound()
+      is_starting = true
+      makeSound() if !sound
       sound.play()
+      is_starting = false
 
     $scope.stop = () ->
       $scope.playing = false
-      if sound
-        sound.stop()
+      sound.stop() if sound
 
     $scope.drop = () ->
       if is_dropping
