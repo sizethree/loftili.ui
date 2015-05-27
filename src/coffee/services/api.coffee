@@ -11,27 +11,31 @@ dependencies =[
   'Api/PasswordReset',
   'Api/DevicePermission',
   'Api/DeviceState',
+  'Api/DeviceSerial',
   'Api/Client',
   'Api/ClientToken'
 ]
 lft.service 'Api', dependencies.concat([() ->
 
-  aindx = 0
+  ai = 0
+  aa = arguments
+  an = () -> aa[ai++]
 
   Api =
-    User: arguments[aindx++]
-    Auth: arguments[aindx++]
-    Device: arguments[aindx++]
-    Track: arguments[aindx++]
-    Artist: arguments[aindx++]
-    Playback: arguments[aindx++]
-    DnsRecord: arguments[aindx++]
-    Invitation: arguments[aindx++]
-    TrackQueue: arguments[aindx++]
-    PasswordReset: arguments[aindx++]
-    DevicePermission: arguments[aindx++]
-    DeviceState: arguments[aindx++]
-    Client: arguments[aindx++]
-    ClientToken: arguments[aindx++]
+    User: an()
+    Auth: an()
+    Device: an()
+    Track: an()
+    Artist: an()
+    Playback: an()
+    DnsRecord: an()
+    Invitation: an()
+    TrackQueue: an()
+    PasswordReset: an()
+    DevicePermission: an()
+    DeviceState: an()
+    DeviceSerial: an()
+    Client: an()
+    ClientToken: an()
 
 ])

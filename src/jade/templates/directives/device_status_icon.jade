@@ -1,10 +1,4 @@
 .device-status-icon.directive(ng-click="force()")
-  .tooltip(lf-tooltip)
-    .content.last-checked
-      .with-diff(ng-if="time_diff >= 0")
-        p.label.gill.medium we last heard from your device {{ last_heard | timeAgo }}
-      .without-diff(ng-if="!(time_diff >= 0)")
-        p.label.gill.medium we havent heard from your device
   .status-icon(ng-if="time_diff >= 0" ng-class="{active: status <= 2, bad: status > 2}")
     i.ionicon(ng-class="{check: status >= 0 && status <= 2, exclamation: status >= 3}")
   .status-icon.inactive(ng-if="!(time_diff >= 0)")

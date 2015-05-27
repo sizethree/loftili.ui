@@ -60,6 +60,7 @@ dDeviceInfo = ($location, Api, Auth, Notifications, DPL, Lang) ->
       device: '='
       manager: '='
       permissions: '='
+      serial: '='
     link: dDeviceInfoLink
 
 dDeviceInfo.$inject = [

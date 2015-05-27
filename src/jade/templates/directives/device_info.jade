@@ -7,7 +7,9 @@
         button.remover(ng-click="destroy()")
           i.ionicon.trash
       .device-name-date
-        .input-container(ng-if="is_owner()")
+        .device-serial
+          h2.foundry.light(title="{{serial.serial_number}}") {{serial.serial_number.substr(0, 6)}}
+        .name-container.input-container(ng-if="is_owner()")
           .name-input(lf-easy-input value="device.name" finish="updates.name")
         .name-container.not-owner(ng-if="!is_owner()")
           p.name {{device.name}}
