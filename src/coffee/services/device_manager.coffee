@@ -19,17 +19,24 @@ sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
 
         defer.promise
 
+    update = (data) ->
+      if /queue/i.test data
+        Manager.queue.load()
+
+      Manager.refresh()
+
     Manager =
       state: false
       play: playback 'start'
       stop: playback 'stop'
+      queue: QueueManager device
 
     Manager.connect = (callback) ->
       connected = (err) ->
         is_connected = !err
         stream_url = ['/devicestream', device.id].join '/'
         Socket.get stream_url
-        Socket.on 'update', Manager.refresh
+        Socket.on 'update', update
         callback err
       Socket.connect connected
 
@@ -47,8 +54,6 @@ sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
         id: device.id).$promise.then success, fail
 
       deferred.promise
-
-    Manager.queue = QueueManager device
 
     Manager
     

@@ -11,10 +11,11 @@ sQueueManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
     callbacks =
       'add': []
       'remove': []
+      'refresh': []
 
-    trigger = (evt) ->
+    trigger = (evt, data) ->
       listeners = callbacks[evt]
-      l.fn() for l in listeners
+      l.fn(data) for l in listeners
 
     Manager.on = (evt, fn) ->
       is_valid = (angular.isArray callbacks[evt]) and (angular.isFunction fn)
@@ -34,11 +35,11 @@ sQueueManager = ($q, Analytics, Api, Socket, DEVICE_STATES) ->
         for listener, index in listeners
           listeners.splice index, 1 if listener.id == id
 
-
     Manager.load = () ->
       defer = $q.defer()
 
       success = (new_queue) ->
+        trigger 'refresh', new_queue
         defer.resolve new_queue.queue
 
       fail = () ->

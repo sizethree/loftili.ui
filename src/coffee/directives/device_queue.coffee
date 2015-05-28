@@ -2,6 +2,7 @@ dDeviceQueue = (Notifications, Lang) ->
 
   dDeviceQueueLink = ($scope, $element, $attrs) ->
     $scope.adding = false
+    listeners = []
 
     $scope.searchToggle = () ->
       $scope.adding = !$scope.adding
@@ -16,11 +17,13 @@ dDeviceQueue = (Notifications, Lang) ->
 
       ($scope.manager.queue.remove index).then success, fail
 
-    listener = $scope.manager.queue.on 'add', () ->
-      $scope.adding = false
+    refreshed = (data) ->
+      $scope.queue = data.queue
 
-    $scope.$on '$destroy', () ->
-      $scope.manager.queue.off listener
+    listeners.push $scope.manager.queue.on 'add', () -> $scope.adding = false
+    listeners.push $scope.manager.queue.on 'refresh', refreshed
+
+    $scope.$on '$destroy', () -> $scope.manager.queue.off l for l in listeners
 
   lfDeviceQueue =
     replace: true
