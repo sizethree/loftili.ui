@@ -6,6 +6,8 @@ DeviceManagementController = ($scope, Api, DeviceManager, resolutions...) ->
   $scope.queue = resolutions[2]
   $scope.manager = DeviceManager $scope.device
 
+  $scope.manager.refresh()
+
   stream = (err) ->
 
   $scope.manager.connect stream

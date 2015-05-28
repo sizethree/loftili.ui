@@ -1,9 +1,9 @@
 _factory = ($resource, URLS) ->
 
   default_params =
-    device_id: '@id'
+    id: '@id'
 
-  DeviceState = $resource [URLS.api, 'devicestates', ':device_id'].join('/'), default_params
+  DeviceState = $resource [URLS.api, 'devicestates', ':id'].join('/'), default_params
 
 _factory.$inject = ['$resource', 'URLS']
 

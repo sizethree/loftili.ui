@@ -1,5 +1,4 @@
 .device-status-icon.directive(ng-click="force()")
-  .status-icon(ng-if="time_diff >= 0" ng-class="{active: status <= 2, bad: status > 2}")
-    i.ionicon(ng-class="{check: status >= 0 && status <= 2, exclamation: status >= 3}")
-  .status-icon.inactive(ng-if="!(time_diff >= 0)")
-    i.ionicon.question
+  .status-icon.active(ng-if="connected()")
+    i.ionicon.check
+  .status-icon.inactive(ng-if="!connected()")

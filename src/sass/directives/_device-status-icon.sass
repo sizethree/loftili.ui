@@ -10,6 +10,14 @@
     border-radius: 2px
     text-align: center
 
+    &.active
+      +linear-gradient($color-green, darken($color-green, 5))
+      border: 1px solid darken($color-green, 8)
+
+  .status-icon.active .ionicon:after
+    color: darken($color-green, 20)
+    text-shadow: 1px 1px darken($color-green, 25)
+
   .ionicon,
   .ionicon:after
     text-align: center
