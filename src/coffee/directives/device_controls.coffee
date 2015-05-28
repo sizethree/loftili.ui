@@ -9,7 +9,14 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
     restarting_lang = Lang 'device.playback.restarting'
     failed_lang = Lang 'device.playback.failed'
 
-    clear = () ->
+    $scope.skip = () ->
+      success = () ->
+
+      fail = () ->
+        failed_play = failed_lang.replace /{{action}}/, 'skip'
+        Notifications.flash.error failed_play
+
+      ($scope.manager.skip true).then success, fail
 
     $scope.play = () ->
       success = () ->

@@ -29,6 +29,7 @@ sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
       state: false
       play: playback 'start'
       stop: playback 'stop'
+      skip: playback 'skip'
       queue: QueueManager device
 
     Manager.connect = (callback) ->
