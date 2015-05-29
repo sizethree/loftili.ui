@@ -1,4 +1,5 @@
 .directive.account-manager
+  @extend %basic-form
   +outer-container
   display: block
 
@@ -9,13 +10,9 @@
     font-size: 22px
     color: darken(white, 50)
 
-  .input-container
-    +outer-container
+  .fields .input-container
+    +clearfix
     +span-columns(6)
-    padding-top: 5px
-    padding-bottom: 5px
-    margin-top: 5px
-    margin-bottom: 5px
 
     &:nth-child(even)
       +omega
@@ -69,3 +66,9 @@
     outline: none
     font-size: 0.8em
     line-height: 1.2em
+
+  .actions
+    +clearfix
+
+  .actions .button
+    @extend %small-button

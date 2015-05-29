@@ -1,0 +1,48 @@
+.request-account.view
+  display: block
+  padding: 40px 1em
+
+  .content-container
+    +span-columns(8)
+    +shift(2)
+
+  .marketing-intro
+    +clearfix
+    margin-bottom: 20px
+    text-align: justify
+
+  .marketing-intro h1
+    font-size: 2em
+    margin-bottom: 0.5em
+
+  .marketing-intro p
+    font-size: 1em
+    line-height: 1.4em
+
+  .marketing-intro .siggy
+    margin-top: 20px
+
+  .marketing-intro .middle 
+    +clearfix
+
+  .marketing-intro .middle .text
+    +span-columns(8)
+
+  .request-form-container
+    +span-columns(4)
+
+  .account-request-form
+    +clearfix
+
+  .request-form-container .fields
+    +span-columns(10)
+    margin-top: 0
+    
+  .request-form-container .fields .input-container
+    margin: 0
+
+  .request-form-container .actions
+    +span-columns(2)
+
+  .request-form-container .actions a.button
+    @extend %small-button

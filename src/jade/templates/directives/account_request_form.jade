@@ -1,0 +1,11 @@
+.account-request-form.directive
+  .has-sent(ng-if="has_sent")
+    p.bodoni.blurb {{"in_touch" | i18n}}
+  .not-sent(ng-if="!has_sent")
+    .fields
+      .input-container
+        input(type="text" ng-model="info.email" name="email" placeholder="email")
+    .actions
+      .action.send
+        a.button.sender(ng-click="send()")
+          i.ionicon.send

@@ -7,8 +7,11 @@ _factory = ($q, Api) ->
     update: (property, value) ->
       deferred = $q.defer()
 
-      params =
-        id: @user.id
+      if angular.isObject property
+        params = property
+      else
+        params = {id: @user.id}
+        params[property] = value
 
       success = () ->
         deferred.resolve()
@@ -16,12 +19,7 @@ _factory = ($q, Api) ->
       fail = () ->
         deferred.reject()
 
-      params[property] = value
-
-      request = Api.User.update params
-
-      request.$promise.then success, fail
-
+      (Api.User.update params).$promise.then success, fail
       deferred.promise
 
 _factory.$inject = ['$q', 'Api']

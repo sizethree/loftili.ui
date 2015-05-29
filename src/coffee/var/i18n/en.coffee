@@ -1,4 +1,5 @@
 lft.value 'i18n-en',
+  in_touch: "We'll be in touch!"
   privacy:
     PRIVATE: 'private'
     CONNECTED: 'connections'
@@ -17,6 +18,10 @@ lft.value 'i18n-en',
   account:
     doing_update: 'Please wait, updating account'
     update_success: 'Successfully updated your account'
+    requesting:
+      sending: 'Sending your request...'
+      finished: 'We\'ve saved your request, we\'ll be in touch'
+      failed: 'We couldn\'t complete your request, shoot us an email.'
     password:
       change:
         success: 'Your password has been updated!'

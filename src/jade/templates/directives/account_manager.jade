@@ -3,16 +3,19 @@
     dl.username-container
       dt.username username
       dd.gill.medium {{manager.user.username}}
-  .bottom-area
+  .bottom-area.fields
     dl.input-container.name-input.first
       dt.gill.medium first name
-      dd.editable(lf-easy-input value="manager.user.first_name" finish="save.first_name")
+      dd.editable
+        input(type="text" ng-model="manager.user.first_name" name="first_name")
     dl.input-container.name-input.last
       dt.gill.medium last name
-      dd.editable(lf-easy-input value="manager.user.last_name" finish="save.last_name")
+      dd.editable
+        input(type="text" ng-model="manager.user.last_name" name="last_name")
     dl.input-container.email-input
       dt.gill.medium email
-      dd.editable(lf-easy-input value="manager.user.email" finish="save.email")
+      dd.editable
+        input(type="email" ng-model="manager.user.email" name="email")
     dl.input-container.password-input
       dt.gill.medium password
       dd.editable
@@ -29,3 +32,7 @@
       dt.gill.light privacy level
       dd.editable
         select(ng-model="fields.privacy" ng-change="save.privacy()" ng-options="value as ('privacy.'+name | i18n) for (name, value) in privacy_levels")
+  .actions
+    a.button.save(ng-click="save()") 
+      i.ionicon.send
+      span save

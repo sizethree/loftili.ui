@@ -23,9 +23,10 @@ _factory = (Notifications, Lang, PRIVACY_LEVELS) ->
           a: ''
           b: ''
 
-      $scope.save = (property, value) ->
+      $scope.save = () ->
         wait_lang = Lang 'account.doing_update'
         wait_id = null
+        promise = null
 
         success = () ->
           Notifications.remove wait_id
@@ -36,36 +37,7 @@ _factory = (Notifications, Lang, PRIVACY_LEVELS) ->
           Notifications.remove wait_id
 
         wait_id = Notifications.add wait_lang, 'info'
-
-        promise = $scope.manager.update property, value
-
-        promise.then success, fail
-
-        promise
-
-      addCallback = (field) ->
-        original_value = null
-        input_scope = null
-        wait_lang = Lang 'account.doing_update'
-        wait_id = null
-
-        success = () ->
-          input_scope.blurOut true
-
-        fail = () ->
-          input_scope.val = input_scope.value = original_value
-          input_scope.blurOut true
-
-        $scope.save[field] = (value, scope) ->
-          original_value = $scope.manager.user[field]
-          input_scope = scope
-
-          if value != original_value
-            $scope.saving = true
-            request = $scope.save field, value
-            request.then success, fail
-
-      angular.forEach basic_fields, addCallback
+        (promise = $scope.manager.update $scope.manager.user).then success, fail
 
       $scope.save.password = (value) ->
         success = () ->
