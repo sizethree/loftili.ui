@@ -1,4 +1,4 @@
-sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
+sDeviceManager = ($q, Analytics, EventManager, Api, Socket, QueueManager, DEVICE_STATES) ->
 
   DeviceManager = (device) ->
     is_connected = false
@@ -19,11 +19,13 @@ sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
 
         defer.promise
 
+    events = EventManager ['update']
+
     update = (data) ->
       if /queue/i.test data
         Manager.queue.load()
-
       Manager.refresh()
+
 
     Manager =
       state: false
@@ -31,6 +33,8 @@ sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
       stop: playback 'stop'
       skip: playback 'skip'
       queue: QueueManager device
+      on: events.on
+      off: events.off
 
     Manager.connect = (callback) ->
       connected = (err) ->
@@ -47,6 +51,7 @@ sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
       success = (data) ->
         Manager.state = data
         deferred.resolve data
+        events.trigger 'update'
 
       fail = () ->
         deferred.reject false
@@ -63,6 +68,7 @@ sDeviceManager = ($q, Analytics, Api, Socket, QueueManager, DEVICE_STATES) ->
 sDeviceManager.$inject = [
   '$q'
   'Analytics'
+  'EventManager'
   'Api'
   'Socket'
   'QueueManager'

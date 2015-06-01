@@ -30,16 +30,16 @@
 
     .item-controls
       float: right
-      margin-top: 2px
 
-      button
-        @extend %small-button
+  .track-container .item-controls button
+    @extend %small-button
+    display: block
     
-    .queue-index,
-    .track-title
-      float: left
-      display: block
-      margin: 0 10px 0 0
+  .track-container .queue-index,
+  .track-container .track-title
+    float: left
+    display: block
+    margin: 0 10px 0 0
 
-    .queue-index
-      font-size: 16px
+  .track-container .queue-index
+    font-size: 16px

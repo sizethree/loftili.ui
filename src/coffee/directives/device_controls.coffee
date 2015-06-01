@@ -36,7 +36,16 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
 
       ($scope.manager.stop true).then success, fail
 
-    $scope.restart = () ->
+    update = () ->
+      state = $scope.manager.state or {}
+      $scope.playback = parseInt state.playback, 10
+      $scope.current_track = (Api.Track.get
+        id: state.current_track)
+
+    listener_id = $scope.manager.on 'update', update
+
+    $scope.$on '$destroy', () ->
+      $scope.manager.off listener_id
 
   lfDeviceControls =
     replace: true

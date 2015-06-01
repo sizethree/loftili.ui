@@ -23,34 +23,22 @@
     height: auto
     overflow: hidden
 
-    p.label
-      font-size: 12px
-
-    p.value
-      font-size: 22px
-
-  .info-bottom
+  .current-state-info .playback-info
     +clearfix
-    overflow: hidden
-    padding: 5px
-    background: darken(white, 5)
-    border: 1px solid darken(white, 8)
-    border-radius: 2px
+    padding: 0.2em 0.5em
+    line-height: 1em
+    background: darken(white, 8)
+    border: 1px solid darken(white, 18)
+    border-radius: 3px
+    display: inline-block
 
-    .stream-state
-      display: block
-      float: left
+  .current-state-info .playback-info .ionicon,
+  .current-state-info .playback-info .current-track
+    display: block
+    float: left
 
-      p.label
-        font-size: 10px
-      
-      i.icon
-        display: block
-        width: 10px
-        height: 10px
-        border-radius: 5px
-        background: red
-        margin: 5px auto 0
+  .current-state-info .playback-info .current-track
+    margin-left: 10px
 
   .control-list
     height: auto
@@ -64,20 +52,3 @@
   
   .control-list .button 
     @extend %small-button
-
-  .current-playback
-    +clearfix
-    display: block
-
-    h1.current-track
-      display: block
-      float: left
-      color: darken(white, 80)
-
-    .ionicon
-      display: block
-      float: left
-      margin: 0 10px 0 0
-
-  button
-    float: left

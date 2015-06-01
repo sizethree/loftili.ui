@@ -1,10 +1,13 @@
 TrackFactory = ['$resource', '$q', 'URLS', ($resource, $q, URLS) ->
 
-  Track = $resource [URLS.api, 'tracks', ':track_id'].join('/'), {},
+  defaults =
+    id: '@id'
+
+
+  Track = $resource [URLS.api, 'tracks', ':id'].join('/'), defaults,
     upload:
       method: 'POST'
-      params:
-        track_id: 'upload'
+      url: [URLS.api, 'tracks', 'upload'].join '/'
       transformRequest: (data) ->
         fdt = new FormData()
         fdt.append 'file', data.track_file
@@ -12,19 +15,15 @@ TrackFactory = ['$resource', '$q', 'URLS', ($resource, $q, URLS) ->
 
     update:
       method: 'PUT'
-      params:
-        track_id: '@id'
 
     search:
       method: 'GET'
       isArray: true
-      params:
-        track_id: 'search'
+      url: [URLS.api, 'tracks', 'search'].join '/'
 
     scout:
       method: 'GET'
-      params:
-        track_id: 'scout'
+      url: [URLS.api, 'tracks', 'scout'].join '/'
 
 ]
 
