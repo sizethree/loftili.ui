@@ -2,7 +2,7 @@
   .searching-flag(ng-if="searching")
   input.search-input(type="text" ng-model="query.val" placeholder="search our library or enter a url" ng-keyup="search($event)")
   .result-list(ng-if="!searching")
-    .result(ng-repeat="result in results" ng-click="add(result)" class="addable")
+    .result.list-item(ng-repeat="result in results" ng-click="add(result)" class="addable")
       .result-inner
         .artist
           p.aptifer.thin(ng-if="result.artist.name") {{result.artist.name}}

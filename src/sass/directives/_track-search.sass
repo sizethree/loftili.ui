@@ -22,7 +22,8 @@
       display: none
 
   .result-list
-    @extend %result-list
+    @extend %alternating-list
+    border: 1px solid darken(white, 30)
     position: absolute
     border: none
     z-index: 1
@@ -33,18 +34,7 @@
     height: auto
 
   .result
-    min-width: 200px
     cursor: pointer
-    padding: 5px 10px
-    border: 1px solid darken(white, 12)
-    border-radius: 2px
-    border-bottom: none
-
-    &:last-child
-      border-bottom: 1px solid darken(white, 12)
-
-    &.addable:hover
-      background: darken(white, 15)
 
   .result-inner
     +clearfix

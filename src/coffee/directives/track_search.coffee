@@ -17,13 +17,8 @@ _factory = ($timeout, Auth, Api) ->
       $scope.query =
         val: ''
 
-      finish = () ->
-        $scope.searching = false
-
       display = (tracks) ->
-        if flag_remove_timeout
-          $timeout.cancel flag_remove_timeout
-        flag_remove_timeout = $timeout finish, 1000
+        $scope.searching = false
         $scope.results = if isArr tracks then tracks else [tracks]
 
       search = () ->
@@ -35,15 +30,13 @@ _factory = ($timeout, Auth, Api) ->
 
       web = () ->
         $scope.searching = true
-        track_promise = Track.scout
-          url: btoa(last_val)
-        track_promise.$promise.then display
+        (Track.scout
+          url: btoa(last_val)).$promise.then display
 
       library = () ->
         $scope.searching = true
-        track_promise = Track.search
-          q: last_val
-        track_promise.$promise.then display
+        (track_promise = Track.search
+          q: last_val).$promise.then display
 
       $scope.search = (evt) ->
         last_val = evt.target.value

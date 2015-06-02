@@ -7,12 +7,13 @@ _factory = ($q, Api) ->
     dropTrack: (track_id) ->
       deferred = $q.defer()
 
-      success = () =>
-        for track, indx in @library
-          if track.id = track_id
-            @library.splice indx, 1
-            break
+      target_index = null
 
+      for track, index in @library
+        target_index = index if track.id == track_id
+
+      success = () =>
+        @library.splice target_index, 1
         deferred.resolve()
 
       fail = () ->

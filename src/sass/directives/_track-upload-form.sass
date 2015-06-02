@@ -7,7 +7,7 @@
   .form-container .action-group
     @extend %button-group
 
-  .form-container .action-group > a.search,
+  .form-container .action-group > a.search-toggle,
   .form-container .action-group .file a
     @extend %small-button
 
@@ -16,7 +16,6 @@
     float: left
 
   .form-container .action-group .track-search
-    +transition(all 500ms ease)
     float: left
     width: 0
     overflow: hidden
@@ -50,4 +49,5 @@
     height: 1.8em
 
   .form-container .action-group .track-search.open
-    +calc("width", "100% - 50px")
+    +calc("width", "100% - 58px")
+    overflow: visible

@@ -18,8 +18,7 @@ dTrack = (Lang, Notifications, Audio) ->
     dropTrack = () ->
       notification_id = Notifications.add dropping_lang, 'info'
       track_id = $scope.track.id
-      promise = $scope.manager.dropTrack track_id
-      promise.then dropSuccess, dropFail
+      ($scope.manager.dropTrack track_id).then dropSuccess, dropFail
 
     stopped = () ->
       $scope.playing = false if !is_starting
