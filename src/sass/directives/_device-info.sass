@@ -61,12 +61,12 @@
     display: inline-block
 
   .share-zone .shared-list
+    @extend %alternating-list
     display: block
+    border: none
 
   .share-zone .shared-list .permission
     +clearfix
-    line-height: 1.7em
-    font-size: 0.8em
     padding: 0.25em 0
 
   .share-zone .shared-list .permission .actions
@@ -79,6 +79,11 @@
     +clearfix
     height: auto
     overflow: hidden
+    font-size: 1em
+    line-height: 1.8em
 
   .share-zone .shared-list .info p
     display: inline-block
+
+  .share-zone .shared-list .info p.permission-level
+    color: lighten(black, 60)
