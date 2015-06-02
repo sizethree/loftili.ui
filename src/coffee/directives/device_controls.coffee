@@ -39,8 +39,11 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
     update = () ->
       state = $scope.manager.state or {}
       $scope.playback = parseInt state.playback, 10
-      $scope.current_track = (Api.Track.get
-        id: state.current_track)
+
+      if (parseInt state.current_track, 10) > 0
+        $scope.current_track = Api.Track.get {id: state.current_track}
+      else
+        $scope.current_track = false
 
     listener_id = $scope.manager.on 'update', update
 
