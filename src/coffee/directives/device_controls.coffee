@@ -39,7 +39,6 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
     update = () ->
       state = $scope.manager.state or {}
       $scope.connected = /true/i.test state.connected
-      console.log state
       $scope.playback = parseInt state.playback, 10
 
       if (parseInt state.current_track, 10) > 0

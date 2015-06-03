@@ -12,8 +12,9 @@
   .results
     display: block
     margin: 10px 0 0 0
-    padding: 10px 0 0 0
-    border-top: 1px solid darken(white, 25)
+    border: 1px solid darken(white, 20)
+    border-radius: 2px
+    background: darken(white, 3)
 
   .existing-permissions
     padding: 10px 0 0 0
@@ -25,10 +26,9 @@
     font-size: 0.8em
     line-height: 1.8em
     padding: 0.5em 0
-    border-top: 1px solid darken(white, 10)
 
-    &:last-child
-      border-bottom: 1px solid darken(white, 10)
+  .results .result
+    padding: 0.5em
 
   .results .result .trigger,
   .existing-permissions .permission .remover
