@@ -7,6 +7,6 @@
     a.button(ng-click="skip()")
       i.ionicon.skip-forward
   .current-state-info
-    .playback-info(ng-if="playback === 1")
+    .playback-info(ng-if="playback === 1 && connected")
       i.ionicon.radio-waves
       p.current-track {{current_track.title}}
