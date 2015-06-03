@@ -19,8 +19,8 @@ sSocket = (CONFIG) ->
   connect = (callback) ->
     is_connected = true
 
-    current_socket = io CONFIG.urls.api,
-      path: '/sock'
+    current_socket = io CONFIG.socket.host,
+      path: CONFIG.socket.path
       query:
         __sails_io_sdk_version: "0.11.0"
         __sails_io_platform: "browser"
