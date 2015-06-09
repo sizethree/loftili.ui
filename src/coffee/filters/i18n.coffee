@@ -1,7 +1,8 @@
 _factory = (Lang) ->
 
   i18n = (context) ->
-    Lang(context)
+    result = Lang context
+    if result then result else context
 
 _factory.$inject = ['Lang']
 

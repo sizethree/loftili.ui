@@ -1,0 +1,39 @@
+.stream-manager.directive
+  .stream-info
+    .basic-info
+      .title-container
+        .title-edit(ng-if="manager.owner")
+          .title-input(lf-easy-input value="manager.stream.title" finish="updates.name")
+        .title-display(ng-if="!manager.owner")
+          h1.foundry.medium {{manager.stream.title}}
+      .description-container
+        .description-edit(ng-if="manager.owner")
+          .description-input(lf-easy-input type="textarea" value="manager.stream.description" finish="updates.description")
+        .description-display(ng-if="!manager.owner")
+          h1.foundry.medium {{manager.stream.description}}
+    .ownership-info
+      .ownership-title
+        h1.foundry.upper Maintained by:
+      .ownership-list
+        .ownership-item.list-item(ng-repeat="p in manager.permissions")
+          .username
+            p.foundry.medium {{p.user.username}}
+          .actions(ng-if="manager.owner && p.level !== 1")
+            a.button.remover(ng-click="removePermission(p.id)")
+              i.ionicon.close
+          .tf
+            .tc
+              .flair(ng-attr-level="{{p.level}}" ng-class="{gold: p.level === 1, blue: p.level === 4, green: p.level === 2}")
+                p.owner.foundry.medium.upper {{ ("stream_permissions." + p.level) | i18n}}
+      .stream-ownership-manager(ng-if="manager.owner")
+        .stream-permission-control(lf-stream-permission-control manager="manager")
+  .stream-control
+    .stream-list
+      .stream-item.list-item(ng-repeat="track in manager.stream.queue")
+        .track-info-container
+          p.track-title.foundry.medium {{track.title}}
+        .track-actions.button-group(ng-if="manager.contributor")
+          a.button.remover(ng-click="remove($index)")
+            i.ionicon.close
+    .stream-addition(ng-if="manager.contributor")
+      .stream-track-search(lf-stream-track-search manager="manager")

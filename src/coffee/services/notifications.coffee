@@ -52,6 +52,7 @@ NotificationsFactory = ($timeout) ->
   
   Notifications.flash.error = (message) -> Notifications.flash message, 'error'
   Notifications.flash.success = (message) -> Notifications.flash message, 'success'
+  Notifications.flash.info = (message) -> Notifications.flash message, 'info'
 
   Notifications
 

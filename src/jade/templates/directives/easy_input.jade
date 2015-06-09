@@ -1,2 +1,10 @@
 .easy-input
-  input(type="text" ng-model="val" ng-keyup="keyUp($event)")
+  textarea(ng-model="val" ng-keyup="keyUp($event)" ng-if="type === 'textarea'" ng-focus="onFocus()" ng-blur="onBlur()")
+  input(type="text" ng-model="val" ng-keyup="keyUp($event)" ng-if="type !== 'textarea'" ng-focus="onFocus()" ng-blur="onBlur()")
+  .menu-container
+    .popup-buttons(lf-popup delegate="focused")
+      .easy-input-menu
+        a.button(ng-click="save()")
+          i.ionicon.check
+        a.button(ng-click="cancel()")
+          i.ionicon.close

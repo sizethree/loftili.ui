@@ -1,0 +1,12 @@
+.stream-permission-control.directive
+  .user-search-container(ng-class="{busy: busy}")
+    input.search-input(type="text" ng-change="search($event)" placeholder="add users" ng-model="search.query")
+  .result-list-container
+    .result-list(ng-if="results.length > 0")
+      .result.list-item(ng-repeat="result in results")
+        .username
+          p.foundry.light {{result.username}}
+        .actions
+          .button-group
+            a.button.addder(ng-click="addUser(result)" /* ng-click="openMenu($index)" */)
+              i.ionicon.add

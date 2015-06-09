@@ -15,6 +15,29 @@
     padding-left: 0
     padding-right: 0
 
+  .stream-list-container .stream-list
+    @extend %alternating-list
+    margin: 0 0 10px 0
+
+  .stream-list-container .stream-list .stream
+    +clearfix
+    line-height: 1.8em
+
+  .stream-list-container .stream-list .stream .title-container,
+  .stream-list-container .stream-list .stream .action-container
+    +clearfix
+    position: relative
+    display: block
+
+  .stream-list-container .stream-list .stream .title-container
+    float: left
+
+  .stream-list-container .stream-list .stream .action-container
+    float: right
+
+  .stream-list-container .stream-list .stream .action-container .button
+    @extend %small-button
+
   .half-section.device-list-wrapper .device-list
     border-radius: 0
     border:
@@ -56,7 +79,7 @@
 
 
   &[active="overview"]
-    .track-section-container, 
+    .stream-section-container, 
     .device-section-container
       +span-columns(6)
 

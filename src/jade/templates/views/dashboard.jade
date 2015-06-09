@@ -1,13 +1,18 @@
 .dashboard.view(ng-attr-active="{{active_nav}}")
-  .track-section-container(ng-if="active_nav === 'library' || active_nav === 'overview'")
-    .track-list-wrapper.half-section
+  .stream-section-container(ng-if="active_nav === 'streams' || active_nav === 'overview'")
+    .stream-list-wrapper.half-section
       .section-top
-        a.foundry.light.upper.subtitle(href="/dashboard/library") library
+        a.foundry.light.upper.subtitle(href="/dashboard/streams") streams
       .bottom
-        .track-list-container(ng-if="tracks.length > 0")
-          .track-list(lf-track-list tracks="tracks" manager="track_manager")
-        .upload-track-container(ng-class="{vis: tracks.length === 0 || uploading}")
-          .uploader(lf-track-upload-form tracks="tracks")
+        .stream-list-container
+          .stream-list
+            .stream.list-item(ng-repeat="stream in streams")
+              .title-container
+                p.title {{stream.title}}
+              .action-container
+                a.button(href="/streams/{{stream.id}}")
+                  i.ionicon.account
+        .upload-form(lf-track-upload-form)
   .device-section-container(ng-if="active_nav === 'devices' || active_nav === 'overview'")
     .device-list-wrapper.half-section
       .section-top

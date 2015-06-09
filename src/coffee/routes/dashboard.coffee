@@ -5,58 +5,53 @@ lft.config ['$routeProvider', ($routeProvider) ->
   next = (user) ->
     callback user for callback in callbacks
 
+  resolve = ($q, $route, Api, Auth) ->
+    deferred = $q.defer()
+    current_route = $route.current
+    params = current_route.params
+
+    resolved =
+      childView: if params['child'] then params['child'] else 'overview'
+
+    check = () ->
+      if resolved.devices and resolved.streams
+        deferred.resolve resolved
+
+    loadedDevices = (devices) ->
+      resolved.devices = devices
+      check true
+
+    loadedStreams = (streams) ->
+      r = []
+      r.push s.stream for s in streams
+      resolved.streams = r
+      check true
+
+    auth = (user_info) ->
+      (Api.Device.query
+        user: user_info.id).$promise.then loadedDevices
+      (Api.StreamPermission.query
+        user: user_info.id).$promise.then loadedStreams
+
+    fail = () ->
+
+    (Auth.filter 'active').then auth, fail
+
+    deferred.promise
+
+  resolve.$inject = [
+    '$q',
+    '$route',
+    'Api',
+    'Auth'
+  ]
+
+
   $routeProvider.when '/dashboard/:child?',
     templateUrl: 'views.dashboard'
     controller: 'DashboardController'
     name: 'dashboard'
     resolve:
-      childView: ['$route', ($route) ->
-        current_route = $route.current
-        if current_route.params and current_route.params['child']
-          current_route.params['child']
-        else
-          'overview'
-      ],
-
-      activeUser: ['Auth', (Auth) ->
-        callbacks = []
-        active = Auth.filter 'active'
-        active.then next
-        active
-      ],
-
-      tracks: ['Api', '$q', (Api, $q) ->
-        deferred = $q.defer()
-
-        finish = (tracks) ->
-          deferred.resolve tracks
-
-        fail = () ->
-          deferred.reject()
-
-        tracks = (user) ->
-          Api.User.tracks({user_id: user.id}).$promise.then finish, fail
-
-        callbacks.push tracks
-        deferred.promise
-      ],
-
-      devices: ['Api', '$q', (Api, $q) ->
-        deferred = $q.defer()
-    
-        finish = (devices) ->
-          deferred.resolve devices
-
-        fail = () ->
-          deferred.reject()
-
-        devices = (user) ->
-          devices = Api.Device.query
-            user: user.id
-          devices.$promise.then finish, fail
-
-        callbacks.push devices
-        deferred.promise
-      ]
+      resolved: resolve
 
 ]

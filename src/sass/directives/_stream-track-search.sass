@@ -1,0 +1,49 @@
+.stream-track-search.directive
+  display: block
+  position: relative
+
+  .search-input
+    margin: 0
+
+  .search-input-container
+    +clearfix
+    display: block
+    position: relative
+
+  .result-info
+    position: absolute
+    top: 100%
+    left: 0
+    margin: 10px 0 0 0
+    width: 100%
+    background: darken(white, 5)
+    border-radius: 2px
+    padding: 0px
+
+  .no-result-text
+    display: block
+    padding: 5px 10px
+    text-transform: uppercase
+    color: darken(white, 25)
+    font-size: 10px
+
+  .result-list
+    list-style: none
+    @extend %alternating-list
+
+  .result-list .result-item
+    border-left: 0
+    border-right: 0
+    line-height: 1.8em
+
+  li.result-item > .inner
+    +clearfix
+
+    .title
+      float: left
+
+    .item-controls
+      float: right
+
+      button
+        @extend %small-button

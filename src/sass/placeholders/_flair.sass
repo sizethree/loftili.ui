@@ -1,0 +1,29 @@
+%flair
+  display: inline-block
+  font-size: 0.5em
+  line-height: 1em
+  vertical-align: middle
+  border-radius: 1em
+  padding: 0
+  background: darken(white, 30)
+  border: 1px solid darken(white, 40)
+  padding: 0.4em 0.5em
+  text-align: center
+
+  &.green
+    $flair-blue-color: #b6e5f1
+    background: $flair-blue-color
+    border-color: darken($flair-blue-color, 10)
+    color: darken($flair-blue-color, 40)
+
+  &.blue
+    $green-color: $blue-color
+    background: $green-color
+    border-color: darken($green-color, 10)
+    color: white
+
+  &.gold
+    $gold-color: #f1e8b6
+    background: $gold-color
+    border-color: darken($gold-color, 10)
+    color: darken($gold-color, 40)

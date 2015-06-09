@@ -1,0 +1,76 @@
+.stream-manager.directive
+  display: block
+  +clearfix
+
+  .ownership-info
+    display: block
+    margin: 20px 0 0 0 
+
+  .ownership-info .ownership-list
+    @extend %alternating-list
+    margin: 0 0 10px 0
+
+  .ownership-info .ownership-title
+    margin-bottom: 5px
+
+  .ownership-info .ownership-title h1
+    font-size: 0.8em
+    color: darken(white, 20)
+    
+  .ownership-info .ownership-list .list-item
+    +clearfix
+    line-height: 1.8em
+
+  .ownership-info .ownership-list .list-item .username
+    float: left
+
+  .ownership-info .ownership-list .list-item .tf
+    float: right
+    height: 1.8em
+
+  .ownership-info .ownership-list .list-item .flair
+    @extend %flair
+    display: table-cell
+
+  .ownership-info .ownership-list .list-item .actions
+    float: right
+    margin-left: 10px
+
+  .ownership-info .ownership-list .list-item .actions .button
+    @extend %small-button
+
+  .stream-info
+    display: block
+
+  .stream-info .title-container
+    display: block
+    margin: 0 0 10px 0
+
+  .stream-info .description-container textarea
+    width: 100%
+    resize: none
+    height: 100%
+    position: relative
+
+  .stream-control .stream-list
+    @extend %alternating-list
+    margin: 0 0 10px 0
+
+  .stream-control .stream-list .stream-item
+    +clearfix
+    line-height: 1.8em
+
+  .stream-item .track-info-container
+    +span-columns(8)
+
+  .stream-item .track-actions
+    +span-columns(4)
+    @extend %button-group
+    text-align: right
+
+  .stream-item .track-actions .button
+    @extend %small-button
+
+  .stream-list .stream-item .track-actions .button
+    display: inline-block
+    float: none

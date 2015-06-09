@@ -1,0 +1,57 @@
+.stream-permission-control.directive
+  display: block
+
+  .user-search-container
+    display: block
+    position: relative
+
+  .user-search-container.busy:after
+    content: ''
+    display: block
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    background: rgba(255,255,255,0.4)
+
+  .result-list-container
+    display: block
+
+  .result-list-container .result-list
+    @extend %alternating-list
+    margin: 10px 0 0 0
+
+  .result-list-container .result-list .list-item
+    +clearfix
+    line-height: 1.8em
+
+  .result-list-container .result-list .list-item .username
+    float: left
+
+  .result-list-container .result-list .list-item .actions
+    float: right
+    position: relative
+
+  .result-list-container .result-list .list-item .actions .popup-menu
+    position: absolute
+    right: -20px
+    top: 0
+
+  .result-list .list-item .actions .button
+    @extend %small-button
+
+.stream-permission-popup-control
+  display: block
+  padding: 0.5em
+  position: relative
+  background: white
+  border: 1px solid darken(white, 15)
+  border-radius: 2px
+
+.stream-permission-popup-control .level-dropdown
+  margin: 0 0 10px 0
+
+.stream-permission-popup-control .submission-action .button
+  @extend %small-button
+  

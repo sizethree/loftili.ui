@@ -3,20 +3,19 @@
   display: block
   position: relative
 
-  .buttons
-    +clearfix
-    display: none
+  .popup-buttons 
     position: absolute
-    right: -20px
+    right: -5px
     top: 0
-
-    button
-      float: left
-      height: 10px
-      width: 10px
-
-      &:after
-        font-size: 10px
+    width: 1px
+    height: 100%
 
   input
     @extend %bordered-input
+
+.easy-input-menu 
+  @extend %button-group
+
+.easy-input-menu .button
+  @extend %small-button
+

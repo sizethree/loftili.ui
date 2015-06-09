@@ -1,0 +1,15 @@
+.stream-track-search.directive
+  .search-input-container
+    input.search-input(type="text" ng-keyup="keyUp($event)" placeholder="search for tracks to add to the stream")
+  .result-info(ng-if="results !== null")
+    .no-results(ng-if="results.length === 0")
+      p.no-result-text.bold no results found
+    ul.result-list(ng-if="results.length > 0")
+      li.result-item.list-item(ng-repeat="result in results")
+        .inner
+          .title 
+            p.foundry {{result.title}}
+          .item-controls
+            button.adder(ng-click="add(result)")
+              i.ionicon.add
+

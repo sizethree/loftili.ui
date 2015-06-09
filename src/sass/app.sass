@@ -16,7 +16,15 @@ body, html
   position: relative
   z-index: 60
 
+.tf
+  display: table
 
+.tf .tc
+  display: table-cell
+  vertical-align: middle
+
+@import "placeholders/flair"
+@import "placeholders/bordered-container"
 @import "placeholders/text-blurb"
 @import "placeholders/alternating-list"
 @import "placeholders/basic-button"
@@ -60,6 +68,7 @@ body, html
 @import "directives/device-queue"
 @import "directives/flash-message"
 @import "directives/dashboard-nav"
+@import "directives/stream-manager"
 @import "directives/device-creator"
 @import "directives/client-browser"
 @import "directives/tooltip-maestro"
@@ -72,8 +81,10 @@ body, html
 @import "directives/client-token-list"
 @import "directives/device-status-icon"
 @import "directives/device-queue-search"
+@import "directives/stream-track-search"
 @import "directives/notification-manager"
 @import "directives/account-request-form"
+@import "directives/stream-permission-control"
 
 @import "views/faq"
 @import "views/join"
@@ -85,3 +96,4 @@ body, html
 @import "views/dashboard"
 @import "views/device-management"
 @import "views/request-account"
+@import "views/stream-management"

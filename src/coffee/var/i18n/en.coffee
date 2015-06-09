@@ -1,4 +1,10 @@
 lft.value 'i18n-en',
+  stream_permissions:
+    1: "Owner"
+    2: "Manager"
+    4: "Contributor"
+    errors:
+      adding: 'Unable to add user to stream, contact support'
   in_touch: "We'll be in touch!"
   privacy:
     PRIVATE: 'private'

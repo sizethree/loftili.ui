@@ -1,12 +1,10 @@
-_factory = ($scope, LibraryManager, activeUser, tracks, devices, childView, Socket) ->
+_factory = ($scope, LibraryManager, resolved, Socket) ->
 
-  $scope.tracks = tracks
-  $scope.devices = devices
-
-  $scope.track_manager = new LibraryManager activeUser, tracks
+  $scope.streams = resolved.streams
+  $scope.devices = resolved.devices
 
   $scope.newbie = true
-  $scope.active_nav = childView
+  $scope.active_nav = resolved.childView
 
   $scope.nonewb = () ->
     $scope.newbie = false
@@ -14,10 +12,7 @@ _factory = ($scope, LibraryManager, activeUser, tracks, devices, childView, Sock
 _factory.$inject = [
   '$scope',
   'LibraryManager',
-  'activeUser',
-  'tracks',
-  'devices',
-  'childView',
+  'resolved',
   'Socket'
 ]
 
