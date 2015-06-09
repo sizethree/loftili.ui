@@ -16,6 +16,10 @@
         h1.foundry.upper Maintained by:
       .ownership-list
         .ownership-item.list-item(ng-repeat="p in manager.permissions")
+          .gravatar
+            .gravatar-thumb
+              .thumb-container
+                img.gravatar-image(ng-attr-src="{{p.user.gravatar_url}}")
           .username
             p.foundry.medium {{p.user.username}}
           .actions(ng-if="manager.owner && p.level !== 1")

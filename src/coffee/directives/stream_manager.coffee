@@ -1,4 +1,4 @@
-dStreamManager = ($location, Api, Auth, Notifications, Lang) ->
+dStreamManager = ($location, Lang, Api, Auth, Notifications) ->
 
   dStreamManagerLink = ($scope, $element, $attrs) ->
     busy = false
@@ -8,6 +8,8 @@ dStreamManager = ($location, Api, Auth, Notifications, Lang) ->
         $scope.manager.refresh()
 
       fail = () ->
+        lang = Lang 'streams.errors.removing_item'
+        Notifications.flash.error lang
 
       ($scope.manager.remove index).then success, fail
 
@@ -21,6 +23,8 @@ dStreamManager = ($location, Api, Auth, Notifications, Lang) ->
 
       fail = () ->
         busy = false
+        lang = Lang 'stream_permissions.errors.removing'
+        Notifications.flash.error lang
 
       (Api.StreamPermission.delete
         id: permission_id).$promise.then success, fail
@@ -35,10 +39,10 @@ dStreamManager = ($location, Api, Auth, Notifications, Lang) ->
 
 dStreamManager.$inject = [
   '$location'
+  'Lang'
   'Api'
   'Auth'
   'Notifications'
-  'Lang'
 ]
 
 lft.directive 'lfStreamManager', dStreamManager

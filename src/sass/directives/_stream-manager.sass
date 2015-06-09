@@ -21,8 +21,13 @@
     +clearfix
     line-height: 1.8em
 
+  .ownership-info .ownership-list .list-item .gravatar,
   .ownership-info .ownership-list .list-item .username
     float: left
+
+  .ownership-info .ownership-list .list-item .gravatar-thumb
+    @extend %gravatar-thumb
+    margin-right: 10px
 
   .ownership-info .ownership-list .list-item .tf
     float: right

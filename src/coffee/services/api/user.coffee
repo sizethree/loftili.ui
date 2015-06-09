@@ -19,7 +19,7 @@ UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) 
 
     search:
       method: 'GET'
-      url: [URLS.api, 'users', 'search'].join '/'
+      url: [URLS.api, 'users'].join '/'
       isArray: true
 
     tracks:

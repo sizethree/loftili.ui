@@ -5,6 +5,10 @@ lft.value 'i18n-en',
     4: "Contributor"
     errors:
       adding: 'Unable to add user to stream, contact support'
+      removing: 'Unable to remove user from stream, contact support'
+  streams:
+    errors:
+      removing_item: 'Unable to remove stream item, try again'
   in_touch: "We'll be in touch!"
   privacy:
     PRIVATE: 'private'
