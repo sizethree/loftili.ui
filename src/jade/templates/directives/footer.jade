@@ -10,7 +10,8 @@
         a(href='/contact') Contact
     .footer-secondary-links
       .expander
-        button.ionicon.more(ng-click="toggleLinks()")
+        a.button.link-menu-toggle(ng-click="toggleLinks()")
+          i.ionicon.more
       ul.footer-social(ng-class="{open: links_open}")
         li
           a.social-link(href="http://mail.loftili.com/mailman/listinfo/info_loftili.com" target="_blank" ng-click="track('mail', $event)")

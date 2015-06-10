@@ -51,11 +51,17 @@
       font-size: .8em
       font-weight: 400
       
+  .expander .link-menu-toggle
+    @extend %small-button
+    margin: 0
+
   .expander
     display: none
 
     +media(max-width 820px)
       display: block
+      height: 1em
+      line-height: 1.8em
 
   ul.footer-social
     float: right
