@@ -1,0 +1,37 @@
+.device-stream-search.directive
+  display: block
+
+  .results-container
+    @extend %alternating-list
+    margin: 10px 0 0 0
+
+  .results-container .result
+    +clearfix
+    line-height: 1.8em
+
+  .results-container .result .title-container
+    +span-columns(3)
+    color: darken(white, 80)
+
+  .results-container .result .updated-tag
+    +span-columns(3)
+    display: block
+    color: darken(white, 55)
+
+  .results-container .result .description-container
+    +span-columns(4)
+    color: darken(white, 75)
+
+  .results-container .result .actions
+    +span-columns(2)
+    text-align: right
+
+  .results-container .result .actions .subscribe
+    @extend %small-button
+    display: inline-block
+    float: none
+
+  .results-container .result .description-container p.description
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap

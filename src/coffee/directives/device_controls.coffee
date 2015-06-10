@@ -4,52 +4,47 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
 
   dDeviceControlsLink = ($scope, $element, $attrs) ->
     notification_id = null
-    playing_lang = Lang 'device.playback.starting'
     stopping_lang = Lang 'device.playback.stopping'
-    restarting_lang = Lang 'device.playback.restarting'
     failed_lang = Lang 'device.playback.failed'
 
-    $scope.skip = () ->
-      success = () ->
+    updateTrack = () ->
+      state = $scope.manager.state
+      track_id = state and parseInt state.current_track, 10
+
+      success = (track) ->
+        $scope.current_track = track
 
       fail = () ->
-        failed_play = failed_lang.replace /{{action}}/, 'skip'
-        Notifications.flash.error failed_play
+        $scope.current_track = null
 
-      ($scope.manager.skip true).then success, fail
-
-    $scope.play = () ->
-      success = () ->
-
-      fail = () ->
-        failed_play = failed_lang.replace /{{action}}/, 'start'
-        Notifications.flash.error failed_play
-
-      ($scope.manager.play true).then success, fail
+      (Api.Track.get {id: track_id}).$promise.then success, fail if track_id > 0
 
     $scope.stop = () ->
+      note_id = Notifications.add stopping_lang, 'info'
+
       success = () ->
+        Notifications.remove note_id
+        $scope.manager.refresh()
 
       fail = () ->
-        failed_play = failed_lang.replace /{{action}}/, 'stop'
-        Notifications.flash.error failed_play
+        Notifications.remove note_id
+        Notifications.flash.error failed_lang
 
-      ($scope.manager.stop true).then success, fail
+      ($scope.manager.subscribe 0).then success, fail
 
     update = () ->
-      state = $scope.manager.state or {}
-      $scope.connected = /true/i.test state.connected
-      $scope.playback = parseInt state.playback, 10
-
-      if (parseInt state.current_track, 10) > 0
-        $scope.current_track = Api.Track.get {id: state.current_track}
-      else
-        $scope.current_track = false
+      $scope.stream_manager = $scope.manager.stream
+      state = $scope.manager.state
+      $scope.current_track = null
+      $scope.playback = state and (parseInt state.playback) == 1
+      updateTrack() if state and (parseInt state.current_track) > 0
 
     listener_id = $scope.manager.on 'update', update
 
     $scope.$on '$destroy', () ->
       $scope.manager.off listener_id
+
+    update()
 
   lfDeviceControls =
     replace: true

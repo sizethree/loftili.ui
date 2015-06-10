@@ -1,40 +1,18 @@
-sDeviceManager = ($q, Analytics, EventManager, Api, Socket, QueueManager, DEVICE_STATES) ->
+sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVICE_STATES) ->
 
   DeviceManager = (device) ->
     is_connected = false
 
-    playback = (evt) ->
-      handler = () ->
-        defer = $q.defer()
-
-        success = () ->
-          defer.resolve true
-
-        fail = () ->
-          defer.reject false
-
-        (Api.Playback[evt]
-          device: device.id
-        ).$promise.then success, fail
-
-        defer.promise
-
     events = EventManager ['update']
 
     update = (data) ->
-      if /queue/i.test data
-        Manager.queue.load()
       Manager.refresh()
-
 
     Manager =
       state: false
-      play: playback 'start'
-      stop: playback 'stop'
-      skip: playback 'skip'
-      queue: QueueManager device
       on: events.on
       off: events.off
+      stream: null
 
     Manager.connect = (callback) ->
       connected = (err) ->
@@ -45,11 +23,35 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, QueueManager, DEVICE
         callback err
       Socket.connect connected
 
+    Manager.subscribe = (id) ->
+      deferred = $q.defer()
+
+      success = (data) ->
+        deferred.resolve true
+
+      fail = () ->
+        deferred.resolve false
+
+      (Api.DeviceState.subscribe
+        stream: id
+        id: device.id).$promise.then success, fail
+
+      deferred.promise
+
     Manager.refresh = () ->
       deferred = $q.defer()
 
       success = (data) ->
         Manager.state = data
+        Manager.connected = /true/i.test data.connected
+
+        if data.stream and (parseInt data.stream, 10) > 0
+          stream_id = parseInt data.stream, 10
+          Manager.stream = StreamManager stream_id
+          Manager.stream.refresh()
+        else
+          Manager.stream = null
+
         deferred.resolve data
         events.trigger 'update'
 
@@ -71,7 +73,7 @@ sDeviceManager.$inject = [
   'EventManager'
   'Api'
   'Socket'
-  'QueueManager'
+  'StreamManager'
   'DEVICE_STATES'
 ]
 

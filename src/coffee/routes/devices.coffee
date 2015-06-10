@@ -5,26 +5,6 @@ rDeviceRoute = ($routeProvider) ->
   next = (user) ->
     callback user for callback in callbacks
 
-  resolveQueue = ($q, $route, DeviceManager, Auth) ->
-    deferred = $q.defer()
-    current_route = $route.current
-    device_id = current_route.params.id
-    manager = DeviceManager
-      id: device_id
-
-    finish = (queue) ->
-      deferred.resolve queue
-
-    fail = () ->
-
-    getQueue = () ->
-      (manager.queue.load true).then finish, fail
-
-    callbacks.push getQueue
-    deferred.promise
-
-  resolveQueue.$inject = ['$q', '$route', 'DeviceManager', 'Auth']
-
   resolvePermissions = ($q, $route, Api, Auth) ->
     deferred = $q.defer()
     current_route = $route.current
@@ -91,7 +71,6 @@ rDeviceRoute = ($routeProvider) ->
         active
       ],
       device_info: resolveDeviceInfo
-      device_queue: resolveQueue
       permissions: resolvePermissions
 
   $routeProvider.when '/devices/:id', DeviceRoute

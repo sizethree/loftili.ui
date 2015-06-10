@@ -3,7 +3,6 @@ DeviceManagementController = ($scope, Api, DeviceManager, resolutions...) ->
   $scope.device = resolutions[0].device
   $scope.serial = resolutions[0].serial_number
   $scope.permissions = resolutions[1]
-  $scope.queue = resolutions[2]
   $scope.manager = DeviceManager $scope.device
 
   $scope.manager.refresh()
@@ -18,7 +17,6 @@ DeviceManagementController.$inject = [
   'DeviceManager'
   'device_info'
   'permissions'
-  'device_queue'
 ]
 
 lft.controller 'DeviceManagementController', DeviceManagementController

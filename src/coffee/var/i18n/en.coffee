@@ -26,6 +26,9 @@ lft.value 'i18n-en',
   queuing:
     failed: 'Unable to add the track to your device queue'
     failed_remove: 'Unable to remove the track from your device queue'
+  merging:
+    errors:
+      subscribe: 'Unable to subscribe your device to the stream, please try again'
   reset_password:
     success: 'Check your email, you should have a link waiting'
   account:

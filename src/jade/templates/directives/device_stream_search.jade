@@ -1,0 +1,14 @@
+.device-stream-search.directive
+  .search-container
+    input(type="text" ng-change="search()" ng-model="search.query" placeholder="search for a stream")
+  .results-container(ng-if="results.length")
+    .result.list-item(ng-repeat="result in results")
+      .title-container
+        a.foundry.medium.title(ng-attr-href="/streams/{{result.id}}") {{result.title}}
+      .updated-tag
+        p.foundry updated {{result.updatedAt | timeAgo}}
+      .description-container
+        p.foundry.description {{result.description}}
+      .actions.button-group
+        a.button.subscribe(ng-click="subscribe(result.id)")
+          i.ionicon.merge

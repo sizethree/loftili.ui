@@ -2,5 +2,15 @@
   .inner
     .device-info(lf-device-info manager="manager" device="device" permissions="permissions" serial="serial")
     .where-the-magic-happens
-      .device-controls(lf-device-controls manager="manager")
-      .device-queue(lf-device-queue queue="queue" manager="manager")
+      .connected(ng-if="manager.connected")
+        .device-controls.section(lf-device-controls manager="manager")
+        .stream-info.present.section(ng-if="manager.stream")
+          .stream-list
+            .stream-item.list-item(ng-repeat="track in manager.stream.stream.queue")
+              .track-info-container
+                p.track-title.foundry.medium {{track.title}}
+        .stream-info.missing(ng-if="!manager.stream")
+          .missing-info
+            p.foundry.light No stream selected. Device playback stopped
+      .not-connected(ng-if="!manager.connected")
+        h1.foundry.medium Your device does not appear to be connected.

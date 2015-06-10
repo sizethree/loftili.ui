@@ -44,7 +44,6 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
     manager.refresh = () ->
       deferred = $q.defer()
       finished = 0
-      console.log 'refreshing'
 
       loadedStream = (stream) ->
         manager.stream = stream

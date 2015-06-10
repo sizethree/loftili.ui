@@ -2,53 +2,55 @@
   display: block
   +clearfix
 
-  .errored-text-container
-    overflow: hidden
-    height: auto
-    background: darken(white, 10)
-    border: darken(white, 15)
-    color: darken(white, 50)
-    height: 32px
+  .no-stream,
+  .has-stream
+    +clearfix
+    display: block
+
+  .has-stream .controls,
+  .has-stream .stream-name
+    float: left
+
+  .has-stream .controls
+    margin-right: 10px
+
+  .has-stream .stream-name,
+  .has-stream .currently-playing
+    +clearfix
+
+  .has-stream .stream-name
+    margin-right: 10px
+
+  .has-stream .stream-name .blurb,
+  .has-stream .currently-playing .blurb
+    +clearfix
+    display: inline-block
+    background: white
+    border: 1px solid darken(white, 8)
+    padding: 0 0.5em
     border-radius: 2px
 
-    .error-text
-      line-height: 22px
+    p.label, p.value, a.link
+      float: left
       display: block
-      padding: 5px 10px
-      text-transform: uppercase
-      font-size: 10px
+      line-height: 1.8em
+      font-size: 1em
+      margin-bottom: 0px
 
-  .current-state-info
-    width: auto
-    height: auto
-    overflow: hidden
+    p.label
+      margin-right: 10px
 
-  .current-state-info .playback-info
-    +clearfix
-    padding: 0.2em 0.5em
-    line-height: 1em
-    background: darken(white, 8)
-    border: 1px solid darken(white, 18)
-    border-radius: 3px
-    display: inline-block
-
-  .current-state-info .playback-info .ionicon,
-  .current-state-info .playback-info .current-track
+  .has-stream .stream-name p,
+  .has-stream .stream-name i
     display: block
     float: left
 
-  .current-state-info .playback-info .current-track
-    margin-left: 10px
+  .has-stream .stream-name i
+    margin-right: 5px
 
-  .control-list
-    height: auto
-    list-style: none
-    float: left
-    padding: 0
-    margin: 0 10px 0 0
+  .has-stream .stream-name i:after
+    font-size: 1em
+    line-height: 2em
 
-  .control-list 
-    @extend %button-group
-  
-  .control-list .button 
+  .has-stream .controls .button
     @extend %small-button

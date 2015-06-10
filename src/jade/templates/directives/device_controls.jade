@@ -1,12 +1,16 @@
 .device-controls.directive
-  .control-list.btn-grp
-    a.button.stop(ng-click="stop()")
-      i.ionicon.stop
-    a.button.play(ng-click="play()")
-      i.ionicon.play
-    a.button.skip(ng-click="skip()")
-      i.ionicon.skip-forward
-  .current-state-info
-    .playback-info(ng-if="playback === 1 && connected")
-      i.ionicon.radio-waves
-      p.current-track {{current_track.title}}
+  .no-stream(ng-if="!stream_manager")
+    .search-input-container(lf-device-stream-search manager="manager")
+  .has-stream(ng-if="stream_manager")
+    .controls.button-group
+      a.control.button.stop(ng-click="stop()")
+        i.ionicon.stop
+    .stream-name
+      .blurb
+        p.label.foundry.light stream:
+        a.foundry.light.link(ng-attr-href="/streams/{{stream_manager.stream.id}}") {{stream_manager.stream.title}}
+    .currently-playing(ng-if="current_track && playback")
+      .blurb
+        p.label.foundry.light now playing:
+        p.value.foundry.light {{current_track.title}}
+

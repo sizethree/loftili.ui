@@ -25,129 +25,44 @@
       &:hover
         background: white
 
-  .device-queue
-    margin: 0.5em 0 0 0
-
-  .queue-track-list
-    @extend %alternating-list
-
-  .queue-track-list .item-controls button
-    @extend %small-button
-
-  .device-queue-search
-    display: block
-
-  .device-queue-search input.search-input
-    @extend %bordered-input
-    width: 100%
-
-  .device-queue-search .result-info
-    background: transparent
-    border: none
-    padding: 0
-    margin: 10px 0 0 0
-
-  .device-queue-search .result-info .result-list
-    border: 1px solid darken(white, 10)
-    border-radius: 3px
-
-  .device-queue-search .result-info .result-list .result-item
-    +clearfix
-    border-top: 1px solid darken(white, 10)
-    padding: 0.4em 0.5em
-    height: auto
-    line-height: 1.8em
-
-    &:first-child
-      border-top: 0
-
-    &:nth-child(odd)
-      background: darken(white, 3)
-
-  .device-queue-search .result-info .result-list .result-item > .inner
-    +clearfix
-
   .where-the-magic-happens
     +span-columns(8)
-
-    .control-list a.button
-      @extend %small-button
 
     +media(max-width 800px)
       +span-columns(12)
       margin: 0
       padding: 10px
 
-      .control-list
-        +clearfix
-        float: none
-        display: inline-block
-        position: relative
-        text-align: center
-        padding: 5px 0
-        margin: 0
+  .where-the-magic-happens .not-connected
+    @extend %bordered-container
 
-        a.button.play
-          position: relative
-          z-index: 2
-          +transition(all 300ms ease)
-          +linear-gradient($base-accent-color, darken($base-accent-color, 10))
-          border: 1px solid darken($base-accent-color, 8)
-          display: block
-          width: 3.8em
-          height: 3.8em
-          border-radius: 1.9em
-          line-height: 1em
-          font-size: 1em
+  .where-the-magic-happens .not-connected h1
+    display: block
+    color: darken(white, 30)
+    font-size: 1em
+    line-height: 1.8em
 
-          .ionicon
-            font-size: 1em
-            line-height: 3em
-            text-align: center
+  .where-the-magic-happens .stream-info,
+  .where-the-magic-happens .device-controls
+    @extend %bordered-container
+    position: relative
 
-          .ionicon:after
-            line-height: 3em
-            text-align: center
-            font-size: 1em
+    .label
+      line-height: 1.2em
+      font-size: 0.8em
+      margin-bottom: 10px
 
-          &:hover
-            box-shadow: inset 0px 1px 1px -1px lighten($base-accent-color, 15), 0px 0px 1px darken($base-accent-color, 15)
+    .label p
+      color: darken(white, 50)
 
-          &:active
-            +linear-gradient(darken($base-accent-color, 10), $base-accent-color)
-            box-shadow: 0px 0px 1px lighten($base-accent-color, 15), inset 0px 0px 1px darken($base-accent-color, 15)
+    .label p em
+      color: darken(white, 80)
 
+  .where-the-magic-happens .device-controls
+    margin-bottom: 10px
 
-        a.button.stop,
-        a.button.skip
-          position: absolute
-          z-index: 1
-          top: 50%
-          margin-top: -0.9em
+  .where-the-magic-happens .stream-list
+    @extend %alternating-list
 
-        a.button.stop
-          left: -1.7em
-
-        a.button.skip
-          right: -1.8em
-
-      .device-queue
-        margin: 10px 0
-        padding: 0
-        border-top: none
-
-      .device-controls
-        display: block
-        position: relative
-        text-align: center
-        padding-top: 2em
-
-      .current-state-info
-        position: absolute
-        top: 0
-        width: 100%
-        text-align: center
-
-      .current-state-info .playback-info
-        display: inline-block
-
+  .where-the-magic-happens .stream-list .list-item
+    line-height: 1.8em
