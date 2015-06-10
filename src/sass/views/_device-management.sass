@@ -70,10 +70,66 @@
   .where-the-magic-happens
     +span-columns(8)
 
+    .control-list a.button
+      @extend %small-button
+
     +media(max-width 800px)
       +span-columns(12)
       margin: 0
       padding: 10px
+
+      .control-list
+        +clearfix
+        float: none
+        display: inline-block
+        position: relative
+        text-align: center
+        padding: 5px 0
+        margin: 0
+
+        a.button.play
+          position: relative
+          z-index: 2
+          +transition(all 300ms ease)
+          +linear-gradient($base-accent-color, darken($base-accent-color, 10))
+          border: 1px solid darken($base-accent-color, 8)
+          display: block
+          width: 3.8em
+          height: 3.8em
+          border-radius: 1.9em
+          line-height: 1em
+          font-size: 1em
+
+          .ionicon
+            font-size: 1em
+            line-height: 3em
+            text-align: center
+
+          .ionicon:after
+            line-height: 3em
+            text-align: center
+            font-size: 1em
+
+          &:hover
+            box-shadow: inset 0px 1px 1px -1px lighten($base-accent-color, 15), 0px 0px 1px darken($base-accent-color, 15)
+
+          &:active
+            +linear-gradient(darken($base-accent-color, 10), $base-accent-color)
+            box-shadow: 0px 0px 1px lighten($base-accent-color, 15), inset 0px 0px 1px darken($base-accent-color, 15)
+
+
+        a.button.stop,
+        a.button.skip
+          position: absolute
+          z-index: 1
+          top: 50%
+          margin-top: -0.9em
+
+        a.button.stop
+          left: -1.7em
+
+        a.button.skip
+          right: -1.8em
 
       .device-queue
         margin: 10px 0
@@ -95,31 +151,3 @@
       .current-state-info .playback-info
         display: inline-block
 
-      .control-list
-        +clearfix
-        float: none
-        display: inline-block
-        position: relative
-        text-align: center
-        padding: 5px 0
-        margin: 0
-
-        a.button.play
-          @extend %circle-button
-          position: relative
-          z-index: 2
-
-        a.button.stop,
-        a.button.skip
-          position: absolute
-          z-index: 1
-          top: 50%
-          margin-top: -0.9em
-
-        a.button.stop
-          left: -1.7em
-
-        a.button.skip
-          right: -1.8em
-          
-        

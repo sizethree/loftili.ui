@@ -71,11 +71,28 @@
   .share-zone .shared-list .permission
     +clearfix
     padding: 0.25em 0
+    line-height: 1.8em
+
+  .share-zone .shared-list .permission .username,
+  .share-zone .shared-list .permission .gravatar
+    float: left
+
+  .share-zone .shared-list .permission .gravatar
+    margin-right: 10px
+
+  .share-zone .shared-list .permission .tf
+    float: right
+    height: 1.8em
+    margin-right: 10px
+
+  .share-zone .shared-list .permission .tf .flair
+    display: table-cell
+    @extend %flair
 
   .share-zone .shared-list .permission .actions
     float: right
 
-  .share-zone .shared-list .permission .actions button
+  .share-zone .shared-list .permission .actions .remover
     @extend %small-button
 
   .share-zone .shared-list .info

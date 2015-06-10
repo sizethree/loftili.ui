@@ -1,4 +1,7 @@
 lft.value 'i18n-en',
+  device_permissions:
+    1: "Owner"
+    2: "Friend"
   stream_permissions:
     1: "Owner"
     2: "Manager"

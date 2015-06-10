@@ -19,11 +19,18 @@
         p.gill.light device shares
       ul.shared-list(ng-if="permissions.length > 0")
         li.permission(ng-repeat="permission in permissions track by permission.id" data-level="{{permission.level}}" ng-if="permission.user.id !== current_user.id")
+          .gravatar
+            .gravatar-thumb
+              .thumb-container
+                img.gravatar-image(ng-attr-src="{{permission.user.gravatar_url}}")
+          .username
+            p.user-name.foundry.medium {{permission.user.username}}
           .actions
-            button.remover(ng-click="removePermission(permission)")
+            a.button.remover(ng-click="removePermission(permission)")
               i.ionicon.trash
-          .info
-            p.user-name.sans {{permission.user.username}}
-            p.permission-level.sans {{permission.level | permissionLevel}}
+          .tf
+            .tc
+              .flair(ng-class="{blue: 1}")
+                p.permission-level.sans {{("device_permissions." + permission.level) | i18n}}
       p.info-box.no-permissions(ng-if="!permissions.length") you havent shared this device
       .share-control(lf-device-share device="device" permissions="permissions")
