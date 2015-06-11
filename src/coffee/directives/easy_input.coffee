@@ -40,6 +40,7 @@ dEasyInput = ($timeout) ->
     $scope.blurOut = () ->
       input_el = $element.find 'input'
       input_el[0].blur()
+      $scope.focused = false
 
   lfEasyInput =
     restrict: 'A'
