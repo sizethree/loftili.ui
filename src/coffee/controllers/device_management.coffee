@@ -9,6 +9,9 @@ DeviceManagementController = ($scope, Api, DeviceManager, resolutions...) ->
 
   stream = (err) ->
 
+  $scope.$on '$destroy', () ->
+    $scope.manager.close()
+
   $scope.manager.connect stream
 
 DeviceManagementController.$inject = [

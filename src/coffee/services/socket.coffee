@@ -46,6 +46,21 @@ sSocket = (CONFIG) ->
       fn: fn
 
     new_id
+
+  Socket.off = (lid) ->
+    found = false
+
+    checkEvt = (e) ->
+      list = listeners[e]
+
+      for a, i in list
+        found = i if a.id == lid
+
+      list.splice found, 1 if found != false
+      true
+
+    checkEvt evt for evt of listeners
+    found
       
   Socket.emit = (evt, data) ->
     current_socket.emit evt, data if current_socket
