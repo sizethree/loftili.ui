@@ -59,10 +59,11 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
     manager.refresh = () ->
       deferred = $q.defer()
       finished = 0
+      required = 3
 
       loadedStream = (stream) ->
         manager.stream = stream
-        deferred.resolve true if ++finished == 2
+        deferred.resolve true if ++finished == required
 
       loadedPermissions = (permissions) ->
         manager.permissions = permissions
@@ -75,7 +76,12 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
         manager.owner = level & levels.OWNER
         manager.contributor = level & (levels.OWNER | levels.CONTRIBUTOR)
 
-        deferred.resolve true if ++finished == 2
+        deferred.resolve true if ++finished == required
+
+      loadedMappings = (mappings) ->
+        manager.mappings = mappings
+        deferred.resolve true if ++finished == required
+
 
       fail = () ->
         deferred.reject false
@@ -85,6 +91,9 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
       (Api.StreamPermission.query
         stream: stream_id).$promise.then loadedPermissions, fail
+
+      (Api.DeviceStreamMapping.query
+        stream: stream_id).$promise.then loadedMappings, fail
 
       deferred.promise
 

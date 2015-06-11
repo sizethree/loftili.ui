@@ -5,6 +5,9 @@
   display: block
   padding-top: 10px
 
+  .stream-manager
+    +span-columns(9)
+
   .stream-manager .stream-info
     @extend %bordered-container
     +span-columns(4)
@@ -12,4 +15,52 @@
   .stream-manager .stream-control
     @extend %bordered-container
     +span-columns(8)
+
+  .stream-shares
+    +span-columns(3)
+ 
+  .stream-shares .inner-container
+    @extend %bordered-container
+
+  .stream-shares .inner-container > h1
+    font-size: 0.8em
+    color: darken(white, 40)
+    margin-bottom: 10px
+
+  .stream-shares .mapping
+    +clearfix
+    line-height: 1.8em
+
+  .stream-shares .mapping .device-info
+    font-size: 0.9em
+    color: darken(white, 80)
+    overflow: hidden
+    height: auto
+
+  .stream-shares .mapping .join-info
+    float: right
+    text-align: right
+    font-size: 0.9em
+    color: darken(white, 60)
+
+  .stream-shares .mapping .join-info p,
+  .stream-shares .mapping .device-info p
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+    
+
+  .stream-shares .no-mappings
+    color: darken(white, 30)
+    background: darken(white, 2)
+    border: 1px solid darken(white, 8)
+    padding: 0.5em 0.5em
+    border-radius: 2px 
+
+  .stream-shares .no-mappings p
+    font-size: 0.8em
+    line-height: 1em
+
+  .stream-shares .mappings-list
+    @extend %alternating-list
 

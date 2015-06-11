@@ -17,6 +17,7 @@ dEasyInput = ($timeout) ->
 
       success = () ->
         $scope.focused = false
+        is_saving = false
 
       if can_save
         is_saving = true
@@ -31,7 +32,7 @@ dEasyInput = ($timeout) ->
       blur = () ->
         revert() if !is_saving
 
-      $timeout blur, 100
+      $timeout blur, 300
 
     $scope.onFocus = () ->
       $scope.focused = true

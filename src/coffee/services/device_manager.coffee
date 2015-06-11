@@ -21,7 +21,7 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVIC
     Manager.connect = (callback) ->
       connected = (err) ->
         is_connected = !err
-        stream_url = ['/devicestreams', device.id].join '/'
+        stream_url = ['/sockets', 'devices', device.id].join '/'
         Socket.get stream_url
         socket_lid = Socket.on 'update', update
         callback err

@@ -9,6 +9,7 @@ dependencies =[
   'Api/TrackQueue',
   'Api/PasswordReset',
   'Api/DevicePermission',
+  'Api/DeviceStreamMapping',
   'Api/AccountRequest',
   'Api/DeviceState',
   'Api/DeviceSerial',
@@ -34,6 +35,7 @@ lft.service 'Api', dependencies.concat([() ->
     TrackQueue: an()
     PasswordReset: an()
     DevicePermission: an()
+    DeviceStreamMapping: an()
     AccountRequest: an()
     DeviceState: an()
     DeviceSerial: an()
