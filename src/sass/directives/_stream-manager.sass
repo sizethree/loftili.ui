@@ -2,6 +2,56 @@
   display: block
   +clearfix
 
+  .title-edit
+    +clearfix
+
+  .title-edit .title-input
+    overflow: hidden
+    height: auto
+    padding: 1px 0
+
+  .title-edit .privacy-selection
+    float: left
+    margin-right: 10px
+    padding-top: 0.4em
+
+    .privacy-toggle .toggle-track .left-text,
+    .privacy-toggle .toggle-track .right-text
+      line-height: 3em
+      font-size: 0.6em
+      position: relative
+
+      .tooltip
+        width: 70%
+        left: 15%
+        top: 0
+
+  .title-edit .privacy-selection .privacy-toggle .toggle-track
+    background: $blue-color
+    border: darken($blue-color, 40)
+ 
+    .right-text
+      color: white
+      margin-right: 0
+
+    .left-text .tooltip
+      width: 0
+
+  .title-edit .privacy-toggle.active .toggle-track
+    background: $warning-color
+    border: darken($warning-color, 40)
+    
+    .left-text
+      color: darken($warning-color, 30)
+      margin-right: 0
+
+    .right-text .tooltip
+      width: 0
+
+    .left-text .tooltip
+      width: 70%
+      left: 15%
+
   .ownership-info
     display: block
     margin: 20px 0 0 0 
@@ -51,11 +101,25 @@
     display: block
     margin: 0 0 10px 0
 
+  .stream-info .description-container
+    margin: 0 0 10px 0
+
   .stream-info .description-container textarea
     width: 100%
     resize: none
     height: 100%
     position: relative
+
+  .stream-info .privacy-selection
+    +clearfix
+    display: block
+
+  .stream-info .privacy-selection .privacy-toggle
+    @extend %toggle
+ 
+  .stream-control .no-tracks
+    color: darken(white, 50)
+    margin: 0 0 10px 0
 
   .stream-control .stream-list
     @extend %alternating-list

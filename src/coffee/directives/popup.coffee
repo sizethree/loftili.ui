@@ -3,7 +3,7 @@ dPopup = (PopupManager) ->
   compile = (element, attrs, transclude) ->
     link = ($scope, $element, $attrs) ->
       delegate_destructor = null
-      popup_id = PopupManager.add transclude, $scope, $element
+      popup_id = PopupManager.add transclude, $scope.$parent, $element
 
       update = () ->
         if $scope.delegate

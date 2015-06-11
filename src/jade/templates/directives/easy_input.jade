@@ -1,6 +1,8 @@
 .easy-input
-  textarea(ng-model="val" ng-keyup="keyUp($event)" ng-if="type === 'textarea'" ng-focus="onFocus()" ng-blur="onBlur()")
-  input(type="text" ng-model="val" ng-keyup="keyUp($event)" ng-if="type !== 'textarea'" ng-focus="onFocus()" ng-blur="onBlur()")
+  .textarea-input(ng-if="type === 'textarea'")
+    textarea(ng-model="$parent.values.mask" ng-focus="onFocus()" ng-blur="onBlur()")
+  .text-input(ng-if="type !== 'textarea'")
+    input(type="text" ng-model="$parent.values.mask" ng-focus="onFocus()" ng-blur="onBlur()")
   .menu-container
     .popup-buttons(lf-popup delegate="focused")
       .easy-input-menu

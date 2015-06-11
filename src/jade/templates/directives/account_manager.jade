@@ -31,7 +31,7 @@
     dl.input-container.privacy-setting
       dt.gill.light privacy level
       dd.editable
-        select(ng-model="fields.privacy" ng-change="save.privacy()" ng-options="value as ('privacy.'+name | i18n) for (name, value) in privacy_levels")
+        select(ng-model="fields.privacy" ng-change="save.privacy()" ng-options="value as ('account.privacy.'+name | i18n) for (name, value) in privacy_levels")
   .actions
     a.button.save(ng-click="save()") 
       i.ionicon.send

@@ -95,7 +95,7 @@ _factory = () ->
   PopupManager.add = (transclusion, scope, element) ->
     new_id = null
 
-    child_scope = scope.$parent.$new()
+    child_scope = scope
 
     place = (child_element) ->
       new_id = maestro.append child_element, scope, element

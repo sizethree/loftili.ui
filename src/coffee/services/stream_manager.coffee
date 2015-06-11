@@ -11,6 +11,21 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
       owner: false
       contributor: false
 
+    manager.update = (updates) ->
+      deferred = $q.defer()
+
+      params = angular.extend {id: stream_id}, updates
+
+      success = () ->
+        deferred.resolve true
+
+      fail = () ->
+        deferred.reject true
+
+      (Api.Stream.update params).$promise.then success, fail
+
+      deferred.promise
+
     manager.remove = (index) ->
       deferred = $q.defer()
 

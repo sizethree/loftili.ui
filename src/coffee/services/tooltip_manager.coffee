@@ -23,6 +23,9 @@ _factory = ($timeout) ->
 
     transclusion: (placement_el, placement_scope) ->
       containing_el = tooltipElement()
+      arrow = angular.element '<span class="arrow"></span>'
+      containing_el.append arrow
+
       tooltip_el = null
       hide_timeout = null
 
@@ -52,6 +55,9 @@ _factory = ($timeout) ->
         containing_el.css
           left: [real_left, 'px'].join ''
           opacity: 1.0
+
+        arrow.css
+          left: [left + (bounding_width * 0.5 - 5), 'px'].join ''
 
       hidePlacement = () ->
         containing_el.css

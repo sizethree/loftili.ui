@@ -8,7 +8,7 @@ _factory = (TooltipManager) ->
       $scope.off = () -> $scope.$broadcast 'off'
 
       transclusionFn = TooltipManager.transclusion $element, placement_scope
-      child_scope = $scope
+      child_scope = $scope.$parent
       transclude child_scope, transclusionFn
 
       $scope.$on '$destroy', () -> placement_scope.$destroy()
@@ -17,6 +17,7 @@ _factory = (TooltipManager) ->
     replace: true
     transclude: true
     templateUrl: 'directives.tooltip'
+    scope: {}
     compile: compile
 
 _factory.$inject = [

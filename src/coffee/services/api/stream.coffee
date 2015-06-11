@@ -4,6 +4,8 @@ StreamFactory = ($resource, $q, URLS) ->
     id: '@id'
 
   Stream = $resource [URLS.api, 'streams', ':id'].join('/'), defaults,
+    update:
+      method: 'PUT'
     enqueue:
       url: [URLS.api, 'streams', ':id', 'queue'].join '/'
       method: 'PUT'

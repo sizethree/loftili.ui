@@ -11,21 +11,22 @@
     position: fixed
     width: auto
     height: auto
-    background: darken(white, 10)
-    border: 1px solid darken(white, 15)
+    background: darken(white, 0)
+    border: 1px solid darken(white, 30)
     padding: 5px
+    border-radius: 2px
 
-    &:after
-      +transform(rotate(45deg))
-      content: ''
-      display: block
-      position: absolute
-      top: -5px
-      margin: 0 0 0 -5px
-      left: 50%
-      width: 10px
-      height: 10px
-      background: darken(white, 10)
-      border: 
-        left: 1px solid darken(white, 15)
-        top: 1px solid darken(white, 15)
+
+  .tooltip-instance .arrow
+    +transform(rotate(45deg))
+    background: red
+    position: absolute
+    width: 10px
+    height: 10px
+    display: block
+    left: 0
+    top: -5px
+    background: white
+    border: 
+      top: 1px solid darken(white, 30)
+      left: 1px solid darken(white, 30)

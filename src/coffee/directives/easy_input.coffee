@@ -1,39 +1,45 @@
 dEasyInput = ($timeout) ->
 
   dEasyInputLink = ($scope, $element, $attrs) ->
-    temp_val = null
-    $scope.val = $scope.value
+    $scope.values =
+      mask: $scope.value
+      temp: null
+
     $scope.type = $attrs['type']
+    is_saving = false
+
+    revert = () ->
+      $scope.focused = false
+      $scope.values.mask = $scope.values.temp
 
     $scope.save = () ->
       can_save = angular.isFunction $scope.finish
+
+      success = () ->
+        $scope.focused = false
+
       if can_save
-        $scope.finish $scope.val, $scope, $element
+        is_saving = true
+        result = $scope.finish $scope.values.mask, $scope, $element
+
+        if angular.isFunction result.then
+          result.then success, revert
 
     $scope.cancel = () ->
 
-    $scope.focus = () ->
-      temp_val = $scope.val
-
     $scope.onBlur = () ->
       blur = () ->
-        $scope.focused = false
+        revert() if !is_saving
 
-      $timeout blur, 50
+      $timeout blur, 100
 
     $scope.onFocus = () ->
       $scope.focused = true
+      $scope.values.temp = $scope.values.mask
 
     $scope.blurOut = () ->
       input_el = $element.find 'input'
       input_el[0].blur()
-
-    $scope.keyUp = (event) ->
-      is_save = event.keyCode == 13
-      can_save = angular.isFunction $scope.finish
-
-      if is_save and can_save
-        $scope.finish $scope.val, $scope, $element
 
   lfEasyInput =
     restrict: 'A'

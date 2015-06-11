@@ -3,7 +3,19 @@
     .basic-info
       .title-container
         .title-edit(ng-if="manager.owner")
-          .title-input(lf-easy-input value="manager.stream.title" finish="updates.name")
+          .privacy-selection
+            .privacy-toggle(ng-class="{active: manager.stream.privacy !== 0}")
+              .toggle-point(ng-click="updates.privacy()")
+              .toggle-track
+                .left-text
+                  p.upper.foundry.medium private
+                  .tooltip(lf-tooltip)
+                    p.text Only contributors can subscribe to this stream
+                .right-text
+                  p.upper.foundry.medium public
+                  .tooltip(lf-tooltip)
+                    p.text Anyone can subscribe to this stream
+          .title-input(lf-easy-input value="manager.stream.title" finish="updates.title")
         .title-display(ng-if="!manager.owner")
           h1.foundry.medium {{manager.stream.title}}
       .description-container
@@ -32,12 +44,14 @@
       .stream-ownership-manager(ng-if="manager.owner")
         .stream-permission-control(lf-stream-permission-control manager="manager")
   .stream-control
-    .stream-list
+    .stream-list(ng-if="manager.stream.queue.length")
       .stream-item.list-item(ng-repeat="track in manager.stream.queue")
         .track-info-container
           p.track-title.foundry.medium {{track.title}}
         .track-actions.button-group(ng-if="manager.contributor")
           a.button.remover(ng-click="remove($index)")
             i.ionicon.close
+    .no-tracks(ng-if="!manager.stream.queue || !manager.stream.queue.length")
+      p.foundry.medium {{"streams.empty" | i18n}}
     .stream-addition(ng-if="manager.contributor")
       .stream-track-search(lf-stream-track-search manager="manager")

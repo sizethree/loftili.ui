@@ -1,4 +1,5 @@
 lft.value 'i18n-en',
+  privacy: "Privacy"
   device_permissions:
     1: "Owner"
     2: "Friend"
@@ -10,13 +11,10 @@ lft.value 'i18n-en',
       adding: 'Unable to add user to stream, contact support'
       removing: 'Unable to remove user from stream, contact support'
   streams:
+    empty: "This stream is empty!"
     errors:
       removing_item: 'Unable to remove stream item, try again'
   in_touch: "We'll be in touch!"
-  privacy:
-    PRIVATE: 'private'
-    CONNECTED: 'connections'
-    PUBLIC: 'public'
   invitation:
     sending: 'Sending invitation, please wait'
     failed_remove: 'Failed deleting the invitation, please contact support'
@@ -32,6 +30,10 @@ lft.value 'i18n-en',
   reset_password:
     success: 'Check your email, you should have a link waiting'
   account:
+    privacy:
+      PRIVATE: 'private'
+      CONNECTED: 'connections'
+      PUBLIC: 'public'
     doing_update: 'Please wait, updating account'
     update_success: 'Successfully updated your account'
     requesting:
@@ -62,3 +64,6 @@ lft.value 'i18n-en',
       stopping: 'Stopping playback, please wait'
       restarting: 'Attempting to restart playback, please wait'
       failed: 'Unable to {{action}} device, please check it\'s connection'
+  stream:
+    errors:
+      privacy: 'Unable to toggle stream\'s privacy'
