@@ -3,3 +3,11 @@
 %red-button
   @extend %red-gradient
   border: 1px solid darken($warning-color, 10)
+
+  &:hover
+    box-shadow: inset 0px 1px 1px -1px lighten($warning-color, 15), 0px 0px 1px darken($warning-color, 15)
+
+  &:active
+    +linear-gradient(darken($warning-color, 10), $warning-color)
+    box-shadow: 0px 0px 1px lighten($warning-color, 15), inset 0px 0px 1px darken($warning-color, 15)
+    

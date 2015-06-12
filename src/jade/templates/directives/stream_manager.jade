@@ -43,6 +43,8 @@
                 p.owner.foundry.medium.upper {{ ("stream_permissions." + p.level) | i18n}}
       .stream-ownership-manager(ng-if="manager.owner")
         .stream-permission-control(lf-stream-permission-control manager="manager")
+      .stream-deletion(ng-if="manager.owner")
+        a.button.deletion(ng-click="destroy()") delete this stream
   .stream-control
     .stream-list(ng-if="manager.stream.queue.length")
       .stream-item.list-item(ng-repeat="track in manager.stream.queue")

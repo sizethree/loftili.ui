@@ -9,6 +9,17 @@ dStreamManager = ($location, Lang, Api, Auth, Notifications) ->
         updates[property] = value
         $scope.manager.update updates
 
+    $scope.destroy = () ->
+      success =  () ->
+        $location.url '/dashboard'
+
+      fail = () ->
+        fail_lang = Lang 'stream.errors.destroy'
+        Notifications.flash.error fail_lang
+
+      (Api.Stream.delete
+        id: $scope.manager.stream.id).$promise.then success, fail
+
     $scope.updates =
       title: update 'title'
       description: update 'description'

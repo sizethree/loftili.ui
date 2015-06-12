@@ -143,3 +143,15 @@
   .stream-list .stream-item .track-actions .button
     display: inline-block
     float: none
+
+  .stream-deletion
+    padding: 0.5em 0
+
+  .stream-deletion a.button
+    @extend %small-button
+    display: block
+
+    &.deletion
+      @extend %red-button
+      display: block
+      text-align: center
