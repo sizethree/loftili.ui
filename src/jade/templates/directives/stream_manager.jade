@@ -56,4 +56,8 @@
     .no-tracks(ng-if="!manager.stream.queue || !manager.stream.queue.length")
       p.foundry.medium {{"streams.empty" | i18n}}
     .stream-addition(ng-if="manager.contributor")
+      .uploader.file
+        a.cover.button
+          i.ionicon.folder
+        input(type="file" name="file" multiple onchange="angular.element(this).scope().file(this)")
       .stream-track-search(lf-stream-track-search manager="manager")
