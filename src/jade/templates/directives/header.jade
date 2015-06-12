@@ -17,8 +17,6 @@
         ul.navigation-menu-list.foundry
           li.nav-link
             a(href='/dashboard' ng-class="{active: active_route === 'dashboard'}") dashboard
-          li.nav-link
-            a(href='/library' ng-class="{active: active_route === 'library'}") library
       .navigation-tools.foundry
         .logged-out(ng-if="!user()")
           button(ng-click="toggle($event)" ng-class="{close: form_active, login: !form_active}")

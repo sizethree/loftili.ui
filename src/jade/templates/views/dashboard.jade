@@ -4,21 +4,11 @@
       .section-top
         a.foundry.light.upper.subtitle(href="/dashboard/streams") streams
       .bottom
-        .stream-list-container
-          .stream-list
-            .stream.list-item(ng-repeat="stream in streams")
-              .title-container
-                p.title {{stream.title}}
-              .action-container
-                a.button(href="/streams/{{stream.id}}")
-                  i.ionicon.account
-        .upload-form(lf-track-upload-form)
+        .user-streams(lf-user-streams streams="streams")
   .device-section-container(ng-if="active_nav === 'devices' || active_nav === 'overview'")
     .device-list-wrapper.half-section
       .section-top
         a.foundry.light.upper.subtitle(href="/dashboard/devices") devices
       .bottom
-        .device-list-container(ng-if="devices.length > 0")
-          .device-list(lf-device-list devices="devices")
-        .registration-container
-          .creator(lf-device-creator devices="devices")
+        .user-devices(lf-user-devices devices="devices")
+

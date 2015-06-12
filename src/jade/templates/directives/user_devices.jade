@@ -1,0 +1,5 @@
+.user-devices.directive
+  .device-list-container(ng-if="devices.length > 0")
+    .device-list(lf-device-list devices="devices")
+  .registration-container
+    .creator(lf-device-creator devices="devices")

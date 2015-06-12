@@ -8,7 +8,7 @@
     +outer-container
     border: 1px solid darken(white, 5)
     margin: 2em 0
-    padding: 0.5em
+    padding: 0.5em 0
     border-radius: 2px
 
   .half-section.device-list-wrapper
@@ -18,10 +18,14 @@
   .stream-list-container .stream-list
     @extend %alternating-list
     margin: 0 0 10px 0
+    border-left: none
+    border-right: none
 
   .stream-list-container .stream-list .stream
     +clearfix
     line-height: 1.8em
+    border-left: none
+    border-right: none
 
   .stream-list-container .stream-list .stream .title-container,
   .stream-list-container .stream-list .stream .action-container
@@ -72,11 +76,41 @@
     margin-bottom: 0
 
   .device-section-container .device-creator .form-container .actions
-    +span-columns(2)
+    float: right
 
   .device-section-container .device-creator .form-container .actions button
     @extend %small-button
 
+  .quick-stream-create
+    +clearfix
+
+  .quick-stream-create .actions
+    float: right
+    margin-left: 10px
+    padding-right: 0.5em
+
+  .quick-stream-create .actions .button
+    @extend %small-button
+
+    &.create-trigger
+      float: none
+      display: block
+      margin: 0.4em 0
+
+  .quick-stream-create .inputs
+    height: auto
+    overflow: hidden
+    +clearfix
+    margin-left: 0.5em
+
+  .quick-stream-create .inputs input
+    @extend %bordered-input
+
+  .quick-stream-create .inputs input.title
+    +span-columns(4)
+
+  .quick-stream-create .inputs input.description
+    +span-columns(8)
 
   &[active="overview"]
     .stream-section-container, 

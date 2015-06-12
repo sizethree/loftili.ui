@@ -11,6 +11,8 @@
                 p.track-title.foundry.medium {{track.title}}
         .stream-info.missing(ng-if="!manager.stream")
           .missing-info
-            p.foundry.light No stream selected. Device playback stopped
+            p.foundry.light No stream selected. Return to the 
+              a.to-dashboard(href="/dashboard") dashboard
+              |  to create one now.
       .not-connected(ng-if="!manager.connected")
         h1.foundry.medium Your device does not appear to be connected.

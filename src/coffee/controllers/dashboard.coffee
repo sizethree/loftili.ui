@@ -1,19 +1,13 @@
-_factory = ($scope, LibraryManager, resolved, Socket) ->
+_factory = ($scope, Api, resolved) ->
 
   $scope.streams = resolved.streams
   $scope.devices = resolved.devices
-
-  $scope.newbie = true
   $scope.active_nav = resolved.childView
-
-  $scope.nonewb = () ->
-    $scope.newbie = false
 
 _factory.$inject = [
   '$scope',
-  'LibraryManager',
+  'Api',
   'resolved',
-  'Socket'
 ]
 
 lft.controller 'DashboardController', _factory

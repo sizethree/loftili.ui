@@ -1,0 +1,17 @@
+.user-streams.directive
+  .stream-list-container
+    .stream-list
+      .stream.list-item(ng-repeat="stream in streams")
+        .title-container
+          p.title {{stream.title}}
+        .action-container
+          a.button(href="/streams/{{stream.id}}")
+            i.ionicon.account
+  .quick-stream-create
+    .stream-title
+      .actions
+        a.button.create-trigger(ng-click="createStream()")
+          i.ionicon.add
+      .inputs
+        input.title(name="title" ng-model="new_stream.title" placeholder="title")
+        input.description(name="description" ng-model="new_stream.description" placeholder="description")
