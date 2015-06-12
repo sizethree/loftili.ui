@@ -3,8 +3,12 @@
     .search-input-container(lf-device-stream-search manager="manager")
   .has-stream(ng-if="stream_manager")
     .controls.button-group
-      a.control.button.stop(ng-click="stop()")
+      a.control.button.stop(ng-click="unsubscribe()")
+        i.ionicon.close
+      a.control.button.stop(ng-click="setPlayback(0)" ng-if="manager.state.playback === 1")
         i.ionicon.stop
+      a.control.button.start(ng-click="setPlayback(1)" ng-if="manager.state.playback === 0")
+        i.ionicon.play
     .stream-name
       .blurb
         p.label.foundry.light stream:

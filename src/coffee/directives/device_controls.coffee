@@ -19,7 +19,7 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
 
       (Api.Track.get {id: track_id}).$promise.then success, fail if track_id > 0
 
-    $scope.stop = () ->
+    $scope.unsubscribe = () ->
       note_id = Notifications.add stopping_lang, 'info'
 
       success = () ->
@@ -31,6 +31,19 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
         Notifications.flash.error failed_lang
 
       ($scope.manager.subscribe 0).then success, fail
+
+    $scope.setPlayback = (state) ->
+      note_id = Notifications.add stopping_lang, 'info'
+
+      success = () ->
+        Notifications.remove note_id
+        $scope.manager.refresh()
+
+      fail = () ->
+        Notifications.remove note_id
+        Notifications.flash.error failed_lang
+
+      ($scope.manager.playback state).then success, fail
 
     update = () ->
       $scope.stream_manager = $scope.manager.stream

@@ -27,6 +27,21 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVIC
         callback err
       Socket.connect connected
 
+    Manager.playback = (state) ->
+      deferred = $q.defer()
+
+      success = () ->
+        deferred.resolve true
+
+      fail = () ->
+        deferred.resolve false
+
+      (Api.DeviceState.playback
+        id: device.id
+        playback: state).$promise.then success,  fail
+
+      deferred.promise
+
     Manager.subscribe = (id) ->
       deferred = $q.defer()
 
@@ -47,6 +62,8 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVIC
 
       success = (data) ->
         Manager.state = data
+        Manager.state.playback = parseInt data.playback, 10 if data
+
         Manager.connected = /true/i.test data.connected
 
         if data.stream and (parseInt data.stream, 10) > 0
