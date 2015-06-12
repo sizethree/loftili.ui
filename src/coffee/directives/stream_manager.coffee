@@ -5,9 +5,17 @@ dStreamManager = ($location, Lang, Api, Auth, Notifications) ->
 
     update = (property) ->
       (value) ->
+        old_value = $scope.manager.stream[property]
+
+        success = () ->
+          $scope.manager.stream[property] = value
+
+        fail = () ->
+          $scope.manager.stream[property] = old_value
+
         updates = {}
         updates[property] = value
-        $scope.manager.update updates
+        ($scope.manager.update updates).then success, fail
 
     $scope.destroy = () ->
       success =  () ->

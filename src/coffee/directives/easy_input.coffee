@@ -7,15 +7,21 @@ dEasyInput = ($timeout) ->
 
     $scope.type = $attrs['type']
     is_saving = false
+    should_revert = true
+
+    $scope.cancel = () ->
+      should_revert = true
+      revert()
 
     revert = () ->
-      $scope.focused = false
       $scope.values.mask = $scope.values.temp
 
     $scope.save = () ->
       can_save = angular.isFunction $scope.finish
+      should_revert = true
 
       success = () ->
+        should_revert = false
         $scope.focused = false
         is_saving = false
 
@@ -30,11 +36,13 @@ dEasyInput = ($timeout) ->
 
     $scope.onBlur = () ->
       blur = () ->
-        revert() if !is_saving
+        $scope.focused = false
+        revert() if should_revert
 
       $timeout blur, 300
 
     $scope.onFocus = () ->
+      should_revert = true
       $scope.focused = true
       $scope.values.temp = $scope.values.mask
 
