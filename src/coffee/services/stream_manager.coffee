@@ -69,7 +69,7 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
       loadedPermissions = (permissions) ->
         manager.permissions = permissions
         user_id = Auth.user().id
-        level = -1
+        level = 0
 
         for p in permissions
           level = p.level if p.user.id == user_id

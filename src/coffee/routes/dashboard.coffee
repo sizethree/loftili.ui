@@ -27,13 +27,32 @@ lft.config ['$routeProvider', ($routeProvider) ->
       resolved.streams = r
       check true
 
+    loadedPermissions = (permissions) ->
+      finished = []
+
+      success = (device) ->
+        finished.push device
+        resolved.devices = finished if finished.length == permissions.data.length
+        check()
+
+      failDevice = () ->
+        deferred.reject false
+
+      loadDevice = (device) ->
+        (Api.Device.get
+          id: device.id or device).$promise.then success, failDevice
+
+      loadDevice p.device for p in permissions.data
+      true
+
     auth = (user_info) ->
-      (Api.Device.query
-        user: user_info.id).$promise.then loadedDevices
+      (Api.DevicePermission.query
+        user: Auth.user().id).$promise.then loadedPermissions
       (Api.StreamPermission.query
         user: user_info.id).$promise.then loadedStreams
 
     fail = () ->
+      deferred.reject false
 
     (Auth.filter 'active').then auth, fail
 
