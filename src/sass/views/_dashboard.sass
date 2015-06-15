@@ -3,6 +3,7 @@
   min-height: 100%
   position: relative
   margin: 0 1em
+  clear: both
 
   .half-section
     +outer-container
@@ -112,10 +113,9 @@
   .quick-stream-create .inputs input.description
     +span-columns(8)
 
-  &[active="overview"]
-    .stream-section-container, 
-    .device-section-container
-      +span-columns(6)
+  &[active="overview"] .stream-section-container,
+  &[active="overview"] .device-section-container
+    +span-columns(6)
 
-      +media(max-width 800px)
-        +span-columns(12)
+    +media(max-width 800px)
+      +span-columns(12)

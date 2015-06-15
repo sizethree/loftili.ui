@@ -2,7 +2,8 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
   levels =
     OWNER: 1
-    CONTRIBUTOR: (1 << 1)
+    MANAGER: (1 << 1)
+    CONTRIBUTOR: (1 << 1 << 1)
 
   StreamManager = (stream_id) ->
     manager =
