@@ -25,6 +25,29 @@
     background: darken(white, 0)
     border-radius: 2px
 
+  .results-container
+    position: relative
+    display: block
+    padding: 1em 0 0 0
+    margin: 1em 0 0 0
+    border-top: 1px dotted darken(white, 30)
+
+  .results-container .closer-container
+    display: block
+    position: absolute
+    left: 0em
+    top: -0.6em
+
+  .results-container .closer-container .closer
+    @extend %small-button
+    font-size: 0.5em
+    line-height: 0.5em
+    padding: 0.3em 0.5em
+
+    .ionicon
+      font-size: 0.5em
+      line-height: 0.5em
+
   .result-list
     list-style: none
     background: darken(white, 5)

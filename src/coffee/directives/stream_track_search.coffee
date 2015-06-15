@@ -15,6 +15,10 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
     last_id = null
     $scope.results = null
 
+    $scope.clear = () ->
+      $scope.results = null
+      $scope.search.query = null
+
     display = (search_id) ->
       (results) ->
         if search_id == last_id
@@ -26,9 +30,8 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       $scope.results = null
 
       if last_val != ''
-        track_promise = Api.Track.search
-          q: last_val
-        track_promise.$promise.then display(last_id)
+        (Api.Track.search
+          q: last_val).$promise.then display(last_id)
 
     $scope.add = (track) ->
       success = (new_queue) ->
@@ -40,8 +43,8 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
 
       ($scope.manager.add track.id).then success, fail
 
-    $scope.keyUp = (event) ->
-      last_val = event.target.value
+    $scope.update = () ->
+      last_val = $scope.search.query
       if timeout_id
         $timeout.cancel timeout_id
       timeout_id = $timeout run, DEBOUNCE_TIME
