@@ -21,11 +21,13 @@
         .logged-out(ng-if="!user()")
           button(ng-click="toggle($event)" ng-class="{close: form_active, login: !form_active}")
             i.login.ionicon
-        .btn-grp.logged-in(ng-if="user()" ng-attr-active="{{active_route}}")
-          a.button(href="/account" ng-class="{active: active_route === 'account'}")
-            i.ionicon.account
-          a.button.sign-out(ng-click="logout($event)")
-            i.ionicon.logout
+        .logged-in(ng-if="user()" ng-attr-active="{{active_route}}")
+          p.username {{user().username}}
+          .btn-group.user-navigation
+            a.button(href="/account" ng-class="{active: active_route === 'account'}")
+              i.ionicon.account
+            a.button.sign-out(ng-click="logout($event)")
+              i.ionicon.logout
       .login-wrapper(ng-if="!user()")
         .login-container(ng-class="{active: form_active}" data-mm-noclose="true")
           .container(lf-login-form close="closeLogin")

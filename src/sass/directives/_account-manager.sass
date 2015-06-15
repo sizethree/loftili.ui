@@ -3,19 +3,13 @@
   +outer-container
   display: block
 
-  .username-container dt
-    display: none
-
   .username-container dd
     font-size: 22px
     color: darken(white, 50)
 
   .fields .input-container
     +clearfix
-    +span-columns(6)
-
-    &:nth-child(even)
-      +omega
+    font-size: 1em
 
   dl.input-container dt
     display: block
@@ -26,10 +20,11 @@
 
   dl.input-container dd
     display: block
+    font-size: 1em
 
   dl.password-input .field-container
-    +clearfix
     +span-columns(8)
+    +clearfix
 
   dl.password-input .toggle-container.open
     +span-columns(4)
@@ -56,8 +51,7 @@
 
   dl.input-container dd input[type="text"],
   dl.input-container dd input[type="password"]
-    @extend bordered-input
-    width: 100%
+    @extend %smaller-input
 
   .password-change-trigger
     @extend %underlined-button

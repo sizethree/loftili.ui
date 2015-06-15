@@ -30,6 +30,10 @@ lft.config ['$routeProvider', ($routeProvider) ->
     loadedPermissions = (permissions) ->
       finished = []
 
+      if permissions.data.length == 0
+        resolved.devices = []
+        return check()
+
       success = (device) ->
         finished.push device
         resolved.devices = finished if finished.length == permissions.data.length

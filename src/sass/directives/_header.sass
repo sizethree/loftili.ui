@@ -107,6 +107,34 @@
     .btn-grp  
       @extend %button-group
 
-    .btn-grp.logged-in,
+    .logged-in,
     .logged-out
       margin-top: 0.8em
+
+  .navigation-tools .logged-in
+    +clearfix
+ 
+  .navigation-tools .logged-in .username
+    float: left
+    margin-right: 10px
+    color: darken(white, 30)
+    font-size: 1em
+    line-height: 2.4em
+
+  .navigation-tools .logged-in .user-navigation
+    padding: 1px
+    overflow: hidden
+    height: auto
+
+  .navigation-tools .logged-in .user-navigation .button
+    display: block
+    float: left
+    border-radius: 0
+
+    &:first-child
+      border-top-left-radius: 2px
+      border-bottom-left-radius: 2px
+
+    &:last-child
+      border-top-right-radius: 2px
+      border-bottom-right-radius: 2px

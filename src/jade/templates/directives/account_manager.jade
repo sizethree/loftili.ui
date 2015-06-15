@@ -1,8 +1,9 @@
 .directive.account-manager(ng-init="changing_password = false;")
   .top-area
-    dl.username-container
+    dl.username-container.input-container
       dt.username username
-      dd.gill.medium {{manager.user.username}}
+      dd.editable
+        input(type="text" ng-model="manager.user.username" name="username")
   .bottom-area.fields
     dl.input-container.name-input.first
       dt.gill.medium first name
