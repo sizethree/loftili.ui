@@ -21,11 +21,28 @@ lft.config ['$routeProvider', ($routeProvider) ->
       resolved.devices = devices
       check true
 
-    loadedStreams = (streams) ->
-      r = []
-      r.push s.stream for s in streams
-      resolved.streams = r
-      check true
+    loadedStreams = (permissions) ->
+      loaded_streams = []
+
+      loadedStream = (stream) ->
+        loaded_streams.push stream
+        resolved.streams = loaded_streams if loaded_streams.length == permissions.length
+        check true
+
+      failStream = () ->
+        deferred.reject false
+
+      (Api.Stream.get
+        id: p.stream).$promise.then loadedStream, failStream for p in permissions
+
+      resolved.stream_permissions = permissions
+
+      if permissions.length == 0
+        resolved.streams = []
+        check true
+      else
+        false
+
 
     loadedPermissions = (permissions) ->
       finished = []

@@ -4,7 +4,7 @@
       .section-top
         a.foundry.light.upper.subtitle(href="/dashboard/streams") streams
       .bottom
-        .user-streams(lf-user-streams streams="streams")
+        .user-streams(lf-user-streams streams="streams" permissions="stream_permissions")
   .device-section-container(ng-if="active_nav === 'devices' || active_nav === 'overview'")
     .device-list-wrapper.half-section
       .section-top

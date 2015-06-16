@@ -7,6 +7,7 @@ _factory = ($q, Api) ->
     update: (property, value) ->
       deferred = $q.defer()
 
+
       if angular.isObject property
         params = property
       else

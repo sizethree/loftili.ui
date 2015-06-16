@@ -30,10 +30,10 @@
         .ownership-item.list-item(ng-repeat="p in manager.permissions")
           .gravatar
             .gravatar-thumb
-              .thumb-container
-                img.gravatar-image(ng-attr-src="{{p.user.gravatar_url}}")
-          .username
-            p.foundry.medium {{p.user.username}}
+              .thumb-container(ng-repeat="u in [userFor(p)]")
+                img.gravatar-image(ng-attr-src="{{u.gravatar_url}}")
+          .username(ng-repeat="u in [userFor(p)]")
+            p.foundry.medium {{u.username}}
           .actions(ng-if="manager.owner && p.level !== 1")
             a.button.remover(ng-click="removePermission(p.id)")
               i.ionicon.close

@@ -70,19 +70,33 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
         manager.permissions = permissions
         user_id = Auth.user().id
         level = 0
+        loaded_users = []
+
+        loadedUser = (user) ->
+          loaded_users.push user
+          if loaded_users.length == permissions.length
+            manager.users = loaded_users
+            deferred.resolve true if ++finished == required
+
+        failedUser = () ->
+          deferred.reject false
 
         for p in permissions
-          level = p.level if p.user.id == user_id
+          level = p.level if p.user == user_id
+          (Api.User.get
+            id: p.user).$promise.then loadedUser, failedUser
 
         manager.owner = level & levels.OWNER
         manager.contributor = level & (levels.OWNER | levels.CONTRIBUTOR)
 
-        deferred.resolve true if ++finished == required
+        if permissions.length == 0
+          deferred.resolve true if ++finished == required
+
+        true
 
       loadedMappings = (mappings) ->
         manager.mappings = mappings
         deferred.resolve true if ++finished == required
-
 
       fail = () ->
         deferred.reject false

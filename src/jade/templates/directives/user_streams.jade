@@ -7,6 +7,10 @@
         .action-container
           a.button(href="/streams/{{stream.id}}")
             i.ionicon.account
+        .stream-flair.tf(ng-repeat="p in [permissionFor(stream)]")
+          .tc
+            .flair(ng-attr-level="{{p.level}}" ng-class="{gold: p.level === 1, blue: p.level === 4, green: p.level === 2}")
+              p.foundry.medium.upper {{ ("stream_permissions." + p.level) | i18n }}
   .quick-stream-create
     .stream-title
       .actions

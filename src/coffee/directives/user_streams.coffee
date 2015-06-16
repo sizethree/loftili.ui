@@ -7,6 +7,11 @@ dUserStreams = ($location, Lang, Api, Auth, Notifications) ->
     $scope.new_stream = {}
     $scope.saving = false
 
+    $scope.permissionFor = (stream) ->
+      found = null
+      found = p if p.stream == stream.id for p in $scope.permissions
+      found
+
     makeStream = (stream) ->
       success = (created_stream) ->
         $scope.streams.push created_stream
@@ -28,6 +33,7 @@ dUserStreams = ($location, Lang, Api, Auth, Notifications) ->
     templateUrl: 'directives.user_streams'
     scope:
       streams: '='
+      permissions: '='
     link: dUserStreamsLink
 
 dUserStreams.$inject = [

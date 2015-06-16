@@ -2,9 +2,9 @@ dependencies = ['$resource', '$q', 'URLS', 'Api/Device', 'Api/Track', 'Api/Artis
 UserFactory = dependencies.concat [($resource, $q, URLS, Device, Track, Artist) ->
 
   user_defaults =
-    user_id: '@id'
+    id: '@id'
 
-  User = $resource [URLS.api, 'users', ':user_id', ':fn'].join('/'), user_defaults,
+  User = $resource [URLS.api, 'users', ':id', ':fn'].join('/'), user_defaults,
     update:
       method: 'PUT'
 

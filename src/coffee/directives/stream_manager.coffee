@@ -3,6 +3,11 @@ dStreamManager = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
   dStreamManagerLink = ($scope, $element, $attrs) ->
     busy = false
 
+    $scope.userFor = (permission) ->
+      found = false
+      found = u if u.id == permission.user for u in $scope.manager.users
+      found
+
     upload = (file) ->
       loading_lang = Lang 'streams.uploading_track'
       note_id = Notifications.add loading_lang, 'info'

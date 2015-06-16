@@ -1,2 +1,18 @@
 .user-streams.directive
   display: block
+
+  .stream-list
+    @extend %alternating-list
+
+  .stream-list .stream
+    +clearfix
+
+  .stream-list .stream .stream-flair
+    float: right
+    margin-right: 10px
+
+  .stream-list .stream .action-container
+    float: right
+
+  .stream-list .stream .stream-flair .flair
+    @extend %flair

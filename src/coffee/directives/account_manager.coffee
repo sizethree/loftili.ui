@@ -26,7 +26,6 @@ _factory = (Notifications, Lang, PRIVACY_LEVELS) ->
       $scope.save = () ->
         wait_lang = Lang 'account.doing_update'
         wait_id = null
-        promise = null
 
         success = () ->
           Notifications.remove wait_id
@@ -37,7 +36,7 @@ _factory = (Notifications, Lang, PRIVACY_LEVELS) ->
           Notifications.remove wait_id
 
         wait_id = Notifications.add wait_lang, 'info'
-        (promise = $scope.manager.update $scope.manager.user).then success, fail
+        ($scope.manager.update $scope.manager.user).then success, fail
 
       $scope.save.password = (value) ->
         success = () ->
@@ -47,8 +46,7 @@ _factory = (Notifications, Lang, PRIVACY_LEVELS) ->
           $scope.changing_password = true
 
         if $scope.fields.password.b == $scope.fields.password.a
-          promise = $scope.save 'password', $scope.fields.password.b
-          promise.then success, fail
+          ($scope.manager.update 'password', $scope.fields.password.a).then success, fail
 
       $scope.save.privacy = () ->
         success = () ->
@@ -58,8 +56,7 @@ _factory = (Notifications, Lang, PRIVACY_LEVELS) ->
           $scope.fields.privacy = original_privacy
 
         if $scope.fields.privacy != original_privacy
-          promise = $scope.save 'privacy_level', $scope.fields.privacy
-          promise.then success, fail
+          ($scope.manager.update 'privacy_level', $scope.fields.privacy).then success, fail
 
       $scope.changing = (state) ->
         $scope.changing_password = state
