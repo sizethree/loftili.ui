@@ -31,10 +31,10 @@ rDeviceRoute = ($routeProvider) ->
     deferred = $q.defer()
     current_route = $route.current
     device_id = current_route.params.id
-
     device = null
 
     finish = (serial_number) ->
+      current_route.$$route.title = device.name
       deferred.resolve
         device: device
         serial_number: serial_number
