@@ -13,6 +13,7 @@ lft.value 'i18n-en',
   streams:
     empty: "This stream is empty!"
     uploading_track: 'Uploading track, please wait'
+    sending_permission: 'Adding user to stream...'
     errors:
       removing_item: 'Unable to remove stream item, try again'
   in_touch: "We'll be in touch!"

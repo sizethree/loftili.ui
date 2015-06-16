@@ -5,12 +5,22 @@ dStreamPermissionControl = ($q, $timeout, Api, Lang, Notifications) ->
     $scope.results = []
 
     $scope.addUser = (user, index) ->
+      return false if $scope.sending == true
+
+      sending_lang = Lang 'streams.sending_permission'
+      note_id = Notifications.add sending_lang, 'info'
+      $scope.sending = true
+
       success = () ->
         $scope.results.splice index, 1
         $scope.manager.refresh()
+        $scope.sending = false
+        Notifications.remove note_id
 
       fail = () ->
         lang = Lang 'stream_permissions.errors.adding'
+        $scope.sending = false
+        Notifications.remove note_id
         Notifications.flash.error lang
 
       (Api.StreamPermission.save
