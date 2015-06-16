@@ -9,6 +9,7 @@ rStreamRoute = ($routeProvider) ->
     finished = 0
 
     finish = () ->
+      current_route.$$route.title = manager.stream.title
       deferred.resolve
         manager: manager
         devices: devices
@@ -48,7 +49,7 @@ rStreamRoute = ($routeProvider) ->
     templateUrl: 'views.stream_management'
     controller: 'StreamManagementController'
     name: 'stream_management'
-    title: 'Stream'
+    title: 'stream'
     resolve:
       resolved: resolve
 
