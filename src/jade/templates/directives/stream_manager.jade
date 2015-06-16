@@ -17,12 +17,12 @@
                     p.text Anyone can subscribe to this stream
           .title-input(lf-easy-input value="manager.stream.title" finish="updates.title")
         .title-display(ng-if="!manager.owner")
-          h1.foundry.medium {{manager.stream.title}}
+          h1.foundry.bold {{manager.stream.title}}
       .description-container
         .description-edit(ng-if="manager.owner")
           .description-input(lf-easy-input type="textarea" value="manager.stream.description" finish="updates.description")
         .description-display(ng-if="!manager.owner")
-          h1.foundry.medium {{manager.stream.description}}
+          h1.foundry.light {{manager.stream.description}}
     .ownership-info
       .ownership-title
         h1.foundry.upper Maintained by:
@@ -45,6 +45,8 @@
         .stream-permission-control(lf-stream-permission-control manager="manager")
       .stream-deletion(ng-if="manager.owner")
         a.button.deletion(ng-click="destroy()") delete this stream
+      .stream-unsubscription(ng-if="manager.contributor && !manager.owner")
+        a.button.unsubscribe(ng-click="unsubscribe()") leave this stream
   .stream-control
     .stream-list(ng-if="manager.stream.queue.length")
       .stream-item.list-item(ng-repeat="track in manager.stream.queue")

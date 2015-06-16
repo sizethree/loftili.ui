@@ -3,9 +3,29 @@ dStreamManager = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
   dStreamManagerLink = ($scope, $element, $attrs) ->
     busy = false
 
+    $scope.unsubscribe = () ->
+      found = 0
+
+      for p in $scope.manager.permissions
+        found = p if p.user == Auth.user().id
+
+      success = () ->
+        $location.url '/dashboard'
+
+      fail = () ->
+        error_lang = Lang 'streams.errors.leaving'
+        Notifications.flash.error error_lang
+
+      if found
+        (Api.StreamPermission.delete
+          id: found.id).$promise.then success, fail
+      else
+        false
+
     $scope.userFor = (permission) ->
       found = false
-      found = u if u.id == permission.user for u in $scope.manager.users
+      for u in $scope.manager.users
+        found = u if u.id == permission.user
       found
 
     upload = (file) ->

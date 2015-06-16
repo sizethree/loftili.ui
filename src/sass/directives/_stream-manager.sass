@@ -2,6 +2,11 @@
   display: block
   +clearfix
 
+  .basic-info
+    margin-bottom: 0.5em
+    padding-bottom: 0.5em
+    border-bottom: 1px solid darken(white, 10)
+
   .title-edit
     +clearfix
 
@@ -52,6 +57,31 @@
       width: 70%
       left: 15%
 
+  .title-display h1
+    font-size: 1.5em
+    color: darken(white, 70)
+
+  .title-display
+    position: relative
+    margin: 0 0 0.5em 0
+    padding: 0 0 0.5em 0
+
+    &:after
+      +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
+      position: absolute
+      background-size: 5px 5px
+      background-repeat: repeat-x
+      content: ''
+      display: block
+      height: 5px
+      width: 100%
+      top: 100%
+      left: 0
+
+  .description-display h1
+    font-size: 1em
+    line-height: 1.25em
+
   .ownership-info
     display: block
     margin: 20px 0 0 0 
@@ -99,9 +129,6 @@
 
   .stream-info .title-container
     display: block
-    margin: 0 0 10px 0
-
-  .stream-info .description-container
     margin: 0 0 10px 0
 
   .stream-info .description-container textarea
@@ -165,12 +192,15 @@
     overflow: hidden
     padding: 1px 0
 
-  .stream-deletion
+  .stream-deletion,
+  .stream-unsubscription
     padding: 0.5em 0
 
-  .stream-deletion a.button
+  .stream-deletion a.button,
+  .stream-unsubscription a.button
     @extend %small-button
     display: block
+    text-align: center
 
     &.deletion
       @extend %red-button
