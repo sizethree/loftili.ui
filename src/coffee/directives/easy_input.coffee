@@ -18,10 +18,9 @@ dEasyInput = ($timeout) ->
 
     $scope.save = () ->
       can_save = angular.isFunction $scope.finish
-      should_revert = true
+      should_revert = false
 
       success = () ->
-        should_revert = false
         $scope.focused = false
         is_saving = false
 

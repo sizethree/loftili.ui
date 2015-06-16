@@ -1,6 +1,9 @@
 ArtistFactory = ['$resource', 'URLS', ($resource, URLS) ->
 
-  Artist = $resource [URLS.api, 'artists', ':artist_id'].join('/'), {}
+  default_params =
+    id: '@id'
+
+  Artist = $resource [URLS.api, 'artists', ':id'].join('/'), default_params
 
 ]
 
