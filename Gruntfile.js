@@ -45,8 +45,11 @@ module.exports = function() {
       artifact_dest = process.env['ARTIFACT_DESTINATION'] || 'artifacts/loftili/ui',
       artifact_host = process.env['ARTIFACT_HOST'] || 'artifacts.sizethreestudios.com';
 
-  if(process.env['TRAVIS_COMMIT'])
-    pkg_info.commit = process.env['TRAVIS_COMMIT'].substr(0, 8);
+  if(process.env['GIT_COMMIT'])
+    pkg_info.commit = process.env['GIT_COMMIT'].substr(0, 8);
+
+  if(process.env['ARTIFACT_TAG'])
+    pkg_info.commit = process.env['ARTIFACT_TAG'].substr(0, 8);
   
   grunt.initConfig({
 
