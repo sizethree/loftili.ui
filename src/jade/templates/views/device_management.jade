@@ -6,10 +6,8 @@
         .device-controls.section(lf-device-controls manager="manager")
         .stream-info.present.section(ng-if="manager.stream")
           .stream-control(ng-repeat="stream_manager in [manager.stream]")
-            .stream-list
-              .stream-item.list-item(ng-repeat="track in stream_manager.stream.queue")
-                .track-info-container
-                  p.track-title.foundry.medium {{track.title}}
+            .stream-list-cotnainer
+              .listing(lf-stream-track-listing manager="stream_manager")
             .stream-addition(ng-if="stream_manager.contributor")
               .track-upload(lf-stream-track-upload manager="stream_manager")
               .stream-track-search(lf-stream-track-search manager="stream_manager")

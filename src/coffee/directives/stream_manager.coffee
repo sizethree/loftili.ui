@@ -70,16 +70,6 @@ dStreamManager = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
         ($scope.manager.update
           privacy: next).then success, fail
 
-    $scope.remove = (index) ->
-      success = () ->
-        $scope.manager.refresh()
-
-      fail = () ->
-        lang = Lang 'streams.errors.removing_item'
-        Notifications.flash.error lang
-
-      ($scope.manager.remove index).then success, fail
-
     $scope.removePermission = (permission_id) ->
       return false if busy
       busy = true

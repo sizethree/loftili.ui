@@ -64,7 +64,22 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
       loadedStream = (stream) ->
         manager.stream = stream
-        deferred.resolve true if ++finished == required
+        manager.artists = []
+
+        artists = []
+        artists.push track.artist if artists.indexOf track.artist < 0 for track in stream.queue
+
+        loadedArtist = (artist) ->
+          manager.artists.push artist
+
+          if manager.artists.length == artists.length
+            deferred.resolve true if ++finished == required
+
+        failArtist = () ->
+          deferred.reject false
+
+        (Api.Artist.get
+          id: a).$promise.then loadedArtist, failArtist for a in artists
 
       loadedPermissions = (permissions) ->
         manager.permissions = permissions

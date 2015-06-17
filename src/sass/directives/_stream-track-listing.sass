@@ -1,0 +1,28 @@
+.stream-track-listing.directive
+  @extend %alternating-list
+  display: block
+
+  .stream-item
+    +clearfix
+    line-height: 1.8em
+
+  .stream-item .track-info-container
+    +clearfix
+    +span-columns(8)
+
+  .stream-item .track-info-container .title-container,
+  .stream-item .track-info-container .artist-container
+    +span-columns(6)
+
+  .stream-item .track-actions
+    +span-columns(4)
+    @extend %button-group
+    text-align: right
+
+  .track-actions .button
+    @extend %small-button
+
+  .stream-item.list-item .track-actions .button
+    display: inline-block
+    float: none
+

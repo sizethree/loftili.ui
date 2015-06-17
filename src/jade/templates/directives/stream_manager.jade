@@ -48,13 +48,9 @@
       .stream-unsubscription(ng-if="manager.contributor && !manager.owner")
         a.button.unsubscribe(ng-click="unsubscribe()") leave this stream
   .stream-control
-    .stream-list(ng-if="manager.stream.queue.length")
-      .stream-item.list-item(ng-repeat="track in manager.stream.queue")
-        .track-info-container
-          p.track-title.foundry.medium {{track.title}}
-        .track-actions.button-group(ng-if="manager.contributor")
-          a.button.remover(ng-click="remove($index)")
-            i.ionicon.close
+    .stream-list-container(ng-if="manager.stream.queue.length")
+      .stream-list-container(lf-stream-track-listing manager="manager")
+        .listing(lf-stream-track-listing manager="manager")
     .no-tracks(ng-if="!manager.stream.queue || !manager.stream.queue.length")
       p.foundry.medium {{"streams.empty" | i18n}}
     .stream-addition(ng-if="manager.contributor")
