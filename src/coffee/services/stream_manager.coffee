@@ -65,10 +65,17 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
       loadedStream = (stream) ->
         manager.stream = stream
         manager.artists = []
-
         artists = []
-        artists.push track.artist if artists.indexOf track.artist < 0 for track in stream.queue
 
+        if !stream.queue.length
+          return deferred.resolve true if ++finished == required
+
+        for track in stream.queue
+          artist_id = track.artist
+          existing = artists.indexOf artist_id
+          if existing < 0
+            artists.push artist_id
+       
         loadedArtist = (artist) ->
           manager.artists.push artist
 
@@ -80,6 +87,8 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
         (Api.Artist.get
           id: a).$promise.then loadedArtist, failArtist for a in artists
+
+        true
 
       loadedPermissions = (permissions) ->
         manager.permissions = permissions
