@@ -2,6 +2,28 @@
   display: block
   position: relative
 
+  .stream-addition
+    +clearfix
+    margin: 10px 0 0 0
+
+  .stream-addition .uploader
+    @extend %file-button
+    display: inline-block
+    float: right
+    padding: 1px
+    margin-left: 10px
+    margin-top: 0.2em
+
+  .stream-addition .uploader .button
+    @extend %small-button
+    border-radius: 3px
+    display: block
+
+  .stream-addition .stream-track-search
+    height: auto
+    overflow: hidden
+    padding: 1px 0
+
   > .inner
     +outer-wrapper
     +clearfix
