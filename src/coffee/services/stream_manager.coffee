@@ -12,6 +12,22 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
       owner: false
       contributor: false
 
+    manager.move = (from, to) ->
+      deferred = $q.defer()
+
+      success = () ->
+        deferred.resolve true
+
+      fail = () ->
+        deferred.reject true
+
+      (Api.Stream.move
+        id: stream_id
+        from: from
+        to: to).$promise.then success, fail
+
+      deferred.promise
+
     manager.update = (updates) ->
       deferred = $q.defer()
 

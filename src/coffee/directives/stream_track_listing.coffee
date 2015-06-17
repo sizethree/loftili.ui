@@ -1,8 +1,21 @@
 dStreamTrackListing = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
 
-  dStreamTrackListingLink = ($scope, $element, $attrs) ->
+  dStreamTrackListingLink = ($scope, $element, $attrs, $controller) ->
     artist =
       name: ''
+
+    moveItem = (from, to) ->
+      success = () ->
+        $scope.manager.refresh()
+        $controller.clear()
+
+      fail = () ->
+        fail_lang = Lang 'stream.errors.moving'
+        Notifications.flash.error fail_lang
+
+      ($scope.manager.move from, to).then success, fail
+
+    $controller.on 'change', moveItem
 
     $scope.artistFor = (track) ->
       artist_id = track.artist
@@ -28,6 +41,7 @@ dStreamTrackListing = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
     templateUrl: 'directives.stream_track_listing'
     scope:
       manager: '='
+    require: 'lfDraggableList'
     link: dStreamTrackListingLink
 
 dStreamTrackListing.$inject = [

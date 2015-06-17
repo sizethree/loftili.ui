@@ -2,9 +2,27 @@
   @extend %alternating-list
   display: block
 
+  &.concrete .stream-item .handle
+    display: none
+
+  .draggable-innards
+    +clearfix
+    display: block
+
   .stream-item
     +clearfix
     line-height: 1.8em
+
+  .stream-item.list-item
+    padding-top: 0
+    padding-bottom: 0
+
+  .stream-item.list-item .mover
+    padding-top: 0.5em
+    padding-bottom: 0.5em
+
+  .stream-item.list-item .draggable-innards
+    padding-left: 2em
 
   .stream-item .track-info-container
     +clearfix

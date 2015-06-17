@@ -4,11 +4,19 @@ StreamFactory = ($resource, $q, URLS) ->
     id: '@id'
 
   Stream = $resource [URLS.api, 'streams', ':id'].join('/'), defaults,
+    move:
+      method: 'PATCH'
+      url: [URLS.api, 'streams', ':id', 'queue'].join '/'
+      params:
+        id: '@id'
+
     update:
       method: 'PUT'
+
     enqueue:
       url: [URLS.api, 'streams', ':id', 'queue'].join '/'
       method: 'PUT'
+
     dequeue:
       url: [URLS.api, 'streams', ':id', 'queue', ':position'].join '/'
       method: 'DELETE'

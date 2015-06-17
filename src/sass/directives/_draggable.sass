@@ -1,0 +1,41 @@
+.draggable.directive
+  +clearfix
+  display: block
+  position: relative
+  padding-left: 2em
+
+  .spacer
+    position: relative
+    display: block
+    padding: 0
+    margin: 0
+
+  .mover
+    +clearfix
+
+    &.moving
+      background: white
+      border: 1px solid darken(white, 20)
+      border-radius: 2px
+      padding: 0.4em 0.5em
+
+  .handle
+    position: absolute
+    left: 0.5em
+    top: 50%
+    margin-top: -0.5em
+    width: 1em
+    height: 1em
+    cursor: pointer
+
+  .handle .ionicon,
+  .handle .ionicon:after
+    width: 1em
+    height: 1em
+    margin: 0
+    padding: 0
+    display: block
+
+  .handle .ionicon:after
+    font-size: 1em
+    line-height: 1em

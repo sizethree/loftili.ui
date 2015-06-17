@@ -68,4 +68,5 @@ lft.value 'i18n-en',
       failed: 'Unable to {{action}} device, please check it\'s connection'
   stream:
     errors:
+      moving: 'Unable to move the stream\'s tracks around'
       privacy: 'Unable to toggle stream\'s privacy'

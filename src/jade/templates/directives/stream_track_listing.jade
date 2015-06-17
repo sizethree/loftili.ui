@@ -1,11 +1,12 @@
-.stream-track-listing.directive
-  .stream-item.list-item(ng-repeat="track in manager.stream.queue")
-    .track-info-container
-      .title-container
-        a.track-title.foundry.medium(ng-attr-href="tracks/{{track.id}}") {{track.title}}
-      .artist-container(ng-repeat="artist in [artistFor(track)]")
-        a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}") {{artist.name}}
-    .track-actions.button-group(ng-if="manager.contributor")
-      a.button.remover(ng-click="remove($index)")
-        i.ionicon.close
+.stream-track-listing.directive(lf-draggable-list ng-class="{concrete: !manager.contributor}")
+  .stream-item.list-item(ng-repeat="track in manager.stream.queue" lf-draggable)
+    .draggable-innards
+      .track-info-container
+        .title-container
+          a.track-title.foundry.medium(ng-attr-href="tracks/{{track.id}}") {{track.title}}
+        .artist-container(ng-repeat="artist in [artistFor(track)]")
+          a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}") {{artist.name}}
+      .track-actions.button-group(ng-if="manager.contributor")
+        a.button.remover(ng-click="remove($index)")
+          i.ionicon.close
 
