@@ -17,5 +17,5 @@
         a.button.create-trigger(ng-click="createStream()")
           i.ionicon.add
       .inputs
-        input.title(name="title" ng-model="new_stream.title" placeholder="title")
-        input.description(name="description" ng-model="new_stream.description" placeholder="description")
+        input.title(name="title" ng-model="new_stream.title" placeholder="title" ng-keyup="keyUp($event)")
+        input.description(name="description" ng-model="new_stream.description" placeholder="description" ng-keyup="keyUp($event)")
