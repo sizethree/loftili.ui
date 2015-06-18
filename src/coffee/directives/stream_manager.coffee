@@ -24,8 +24,13 @@ dStreamManager = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
 
     $scope.userFor = (permission) ->
       found = false
+
+      if !$scope.manager.users
+        return false
+
       for u in $scope.manager.users
         found = u if u.id == permission.user
+
       found
 
     update = (property) ->
