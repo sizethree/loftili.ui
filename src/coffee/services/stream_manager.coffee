@@ -89,7 +89,7 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
         for track in stream.queue
           artist_id = track.artist
           existing = artists.indexOf artist_id
-          if existing < 0
+          if existing < 0 and artist_id > 0
             artists.push artist_id
        
         loadedArtist = (artist) ->
