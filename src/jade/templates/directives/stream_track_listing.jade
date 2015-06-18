@@ -3,7 +3,7 @@
     .draggable-innards
       .track-info-container
         .title-container
-          a.track-title.foundry.medium(ng-attr-href="tracks/{{track.id}}") {{track.title}}
+          a.track-title.foundry.medium(ng-attr-href="tracks/{{track.id}}" ng-attr-title="{{track.title}}") {{track.title}}
         .artist-container(ng-repeat="artist in [artistFor(track)]")
           a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}") {{artist.name}}
       .track-actions.button-group(ng-if="manager.contributor")
