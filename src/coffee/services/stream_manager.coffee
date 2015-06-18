@@ -91,6 +91,9 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
           existing = artists.indexOf artist_id
           if existing < 0 and artist_id > 0
             artists.push artist_id
+
+        if artists.length == 0
+          return deferred.resolve true if ++finished == required
        
         loadedArtist = (artist) ->
           manager.artists.push artist
