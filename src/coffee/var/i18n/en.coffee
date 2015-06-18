@@ -14,6 +14,7 @@ lft.value 'i18n-en',
     empty: "This stream is empty!"
     uploading_track: 'Uploading track, please wait'
     sending_permission: 'Adding user to stream...'
+    subscribing_browser: 'Subscribing your browser to the stream...'
     errors:
       removing_item: 'Unable to remove stream item, try again'
   in_touch: "We'll be in touch!"

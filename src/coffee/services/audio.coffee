@@ -1,34 +1,32 @@
 _factory = (URLS) ->
 
-  listeners:
-    start: []
-    stop: []
-    finish: []
-
   current_sound = null
 
   class Sound
 
     constructor: (@data) ->
-      @listeners =
-        start: []
-        stop: []
-        finish: []
+      @listeners = []
 
       @sound_obj = soundManager.createSound
         url: @data.streaming_url
+        volume: 1
+
+        onfinish: () =>
+          @trigger 'finish'
+
+        whileplaying: () =>
+          @trigger 'playback'
+
+        onload: () =>
+          @trigger 'loaded'
 
     on: (evt, fn) ->
-      is_list = angular.isArray @listeners[evt]
       is_fn = angular.isFunction fn
-      if is_list and is_fn
-        @listeners[evt].push fn
+      @listeners.push {evt: evt, fn: fn} if is_fn
 
     trigger: (evt, args...) ->
-      has_callbacks = angular.isArray @listeners[evt]
-
-      if has_callbacks
-        fn.apply null, args for fn in @listeners[evt]
+      for l in @listeners
+        l.fn.apply null, args if l.evt == evt
 
     play: () ->
       if current_sound
@@ -39,6 +37,10 @@ _factory = (URLS) ->
 
       @trigger 'start'
 
+    pause: () ->
+      @sound_obj.pause()
+      @trigger 'paused'
+
     stop: () ->
       @sound_obj.stop()
       @trigger 'stop'
@@ -46,13 +48,6 @@ _factory = (URLS) ->
   AudioManager =
 
     Sound: Sound
-
-  AudioManager.on = (evt, fn) ->
-    is_fn = angular.isFunction fn
-    has_evt = angular.isArray listeners[evt]
-
-    if is_fn and has_evt
-      listeners[evt].push fn
 
   AudioManager
 
