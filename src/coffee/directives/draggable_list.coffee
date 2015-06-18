@@ -36,6 +36,12 @@ dDraggableList = ($q) ->
         if is_above and is_below
           swap_index = index
 
+        if index == 0 and is_above
+          swap_index = 0
+
+        if index == (@items.length - 1) and is_below
+          swap_index = index
+
       fn moved_index, swap_index for fn in @callbacks['change']
 
       deferred.resolve true
