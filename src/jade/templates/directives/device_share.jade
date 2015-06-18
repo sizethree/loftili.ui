@@ -5,7 +5,7 @@
     .search
       input(type="text" placeholder="search people" ng-change="search($event)" ng-model="search.query")
     ul.results(ng-if="results.length > 0")
-      li.result(ng-repeat="result in results")
+      li.result.list-item(ng-repeat="result in results")
         button.trigger(ng-click="share(result)")
           i.ionicon.add
         h2.sans.username {{result.username}}
