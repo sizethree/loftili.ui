@@ -14,10 +14,10 @@
     input(type="password" disabled="true" ng-model="credentials.password" ng-if="locked")
   .input-container.actions
     .cancel
-      button(ng-click="cancel()" data-mm-noclose="true")
+      a.button(ng-click="cancel()" data-mm-noclose="true")
         i.ionicon.gray(ng-class="{cancel: state === 0, back: state > 0}")
     .btn-grp.others
-      button(ng-click="reset()" data-mm-noclose="true")
+      a.button(ng-click="reset()" data-mm-noclose="true")
         i.ionicon(ng-class="{help: state === 0, send: state > 0}")
-      button(ng-click="attempt($event)")
-        i.ionicon.send(ng-if="state === 0")
+      a.button(ng-click="attempt($event)" data-mm-noclose="true" ng-if="state === 0")
+        i.ionicon.send
