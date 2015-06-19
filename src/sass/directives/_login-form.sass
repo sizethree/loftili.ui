@@ -19,8 +19,12 @@
   .actions
     +clearfix
 
-    .cancel
-      float: left
-
     .btn-grp.others
       float: right
+
+  .actions div.cancel
+    float: left
+
+  .actions .button
+    @extend %small-button
+    display: inline-block
