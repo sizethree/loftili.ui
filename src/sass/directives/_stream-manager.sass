@@ -186,18 +186,54 @@
     height: auto
     overflow: hidden
     padding: 1px 0
-
-  .stream-deletion,
-  .stream-unsubscription
+  
+  .stream-actions
+    +clearfix
     padding: 0.5em 0
 
-  .stream-deletion a.button,
-  .stream-unsubscription a.button
+  .stream-actions .stream-browser,
+  .stream-actions .stream-deletion,
+  .stream-actions .stream-unsubscription
+    +clearfix
+    display: inline-block
+    float: left
+
+    a.button
+      border-radius: 0
+
+    &:first-child a.button
+      border-top-left-radius: 3px
+      border-bottom-left-radius: 3px
+
+    &:last-child a.button
+      border-top-right-radius: 3px
+      border-bottom-right-radius: 3px
+
+  .stream-actions .stream-browser a.button,
+  .stream-actions .stream-deletion a.button,
+  .stream-actions .stream-unsubscription a.button
     @extend %small-button
-    display: block
+    display: inline-block
     text-align: center
 
     &.deletion
       @extend %red-button
       display: block
       text-align: center
+
+  .stream-actions .stream-browser a.button
+    +clearfix
+
+  .stream-actions .stream-browser a.button span
+    display: block
+    float: left
+
+  .stream-actions .stream-browser a.button .ionicon
+    float: left
+    margin-right: 5px
+    display: block
+    height: 1.25em
+
+    &:after
+      font-size: 1.1em
+      line-height: 1.3em

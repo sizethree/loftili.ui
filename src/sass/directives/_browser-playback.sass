@@ -1,0 +1,72 @@
+.browser-playback.directive
+  display: block
+
+  .playback-controls
+    position: relative
+    display: block
+    height: 3em
+
+  .playback-controls .control-position
+    position: fixed
+    display: block
+    left: 0
+    bottom: 0
+    height: auto
+    width: 100%
+    z-index: 1000
+    text-align: center
+    background: lighten(black, 20)
+    box-shadow: inset 0px 1px lighten(black, 35)
+    border-top: 1px solid darken(white, 100)
+
+  .playback-controls .controls-inner
+    +clearfix
+    position: relative
+    display: inline-block
+
+  .controls .button
+    @extend %small-button
+
+  .playback-controls .controls-inner .controls .button
+    display: block
+
+  .playback-controls .controls-inner .controls,
+  .playback-controls .controls-inner .current-info,
+  .playback-controls .controls-inner .stream-info
+    white-space: nowrap
+    display: block
+    float: left
+    padding: 0.5em 0.8em
+    line-height: 1.8em
+    color: darken(white, 10)
+    border-left: 1px solid darken(white, 90)
+    border-right: 1px solid darken(white, 75)
+
+    &:first-child
+      border-left: 0
+
+    &:last-child
+      border-right: 0
+
+  .playback-controls .controls
+    @extend %button-group
+
+  .playback-controls .controls-inner .current-info  
+    +clearfix
+
+  .playback-controls .controls-inner .current-info  .track-title,
+  .playback-controls .controls-inner .current-info  .track-duration
+    float: left
+
+  .playback-controls .controls-inner .current-info  .track-title
+    margin-right: 10px
+    color: darken(white, 10)
+
+  .playback-controls .controls-inner .current-info  .track-duration
+    +clearfix
+    color: darken(white, 30)
+
+  .playback-controls .controls-inner .current-info  .track-duration p
+    display: block
+    float: left
+    margin-right: 10px

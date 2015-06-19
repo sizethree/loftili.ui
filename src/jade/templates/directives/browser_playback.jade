@@ -1,0 +1,17 @@
+.browser-playback.directive
+  .playback-controls(ng-if="current")
+    .control-position
+      .controls-inner
+        .current-info
+          .track-title
+            p.foundry {{current.data.title}}
+          .track-duration
+            p.foundry.light(ng-if="current.sound_obj.position") {{current.sound_obj.position | formatTime}}
+            p.foundry.light(ng-if="!current.sound_obj.position") 0:00
+            p.foundry.light {{current.sound_obj.duration | formatTime}}
+        .stream-info
+          .name-container
+            a.foundry.light(ng-attr-href="/streams/{{stream.id}}") {{stream.title}}
+        .controls
+          a.button.unsubscribe(ng-click="unsubscribe()")
+            i.ionicon.stop

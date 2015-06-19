@@ -1,7 +1,19 @@
-dStreamManager = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
+dStreamManager = ($rootScope, $location, Lang, Api, Auth, BrowserPlayback, Notifications) ->
 
   dStreamManagerLink = ($scope, $element, $attrs) ->
     busy = false
+
+    $scope.browser = () ->
+      lang = Lang 'streams.subscribing_browser'
+      note_id = Notifications.add lang, 'info'
+
+      success = () ->
+        Notifications.remove note_id
+
+      fail = () ->
+        Notifications.remove note_id
+
+      (BrowserPlayback.subscribe $scope.manager.stream.id).then success, fail
 
     $scope.unsubscribe = () ->
       found = 0
@@ -105,6 +117,7 @@ dStreamManager.$inject = [
   'Lang'
   'Api'
   'Auth'
+  'BrowserPlayback'
   'Notifications'
 ]
 
