@@ -12,13 +12,7 @@ lft.service 'MenuManager', ['$window', '$rootScope', ($window, $rootScope) ->
     if evt.keyCode == 27
       closeNext()
 
-  clickWatch = (evt) ->
-    target = angular.element evt.target
-    if !target.attr('data-mm-noclose')
-      closeNext()
-
   angular.element($window).on 'keyup', keyWatch
-  angular.element($window).on 'click', clickWatch
 
   uid = do ->
     indx = 0
