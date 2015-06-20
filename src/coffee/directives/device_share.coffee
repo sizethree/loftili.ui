@@ -1,4 +1,4 @@
-dDeviceShare = ($timeout, Api, Auth, DEVICE_PERMISSION_LEVELS) ->
+dDeviceShare = ($timeout, Api, Auth, Lang, Notifications, DEVICE_PERMISSION_LEVELS) ->
 
   link = ($scope, $element, $attrs) ->
     query = ''
@@ -22,15 +22,19 @@ dDeviceShare = ($timeout, Api, Auth, DEVICE_PERMISSION_LEVELS) ->
       ).$promise.then success, fail
 
     share = (user) ->
+      wait_lang = Lang 'device.sending_permission'
+      note_id = Notifications.add wait_lang, 'info'
       busy = true
 
       success = (permission) ->
+        Notifications.remove note_id
         busy = false
         $scope.permissions.push permission
         $scope.results = []
 
       fail = () ->
         bounce = false
+        Notifications.remove note_id
 
       (Api.DevicePermission.save
         device: $scope.device.id
@@ -81,6 +85,8 @@ dDeviceShare.$inject = [
   '$timeout'
   'Api'
   'Auth'
+  'Lang'
+  'Notifications'
   'DEVICE_PERMISSION_LEVELS'
 ]
 

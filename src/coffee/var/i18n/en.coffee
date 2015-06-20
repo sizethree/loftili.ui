@@ -48,6 +48,7 @@ lft.value 'i18n-en',
         success: 'Your password has been updated!'
         fail: 'We\'ve messed something up, shoot us an email!'
   device:
+    sending_permission: 'Granting user control of device, please wait...'
     now_playing_text: "Now playing:"
     register: "Register device:"
     errors:
