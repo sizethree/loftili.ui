@@ -36,6 +36,8 @@
     color: darken(white, 80)
     overflow: hidden
     height: auto
+    text-overflow: hidden
+    white-space: nowrap
 
   .stream-shares .mapping .join-info
     float: right
@@ -63,3 +65,19 @@
   .stream-shares .mappings-list
     @extend %alternating-list
 
+  +media(max-width 800px)
+
+    .stream-shares,
+    .stream-manager,
+    .stream-manager .stream-info,
+    .stream-manager .stream-control
+      float: none
+      width: 100%
+      margin-right: 0px
+
+    .stream-manager .stream-info
+      margin-bottom: 10px
+
+    .stream-shares
+      margin-top: 10px
+      margin-bottom: 20px
