@@ -18,6 +18,9 @@ dUserStreams = ($location, Lang, Api, Auth, Notifications) ->
     makeStream = (stream) ->
       success = (created_stream) ->
         $scope.streams.push created_stream
+        $scope.new_stream =
+          title: ''
+          description: ''
 
       fail = () ->
         failed_lang = Lang 'streams.errors.create'
