@@ -14,7 +14,9 @@ _factory = ($location, Auth, Api, Notifications, Lang, Analytics) ->
 
       fail = () ->
         Analytics.event 'authentication', 'fail', 'login_form'
-        $scope.errors = ['Hmm, try again']
+        $scope.errors = [
+          'Invalid credentials.'
+        ]
 
       Analytics.event 'authentication', 'attempt', 'login_form'
 
