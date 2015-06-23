@@ -20,6 +20,7 @@ dDraggable = ($rootScope) ->
       detached = false
       mover = null
       spacer = false
+      list_id = null
 
       bounding = () ->
         mover[0].getBoundingClientRect()
@@ -35,7 +36,7 @@ dDraggable = ($rootScope) ->
           clearStyle spacer
           clearStyle mover
 
-        ($controller.finish $element, current).then finish
+        ($controller.finish list_id, current).then finish
 
       detatch = () ->
         detached = true
@@ -89,7 +90,10 @@ dDraggable = ($rootScope) ->
         mover = angular.element $element[0].querySelectorAll '.mover'
         spacer = angular.element $element[0].querySelectorAll '.spacer'
         mover.append child_element
-        $controller.addReference $element
+        list_id = $controller.addReference $element
+
+      $scope.$on '$destroy', () ->
+        $controller.removeReference list_id
 
       transclude $scope.$parent, transclusion
       doc.on 'mousemove', move
