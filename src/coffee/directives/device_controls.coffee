@@ -54,7 +54,7 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
 
       success = () ->
         Notifications.remove note_id
-        $scope.manager.refresh()
+        $scope.manager.refresh().then update
 
       fail = () ->
         Notifications.remove note_id
@@ -67,6 +67,9 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
       state = $scope.manager.state
       $scope.current_track = null
       nav = ['stream']
+      nav_index = 0
+      $scope.active_nav = nav[nav_index]
+
       $scope.playback = state and (parseInt state.playback) == 1
       updateTrack() if state and (parseInt state.current_track) > 0
 

@@ -98,21 +98,37 @@
       position: relative
       overflow: hidden
 
-      .has-stream
+      .no-stream .search-container
         margin: 0 0.5em
 
-      &:after
-        +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
-        position: absolute
-        background-size: 4px 4px 
-        background-repeat: repeat-y
-        right: 50%
-        top: 4em
-        content: ''
-        display: block
-        height: 100%
-        width: 4px
-        z-index: 2
+      .no-stream .results-container
+        border-left: none
+        border-right: none
+        border-radius: 0 0
+
+      .no-stream .results-container .title-container
+        +span-columns(6)
+        text-align: left
+
+      .no-stream .results-container .updated-tag
+        display: none
+
+      .has-stream
+        margin: 0 0.5em
+        position: relative
+
+        &:after
+          +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
+          position: absolute
+          background-size: 4px 4px 
+          background-repeat: repeat-y
+          right: 50%
+          top: 4em
+          content: ''
+          display: block
+          height: 100%
+          width: 4px
+          z-index: 2
 
       a.control
         float: left
