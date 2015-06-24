@@ -6,18 +6,35 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
     notification_id = null
     stopping_lang = Lang 'device.playback.stopping'
     failed_lang = Lang 'device.playback.failed'
+    nav_index = 0
+    nav = ['stream', 'track']
+    $scope.active_nav = nav[nav_index]
+
+    $scope.next = () ->
+      nav_index = 0 if ++nav_index >= nav.length
+      $scope.active_nav = nav[nav_index]
 
     updateTrack = () ->
       state = $scope.manager.state
       track_id = state and parseInt state.current_track, 10
+      loaded_track = null
 
-      success = (track) ->
-        $scope.current_track = track
+      finish = (artist) ->
+        $scope.current_track = loaded_track
+        $scope.current_artist = artist
+        nav = ['stream', 'track']
+        nav_index = 1
+        $scope.active_nav = 'track'
+
+      loadedTrack = (track) ->
+        loaded_track = track
+        (Api.Artist.get {id: track.artist}).$promise.then finish, fail
 
       fail = () ->
         $scope.current_track = null
+        nav = ['stream']
 
-      (Api.Track.get {id: track_id}).$promise.then success, fail if track_id > 0
+      (Api.Track.get {id: track_id}).$promise.then loadedTrack, fail if track_id > 0
 
     $scope.unsubscribe = () ->
       note_id = Notifications.add stopping_lang, 'info'
@@ -49,6 +66,7 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
       $scope.stream_manager = $scope.manager.stream
       state = $scope.manager.state
       $scope.current_track = null
+      nav = ['stream']
       $scope.playback = state and (parseInt state.playback) == 1
       updateTrack() if state and (parseInt state.current_track) > 0
 

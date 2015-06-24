@@ -25,8 +25,9 @@ lft.service 'Analytics', ['GOOGLE', '$rootScope', '$location', (GOOGLE, $rootSco
       end_time = new Date().getTime()
       current_route = route_info.$$route
 
-      Analytics.track $location.url(), current_route.title
-      Analytics.event 'routing', 'loadtime', $location.url(), (end_time - start_time)
+      if current_route
+        Analytics.track $location.url(), current_route.title
+        Analytics.event 'routing', 'loadtime', $location.url(), (end_time - start_time)
 
       detatch()
       current_route_listener = null

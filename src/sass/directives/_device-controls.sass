@@ -1,4 +1,4 @@
-.device-controls
+.device-controls.directive
   display: block
   +clearfix
 
@@ -6,52 +6,80 @@
   .has-stream
     +clearfix
     display: block
+    text-align: center
 
-  .has-stream .controls,
-  .has-stream .stream-name
+  .has-stream .control.button
+    @extend %small-button
+    margin: 0.2em 0 0 0
+
+    .ionicon,
+    .ionicon:after
+      display: inline-block
+
+  .has-stream .control.button.unsubscribe
+    float: right
+    margin-left: 1em
+
+  .has-stream .control.button.start,
+  .has-stream .control.button.stop
     float: left
+    margin-right: 1em
 
-  .has-stream .controls
-    margin-right: 10px
+  .has-stream .playback-info
+    +clearfix
+    overflow: hidden
+    height: auto
+    padding: 0.5em 0 0.5em 1.5em
+    background: darken(white, 75)
+    border: 1px solid darken(white, 90)
+    color: darken(white, 15)
+    border-radius: 3px
+    position: relative
+
+  .has-stream .playback-info .playback-nav
+    position: absolute
+    left: 1em
+    top: 50%
+    margin-top: -0.7em
+
+  .has-stream .playback-info .playback-nav a.button
+    background: transparent
+    display: block
+    border: none
+    box-shadow: none
+    padding: 0
+    margin: 0
+
+    .ionicon:after
+      color: darken(white, 80)
+      background: darken(white, 15)
+      border-radius: 1em
+      font-size: 0.8em
+      line-height: 1.4em
+      height: 1.4em
+      width: 1.4em
+      text-indent: 0.2em
 
   .has-stream .stream-name,
   .has-stream .currently-playing
-    +clearfix
+    display: none
+    overflow: hidden
+    height: auto
 
-  .has-stream .stream-name
-    margin-right: 10px
-
-  .has-stream .stream-name .blurb,
-  .has-stream .currently-playing .blurb
-    +clearfix
-    display: inline-block
-    background: white
-    border: 1px solid darken(white, 8)
-    padding: 0 0.5em
-    border-radius: 2px
-
-    p.label, p.value, a.link
-      float: left
+    &.active
       display: block
-      line-height: 1.8em
-      font-size: 1em
-      margin-bottom: 0px
 
-    p.label
-      margin-right: 10px
+    .blurb .label,
+    .blurb .value
+      margin: 0
 
-  .has-stream .stream-name p,
-  .has-stream .stream-name i
-    display: block
-    float: left
+    .blurb .label
+      font-size: 0.8em
+      line-height: 1em
+      display: block
+      margin-bottom:  0.2em
 
-  .has-stream .stream-name i
-    margin-right: 5px
-
-  .has-stream .stream-name i:after
-    font-size: 1em
-    line-height: 2em
-
-  .has-stream .controls .button
-    @extend %small-button
-
+    .blurb .value
+      font-size: 1.3em
+      line-height: 1em
+      display: inline-block

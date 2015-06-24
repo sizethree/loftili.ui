@@ -98,34 +98,35 @@
       position: relative
       overflow: hidden
 
+      .has-stream
+        margin: 0 0.5em
+
       &:after
         +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
         position: absolute
         background-size: 4px 4px 
         background-repeat: repeat-y
         right: 50%
-        top: 2em
+        top: 4em
         content: ''
         display: block
         height: 100%
         width: 4px
         z-index: 2
 
-      .controls.button-group
-        display: block
-        float: none
-        clear: both
-        margin: 0 0.5em 20px
-        text-align: center
-        z-index: 3
+      a.control
+        float: left
+        padding: 0.5em 0
         position: relative
-
-      .controls.button-group a.control
-        float: none
-        padding: 0.5em
-        position: relative
-        display: inline-block
         width: 50%
+        z-index: 3
+
+        &.stop,
+        &.start,
+        &.unsubscribe
+          margin-left: 0
+          margin-right: 0
+          float: left
 
         i.ionicon
           position: relative
@@ -138,12 +139,34 @@
           font-size: 1.5em
           line-height: 1.5em
 
+        &:first-of-type
+          border-radius: 3px 0 0 3px
+
+        &:last-of-type
+          clear: right
+          border-radius: 0 3px 3px 0
+
+      .playback-info
+        +clearfix
+        background: transparent
+        border: none
+        padding: 0
+        height: auto
+        overflow: visible
+
+      .playback-info .playback-nav
+        display: none
+
+      .stream-name,
+      .currently-playing
+        padding: 1em 0
+
       .stream-name
+        display: block
         position: relative
         text-align: left
         float: left
         width: 50%
-        padding: 0
         margin: 0
         text-align: center
 
@@ -171,6 +194,7 @@
         clear: both
         display: block
         text-align: center
+        margin-bottom: 0
 
         &.label
           font-size: 0.8em
