@@ -53,7 +53,7 @@
     +media(max-width 800px)
       +span-columns(12)
       margin: 0
-      padding: 10px
+      padding: 0 10px 10px
 
   .where-the-magic-happens .not-connected
     @extend %bordered-container
@@ -88,3 +88,92 @@
 
   .where-the-magic-happens .stream-list .list-item
     line-height: 1.8em
+
+  .where-the-magic-happens .device-controls
+    +media(max-width 800px)
+      margin: 10px 0
+      padding: 10px 0
+      background: white
+      text-align: center
+      position: relative
+
+      .controls.button-group
+        display: block
+        float: none
+        clear: both
+        margin: 0 0.5em 20px
+        text-align: center
+
+      .controls.button-group a.control
+        float: none
+        padding: 0.5em
+        position: relative
+        display: inline-block
+        width: 50%
+
+        i.ionicon
+          position: relative
+          display: block
+          width: 2em
+          height: 2em
+
+        i.ionicon:after
+          display: block
+          font-size: 1.5em
+          line-height: 1.5em
+
+      .stream-name
+        position: relative
+        text-align: left
+        float: left
+        width: 50%
+        padding: 0
+        margin: 0
+        text-align: center
+
+      .stream-name:after
+        +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
+        position: absolute
+        background-size: 4px 4px 
+        background-repeat: repeat-y
+        right: -2px
+        top: 0
+        content: ''
+        display: block
+        height: 100%
+        width: 4px
+
+      .stream-name .blurb
+        display: inline-block
+        border: none
+        padding: 0
+
+      .currently-playing
+        display: block
+        float: left
+        width: 50%
+
+      .currently-playing .blurb
+        border: none
+        position: relative
+        padding: 0
+
+      .stream-name .blurb p,
+      .stream-name .blurb a,
+      .currently-playing p,
+      .currently-playing a
+        border: none
+        float: none
+        clear: both
+        display: block
+        text-align: center
+
+        &.label
+          font-size: 0.8em
+          color: darken(white, 50)
+          line-height: 1em
+
+        &.value
+          font-size: 1.3em
+          line-height: 1.3em
+          font-family: $font-foundry-medium

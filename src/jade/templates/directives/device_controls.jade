@@ -4,7 +4,7 @@
   .has-stream(ng-if="stream_manager")
     .controls.button-group
       a.control.button.stop(ng-click="unsubscribe()")
-        i.ionicon.close
+        i.ionicon.eject
       a.control.button.stop(ng-click="setPlayback(0)" ng-if="manager.state.playback === 1")
         i.ionicon.stop
       a.control.button.start(ng-click="setPlayback(1)" ng-if="manager.state.playback === 0")
@@ -12,9 +12,9 @@
     .stream-name
       .blurb
         p.label.foundry.light stream:
-        a.foundry.light.link(ng-attr-href="/streams/{{stream_manager.stream.id}}") {{stream_manager.stream.title}}
+        a.foundry.light.link.value(ng-attr-href="/streams/{{stream_manager.stream.id}}") {{stream_manager.stream.title}}
     .currently-playing(ng-if="current_track && playback")
       .blurb
         p.label.foundry.light now playing:
-        p.value.foundry.light {{current_track.title}}
+        a.value.foundry.light(ng-attr-href="/tracks/{{current_track.id}}") {{current_track.title}}
 
