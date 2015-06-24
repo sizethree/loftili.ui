@@ -96,6 +96,20 @@
       background: white
       text-align: center
       position: relative
+      overflow: hidden
+
+      &:after
+        +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
+        position: absolute
+        background-size: 4px 4px 
+        background-repeat: repeat-y
+        right: 50%
+        top: 2em
+        content: ''
+        display: block
+        height: 100%
+        width: 4px
+        z-index: 2
 
       .controls.button-group
         display: block
@@ -103,6 +117,8 @@
         clear: both
         margin: 0 0.5em 20px
         text-align: center
+        z-index: 3
+        position: relative
 
       .controls.button-group a.control
         float: none
@@ -130,18 +146,6 @@
         padding: 0
         margin: 0
         text-align: center
-
-      .stream-name:after
-        +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
-        position: absolute
-        background-size: 4px 4px 
-        background-repeat: repeat-y
-        right: -2px
-        top: 0
-        content: ''
-        display: block
-        height: 100%
-        width: 4px
 
       .stream-name .blurb
         display: inline-block
