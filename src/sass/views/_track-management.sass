@@ -1,0 +1,21 @@
+.track-management.view
+  +outer-container
+  min-height: 100%
+  position: relative
+  margin: 0 1em
+  clear: both
+  padding: 1em 0
+
+  .track-info
+    +clearfix
+    +span-columns(6)
+
+  .track-info .track-title h1,
+  .artist-info .artist-name h1
+    font-size: 2em
+    line-height: 1em
+    color: darken(white, 80)
+
+  .artist-info 
+    +span-columns(6)
+

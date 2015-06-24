@@ -15,8 +15,12 @@ rTracksRoute = ($routeProvider) ->
 
     loadedTrack = (track) ->
       resolved.track = track
-      (Api.Artist.get
-        id: track.artist).$promise.then success, fail
+
+      if track.artist
+        (Api.Artist.get
+          id: track.artist).$promise.then success, fail
+      else
+        success null
 
     loadTrack = () ->
       current = $route.current.params

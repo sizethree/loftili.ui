@@ -1,6 +1,8 @@
 TrackManagementController = ($scope, Api, resolution) ->
 
-  console.log resolution
+  $scope.track = resolution.track
+  $scope.artist = resolution.artist
+
 
 TrackManagementController.$inject = [
   '$scope'
