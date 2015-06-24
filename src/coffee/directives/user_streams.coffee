@@ -16,11 +16,22 @@ dUserStreams = ($location, Lang, Api, Auth, Notifications) ->
       found
 
     makeStream = (stream) ->
-      success = (created_stream) ->
+      created_stream = null
+
+      loadedPermissions = (permissions) ->
+        for p in permissions
+          $scope.permissions.push p
+
         $scope.streams.push created_stream
+
         $scope.new_stream =
           title: ''
           description: ''
+
+      success = (s) ->
+        created_stream = s
+        (Api.StreamPermission.query
+          stream: created_stream.id).$promise.then loadedPermissions, fail
 
       fail = () ->
         failed_lang = Lang 'streams.errors.create'
