@@ -28,7 +28,10 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
 
       loadedTrack = (track) ->
         loaded_track = track
-        (Api.Artist.get {id: track.artist}).$promise.then finish, fail
+        if track.artist
+          (Api.Artist.get {id: track.artist}).$promise.then finish, fail
+        else
+          finish null
 
       fail = () ->
         $scope.current_track = null
