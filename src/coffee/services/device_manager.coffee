@@ -3,6 +3,7 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVIC
   DeviceManager = (device) ->
     is_connected = false
     socket_lid = null
+    latest_refresh = 0
 
     events = EventManager ['update']
 
@@ -59,8 +60,14 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVIC
 
     Manager.refresh = () ->
       deferred = $q.defer()
+      local_refresh = ++latest_refresh
 
       success = (data) ->
+        if local_refresh != latest_refresh
+          return false
+
+        latest_refresh = 0
+
         Manager.state = data
         Manager.state.playback = parseInt data.playback, 10 if data
 
