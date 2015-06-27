@@ -13,6 +13,8 @@
             a(href='/blog' ng-class="{active: active_route === 'blog'}") blog
           li.nav-link
             a(href='/contact' ng-class="{active: active_route === 'contact'}") contact
+          li.nav-link
+            a(href='/signup' ng-class="{active: active_route === 'signup'}") signup
       .nav.user-nav(ng-if="user()")
         ul.navigation-menu-list.foundry
           li.nav-link

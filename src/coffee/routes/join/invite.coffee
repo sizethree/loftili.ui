@@ -7,7 +7,7 @@ _factory = ($routeProvider) ->
     ["filter[p]=", id].join ''
 
   $routeProvider.when '/join/:token',
-    templateUrl: 'views.join'
+    templateUrl: 'views.invitation'
     controller: 'SignupController'
     name: 'join'
     title: 'none'

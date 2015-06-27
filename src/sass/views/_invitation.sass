@@ -1,4 +1,4 @@
-.join.view
+.invitation.view
   display: block
 
   .signup-container
@@ -33,14 +33,21 @@
 
   .signup-form
     display: block
+    
+  .signup-form .input-container
+    margin: 0 0 10px 0
 
-    .input-container
-      margin: 0 0 10px 0
+  .signup-form .input-container input
+    @extend %bordered-input
+    width: 100%
+    box-sizing: border-box
 
-    input
-      @extend %bordered-input
-      width: 100%
-      box-sizing: border-box
+  .signup-form .input-container.actions
+    margin-top: 10px
+
+  .signup-form .input-container.actions .button
+    @extend %small-button
+    margin: 0
 
   .signup-form .top
     display: none

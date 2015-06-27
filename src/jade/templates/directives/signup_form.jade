@@ -1,18 +1,19 @@
-.signup-form
-  .top
-    h1 Sign up
-  .form-container
-    .flash(lf-flash-message messages="errors")
-    .input-container
-      input(type="text" placeholder="email" ng-model="credentials.email" ng-keyup="keywatch($event)")
-    .input-container
-      input(type="text" placeholder="username" ng-model="credentials.username" ng-keyup="keywatch($event)")
-    .input-container
-      input(type="text" placeholder="first name" ng-model="credentials.first_name" ng-keyup="keywatch($event)")
-    .input-container
-      input(type="text" placeholder="last name" ng-model="credentials.last_name" ng-keyup="keywatch($event)")
-    .input-container
-      input(type="password" placeholder="password" ng-model="credentials.password" ng-keyup="keywatch($event)")
-    .input-container
-      button(ng-click="attempt()") sign up
-
+.signup-form.directive
+  .flash(ng-if="duplicate")
+    p.foundry.medium please pick another username
+  .flash(ng-if="errored")
+    p.foundry.medium we were unable to create your account!
+    p.foundry please make sure you have all fields filled.
+  .fields
+    .input-container.field
+      input(type="text" placeholder="email" ng-model="credentials.email" ng-keyup="key($event)")
+    .input-container.field
+      input(type="text" placeholder="username" ng-model="credentials.username" ng-keyup="key($event)")
+    .input-container.field
+      input(type="text" placeholder="first name" ng-model="credentials.first_name" ng-keyup="key($event)")
+    .input-container.field
+      input(type="text" placeholder="last name" ng-model="credentials.last_name" ng-keyup="key($event)")
+    .input-container.field
+      input(type="password" placeholder="password" ng-model="credentials.password" ng-keyup="key($event)")
+  .input-container.actions
+    a.attempt.button(ng-click="attempt()") sign up

@@ -1,0 +1,27 @@
+.signup.view
+  +clearfix
+  max-width: 800px
+  margin: 0 auto
+  padding: 1em 0
+
+  .motd-container
+    +span-columns(6)
+    min-height: 500px
+
+  .form-container
+    +span-columns(6)
+
+  .form
+    @extend %basic-form
+
+  .form a.attempt
+    @extend %small-button
+
+  +media(max-width 800px)
+
+    .form-container,
+    .motd-container
+      +span-columns(12)
+      float: none
+      margin: 0
+      clear: both

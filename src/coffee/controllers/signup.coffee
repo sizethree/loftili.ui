@@ -1,8 +1,10 @@
-_factory = ($scope, token, content) ->
+cSignup = ($scope, resolution) ->
 
-  $scope.token = token
-  $scope.content = content
-  
-_factory.$inject = ['$scope', 'token', 'content']
+  $scope.content = resolution.content
 
-lft.controller 'SignupController', _factory
+cSignup.$inject = [
+  '$scope',
+  'resolution'
+]
+
+lft.controller 'NewSignupController', cSignup
