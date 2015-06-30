@@ -1,4 +1,4 @@
-_factory = ($location, Auth, Api, Notifications, Lang, Analytics) ->
+dLoginForm = ($location, Auth, Api, Notifications, Lang, Analytics) ->
 
   isFn = angular.isFunction
 
@@ -6,6 +6,11 @@ _factory = ($location, Auth, Api, Notifications, Lang, Analytics) ->
     $scope.creds = {}
     $scope.errors = []
     $scope.state = 0
+
+    $scope.signup = () ->
+      $location.url '/signup'
+      $scope.close() if $scope.close and angular.isFunction $scope.close
+      true
 
     $scope.attempt = (event) ->
       success = () ->
@@ -81,7 +86,13 @@ _factory = ($location, Auth, Api, Notifications, Lang, Analytics) ->
       close: '='
     link: linkFn
 
-_factory.$inject = ['$location', 'Auth', 'Api', 'Notifications', 'Lang', 'Analytics']
+dLoginForm.$inject = [
+  '$location'
+  'Auth'
+  'Api'
+  'Notifications'
+  'Lang'
+  'Analytics'
+]
 
-lft.directive 'lfLoginForm', _factory
-
+lft.directive 'lfLoginForm', dLoginForm
