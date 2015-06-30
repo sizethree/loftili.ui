@@ -17,6 +17,7 @@ dDeviceInfo = ($location, Api, Auth, Notifications, DPL, Lang) ->
       if current_user
         result = false
         for p in permissions
+          continue if !p.user
           result = true if p.user.id == current_user.id and p.level == DPL.OWNER
         result
 
