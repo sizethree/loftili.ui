@@ -29,7 +29,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
 
       $scope.results = null
 
-      if last_val != ''
+      if last_val != '' and last_val.length > 3
         (Api.Track.search
           q: last_val).$promise.then display(last_id)
 
@@ -41,7 +41,11 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
         failed_lang = Lang 'queuing.failed'
         Notifications.flash failed_lang, 'error'
 
-      ($scope.manager.add track.id).then success, fail
+      ($scope.manager.add
+        id: track.id
+        provider: track.provider
+        pid: track.pid
+      ).then success, fail
 
     $scope.update = () ->
       last_val = $scope.search.query

@@ -58,7 +58,7 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
       deferred.promise
 
-    manager.add = (track_id) ->
+    manager.add = (track_details) ->
       deferred = $q.defer()
 
       success = () ->
@@ -69,7 +69,10 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
       (Api.Stream.enqueue
         id: stream_id
-        track: track_id).$promise.then success, fail
+        track: track_details.id
+        provider: track_details.provider
+        pid: track_details.pid
+      ).$promise.then success, fail
 
       deferred.promise
 

@@ -23,15 +23,7 @@ _factory = ($timeout, Auth, Api) ->
 
       search = () ->
         $scope.searching = true
-        if url_test.test last_val
-          web()
-        else
-          library()
-
-      web = () ->
-        $scope.searching = true
-        (Track.scout
-          url: btoa(last_val)).$promise.then display
+        library()
 
       library = () ->
         $scope.searching = true

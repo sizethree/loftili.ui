@@ -19,11 +19,7 @@ TrackFactory = ['$resource', '$q', 'URLS', ($resource, $q, URLS) ->
     search:
       method: 'GET'
       isArray: true
-      url: [URLS.api, 'tracks', 'search'].join '/'
-
-    scout:
-      method: 'GET'
-      url: [URLS.api, 'tracks', 'scout'].join '/'
+      url: [URLS.api, 'tracks'].join '/'
 
 ]
 
