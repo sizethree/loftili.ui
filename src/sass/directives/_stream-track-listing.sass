@@ -36,10 +36,32 @@
     display: block
 
   .stream-item .track-info-container .title-container
-    +span-columns(6)
+    +span-columns(8)
+    position: relative
+
+  .stream-item .track-info-container .title-container,
+  .stream-item .track-info-container .artist-container
+    position: relative
+
+    &:after
+      content: ''
+      display: block
+      height: 100%
+      width: 1px
+      background: darken(white, 15)
+      border-right: 1px solid white
+      position: absolute
+      right: 0
+      top: 0
 
   .stream-item .track-info-container .artist-container
-    +span-columns(6)
+    +span-columns(4)
+
+  .stream-item .track-info-container .title-container a,
+  .stream-item .track-info-container .title-container p,
+  .stream-item .track-info-container .artist-container a,
+  .stream-item .track-info-container .artist-container p
+    margin-right: 10px
 
   .provider-container
     float: right
@@ -47,6 +69,7 @@
 
   .provider-container .flair
     @extend %flair
+    width: 8em
 
   .stream-item .track-actions
     +clearfix

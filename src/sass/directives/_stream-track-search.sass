@@ -72,12 +72,30 @@
 
   li.result-item .provider-container .flair
     @extend %flair
+    width: 8em
 
   li.result-item .track-info-container .title,
   li.result-item .track-info-container .artist-container
-    +span-columns(6)
     overflow: hidden
     display: block
+    position: relative
+
+    &:after
+      content: ''
+      display: block
+      height: 100%
+      width: 1px
+      background: darken(white, 15)
+      border-right: 1px solid white
+      position: absolute
+      right: 0
+      top: 0
+
+  li.result-item .track-info-container .title
+    +span-columns(8)
+
+  li.result-item .track-info-container .artist-container
+    +span-columns(4)
 
   li.result-item .track-info-container .title a,
   li.result-item .track-info-container .title p,
@@ -87,6 +105,7 @@
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
+    margin-right: 10px
 
   li.result-item .item-controls
     float: right
