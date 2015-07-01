@@ -26,7 +26,8 @@
 
   .stream-item .track-info-container
     +clearfix
-    +span-columns(8)
+    overflow: hidden
+    height: auto
 
   .stream-item .track-title
     text-overflow: ellipsis
@@ -34,14 +35,25 @@
     white-space: nowrap
     display: block
 
-  .stream-item .track-info-container .title-container,
+  .stream-item .track-info-container .title-container
+    +span-columns(6)
+
   .stream-item .track-info-container .artist-container
     +span-columns(6)
 
+  .provider-container
+    float: right
+    margin: 0 10px
+
+  .provider-container .flair
+    @extend %flair
+
   .stream-item .track-actions
-    +span-columns(4)
+    +clearfix
     @extend %button-group
     text-align: right
+    float: right
+    display: block
 
   .track-actions .button
     @extend %small-button
@@ -50,3 +62,19 @@
     display: inline-block
     float: none
 
+  +media(max-width 800px)
+    background: red
+
+    .stream-item.draggable .draggable-innards
+      padding-left: 0
+
+    .stream-item.draggable .handle
+      display: none
+
+    .stream-item .draggable-innards
+
+    .stream-item .track-info-container .title-container
+      +span-columns(12)
+
+    .stream-item .track-info-container .artist-container
+      display: none

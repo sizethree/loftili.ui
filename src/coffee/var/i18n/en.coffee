@@ -72,3 +72,7 @@ lft.value 'i18n-en',
     errors:
       moving: 'Unable to move the stream\'s tracks around'
       privacy: 'Unable to toggle stream\'s privacy'
+  media:
+    providers:
+      SC: "soundcloud"
+      LF: "loftili"

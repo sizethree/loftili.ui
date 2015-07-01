@@ -25,9 +25,8 @@
     padding: 1px 0
 
   > .inner
-    +outer-wrapper
     +clearfix
-    padding-top: 10px
+    padding: 1em
 
   .device-info
     +span-columns(4)
@@ -53,7 +52,11 @@
     +media(max-width 800px)
       +span-columns(12)
       margin: 0
-      padding: 0 10px 10px
+      padding: 0 0 10px
+
+
+      .not-connected
+        margin-top: 1em
 
   .where-the-magic-happens .not-connected
     @extend %bordered-container
@@ -117,19 +120,6 @@
         margin: 0 0.5em
         position: relative
 
-        &:after
-          +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
-          position: absolute
-          background-size: 4px 4px 
-          background-repeat: repeat-y
-          right: 50%
-          top: 4em
-          content: ''
-          display: block
-          height: 100%
-          width: 4px
-          z-index: 2
-
       a.control
         float: left
         padding: 0.5em 0
@@ -161,28 +151,39 @@
         &:last-of-type
           clear: right
           border-radius: 0 3px 3px 0
+          margin-bottom: 1em
 
       .playback-info
         +clearfix
         background: transparent
         border: none
-        padding: 0
+        padding: 1em 0 0 0
+        clear: both
         height: auto
-        overflow: visible
+        overflow: hidden
+        position: relative
+
+        &:after
+          +linear-gradient(45deg, white 0, white 3px, darken(white, 30) 3px, darken(white, 30) 4px, white 5px)
+          background-repeat: repeat-x
+          background-size: 5px 5px
+          content: ''
+          height: 5px
+          width: 100%
+          position: absolute
+          left: 0
+          top: 0
 
       .playback-info .playback-nav
         display: none
 
       .stream-name,
       .currently-playing
-        padding: 1em 0
+        padding: 0.5em 0
 
       .stream-name
         display: block
         position: relative
-        text-align: left
-        float: left
-        width: 50%
         margin: 0
         text-align: center
 
@@ -193,8 +194,6 @@
 
       .currently-playing
         display: block
-        float: left
-        width: 50%
 
       .currently-playing .blurb
         border: none
@@ -210,7 +209,7 @@
         clear: both
         display: block
         text-align: center
-        margin-bottom: 0
+        margin: 0 5px 0
 
         &.label
           font-size: 0.8em

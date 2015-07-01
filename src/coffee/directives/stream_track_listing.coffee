@@ -1,7 +1,7 @@
 dStreamTrackListing = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
 
   dStreamTrackListingLink = ($scope, $element, $attrs, $controller) ->
-    artist =
+    blank_artist =
       name: ''
 
     moveItem = (from, to) ->
@@ -24,7 +24,7 @@ dStreamTrackListing = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
       for a in $scope.manager.artists
         found = a if a.id == artist_id
 
-      found or artist
+      found or blank_artist
 
     $scope.remove = (index) ->
       success = () ->

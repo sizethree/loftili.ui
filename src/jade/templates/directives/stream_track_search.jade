@@ -11,9 +11,17 @@
       ul.result-list
         li.result-item.list-item(ng-repeat="result in results")
           .inner
-            .title 
-              a.track-link.foundry(ng-attr-href="/tracks/{{result.id}}") {{result.title}}
             .item-controls
-              button.adder(ng-click="add(result)")
+              a.button.adder(ng-click="add(result)")
                 i.ionicon.add
-
+            .provider-container
+              .tf
+                .tc
+                  .flair(ng-class="{'blue': result.provider === 'LF', 'soundcloud-orange': result.provider === 'SC'}")
+                    p.permission-level.sans {{("media.providers." + result.provider) | i18n}}
+            .track-info-container
+              .title 
+                a.track-link.foundry(ng-attr-href="/tracks/{{result.id}}") {{result.title}}
+              .artist-container(ng-repeat="artist in [artistFor(result)]")
+                a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}" ng-if="artist.id") {{artist.name}}
+                p.unkown-artist(ng-if="!artist.id") &nbsp;

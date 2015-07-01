@@ -19,6 +19,6 @@
       .currently-playing(ng-if="current_track && playback" ng-class="{active: active_nav === 'track'}")
         .blurb
           p.label.foundry.light now playing:
-          a.artist.value.foundry(ng-attr-href="/artists/{{current_artist.id}}") {{current_artist.name}}
-          span.separator &nbsp;-&nbsp;
+          a.artist.value.foundry(ng-attr-href="/artists/{{current_artist.id}}" ng-if="current_artist.id") {{current_artist.name}}
+          span.separator(ng-if="current_artist.id") &nbsp;-&nbsp;
           a.track.value.foundry(ng-attr-href="/tracks/{{current_track.id}}") {{current_track.title}}

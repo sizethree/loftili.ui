@@ -14,24 +14,68 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
     last_val = null
     last_id = null
     $scope.results = null
+    blank_artist = {name: ''}
 
     $scope.clear = () ->
       $scope.results = null
       $scope.search.query = null
 
+    $scope.artistFor = (track) ->
+      artist_id = track.artist
+      found = false
+
+      for a in $scope.artists
+        found = a if a.id == artist_id
+
+      found or blank_artist
+
     display = (search_id) ->
-      (results) ->
-        if search_id == last_id
-          $scope.results = results
+      tracks = null
+      artist_ids = []
+      artists = []
+      attempted = 0
+
+      finish = () ->
+        $scope.artists = artists
+        $scope.results = tracks if search_id == last_id
+
+      loadedArtist = (artist) ->
+        artists.push artist
+        finish true if ++attempted == artist_ids.length
+        true
+
+      failed = () ->
+        finish true if ++attempted == artist_ids.length
+        true
+
+      (r) ->
+        tracks = r
+
+        for t in tracks
+          artist_ids.push t.artist if /lf/i.test t.provider
+
+        if artist_ids.length == 0
+          return finish true
+
+        for a in artist_ids
+          (Api.Artist.get {id: a}).$promise.then loadedArtist, failed
+
+        true
 
     run = () ->
       last_id = idGen()
 
       $scope.results = null
 
+      display_fn = display last_id
+
       if last_val != '' and last_val.length > 3
         (Api.Track.search
-          q: last_val).$promise.then display(last_id)
+          q: last_val).$promise.then display_fn
+      else
+        $scope.clear true
+
+      true
 
     $scope.add = (track) ->
       success = (new_queue) ->

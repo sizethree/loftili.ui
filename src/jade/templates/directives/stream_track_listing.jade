@@ -1,12 +1,17 @@
 .stream-track-listing.directive(lf-draggable-list ng-class="{concrete: !manager.contributor}")
   .stream-item.list-item(ng-repeat="track in manager.stream.queue" lf-draggable)
     .draggable-innards
+      .track-actions.button-group(ng-if="manager.contributor")
+        a.button.remover(ng-click="remove($index)")
+          i.ionicon.close
+      .provider-container
+        .tf
+          .tc
+            .flair(ng-class="{'blue': track.provider === 'LF', 'soundcloud-orange': track.provider === 'SC'}")
+              p.permission-level.sans {{("media.providers." + track.provider) | i18n}}
       .track-info-container
         .title-container
           a.track-title.foundry.medium(ng-attr-href="tracks/{{track.id}}" ng-attr-title="{{track.title}}") {{track.title}}
         .artist-container(ng-repeat="artist in [artistFor(track)]")
-          a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}") {{artist.name}}
-      .track-actions.button-group(ng-if="manager.contributor")
-        a.button.remover(ng-click="remove($index)")
-          i.ionicon.close
-
+          a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}" ng-if="artist.id") {{artist.name}}
+          p.unkown-artist(ng-if="!artist.id") &nbsp;

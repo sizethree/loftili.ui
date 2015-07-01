@@ -61,11 +61,35 @@
   li.result-item > .inner
     +clearfix
 
-    .title
-      float: left
+  li.result-item .track-info-container
+    +clearfix
+    overflow: hidden
+    height: auto
 
-    .item-controls
-      float: right
+  li.result-item .provider-container
+    float: right
+    margin: 0 10px
 
-      button
-        @extend %small-button
+  li.result-item .provider-container .flair
+    @extend %flair
+
+  li.result-item .track-info-container .title,
+  li.result-item .track-info-container .artist-container
+    +span-columns(6)
+    overflow: hidden
+    display: block
+
+  li.result-item .track-info-container .title a,
+  li.result-item .track-info-container .title p,
+  li.result-item .track-info-container .artist-container a,
+  li.result-item .track-info-container .artist-container p
+    display: block
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  li.result-item .item-controls
+    float: right
+
+  li.result-item .item-controls .button
+    @extend %small-button

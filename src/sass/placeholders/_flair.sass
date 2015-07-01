@@ -24,6 +24,9 @@
 
   &.gold
     $gold-color: #f1e8b6
-    background: $gold-color
-    border-color: darken($gold-color, 10)
-    color: darken($gold-color, 40)
+    +flair-style($gold-color)
+
+  &.soundcloud-orange
+    $orange-color: #f50
+    +flair-style($orange-color)
+    color: white
