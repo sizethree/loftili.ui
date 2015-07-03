@@ -73,7 +73,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
         (Api.Track.search
           q: last_val).$promise.then display_fn
       else
-        $scope.clear true
+        $scope.results = null
 
       true
 

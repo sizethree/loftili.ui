@@ -74,6 +74,14 @@
     @extend %flair
     width: 8em
 
+    +media(max-width 800px)
+      width: 1em
+      overflow: hidden
+
+      p
+        display: block
+        text-indent: 100em
+
   li.result-item .track-info-container .title,
   li.result-item .track-info-container .artist-container
     overflow: hidden
@@ -94,8 +102,14 @@
   li.result-item .track-info-container .title
     +span-columns(8)
 
+    +media(max-width 800px)
+      +span-columns(12)
+
   li.result-item .track-info-container .artist-container
     +span-columns(4)
+
+    +media(max-width 800px)
+      display: none
 
   li.result-item .track-info-container .title a,
   li.result-item .track-info-container .title p,

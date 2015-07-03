@@ -67,9 +67,38 @@
     float: right
     margin: 0 10px
 
+    +media(max-width 800px)
+      position: relative
+
+      &:after
+        display: block
+        color: white
+        text-align: center
+        position: absolute
+        font-size: 0.5em
+        width: 99%
+        line-height: 3.4em
+        left: 0
+        top: 0
+
+      &[data-provider="LF"]:after
+        content: 'LF'
+
+      &[data-provider="SC"]:after
+        content: 'SC'
+
   .provider-container .flair
     @extend %flair
     width: 8em
+
+    +media(max-width 800px)
+      width: 2em
+      overflow: hidden
+
+      p
+        display: block
+        text-indent: 100em
+        overflow: hidden
 
   .stream-item .track-actions
     +clearfix
