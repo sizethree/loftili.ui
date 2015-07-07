@@ -12,7 +12,10 @@ dUserStreams = ($location, Lang, Api, Auth, Notifications) ->
 
     $scope.permissionFor = (stream) ->
       found = null
-      found = p if p.stream == stream.id for p in $scope.permissions
+
+      for p in $scope.permissions
+        found = p if p.stream == stream.id
+
       found
 
     makeStream = (stream) ->
