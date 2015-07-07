@@ -14,7 +14,8 @@ dUserStreams = ($location, Lang, Api, Auth, Notifications) ->
       found = null
 
       for p in $scope.permissions
-        found = p if p.stream == stream.id
+        if p.stream == stream.id
+          found = p
 
       found
 
