@@ -32,7 +32,20 @@ dStreamPermissionControl = ($q, $timeout, Api, Lang, Notifications) ->
       $timeout.cancel last_attempt if last_attempt
 
       success = (results) ->
-        $scope.results = results
+        existing_users = []
+        unique_users = []
+
+        for p in $scope.manager.permissions
+          existing_users.push p.user
+
+        for r in results
+          user = r.id
+          existing = (existing_users.indexOf user) >= 0
+          unique_users.push user if !existing
+          true
+
+        $scope.results = unique_users
+
         $scope.menus = new Array results.length
         $scope.busy = false
 
