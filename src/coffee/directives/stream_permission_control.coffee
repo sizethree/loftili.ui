@@ -41,7 +41,7 @@ dStreamPermissionControl = ($q, $timeout, Api, Lang, Notifications) ->
         for r in results
           user = r.id
           existing = (existing_users.indexOf user) >= 0
-          unique_users.push user if !existing
+          unique_users.push r if !existing
           true
 
         $scope.results = unique_users
