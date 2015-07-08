@@ -2,6 +2,14 @@
   .info-inner
     .device-brief
       .device-state
+        .dnd-state
+          .tooltip(lf-tooltip ng-click="dnd()" ng-class="{disabled: !is_owner()}")
+            p.text(ng-if="device.do_not_disturb") do not disturb: on
+            p.text(ng-if="!device.do_not_disturb") do not disturb: off
+          a.button.dnd-on(ng-if="!device.do_not_disturb")
+            i.ionicon.lock-open
+          a.button.dnd-off(ng-if="device.do_not_disturb")
+            i.ionicon.lock-closed
         .status-icon(lf-device-status-icon manager="manager")
       .device-delete(ng-if="is_owner()")
         button.remover(ng-click="destroy()")

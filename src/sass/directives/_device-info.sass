@@ -19,9 +19,54 @@
     outline: none
 
   .device-brief .device-state
+    +clearfix
     float: left
-    width: 2em
     margin: 0 10px 0 0
+
+  .device-brief .device-state .dnd-state
+    float: right
+    position: relative
+
+  .device-brief .device-state .dnd-state .tooltip
+    display: block
+    cursor: pointer
+
+    &.disabled
+      cursor: default
+
+  .device-brief .dnd-state .button
+    @extend %transparent-button
+
+  .device-brief .device-state .dnd-state .button
+    background: transparent
+    border: none
+    box-shadow: none
+    display: block
+    float: left
+
+    .ionicon,
+    .ionicon:after
+      color: darken(white, 60)
+      line-height: 2em
+      font-size: 1em
+      width: 2em
+      height: 2em
+
+  .device-brief .device-state .status-icon
+    width: 2em
+    overflow: hidden
+    height: auto
+    padding: 1px
+
+  .device-brief .device-state .status-icon,
+  .device-brief .device-state .dnd-state .button
+    display: block
+    width: 2em
+    height: 2em
+    line-height: 1em
+    font-size: 1em
+    padding: 0
+    
 
   .device-brief .device-name-date .name-container input
     @extend %smaller-input

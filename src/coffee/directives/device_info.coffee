@@ -7,19 +7,46 @@ dDeviceInfo = ($location, Api, Auth, Notifications, DPL, Lang) ->
 
   dDeviceInfoLink = ($scope, $element, $attrs) ->
     feed_loop_id = null
+    is_busy = false
 
     $scope.updates = {}
     $scope.current_user = Auth.user()
 
+    $scope.dnd = () ->
+      state = !$scope.device.do_not_disturb
+      is_owner = $scope.is_owner()
+
+      if is_busy or !is_owner
+        return false
+
+      is_busy = true
+
+      wait_lang = Lang 'deivce.do_not_disturb.changing'
+      note_id = Notifications.add wait_lang, 'info'
+
+      success = () ->
+        is_busy = false
+        $scope.device.do_not_disturb = state
+        Notifications.remove note_id
+
+      fail = () ->
+        is_busy = false
+        Notifications.remove note_id
+
+      (Api.Device.update
+        id: $scope.device.id
+        do_not_disturb: if state then 1 else 0
+      ).$promise.then success, fail
+
     $scope.is_owner = () ->
       permissions = $scope.permissions or []
-      current_user = Auth.user()
-      if current_user
-        result = false
-        for p in permissions
-          continue if !p.user
-          result = true if p.user.id == current_user.id and p.level == DPL.OWNER
-        result
+      cu = Auth.user()
+      result = false
+
+      if cu
+        result = p for p in permissions when p.user.id == cu.id and p.level == DPL.OWNER
+
+      result
 
     $scope.updates.name = (new_name, input_scope, input_el) ->
       success = () ->
