@@ -1,4 +1,4 @@
 .device-list.directive
   .list-container
-    .device-container.list-item(ng-repeat="device in devices")
+    .device-container.list-item(ng-repeat="device in (devices | orderBy:'device.id')")
       .device(lf-device-item device="device" ondelete="remove($index)")
