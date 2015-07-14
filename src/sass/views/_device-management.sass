@@ -5,6 +5,7 @@
   .stream-addition
     +clearfix
     margin: 10px 0 0 0
+    position: relative
 
   .stream-addition .uploader
     @extend %file-button
@@ -19,10 +20,19 @@
     border-radius: 3px
     display: block
 
+  .stream-addition .track-upload
+    +clearfix
+    position: absolute
+    right: 0
+    top: 0
+
   .stream-addition .stream-track-search
     height: auto
     overflow: hidden
     padding: 1px 0
+
+  .stream-addition .search-input-container
+    margin-right: 3em
 
   > .inner
     +clearfix
