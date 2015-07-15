@@ -29,18 +29,7 @@
     overflow: hidden
     height: auto
 
-  .stream-item .track-title
-    text-overflow: ellipsis
-    overflow: hidden
-    white-space: nowrap
-    display: block
-
   .stream-item .track-info-container .title-container
-    +span-columns(8)
-    position: relative
-
-  .stream-item .track-info-container .title-container,
-  .stream-item .track-info-container .artist-container
     position: relative
 
     &:after
@@ -53,15 +42,26 @@
       position: absolute
       right: 0
       top: 0
+ 
+  .stream-item .track-info-container .track-artist-info
+    +clearfix
+    white-space: nowrap
+    display: block
+    text-overflow: ellipsis
 
-  .stream-item .track-info-container .artist-container
-    +span-columns(4)
+  .stream-item .track-info-container .track-artist-info span.track-title,
+  .stream-item .track-info-container .track-artist-info span.artist-container
+    display: block
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
 
-  .stream-item .track-info-container .title-container a,
-  .stream-item .track-info-container .title-container p,
-  .stream-item .track-info-container .artist-container a,
-  .stream-item .track-info-container .artist-container p
-    margin-right: 10px
+  .stream-item .track-info-container .track-artist-info span.artist-container
+    float: left
+    max-width: 40%
+    margin-right: 0.5em
+    text-transform: capitalize
+
 
   .provider-container
     float: right

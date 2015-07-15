@@ -3,6 +3,8 @@ sApiCache = ($q, Api) ->
   ApiCache = (model) ->
     cache = {}
 
+    window.cache = cache
+
     Cache = (id) ->
       deferred = $q.defer()
 
@@ -16,6 +18,7 @@ sApiCache = ($q, Api) ->
       if cache[id]
         deferred.resolve cache[id]
       else
+        console.log 'fetching ' + id
         (model.get {id: id}).$promise.then success, fail
 
       deferred.promise

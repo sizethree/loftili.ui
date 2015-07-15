@@ -23,12 +23,17 @@ sDeviceHistoryLoader = ($q, Api, TrackCache) ->
         true
 
       success = (history) ->
+
+        history = history.sort (a, b) ->
+          da = (new Date a.createdAt).getTime()
+          ba = (new Date b.createdAt).getTime()
+          if da > ba then -1 else 1
+
+        console.log history
+
         Loader.history = history
-
-        (track_ids.push h.track for h in history when (track_ids.indexOf h.track) < 0 and track_ids.length < 10)
-
+        (track_ids.push h.track for h in history when (track_ids.indexOf h.track) < 0)
         ((TrackCache id).then loaded, fail for id in track_ids)
-
         true
 
       (Api.DeviceHistory.get

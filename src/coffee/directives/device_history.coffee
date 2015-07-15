@@ -2,7 +2,8 @@ dDeviceHistory = (TrackCache) ->
 
   dDeviceHistoryLink = ($scope, $element, $attrs) ->
     $scope.trackFor = (history) ->
-      TrackCache.lookup history.track
+      t = TrackCache.lookup history.track
+      t
 
     $scope.itemDate = (d) ->
       d = new Date d.createdAt

@@ -14,7 +14,10 @@ dStreamTrackUpload = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
         Notifications.remove note_id
 
       success = (track) ->
-        ($scope.manager.add track.id).then finish, fail
+        ($scope.manager.add
+          id: track.id
+          provider: track.provider
+        ).then finish, fail
 
       (Api.Track.upload
         track_file: file).$promise.then success, fail
