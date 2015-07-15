@@ -4,8 +4,13 @@
     .fields
       .input-container
         input(type="text" ng-keyup="keywatch($event)" ng-model="device.name" placeholder="device name")
-      .input-container
+      .input-container.serial-input
         input(type="text" ng-keyup="keywatch($event)" ng-model="device.serial_number" placeholder="serial number")
+        .generate-container(ng-if="!device.serial_number")
+          .tooltip.generate-tooltip(lf-tooltip ng-click="generate()")
+            p.foundry.light generate serial
+          a.button.generator.foundry.light
+            i.ionicon.beaker
     .actions
       .action-container
         button(ng-click="attempt()")

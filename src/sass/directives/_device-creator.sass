@@ -3,3 +3,22 @@
 
   .form-container
     +clearfix
+
+  .form-container .input-container.serial-input
+    position: relative
+
+  .serial-input .generate-tooltip
+    position: absolute
+    right: 0.3em
+    top: 0.3em
+    width: 1.6em
+    height: 1.6em
+    font-size: 1em
+    line-height: 1em
+    cursor: pointer
+
+  .serial-input .generator
+    @extend %small-button
+    position: absolute
+    right: 0.3em
+    top: 0.3em
