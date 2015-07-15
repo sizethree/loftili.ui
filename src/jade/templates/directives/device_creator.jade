@@ -1,6 +1,10 @@
 .device-creator.directive
   .problems(lf-flash-message messages="failures")
   .form-container
+    .actions
+      .action-container
+        a.button.attempt(ng-click="attempt()")
+          i.ionicon.add
     .fields
       .input-container
         input(type="text" ng-keyup="keywatch($event)" ng-model="device.name" placeholder="device name")
@@ -11,7 +15,4 @@
             p.foundry.light generate serial
           a.button.generator.foundry.light
             i.ionicon.beaker
-    .actions
-      .action-container
-        button(ng-click="attempt()")
-          i.ionicon.add
+
