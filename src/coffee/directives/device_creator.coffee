@@ -1,6 +1,6 @@
-_factory = (Api, Auth, Notifications, Lang, $timeout) ->
+dDeviceCreator = (Api, Auth, Notifications, Lang, $timeout) ->
 
-  link = ($scope, $element, $attrs) ->
+  dDeviceCreatorLink = ($scope, $element, $attrs) ->
     $scope.failures = []
     $scope.device = {}
 
@@ -45,9 +45,9 @@ _factory = (Api, Auth, Notifications, Lang, $timeout) ->
     templateUrl: 'directives.device_creator'
     scope:
       devices: '='
-    link: link
+    link: dDeviceCreatorLink
 
-_factory.$inject = [
+dDeviceCreator.$inject = [
   'Api'
   'Auth'
   'Notifications'
@@ -56,4 +56,4 @@ _factory.$inject = [
 ]
 
 
-lft.directive 'lfDeviceCreator', _factory
+lft.directive 'lfDeviceCreator', dDeviceCreator

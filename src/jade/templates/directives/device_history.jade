@@ -1,0 +1,7 @@
+.device-history.directive
+  .history-list
+    .list-item.history-item(ng-repeat="h in loader.history | orderBy:itemDate:true | limitTo:10")
+      .track-name(ng-repeat="track in [trackFor(h)]")
+        p.item-no.foundry {{track.title}}
+      .played-at
+        p.foundry.timestamp {{h.createdAt | timeAgo}}

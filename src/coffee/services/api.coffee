@@ -13,6 +13,7 @@ dependencies =[
   'Api/AccountRequest',
   'Api/DeviceState',
   'Api/DeviceSerial',
+  'Api/DeviceHistory',
   'Api/Stream',
   'Api/StreamPermission',
   'Api/Client',
@@ -39,6 +40,7 @@ lft.service 'Api', dependencies.concat([() ->
     AccountRequest: an()
     DeviceState: an()
     DeviceSerial: an()
+    DeviceHistory: an()
     Stream: an()
     StreamPermission: an()
     Client: an()

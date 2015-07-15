@@ -1,6 +1,11 @@
 .device-management.view
   .inner
-    .device-info(lf-device-info manager="manager" device="device" permissions="permissions" serial="serial")
+    .information-happenings
+      .device-info(lf-device-info manager="manager" device="device" permissions="permissions" serial="serial")
+      .device-history-container
+        .bbi
+          h1.foundry.medium History
+          .device-history(lf-device-history loader="history_loader" device="device")
     .where-the-magic-happens
       .connected(ng-if="manager.connected")
         .device-controls.section(lf-device-controls manager="manager")
@@ -18,3 +23,4 @@
               |  to create one now.
       .not-connected(ng-if="!manager.connected")
         h1.foundry.medium Your device does not appear to be connected.
+

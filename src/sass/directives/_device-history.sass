@@ -1,0 +1,25 @@
+.device-history.directive
+  display: block
+
+  .history-list
+    @extend %alternating-list
+    margin-top: 10px
+
+  .history-list .history-item
+    +clearfix
+    font-size: 0.8em
+    line-height: 1.2em
+    padding: 0.4em 0.5em
+
+  .history-list .history-item .track-name
+    +span-columns(7)
+
+  .history-list .history-item .track-name p
+    display: block
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+  .history-list .history-item .played-at
+    +span-columns(5)
+
