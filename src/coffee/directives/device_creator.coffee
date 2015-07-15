@@ -4,17 +4,18 @@ _factory = (Api, Auth, Notifications, Lang, $timeout) ->
     $scope.failures = []
     $scope.device = {}
 
-    success = (created) ->
-      if $scope.devices
-        $scope.devices.push created
-      $scope.device = {}
-
-    fail = (response) ->
-      lang = Lang 'device.errors.registration'
-      Notifications.flash.error lang
-
     attempt = () ->
       device = $scope.device
+
+      success = (created) ->
+        if $scope.devices
+          $scope.devices.push created
+
+        $scope.device = {}
+
+      fail = (response) ->
+        lang = Lang 'device.errors.registration'
+        Notifications.flash.error lang
 
       if device and device.name and device.serial_number
         (Api.Device.save
