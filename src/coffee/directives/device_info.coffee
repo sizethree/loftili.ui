@@ -1,4 +1,4 @@
-dDeviceInfo = ($location, Api, Auth, Notifications, DPL, Lang) ->
+dDeviceInfo = ($rootScope, $location, Api, Auth, Notifications, DPL, Lang) ->
 
   update_lang =
     name:
@@ -8,6 +8,23 @@ dDeviceInfo = ($location, Api, Auth, Notifications, DPL, Lang) ->
   dDeviceInfoLink = ($scope, $element, $attrs) ->
     feed_loop_id = null
     is_busy = false
+    serial_container = document.getElementById 'device-id'
+    client = new ZeroClipboard serial_container
+
+    copySerial = (event) ->
+      event.clipboardData.setData 'text/plain', $scope.serial.serial_number
+
+    afterCopy = () ->
+      copy_lang = Lang 'device.copied_serial'
+      Notifications.flash.info copy_lang
+      $rootScope.$digest()
+
+    client.on 'ready', () ->
+      client.on 'copy', copySerial
+      client.on 'aftercopy', afterCopy
+
+    client.on 'error', () ->
+      console.log arguments
 
     $scope.updates = {}
     $scope.current_user = Auth.user()
@@ -92,6 +109,7 @@ dDeviceInfo = ($location, Api, Auth, Notifications, DPL, Lang) ->
     link: dDeviceInfoLink
 
 dDeviceInfo.$inject = [
+  '$rootScope'
   '$location'
   'Api'
   'Auth'

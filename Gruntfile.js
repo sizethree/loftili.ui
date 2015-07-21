@@ -171,7 +171,8 @@ module.exports = function() {
           path.join(paths.vendor, 'angular-resource/angular-resource.js'),
           path.join(paths.vendor, 'soundmanager/script/soundmanager2.js'),
           path.join(paths.vendor, 'socket.io/index.js'),
-          path.join(paths.vendor, 'analytics/index.js')
+          path.join(paths.vendor, 'analytics/index.js'),
+          path.join(paths.vendor, 'zeroclipboard/dist/ZeroClipboard.js')
         ],
         dest: path.join(paths.dist, 'js', 'vendor.bundle.js')
       },
@@ -211,6 +212,12 @@ module.exports = function() {
     },
 
     copy: {
+      zeroclipboard: {
+        expand: true,
+        cwd: 'bower_components/zeroclipboard/dist',
+        src: ['**/*.swf'],
+        dest: 'public/swf'
+      },
       soundmanager: {
         expand: true,
         cwd: 'bower_components/soundmanager/swf',
@@ -339,7 +346,8 @@ module.exports = function() {
     'concat:vendors',
     'img', 
     'icons', 
-    'copy:soundmanager'
+    'copy:soundmanager',
+    'copy:zeroclipboard'
   ]);
 
   grunt.registerTask('release', [

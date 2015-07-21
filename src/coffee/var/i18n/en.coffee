@@ -48,6 +48,7 @@ lft.value 'i18n-en',
         success: 'Your password has been updated!'
         fail: 'We\'ve messed something up, shoot us an email!'
   device:
+    copied_serial: 'Copied serial to clipboard!'
     do_not_disturb:
       changing: 'Changing your device\'s do not disturb setting...'
     sending_permission: 'Granting user control of device, please wait...'

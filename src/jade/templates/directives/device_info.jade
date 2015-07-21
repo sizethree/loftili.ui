@@ -16,7 +16,7 @@
           i.ionicon.trash
       .device-name-date
         .device-serial
-          h2.foundry.light(title="{{serial.serial_number}}") {{serial.serial_number.substr(0, 6)}}
+          h2.foundry.light#device-id(title="{{serial.serial_number}}") {{serial.serial_number.substr(0, 6)}}
         .name-container.input-container(ng-if="is_owner()")
           .name-input(lf-easy-input value="device.name" finish="updates.name")
         .name-container.not-owner(ng-if="!is_owner()")
