@@ -1,4 +1,4 @@
 .notification-manager
   .notification-container(ng-repeat="n in notifications")
     .notification-inner(ng-class="{error: n.type === 'error', info: n.type === 'info', success: n.type === 'success'}")
-      p {{ n.message }}
+      p.notification-message{{ n.message }}

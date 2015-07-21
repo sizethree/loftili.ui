@@ -4,20 +4,29 @@
   
   .notification-container
     position: fixed
-    width: 400px
-    left: 50%
-    margin: 0 -200px
     top: 0px
+    width: 100%
+    text-align: center
 
-    .notification-inner
-      padding: 10px 20px
-      background: lighten($light-gray, 10)
+  .notification-container .notification-inner
+    position: relative
+    display: inline-block
+    font-size: 1em
+    padding: 1em 1.5em
+    background: lighten($light-gray, 10)
+    border: 1px solid $light-gray
+    border-top: none
+    color: darken($light-gray, 40)
+    font-family: $font-foundry
 
-      border: 
-        left: 1px solid $light-gray
-        right: 1px solid $light-gray
-        bottom: 1px solid $light-gray
+  .notification-container .notification-inner .notification-message
+    display: block
+    text-align: center
 
-      color: darken($light-gray, 40)
-      font-size: 14px
-      font-family: $font-foundry
+
+  +media(max-width 800px)
+    display: block
+
+    .notification-container .notification-inner
+      font-size: 0.8em
+
