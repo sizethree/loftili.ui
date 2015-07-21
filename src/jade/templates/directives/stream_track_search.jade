@@ -20,8 +20,7 @@
                   .flair(ng-class="{'blue': result.provider === 'LF', 'soundcloud-orange': result.provider === 'SC'}")
                     p.permission-level.sans {{("media.providers." + result.provider) | i18n}}
             .track-info-container
-              .title 
-                a.track-link.foundry(ng-attr-href="/tracks/{{result.id}}") {{result.title}}
-              .artist-container(ng-repeat="artist in [artistFor(result)]")
-                a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}" ng-if="artist.id") {{artist.name}}
-                p.unkown-artist(ng-if="!artist.id") &nbsp;
+              p.title-artist.foundry 
+                span.artist-container(ng-repeat="artist in [artistFor(result)]")
+                  span.title-container(ng-if="artist.name") {{artist.name}} - 
+                span.title-container {{result.title}}
