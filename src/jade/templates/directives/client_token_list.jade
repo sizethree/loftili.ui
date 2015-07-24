@@ -2,10 +2,15 @@
   ul.token-list
     li.list-item.token(ng-repeat="token in tokens")
       .token-container
-        code.inline.client-token(ng-if="showing($index)") {{token.token}}
-        a.token-display-toggle(ng-if="!showing($index)" ng-click="show($index)") show
-        a.token-display-toggle(ng-if="showing($index)" ng-click="hide($index)") hide
-        button.remover(ng-click="remove(token)")
-          i.ionicon.close
+        .copyblock
+          .cc
+            .cd
+              .ce
+                code.inline.client-token(lf-copiable ng-attr-copydata="{{token.token}}" ng-if="showing($index)") {{token.token}}
+        .actions
+          a.token-display-toggle(ng-if="!showing($index)" ng-click="show($index)") show
+          a.token-display-toggle(ng-if="showing($index)" ng-click="hide($index)") hide
+          button.remover(ng-click="remove(token)")
+            i.ionicon.close
       .name-container
         p.gill.light.client-name {{clientById(token.client).name}}

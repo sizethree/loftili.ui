@@ -1,4 +1,5 @@
 lft.value 'i18n-en',
+  copied_to_clipboard: 'Copied to clipboard'
   privacy: "Privacy"
   device_permissions:
     1: "Owner"
