@@ -50,10 +50,6 @@
       .stream-unsubscription(ng-if="manager.contributor && !manager.owner")
         a.button.unsubscribe(ng-click="unsubscribe()")
           i.ionicon.logout
-      .stream-browser
-        a.button.subscribe-browser(ng-click="browser()")
-          i.ionicon.computer
-          span play here
   .stream-control
     .stream-list-container(ng-if="manager.stream.queue.length")
       .stream-list-container(lf-stream-track-listing manager="manager")

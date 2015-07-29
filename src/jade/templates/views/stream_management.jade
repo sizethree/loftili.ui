@@ -1,7 +1,7 @@
 .stream-management.view
   .stream-config(lf-stream-manager manager="manager")
   .stream-shares
-    .inner-container
+    .inner-container(ng-if="manager.mappings.length")
       h1.foundry.medium.upper listeners:
       .mappings-list(ng-if="manager.mappings.length")
         .mapping.list-item(ng-repeat="map in manager.mappings")
@@ -12,5 +12,5 @@
               a.foundry.medium(ng-attr-href="/devices/{{map.device.id}}") {{map.device.name}}
             .not-owner(ng-if="my_devices.indexOf(map.device.id) < 0")
               p.foundry.medium {{map.device.name}}
-      .no-mappings(ng-if="!manager.mappings.length")
-        p.foundry.upper empty
+    .inner-container(ng-if="!manager.mappings.length")
+      p.foundry.upper.no-listeners No listeners
