@@ -60,10 +60,13 @@ dDeviceInfo = ($rootScope, $location, Api, Auth, Notifications, DPL, Lang) ->
       cu = Auth.user()
       result = false
 
-      if cu
-        result = p for p in permissions when p.user.id == cu.id and p.level == DPL.OWNER
+      if !cu
+        return false
 
-      result
+      for p in permissions
+        return true if p.user == cu.id and p.level == DPL.OWNER
+
+      false
 
     $scope.updates.name = (new_name, input_scope, input_el) ->
       success = () ->
