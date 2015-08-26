@@ -80,3 +80,4 @@ lft.value 'i18n-en',
     providers:
       SC: "soundcloud"
       LF: "loftili"
+      LFTXS: "lftxs"

@@ -17,7 +17,7 @@
             .provider-container
               .tf
                 .tc
-                  .flair(ng-class="{'blue': result.provider === 'LF', 'soundcloud-orange': result.provider === 'SC'}")
+                  .flair(ng-attr-data-provider="{{result.provider}}")
                     p.permission-level.sans {{("media.providers." + result.provider) | i18n}}
             .track-info-container
               p.title-artist.foundry 

@@ -91,6 +91,15 @@
     @extend %flair
     width: 8em
 
+    &[data-provider="SC"]
+      @extend %orange-flair
+
+    &[data-provider="LF"]
+      @extend %blue-flair
+
+    &[data-provider="LFTXS"]
+      @extend %black-flair
+
     +media(max-width 800px)
       width: 2em
       overflow: hidden

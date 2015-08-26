@@ -1,3 +1,25 @@
+%green-flair
+  $flair-blue-color: #b6e5f1
+  background: $flair-blue-color
+  border-color: darken($flair-blue-color, 10)
+  color: darken($flair-blue-color, 40)
+
+%blue-flair
+  $green-color: $blue-color
+  background: $green-color
+  border-color: darken($green-color, 10)
+  color: white
+
+%orange-flair
+  $orange-color: #f50
+  +flair-style($orange-color)
+  color: white
+
+%black-flair
+  $black-color: #414141
+  +flair-style($black-color)
+  color: white
+
 %flair
   display: inline-block
   font-size: 0.5em
@@ -11,22 +33,18 @@
   text-align: center
 
   &.green
-    $flair-blue-color: #b6e5f1
-    background: $flair-blue-color
-    border-color: darken($flair-blue-color, 10)
-    color: darken($flair-blue-color, 40)
+    @extend %green-flair
+
+  &.black
+    @extend %black-flair
 
   &.blue
-    $green-color: $blue-color
-    background: $green-color
-    border-color: darken($green-color, 10)
-    color: white
+    @extend %blue-flair
 
   &.gold
     $gold-color: #f1e8b6
     +flair-style($gold-color)
 
   &.soundcloud-orange
-    $orange-color: #f50
-    +flair-style($orange-color)
-    color: white
+    @extend %orange-flair
+

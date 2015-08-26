@@ -1,6 +1,8 @@
 dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
 
   DEBOUNCE_TIME = 400
+  LFTXS_RGX = /^lftxs$/i
+  LF_RGX = /^lf$/i
 
   idGen = do ->
     index = 0
@@ -23,6 +25,9 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
     $scope.artistFor = (track) ->
       artist_id = track.artist
       found = false
+
+      if LFTXS_RGX.test track.provider
+        return track.artist
 
       for a in $scope.artists
         found = a if a.id == artist_id
@@ -52,7 +57,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
         tracks = r
 
         for t in tracks
-          artist_ids.push t.artist if /lf/i.test t.provider
+          artist_ids.push t.artist if LF_RGX.test t.provider
 
         if artist_ids.length == 0
           return finish true
