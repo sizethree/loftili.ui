@@ -1,7 +1,7 @@
 .user-streams.directive
   .stream-list-container
     .stream-list
-      .stream.list-item(ng-repeat="stream in streams")
+      .stream.list-item(ng-repeat="stream in (streams | orderBy:'id')")
         .title-container
           p.title {{stream.title}}
         .action-container

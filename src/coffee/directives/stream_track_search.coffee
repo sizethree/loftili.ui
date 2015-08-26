@@ -1,6 +1,7 @@
 dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
 
-  BUSY_LANG = Lang 'queuing.busy'
+  SEARCHING_LANG = Lang 'queuing.searcing'
+  ADDING_LANG = Lang 'queuing.busy'
   DEBOUNCE_TIME = 400
   LFTXS_RGX = /^lftxs$/i
   LF_RGX = /^lf$/i
@@ -18,6 +19,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
     last_id = null
     $scope.results = null
     blank_artist = {name: ''}
+    search_note = false
 
     $scope.clear = () ->
       $scope.results = null
@@ -42,8 +44,11 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       attempted = 0
 
       finish = () ->
+        is_latest = search_id == last_id
         $scope.artists = artists
         $scope.results = tracks if search_id == last_id
+        Notifications.remove search_note if search_id == last_id
+        true
 
       loadedArtist = (artist) ->
         artists.push artist
@@ -60,8 +65,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
         for t in tracks
           artist_ids.push t.artist if LF_RGX.test t.provider
 
-        if artist_ids.length == 0
-          return finish true
+        return finish true if (artist_ids.length == 0 and search_id == last_id)
 
         for a in artist_ids
           (Api.Artist.get {id: a}).$promise.then loadedArtist, failed
@@ -84,7 +88,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       true
 
     $scope.add = (track) ->
-      note_id = Notifications.add BUSY_LANG, 'info'
+      note_id = Notifications.add ADDING_LANG, 'info'
       $scope.is_busy = true
 
       success = (new_queue) ->
@@ -105,9 +109,9 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       ).then success, fail
 
     $scope.update = () ->
+      search_note = Notifications.add SEARCHING_LANG, 'info' if !search_note
       last_val = $scope.search.query
-      if timeout_id
-        $timeout.cancel timeout_id
+      $timeout.cancel timeout_id if timeout_id
       timeout_id = $timeout run, DEBOUNCE_TIME
 
   lfStreamTrackSearch =
