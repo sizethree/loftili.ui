@@ -26,6 +26,7 @@ lft.value 'i18n-en',
     tracks:
       dropping: 'Removing the track from your library, please wait'
   queuing:
+    busy: 'Adding track to queue, please wait'
     failed: 'Unable to add the track to your device queue'
     failed_remove: 'Unable to remove the track from your device queue'
   merging:

@@ -1,5 +1,6 @@
 dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
 
+  BUSY_LANG = Lang 'queuing.busy'
   DEBOUNCE_TIME = 400
   LFTXS_RGX = /^lftxs$/i
   LF_RGX = /^lf$/i
@@ -83,10 +84,17 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       true
 
     $scope.add = (track) ->
+      note_id = Notifications.add BUSY_LANG, 'info'
+      $scope.is_busy = true
+
       success = (new_queue) ->
+        $scope.is_busy = false
+        Notifications.remove note_id
         $scope.manager.refresh()
 
       fail = () ->
+        $scope.is_busy = false
+        Notifications.remove note_id
         failed_lang = Lang 'queuing.failed'
         Notifications.flash failed_lang, 'error'
 
