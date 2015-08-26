@@ -26,13 +26,13 @@
         i.ionicon.stalker
         p.gill.light device shares
       ul.shared-list(ng-if="permissions.length > 0")
-        li.permission(ng-repeat="permission in permissions track by permission.id" data-level="{{permission.level}}" ng-if="permission.user.id !== current_user.id")
+        li.permission(ng-repeat="permission in permissions track by permission.id" data-level="{{permission.level}}" ng-if="permission.user !== current_user.id")
           .gravatar
             .gravatar-thumb
-              .thumb-container
-                img.gravatar-image(ng-attr-src="{{permission.user.gravatar_url}}")
-          .username
-            p.user-name.foundry.medium {{permission.user.username}}
+              .thumb-container(ng-repeat="user in [userFor(permission)]")
+                img.gravatar-image(ng-attr-src="{{user.gravatar_url}}")
+          .username(ng-repeat="user in [userFor(permission)]")
+            p.user-name.foundry.medium {{user.username}}
           .actions
             a.button.remover(ng-click="removePermission(permission)")
               i.ionicon.trash

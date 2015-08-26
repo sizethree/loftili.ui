@@ -29,6 +29,18 @@ dDeviceInfo = ($rootScope, $location, Api, Auth, Notifications, DPL, Lang) ->
     $scope.updates = {}
     $scope.current_user = Auth.user()
 
+    $scope.userFor = (permission) ->
+      found = false
+
+      if !$scope.manager.users
+        return false
+
+      for u in $scope.manager.users
+        found = u if u.id == permission.user
+
+      found
+
+
     $scope.dnd = () ->
       state = !$scope.device.do_not_disturb
       is_owner = $scope.is_owner()
