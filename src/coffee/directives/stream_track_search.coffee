@@ -1,7 +1,6 @@
 dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
 
   SEARCHING_LANG = Lang 'queuing.searcing'
-  ADDING_LANG = Lang 'queuing.busy'
   DEBOUNCE_TIME = 400
   LFTXS_RGX = /^lftxs$/i
   LF_RGX = /^lf$/i
@@ -21,12 +20,8 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
     blank_artist = {name: ''}
     search_note = false
 
-    $scope.clear = () ->
-      $scope.results = null
-      $scope.search.query = null
-
-    $scope.artistFor = (track) ->
-      artist_id = track.artist
+    $scope.getArtist = (track) ->
+      artist_id = if track and track.artist then track.artist else null
       found = false
 
       if LFTXS_RGX.test track.provider
@@ -35,7 +30,11 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       for a in $scope.artists
         found = a if a.id == artist_id
 
-      found or blank_artist
+      found or null
+
+    $scope.clear = () ->
+      $scope.results = null
+      $scope.search.query = null
 
     display = (search_id) ->
       tracks = null
@@ -48,6 +47,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
         $scope.artists = artists
         $scope.results = tracks if search_id == last_id
         Notifications.remove search_note if search_id == last_id
+        search_note = false
         true
 
       loadedArtist = (artist) ->
@@ -84,30 +84,10 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
           q: last_val).$promise.then display_fn
       else
         Notifications.remove search_note
+        search_note = false
         $scope.results = null
 
       true
-
-    $scope.add = (track) ->
-      note_id = Notifications.add ADDING_LANG, 'info'
-      $scope.is_busy = true
-
-      success = (new_queue) ->
-        $scope.is_busy = false
-        Notifications.remove note_id
-        $scope.manager.refresh()
-
-      fail = () ->
-        $scope.is_busy = false
-        Notifications.remove note_id
-        failed_lang = Lang 'queuing.failed'
-        Notifications.flash failed_lang, 'error'
-
-      ($scope.manager.add
-        id: track.id
-        provider: track.provider
-        pid: track.pid
-      ).then success, fail
 
     $scope.update = () ->
       $timeout.cancel timeout_id if timeout_id
@@ -115,11 +95,16 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       if $scope.search.query == ''
         last_id = null
         $scope.results = []
+        Notifications.remove search_note
+        search_note = false
         return false
 
       search_note = Notifications.add SEARCHING_LANG, 'info' if !search_note
       last_val = $scope.search.query
       timeout_id = $timeout run, DEBOUNCE_TIME
+
+    $scope.manager.on 'adding', () -> $scope.is_busy = true
+    $scope.manager.on 'added', () -> $scope.is_busy = false
 
   lfStreamTrackSearch =
     replace: true

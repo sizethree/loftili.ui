@@ -1,0 +1,18 @@
+.stream-track-list-item.directive
+  .track-actions.button-group(ng-if="manager.contributor")
+    a.button.remover(ng-click="remove($index)")
+      i.ionicon.close
+  .provider-container(ng-attr-data-provider="{{track.provider}}")
+    .tf
+      .tc
+        .flair(ng-attr-data-provider="{{track.provider}}")
+          p.permission-level.sans {{("media.providers." + track.provider) | i18n}}
+  .track-info-container
+    .title-container(ng-repeat="artist in [artistFor(track)]")
+      p.track-artist-info(ng-if="artist && artist.id")
+        a.track-title.foundry.medium(ng-attr-href="artists/{{artist.id}}?track={{track.id}}" ng-attr-title="{{track.title}}") {{track.title}}
+        span.artist-container
+          a.track-artist.foundry.medium(ng-attr-href="artists/{{artist.id}}") {{artist.name}}
+      p.track-only-info(ng-if="!artist || !artist.id")
+        span.track-title.foundry.medium(ng-attr-title="{{track.title}}") {{track.title}}
+

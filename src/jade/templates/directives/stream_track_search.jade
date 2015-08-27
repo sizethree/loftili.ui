@@ -11,17 +11,4 @@
           i.ionicon.close
       ul.result-list
         li.result-item.list-item(ng-repeat="result in results")
-          .inner(ng-attr-uuid="{{result.uuid}}")
-            .item-controls
-              a.button.adder(ng-click="add(result)")
-                i.ionicon.add
-            .provider-container
-              .tf
-                .tc
-                  .flair(ng-attr-data-provider="{{result.provider}}")
-                    p.permission-level.sans {{("media.providers." + result.provider) | i18n}}
-            .track-info-container
-              p.title-artist.foundry 
-                span.artist-container(ng-repeat="artist in [artistFor(result)]")
-                  span.title-container(ng-if="artist.name") {{artist.name}} - 
-                span.title-container {{result.title}}
+          .search-item(lf-stream-track-search-item result="result" manager="manager" artist="getArtist(result)")

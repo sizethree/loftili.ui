@@ -1,9 +1,6 @@
 dStreamTrackListing = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
 
   dStreamTrackListingLink = ($scope, $element, $attrs, $controller) ->
-    blank_artist =
-      name: ''
-
     moveItem = (from, to) ->
       success = () ->
         $scope.manager.refresh()
@@ -16,25 +13,6 @@ dStreamTrackListing = ($rootScope, $location, Lang, Api, Auth, Notifications) ->
       ($scope.manager.move from, to).then success, fail
 
     $controller.on 'change', moveItem
-
-    $scope.artistFor = (track) ->
-      artist_id = track.artist
-      found = false
-
-      for a in $scope.manager.artists
-        found = a if a.id == artist_id
-
-      found or blank_artist
-
-    $scope.remove = (index) ->
-      success = () ->
-        $scope.manager.refresh()
-
-      fail = () ->
-        lang = Lang 'streams.errors.removing_item'
-        Notifications.flash.error lang
-
-      ($scope.manager.remove index).then success, fail
 
   lfStreamTrackListing =
     replace: true

@@ -1,17 +1,4 @@
 .stream-track-listing.directive(lf-draggable-list ng-class="{concrete: !manager.contributor}")
   .stream-item.list-item(ng-repeat="track in manager.stream.queue" lf-draggable)
     .draggable-innards
-      .track-actions.button-group(ng-if="manager.contributor")
-        a.button.remover(ng-click="remove($index)")
-          i.ionicon.close
-      .provider-container(ng-attr-data-provider="{{track.provider}}")
-        .tf
-          .tc
-            .flair(ng-attr-data-provider="{{track.provider}}")
-              p.permission-level.sans {{("media.providers." + track.provider) | i18n}}
-      .track-info-container
-        .title-container
-          p.track-artist-info
-            span.artist-container(ng-repeat="artist in [artistFor(track)]")
-              span.track-artist.foundry.medium(ng-attr-href="artists/{{artist.id}}" ng-if="artist.id") {{artist.name}}
-            span.track-title.foundry.medium(ng-attr-href="tracks/{{track.id}}" ng-attr-title="{{track.title}}") {{track.title}}
+      .track-list-item(lf-stream-track-list-item track="track" manager="manager" index="$index")

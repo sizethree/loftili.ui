@@ -1,4 +1,4 @@
-sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
+sStreamManager = ($q, $rootScope, Analytics, Api, Auth, Socket) ->
 
   levels =
     OWNER: 1
@@ -6,11 +6,14 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
     CONTRIBUTOR: (1 << 1 << 1)
 
   StreamManager = (stream_id) ->
+    events = $rootScope.$new()
+
     manager =
       stream: null
       permissions: null
       owner: false
       contributor: false
+      on: angular.bind events, events.$on
 
     manager.move = (from, to) ->
       deferred = $q.defer()
@@ -60,11 +63,14 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
     manager.add = (track_details) ->
       deferred = $q.defer()
+      events.$emit 'adding'
 
       success = () ->
+        events.$emit 'added'
         deferred.resolve true
 
       fail = () ->
+        events.$emit 'added'
         deferred.reject false
 
       (Api.Stream.enqueue
@@ -162,6 +168,7 @@ sStreamManager = ($q, Analytics, Api, Auth, Socket) ->
 
 sStreamManager.$inject = [
   '$q'
+  '$rootScope'
   'Analytics'
   'Api'
   'Auth'
