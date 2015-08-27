@@ -79,10 +79,11 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
 
       display_fn = display last_id
 
-      if last_val != '' and last_val.length > 3
+      if last_val and last_val.length > 3
         (Api.Track.search
           q: last_val).$promise.then display_fn
       else
+        Notifications.remove search_note
         $scope.results = null
 
       true
