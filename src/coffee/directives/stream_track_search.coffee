@@ -1,4 +1,4 @@
-dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
+dStreamTrackSearch = ($timeout, Api, Notifications, Lang, ArtistCache) ->
 
   SEARCHING_LANG = Lang 'queuing.searcing'
   DEBOUNCE_TIME = 400
@@ -71,7 +71,7 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
           return finish true
 
         for a in artist_ids
-          (Api.Artist.get {id: a}).$promise.then loadedArtist, failed
+          (ArtistCache a).then loadedArtist, failed
 
         true
 
@@ -122,6 +122,7 @@ dStreamTrackSearch.$inject = [
   'Api'
   'Notifications'
   'Lang'
+  'ArtistCache'
 ]
 
 lft.directive 'lfStreamTrackSearch', dStreamTrackSearch

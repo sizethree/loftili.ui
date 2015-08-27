@@ -40,7 +40,6 @@ dDeviceInfo = ($rootScope, $location, Api, Auth, Notifications, DPL, Lang) ->
 
       found
 
-
     $scope.dnd = () ->
       state = !$scope.device.do_not_disturb
       is_owner = $scope.is_owner()

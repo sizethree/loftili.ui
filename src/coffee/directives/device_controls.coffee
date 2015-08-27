@@ -1,11 +1,13 @@
-dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
+dDeviceControls = (Api, Notifications, Socket, Lang, TrackCache, ArtistCache, DEVICE_STATES) ->
 
   to_i = (num) -> parseInt num, 10
 
+  STOPPING_LANG = Lang 'device.playback.stopping'
+  STARTING_LANG = Lang 'device.playback.starting'
+  FAILED_LANG = Lang 'device.playback.failed'
+
   dDeviceControlsLink = ($scope, $element, $attrs) ->
     notification_id = null
-    stopping_lang = Lang 'device.playback.stopping'
-    failed_lang = Lang 'device.playback.failed'
     nav_index = 0
     nav = ['stream', 'track']
     $scope.active_nav = nav[nav_index]
@@ -29,7 +31,7 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
       loadedTrack = (track) ->
         loaded_track = track
         if track.artist
-          (Api.Artist.get {id: track.artist}).$promise.then finish, fail
+          (ArtistCache track.artist).then finish, fail
         else
           finish null
 
@@ -37,10 +39,10 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
         $scope.current_track = null
         nav = ['stream']
 
-      (Api.Track.get {id: track_id}).$promise.then loadedTrack, fail if track_id > 0
+      (TrackCache track_id).then loadedTrack, fail if track_id > 0
 
     $scope.unsubscribe = () ->
-      note_id = Notifications.add stopping_lang, 'info'
+      note_id = Notifications.add STOPPING_LANG, 'info'
 
       success = () ->
         Notifications.remove note_id
@@ -48,24 +50,25 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
 
       fail = () ->
         Notifications.remove note_id
-        Notifications.flash.error failed_lang
+        Notifications.flash.error FAILED_LANG
 
       ($scope.manager.subscribe 0).then success, fail
 
     $scope.setPlayback = (state) ->
-      note_id = Notifications.add stopping_lang, 'info'
+      message = if state then STARTING_LANG else STOPPING_LANG
+      note_id = Notifications.add message, 'info'
 
       success = () ->
         Notifications.remove note_id
-        $scope.manager.refresh().then update
+        $scope.manager.refresh()
 
       fail = () ->
         Notifications.remove note_id
-        Notifications.flash.error failed_lang
+        Notifications.flash.error FAILED_LANG
 
       ($scope.manager.playback state).then success, fail
 
-    update = () ->
+    update = (initial) ->
       $scope.stream_manager = $scope.manager.stream
       state = $scope.manager.state
       $scope.current_track = null
@@ -74,14 +77,20 @@ dDeviceControls = (Api, Notifications, Socket, Lang, DEVICE_STATES) ->
       $scope.active_nav = nav[nav_index]
 
       $scope.playback = state and (parseInt state.playback) == 1
-      updateTrack() if state and (parseInt state.current_track) > 0
+
+      if state and (parseInt state.current_track) > 0
+        updateTrack 1
+
+      true
 
     listener_id = $scope.manager.on 'update', update
 
-    $scope.$on '$destroy', () ->
+    cleanup = () ->
       $scope.manager.off listener_id
 
-    update()
+    $scope.$on '$destroy', cleanup
+
+    update 1
 
   lfDeviceControls =
     replace: true
@@ -95,6 +104,8 @@ dDeviceControls.$inject = [
   'Notifications'
   'Socket'
   'Lang'
+  'TrackCache'
+  'ArtistCache'
   'DEVICE_STATES'
 ]
 

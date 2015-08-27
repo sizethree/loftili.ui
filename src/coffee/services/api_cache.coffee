@@ -17,8 +17,9 @@ sApiCache = ($q, Api) ->
 
       if cache[id]
         deferred.resolve cache[id]
-      else
-        (model.get {id: id}).$promise.then success, fail
+        return deferred.promise
+
+      (model.get {id: id}).$promise.then success, fail
 
       deferred.promise
 

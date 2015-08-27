@@ -1,4 +1,4 @@
-sStreamManager = ($q, $rootScope, Analytics, Api, Auth, Socket) ->
+sStreamManager = ($q, $rootScope, Analytics, Api, Auth, Socket, UserCache, ArtistCache) ->
 
   levels =
     OWNER: 1
@@ -113,8 +113,7 @@ sStreamManager = ($q, $rootScope, Analytics, Api, Auth, Socket) ->
         failArtist = () ->
           deferred.reject false
 
-        (Api.Artist.get
-          id: a).$promise.then loadedArtist, failArtist for a in artists
+        (ArtistCache a).then loadedArtist, failArtist for a in artists
 
         true
 
@@ -135,8 +134,7 @@ sStreamManager = ($q, $rootScope, Analytics, Api, Auth, Socket) ->
 
         for p in permissions
           level = p.level if p.user == user_id
-          (Api.User.get
-            id: p.user).$promise.then loadedUser, failedUser
+          (UserCache p.user).then loadedUser, failedUser
 
         manager.owner = level & levels.OWNER
         manager.contributor = level & (levels.OWNER | levels.CONTRIBUTOR)
@@ -173,6 +171,8 @@ sStreamManager.$inject = [
   'Api'
   'Auth'
   'Socket'
+  'UserCache'
+  'ArtistCache'
 ]
 
 lft.service 'StreamManager', sStreamManager

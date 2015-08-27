@@ -1,9 +1,102 @@
-sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVICE_STATES) ->
+sDeviceManager = ($q, $timeout, Analytics, EventManager, Api, Socket, StreamManager, UserCache, DEVICE_STATES) ->
+
+
+  refreshFactory = (config) ->
+    latest_refresh = 0
+    current_bounce = null
+    manager = config.manager
+    device = config.device
+    events = config.events
+
+    run = () ->
+      deferred = $q.defer()
+      local_refresh = ++latest_refresh
+      did_fail = false
+      state = 0
+      found_users = []
+      user_ids = []
+
+      receiveUser = (user_data) ->
+        found_users.push user_data
+
+        if found_users.length == user_ids.length and ++state == 2
+          manager.users = found_users
+          finish true
+
+        false
+      
+      fail = () ->
+        finish true if ++state == 2
+
+      receivePermissions = (data) ->
+        manager.permissions = data.resource
+
+        user_ids = (p.user for p in manager.permissions)
+
+        for id in user_ids
+          (UserCache id).then receiveUser, fail
+
+        true
+
+      finish = () ->
+        deferred.resolve local_refresh
+
+      receiveState = (data) ->
+        manager.state = data
+        manager.state.playback = parseInt data.playback, 10 if data
+
+        manager.connected = /true/i.test data.connected
+
+        if data.stream and (parseInt data.stream, 10) > 0
+          stream_id = parseInt data.stream, 10
+          manager.stream = StreamManager stream_id
+          manager.stream.refresh()
+        else
+          manager.stream = null
+
+        if ++state == 2 then finish true else false
+        
+
+      failState = () ->
+        return false if local_refresh != latest_refresh
+        manager.state = false
+        if ++state == 2 then finish true else false
+
+
+      failPermissions = () ->
+        if ++state == 2 then finish true else false
+
+      (Api.DeviceState.get
+        id: device.id).$promise.then receiveState, failState
+
+      (Api.DevicePermission.query
+        device: device.id).$promise.then receivePermissions, failPermissions
+
+      deferred.promise
+
+    refresh = () ->
+      current_bounce = $q.defer() if !current_bounce
+
+      finish = (run_id) ->
+        bounced = () ->
+          return true if run_id != latest_refresh
+          events.trigger 'update'
+          current_bounce.resolve true
+
+        $timeout bounced, 300
+
+      fail = () ->
+        true
+
+      (run 1).then finish, fail
+
+      current_bounce.$promise
+
+    refresh
 
   DeviceManager = (device) ->
     is_connected = false
     socket_lid = null
-    latest_refresh = 0
 
     events = EventManager ['update']
 
@@ -60,74 +153,10 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVIC
 
       deferred.promise
 
-    Manager.refresh = () ->
-      deferred = $q.defer()
-      local_refresh = ++latest_refresh
-      did_fail = false
-      state = 0
-
-      receivePermissions = (data) ->
-        return false if local_refresh != latest_refresh
-        Manager.permissions = data.resource
-        user_ids = (p.user for p in Manager.permissions)
-        users = []
-
-        receive = (user_data) ->
-          users.push user_data
-          if users.length == user_ids.length and ++state == 2
-            Manager.users = users
-            finish true
-          else
-            false
-        
-        fail = () ->
-          finish true if ++state == 2
-
-        (Api.User.get {id: id}).$promise.then receive, fail for id in user_ids
-
-        true
-
-      finish = () ->
-        console.log 'finishing'
-        deferred.resolve true
-        events.trigger 'update'
-
-      receiveState = (data) ->
-        return false if local_refresh != latest_refresh
-
-        latest_refresh = 0
-
-        Manager.state = data
-        Manager.state.playback = parseInt data.playback, 10 if data
-
-        Manager.connected = /true/i.test data.connected
-
-        if data.stream and (parseInt data.stream, 10) > 0
-          stream_id = parseInt data.stream, 10
-          Manager.stream = StreamManager stream_id
-          Manager.stream.refresh()
-        else
-          Manager.stream = null
-
-        if ++state == 2 then finish true else false
-        
-
-      failState = () ->
-        return false if local_refresh != latest_refresh
-        Manager.state = false
-        if ++state == 2 then finish true else false
-
-
-      failPermissions = () ->
-        if ++state == 2 then finish true else false
-
-      (Api.DeviceState.get
-        id: device.id).$promise.then receiveState, failState
-
-      (Api.DevicePermission.query
-        device: device.id).$promise.then receivePermissions, failPermissions
-
-      deferred.promise
+    Manager.refresh = refreshFactory
+      manager: Manager
+      device: device
+      events: events
 
     Manager
     
@@ -135,11 +164,13 @@ sDeviceManager = ($q, Analytics, EventManager, Api, Socket, StreamManager, DEVIC
 
 sDeviceManager.$inject = [
   '$q'
+  '$timeout'
   'Analytics'
   'EventManager'
   'Api'
   'Socket'
   'StreamManager'
+  'UserCache'
   'DEVICE_STATES'
 ]
 
