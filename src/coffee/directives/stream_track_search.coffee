@@ -24,7 +24,9 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       artist_id = if track and track.artist then track.artist else null
       found = false
 
-      if LFTXS_RGX.test track.provider
+      return null if artist_id == null
+
+      if track.id < 0 and LFTXS_RGX.test track.provider
         return track.artist
 
       for a in $scope.artists
@@ -63,9 +65,10 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
         tracks = r
 
         for t in tracks
-          artist_ids.push t.artist if LF_RGX.test t.provider
+          artist_ids.push t.artist if t.id > 0 and (artist_ids.indexOf t.artist) < 0
 
-        return finish true if (artist_ids.length == 0 and search_id == last_id)
+        if artist_ids.length == 0 and search_id == last_id
+          return finish true
 
         for a in artist_ids
           (Api.Artist.get {id: a}).$promise.then loadedArtist, failed

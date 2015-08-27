@@ -1,3 +1,42 @@
 .stream-track-search-item.directive
   display: block
   position: relative
+  
+  .provider-container .flair
+    @extend %flair
+    width: 8em
+
+    &[data-provider="SC"]
+      @extend %orange-flair
+
+    &[data-provider="LF"]
+      @extend %blue-flair
+
+    &[data-provider="LFTXS"]
+      @extend %black-flair
+
+    +media(max-width 800px)
+      width: 1em
+      overflow: hidden
+
+      p
+        display: block
+        text-indent: 100em
+
+  .track-info-container
+    +clearfix
+    overflow: hidden
+    position: relative
+
+  .track-info-container .title-artist
+    +clearfix
+    display: block
+    overflow: hidden
+    position: relative
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .track-info-container .title-artist .title-container,
+  .track-info-container .title-artist .artist-container
+    +span-columns(6)
+    

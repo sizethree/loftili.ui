@@ -8,8 +8,10 @@
         .tc
           .flair(ng-attr-data-provider="{{result.provider}}")
             p.permission-level.sans {{("media.providers." + result.provider) | i18n}}
-    .track-info-container
-      p.title-artist.foundry
-        span.artist-container(ng-repeat="a in [artist()]")
-          span.title-container(ng-if="a.name") {{a.name}} - 
+    .track-info-container(ng-repeat="a in [artist()]")
+      p.title-artist.foundry(ng-if="a")
+        span.title-container {{result.title}}
+        span.artist-container
+          span.title-container(ng-if="a.name") {{a.name}}
+      p.title-only.foundry(ng-if="!a")
         span.title-container {{result.title}}
