@@ -109,9 +109,15 @@ dStreamTrackSearch = ($timeout, Api, Notifications, Lang) ->
       ).then success, fail
 
     $scope.update = () ->
+      $timeout.cancel timeout_id if timeout_id
+
+      if $scope.search.query == ''
+        last_id = null
+        $scope.results = []
+        return false
+
       search_note = Notifications.add SEARCHING_LANG, 'info' if !search_note
       last_val = $scope.search.query
-      $timeout.cancel timeout_id if timeout_id
       timeout_id = $timeout run, DEBOUNCE_TIME
 
   lfStreamTrackSearch =
