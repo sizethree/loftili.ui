@@ -4,18 +4,12 @@ var grunt = require('grunt'),
     path = require('path'),
     neat = require('node-neat'),
     sass = require('node-sass'),
-    helpers = require('./tasks/helpers');
+    helpers = require('./tasks/helpers'),
+    paths = require("./tasks/config/paths");
 
 module.exports = function() {
 
   dotenv.load();
-
-  var paths = {
-    src: path.join(__dirname, 'src'),
-    dist: path.join(__dirname, 'public'),
-    temp: path.join(__dirname, 'obj'),
-    vendor: path.join(__dirname, 'bower_components')
-  };
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -52,220 +46,17 @@ module.exports = function() {
     pkg_info.commit = process.env['ARTIFACT_TAG'].substr(0, 8);
   
   grunt.initConfig({
-
     pkg: pkg_info,
-
-    clean: {
-      scripts: [
-        path.join(paths.dist, 'js')
-      ],
-      css: [
-        path.join(paths.dist, 'css')
-      ],
-      img: [
-        path.join(paths.dist, 'img')
-      ],
-      index: [
-        path.join(paths.dist, 'index.html')
-      ],
-      obj: [
-        paths.temp
-      ]
-    },
-
-    uglify: {
-      options: { 
-        banner: banner
-      },
-      release: {
-        files: [{
-          src: [
-            path.join(paths.dist, 'js', 'vendor.bundle.js'),
-            path.join(paths.dist, 'js', 'app.js')
-          ],
-          dest: path.join(paths.dist, 'js', 'app.min.js')
-        }]
-      }
-    },
-
-    cssmin: {
-      release: {
-        expand: true,
-        cwd: path.join(paths.dist, 'css'),
-        src: ['*.css'],
-        dest: path.join(paths.dist, 'css'),
-        ext: '.min.css'
-      }
-    },
-
-    html2js: {
-      debug: {
-        options: {
-          module: 'lft.templates',
-          rename: function(filename) {
-            var rel = filename.replace(/jade\/templates\/(.*)\.jade/, '$1');
-            return rel.replace(/\//g, '.');
-          }
-        },
-        files: [{
-          src: path.join(paths.src, 'jade', 'templates', '**/*.jade'),
-          dest: path.join(paths.temp, 'js/templates.js')
-        }]
-      }
-    },
-
-    jade: {
-      index: {
-        options: {
-          data: function() {
-            return {
-              debug: true,
-              commit: pkg_info.commit || new Date().getTime()
-            };
-          }
-        },
-        files: [{
-          src: path.join(paths.src, 'jade', 'index.jade'),
-          dest: path.join(paths.dist, 'index.html')
-        }]
-      },
-      indexmin: {
-        options: {
-          data: function() {
-            return {
-              debug: false,
-              commit: pkg_info.commit || new Date().getTime()
-            };
-          }
-        },
-        files: [{
-          src: path.join(paths.src, 'jade', 'index.jade'),
-          dest: path.join(paths.dist, 'index.html')
-        }]
-      }
-    },
-
-    coffee: {
-      options: {
-        join: true
-      },
-      debug: {
-        files: [{
-          expand: true,
-          cwd: path.join(paths.src, 'coffee'),
-          src: ['**/*.coffee'],
-          dest: path.join(paths.temp, 'js'),
-          ext: '.js'
-        }]
-      }
-    },
-
-    concat: {
-      options: {
-        separator: ';',
-      },
-      vendors: {
-        src: [
-          path.join(paths.vendor, 'angular/angular.js'),
-          path.join(paths.vendor, 'angular-route/angular-route.js'),
-          path.join(paths.vendor, 'angular-resource/angular-resource.js'),
-          path.join(paths.vendor, 'soundmanager/script/soundmanager2.js'),
-          path.join(paths.vendor, 'socket.io/index.js'),
-          path.join(paths.vendor, 'analytics/index.js'),
-          path.join(paths.vendor, 'zeroclipboard/dist/ZeroClipboard.js')
-        ],
-        dest: path.join(paths.dist, 'js', 'vendor.bundle.js')
-      },
-      scripts: {
-        src: [
-          path.join(paths.temp, 'js', '**/*.js'),
-          path.join(paths.temp, 'templates', '**/*.js')
-        ],
-        dest: path.join(paths.dist, 'js', 'app.js')
-      }
-    },
-
-    watch: {
-      scripts: {
-        files: [
-          path.join(paths.src, 'jade', '**/*.jade'),
-          path.join(paths.src, 'coffee', '/**/*.coffee')
-        ],
-        tasks: [
-          'clean:scripts', 
-          'coffee:debug',
-          'html2js:debug',
-          'concat:scripts',
-          'concat:vendors'
-        ],
-      },
-      sass: {
-        files: [
-          path.join(paths.src, 'sass', '**/*.sass')
-        ],
-        tasks: ['sass:debug']
-      },
-      index: {
-        files: ['src/jade/index.jade'],
-        tasks: ['jade:index']
-      }
-    },
-
-    copy: {
-      zeroclipboard: {
-        expand: true,
-        cwd: 'bower_components/zeroclipboard/dist',
-        src: ['**/*.swf'],
-        dest: 'public/swf'
-      },
-      soundmanager: {
-        expand: true,
-        cwd: 'bower_components/soundmanager/swf',
-        src: ['**/*.swf'],
-        dest: 'public/swf'
-      },
-      icons: {
-        expand: true,
-        cwd: 'bower_components',
-        src: ['ionicons/css/**/*', 'ionicons/fonts/**/*'],
-        dest: 'public/vendor'
-      },
-      img: {
-        expand: true,
-        cwd: 'src/img',
-        src: '**/*',
-        dest: 'public/img'
-      }
-    },
-
-    sass: {
-      debug: {
-        options: {
-          include: neat.includePaths,
-          comments: true
-        },
-        files: [{
-          cwd: path.join(paths.src, 'sass'),
-          expand: true,
-          src: ['app.sass'],
-          dest: path.join(paths.dist, 'css'),
-          ext: '.css'
-        }]
-      },
-      release: {
-        options: {
-          include: neat.includePaths
-        },
-        files: [{
-          cwd: path.join(paths.src, 'sass'),
-          expand: true,
-          src: ['app.sass'],
-          dest: path.join(paths.dist, 'css'),
-          ext: '.css'
-        }]
-      }
-    }
-
+    uglify: require("./tasks/config/uglify")(banner),
+    cssmin: require("./tasks/config/cssmin"),
+    clean: require("./tasks/config/clean"),
+    html2js: require("./tasks/config/html2js"),
+    jade: require("./tasks/config/jade")(pkg_info),
+    coffee: require("./tasks/config/coffee"),
+    concat: require("./tasks/config/concat"),
+    watch: require("./tasks/config/watch"),
+    copy: require("./tasks/config/copy"),
+    sass: require("./tasks/config/sass")
   });
 
   grunt.registerMultiTask('sass', 'compiles sass via node native bindings', function() {
@@ -318,10 +109,10 @@ module.exports = function() {
       sass.render(sass_config, finished);
     }
 
-    if(files.length === 1)
-      files.forEach(render);
-    else
-      failed('no sass file configuration detected');
+    if(files.length !== 1)
+      return failed('no sass file configuration detected');
+
+    files.forEach(render);
   });
   
   grunt.registerTask('publish', [

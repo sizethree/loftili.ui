@@ -1,4 +1,6 @@
 @import "base"
+@import "shared/reset"
+@import "grid/grid"
 
 body, html
   min-width: 100%
@@ -8,12 +10,13 @@ body, html
   &.no-hl
     +user-select(none)
 
+  +foundation-grid
+
 .header.main, .footer.main
   position: relative
   z-index: 61
 
-[ng-view],
-.view-wrapper
+[ng-view], .view-wrapper
   min-height: 100%
   +calc(min-height, "100% - 100px")
   position: relative
